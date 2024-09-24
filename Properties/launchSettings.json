@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Fluentver (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Fluentver (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
