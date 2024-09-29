@@ -10,7 +10,14 @@
     NavigationCacheMode="Required"
     mc:Ignorable="d">
 
-    <Grid>
-
-    </Grid>
+    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
+        <Expander x:Name="pcInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Information">
+            <StackPanel Orientation="Horizontal">
+            </StackPanel>
+        </Expander>
+        <Expander x:Name="pcSpecs" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Specifications">
+            <StackPanel>
+            </StackPanel>
+        </Expander>
+    </StackPanel>
 </Page>
