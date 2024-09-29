@@ -24,6 +24,7 @@ using Windows.UI.Text;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml.Media.Animation;
 using Windows.ApplicationModel.DataTransfer;
+using Fluentver.Views;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -133,6 +134,10 @@ namespace Fluentver
                     break;
                 case "Users_NavItem":
                     page = typeof(Users);
+                    activationStateVisibility = Visibility.Collapsed;
+                    break;
+                case "PC_NavItem":
+                    page = typeof(PC);
                     activationStateVisibility = Visibility.Collapsed;
                     break;
                 default:
