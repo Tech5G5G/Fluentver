@@ -59,19 +59,11 @@ namespace Fluentver
             ulong revision = deviceFamilyVersion & 0x000000000000FFFF;
             int currentYear = DateTime.Now.Year;
 
-            copyrightText.Text = "©️ " + currentYear.ToString() + " Microsoft Corporation. All rights reserved.";
+            copyrightText.Text = "© " + currentYear.ToString() + " Microsoft Corporation. All rights reserved.";
             versionText.Text = displayName;
             buildText.Text = build.ToString() + "." + revision.ToString();
 
-            string windows;
-            if (build >= 22000)
-            {
-                windows = "Windows 11";
-            }
-            else
-            {
-                windows = "Windows 10";
-            }
+            string windows = build >= 22000 ? "Windows 11" : "Windows 10";
 
             string productName = Registry.GetValue(HKLMWinNTCurrent, "ProductName", "").ToString();
             string productionEdition = productName.Remove(0, 11);
