@@ -43,9 +43,14 @@
                         <KeyboardAccelerator Modifiers="Control" Key="Number1" />
                     </NavigationViewItem.KeyboardAccelerators>
                 </NavigationViewItem>
-                <NavigationViewItem x:Name="Users_NavItem" ToolTipService.ToolTip="Your info and other users" Icon="People" Content="Users">
+                <NavigationViewItem x:Name="PC_NavItem" ToolTipService.ToolTip="Your PC's name and specs" Icon="{ui:FontIcon Glyph=&#xE7F4;}" Content="Your PC">
                     <NavigationViewItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="Number2" />
+                    </NavigationViewItem.KeyboardAccelerators>
+                </NavigationViewItem>
+                <NavigationViewItem x:Name="Users_NavItem" ToolTipService.ToolTip="Your info and other users" Icon="People" Content="Users">
+                    <NavigationViewItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="Number3" />
                     </NavigationViewItem.KeyboardAccelerators>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
