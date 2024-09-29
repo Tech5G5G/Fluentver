@@ -34,11 +34,11 @@ namespace Fluentver
         {
             this.InitializeComponent();
 
-            SetInformation();
-            AsyncMethods();
+            SetWindowsInformation();
+            SetNames();
         }
 
-        private async void AsyncMethods()
+        private async void SetNames()
         {
             string orgName = await ((App)Application.Current).GetCurrentUserInfo(KnownUserProperties.DomainName);
             if (orgName != "" && orgName is not null)
@@ -49,7 +49,7 @@ namespace Fluentver
             usernameText.Content = await ((App)Application.Current).GetCurrentUserInfo(KnownUserProperties.AccountName);
         }
 
-        private void SetInformation()
+        private void SetWindowsInformation()
         {
             string HKLMWinNTCurrent = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion";
             ulong deviceFamilyVersion = ulong.Parse(AnalyticsInfo.VersionInfo.DeviceFamilyVersion);
@@ -126,12 +126,22 @@ namespace Fluentver
             HyperlinkButton nameText = sender as HyperlinkButton;
 
             CommandBarFlyout optionsFlyout = new CommandBarFlyout();
-            AppBarButton copyButton = new AppBarButton() { Icon = new FontIcon() { Glyph = "\uE8C8" }, Name = (string)nameText.Content };
+            AppBarButton copyButton = new AppBarButton() { Icon = new FontIcon() { Glyph = "\uE8C8" }, Tag = (string)nameText.Content };
             AppBarButton openPageButton = new AppBarButton() { Label = "Go to the users page", Icon = new FontIcon() { Glyph = "\uE716" } };
 
             ToolTipService.SetToolTip(copyButton, "Copy the selected text");
 
-            copyButton.Click += CopyButton_Click;
+            copyButton.Click += (object sender, RoutedEventArgs e) =>
+            {
+                AppBarButton senderButton = sender as AppBarButton;
+
+                DataPackage dataPackage = new DataPackage();
+                dataPackage.SetText(senderButton.Tag as string);
+
+                Clipboard.SetContent(dataPackage);
+
+                optionsFlyout.Hide();
+            };
             openPageButton.Click += Navigate_UsersPage;
 
             optionsFlyout.PrimaryCommands.Add(copyButton);
@@ -149,16 +159,6 @@ namespace Fluentver
             MainWindow mw = (MainWindow)((App)Application.Current).m_window;
             mw.RootNV.SelectedItem = mw.RootNV.MenuItems.First(i => ((NavigationViewItem)i).Name == "Users_NavItem");
             mw.ContentFrame.Navigate(typeof(Users), null, new SlideNavigationTransitionInfo { Effect = SlideNavigationTransitionEffect.FromRight });
-        }
-
-        private void CopyButton_Click(object sender, RoutedEventArgs e)
-        {
-            AppBarButton senderButton = sender as AppBarButton;
-
-            DataPackage dataPackage = new DataPackage();
-            dataPackage.SetText(senderButton.Name);
-
-            Clipboard.SetContent(dataPackage);
         }
     }
 }
