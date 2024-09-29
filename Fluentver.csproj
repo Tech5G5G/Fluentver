@@ -16,6 +16,7 @@
     <None Remove="About.xaml" />
     <None Remove="Assets\Windows-Logos.ttf" />
     <None Remove="Users.xaml" />
+    <None Remove="Views\PC.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,6 +56,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Users.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\PC.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
