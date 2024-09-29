@@ -110,40 +110,10 @@ namespace Fluentver
             Microsoft.UI.WindowId windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
             Microsoft.UI.Windowing.AppWindow appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
 
-            double scale;
             if (appWindow is not null)
             {
-                uint dpi = GetDpiForWindow(hWnd);
-                switch (dpi)
-                {
-                    case 90:
-                        scale = 1;
-                        break;
-                    case 120:
-                        scale = 1.25;
-                        break;
-                    case 144:
-                        scale = 1.5;
-                        break;
-                    case 168:
-                        scale = 1.75;
-                        break;
-                    case 192:
-                        scale = 2;
-                        break;
-                    case 216:
-                        scale = 2.25;
-                        break;
-                    case 240:
-                        scale = 2.5;
-                        break;
-                    case 288:
-                        scale = 3;
-                        break;
-                    default:
-                        scale = (double)dpi / 100;
-                        break;
-                }
+                double scale = GetScaleFromDpi(GetDpiForWindow(hWnd));
+
                 var newSize = new SizeInt32();
                 newSize.Width = (int)(480 * scale);
                 newSize.Height = (int)(590 * scale);
@@ -154,6 +124,42 @@ namespace Fluentver
         }
 
         public Window m_window;
+
+        private double GetScaleFromDpi(uint dpi)
+        {
+            double scale = 1;
+            switch (dpi)
+            {
+                case < 120:
+                    scale = 1;
+                    break;
+                case < 144:
+                    scale = 1.25;
+                    break;
+                case < 168:
+                    scale = 1.5;
+                    break;
+                case < 192:
+                    scale = 1.75;
+                    break;
+                case < 216:
+                    scale = 2;
+                    break;
+                case < 240:
+                    scale = 2.25;
+                    break;
+                case < 288:
+                    scale = 2.5;
+                    break;
+                case < 312:
+                    scale = 3;
+                    break;
+                default:
+                    scale = (double)dpi / 100;
+                    break;
+            }
+            return scale;
+        }
 
         public async Task<string> GetCurrentUserInfo(string userProperty)
         {
