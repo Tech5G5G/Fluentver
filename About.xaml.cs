@@ -51,15 +51,16 @@ namespace Fluentver
         private void SetInformation()
         {
             string HKLMWinNTCurrent = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion";
+            ulong deviceFamilyVersion = ulong.Parse(AnalyticsInfo.VersionInfo.DeviceFamilyVersion);
+
             string displayName = Registry.GetValue(HKLMWinNTCurrent, "DisplayVersion", "").ToString();
             int build = Environment.OSVersion.Version.Build;
-            string version = Registry.GetValue(HKLMWinNTCurrent, "UBR", "").ToString();
-            //string revision = version.Remove(0, 11);
+            ulong revision = deviceFamilyVersion & 0x000000000000FFFF;
             int currentYear = DateTime.Now.Year;
 
             copyrightText.Text = "©️ " + currentYear.ToString() + " Microsoft Corporation. All rights reserved.";
             versionText.Text = displayName;
-            buildText.Text = build.ToString() + "." + version;
+            buildText.Text = build.ToString() + "." + revision.ToString();
 
             string windows;
             if (build >= 22000)
