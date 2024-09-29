@@ -53,13 +53,13 @@ namespace Fluentver
             string HKLMWinNTCurrent = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion";
             string displayName = Registry.GetValue(HKLMWinNTCurrent, "DisplayVersion", "").ToString();
             int build = Environment.OSVersion.Version.Build;
-            string version = Registry.GetValue(HKLMWinNTCurrent, "LCUVer", "").ToString();
-            string revision = version.Remove(0, 11);
+            string version = Registry.GetValue(HKLMWinNTCurrent, "UBR", "").ToString();
+            //string revision = version.Remove(0, 11);
             int currentYear = DateTime.Now.Year;
 
             copyrightText.Text = "©️ " + currentYear.ToString() + " Microsoft Corporation. All rights reserved.";
             versionText.Text = displayName;
-            buildText.Text = build.ToString() + "." + revision;
+            buildText.Text = build.ToString() + "." + version;
 
             string windows;
             if (build >= 22000)
