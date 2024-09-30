@@ -35,6 +35,9 @@ namespace Fluentver
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        [DllImport("uxtheme.dll", EntryPoint = "#135", SetLastError = true, CharSet = CharSet.Unicode)]
+        private static extern int SetPreferredAppMode(int preferredAppMode);
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -48,6 +51,8 @@ namespace Fluentver
 
             this.Activated += MainWindow_Activated;
             AppTitleBar.ActualThemeChanged += AppTitleBar_ActualThemeChanged;
+            if (AppTitleBar.ActualTheme == ElementTheme.Dark)
+                SetPreferredAppMode(2);
 
             SetWindowsLogo();
 
@@ -97,6 +102,8 @@ namespace Fluentver
                 this.AppWindow.TitleBar.ButtonHoverForegroundColor = Colors.Black;
                 this.AppWindow.TitleBar.InactiveForegroundColor = ((SolidColorBrush)App.Current.Resources["WindowCaptionForegroundDisabled"]).Color;
                 this.AppWindow.TitleBar.ButtonPressedForegroundColor = Colors.Black;
+
+                SetPreferredAppMode(1);
             }
             else if (currentTheme == ElementTheme.Dark)
             {
@@ -104,6 +111,8 @@ namespace Fluentver
                 this.AppWindow.TitleBar.ButtonHoverForegroundColor = Colors.White;
                 this.AppWindow.TitleBar.InactiveForegroundColor = ((SolidColorBrush)App.Current.Resources["WindowCaptionForegroundDisabled"]).Color;
                 this.AppWindow.TitleBar.ButtonPressedForegroundColor = Colors.White;
+
+                SetPreferredAppMode(2);
             }
         }
 
