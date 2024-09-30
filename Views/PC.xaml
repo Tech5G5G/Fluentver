@@ -13,6 +13,16 @@
     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
         <Expander x:Name="pcInfo" Expanding="PCInfo_WindowHeight_Increase" Collapsed="PCInfo_WindowHeight_Decrease" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Information">
             <StackPanel Orientation="Horizontal">
+                <StackPanel Spacing="4" BorderThickness="12">
+                    <TextBlock Text="Name" />
+                    <TextBlock Text="Is 64-bit" />
+                    <TextBlock Text="Time awake" />
+                </StackPanel>
+                <StackPanel Spacing="4" Margin="0,12,12,12">
+                    <TextBlock x:Name="pcName" Text="PC name" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
+                    <TextBlock x:Name="is64Bit" Text="Yes" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
+                    <TextBlock x:Name="timeAwake" Text="00:00:00:00" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
+                </StackPanel>
             </StackPanel>
         </Expander>
         <Expander x:Name="pcSpecs" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Specifications">
