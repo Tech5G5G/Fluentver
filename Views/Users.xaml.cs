@@ -44,8 +44,8 @@ namespace Fluentver
 
         private async void AsyncMethods()
         {
-            userDisplayName.Text = await ((App)Application.Current).GetCurrentUserInfo(KnownUserProperties.DisplayName);
-            userAccountName.Text = await ((App)Application.Current).GetCurrentUserInfo(KnownUserProperties.AccountName);
+            userDisplayName.Text = await App.GetCurrentUserInfo(KnownUserProperties.DisplayName);
+            userAccountName.Text = await App.GetCurrentUserInfo(KnownUserProperties.AccountName);
         }
 
 

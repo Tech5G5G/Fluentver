@@ -40,13 +40,13 @@ namespace Fluentver
 
         private async void SetNames()
         {
-            string orgName = await ((App)Application.Current).GetCurrentUserInfo(KnownUserProperties.DomainName);
+            string orgName = await App.GetCurrentUserInfo(KnownUserProperties.DomainName);
             if (orgName != "" && orgName is not null)
                 orgNameText.Content = orgName;
             else
                 orgNameText.Visibility = Visibility.Collapsed;
 
-            usernameText.Content = await ((App)Application.Current).GetCurrentUserInfo(KnownUserProperties.AccountName);
+            usernameText.Content = await App.GetCurrentUserInfo(KnownUserProperties.AccountName);
         }
 
         private void SetWindowsInformation()

@@ -161,7 +161,7 @@ namespace Fluentver
             return scale;
         }
 
-        public async Task<string> GetCurrentUserInfo(string userProperty)
+        public static async Task<string> GetCurrentUserInfo(string userProperty)
         {
             IReadOnlyList<User> users = await User.FindAllAsync();
 
