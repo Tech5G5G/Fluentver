@@ -17,20 +17,20 @@
                     <TextBlock Text="Build" />
                 </StackPanel>
                 <StackPanel Spacing="4" Margin="0,12,12,12">
-                    <TextBlock x:Name="editionText" Text="Windows" Foreground="{ThemeResource TextFillColorSecondary}" />
-                    <TextBlock x:Name="versionText" Text="XXHX" Foreground="{ThemeResource TextFillColorSecondary}" />
-                    <TextBlock x:Name="buildText" Text="XXXXX.XXXX" Foreground="{ThemeResource TextFillColorSecondary}" />
+                    <TextBlock x:Name="editionText" Text="Windows" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
+                    <TextBlock x:Name="versionText" Text="XXHX" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
+                    <TextBlock x:Name="buildText" Text="XXXXX.XXXX" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
                 </StackPanel>
             </StackPanel>
         </Expander>
         <Expander x:Name="legalInfo" Expanding="LegalInfo_WindowHeight_Increase" Collapsed="LegalInfo_WindowHeight_Decrease" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Legal">
             <StackPanel>
                 <StackPanel BorderThickness="12">
-                    <TextBlock x:Name="prText" Text="The Windows operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions." TextWrapping="WrapWholeWords" />
+                    <TextBlock x:Name="prText" Text="The Windows operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions." IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
                 </StackPanel>
-                <TextBlock x:Name="copyrightText" Margin="12,0,0,0" Text="©️ Microsoft Corporation. All rights reserved." />
+                <TextBlock x:Name="copyrightText" Margin="12,0,0,0" Text="©️ Microsoft Corporation. All rights reserved." IsTextSelectionEnabled="True" />
                 <StackPanel BorderThickness="12">
-                    <TextBlock Text="The product is licensed under the Microsoft Software License Terms to:" TextWrapping="WrapWholeWords" />
+                    <TextBlock Text="The product is licensed under the Microsoft Software License Terms to:" IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <HyperlinkButton x:Name="usernameText" Click="Navigate_UsersPage" IsRightTapEnabled="True" RightTapped="Name_RightTapped" Content="Username placeholder" />
                         <HyperlinkButton x:Name="orgNameText" Click="Navigate_UsersPage" IsRightTapEnabled="True" RightTapped="Name_RightTapped" Content="Org name placeholder" />
