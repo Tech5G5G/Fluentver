@@ -68,20 +68,13 @@ namespace Fluentver
             return photoPath;
         }
 
-        private void UserPhoto_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            cameraHover.Visibility = Visibility.Visible;
-        }
+        private void UserPhoto_PointerEntered(object sender, PointerRoutedEventArgs e) => cameraHover.Visibility = Visibility.Visible;
+        private void UserPhoto_PointerPressed(object sender, PointerRoutedEventArgs e) => cameraHoverColor.Fill = new SolidColorBrush(Colors.DarkGray);
 
         private void UserPhoto_PointerExited(object sender, PointerRoutedEventArgs e)
         {
             cameraHover.Visibility = Visibility.Collapsed;
             cameraHoverColor.Fill = new SolidColorBrush(Colors.Black);
-        }
-
-        private void UserPhoto_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            cameraHoverColor.Fill = new SolidColorBrush(Colors.DarkGray);
         }
 
         private void UserPhoto_PointerReleased(object sender, PointerRoutedEventArgs e)
