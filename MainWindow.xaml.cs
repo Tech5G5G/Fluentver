@@ -46,7 +46,7 @@ namespace Fluentver
             ExtendsContentIntoTitleBar = true;
             Title = "About Windows";
 
-            var presenter = GetAppWindowAndPresenter();
+            var presenter = this.AppWindow.Presenter as OverlappedPresenter;
             presenter.IsMaximizable = presenter.IsMinimizable = presenter.IsResizable = false;
 
             this.Activated += MainWindow_Activated;
@@ -81,13 +81,9 @@ namespace Fluentver
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
         {
             if (args.WindowActivationState == WindowActivationState.Deactivated)
-            {
                 AppTitle.Foreground = (SolidColorBrush)App.Current.Resources["WindowCaptionForegroundDisabled"];
-            }
             else
-            {
                 AppTitle.Foreground = (SolidColorBrush)App.Current.Resources["WindowCaptionForeground"];
-            }
         }
 
         private void AppTitleBar_ActualThemeChanged(FrameworkElement sender, object args)
@@ -116,18 +112,7 @@ namespace Fluentver
             }
         }
 
-        private OverlappedPresenter GetAppWindowAndPresenter()
-        {
-            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-            WindowId myWndId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
-            var _apw = AppWindow.GetFromWindowId(myWndId);
-            return _apw.Presenter as OverlappedPresenter;
-        }
-
-        private void CloseWindow(object sender, RoutedEventArgs args)
-        {
-            ((App)Application.Current).m_window.Close();
-        }
+        private void CloseWindow(object sender, RoutedEventArgs args) => ((App)Application.Current).m_window.Close();
 
         private void RootNV_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
@@ -159,9 +144,6 @@ namespace Fluentver
             activationState.Visibility = activationStateVisibility;
         }
 
-        private void ActivationState_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start(new ProcessStartInfo("ms-settings:activation") { UseShellExecute = true });
-        }
+        private void ActivationState_Click(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:activation") { UseShellExecute = true });
     }
 }
