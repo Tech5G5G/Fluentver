@@ -15,13 +15,13 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Spacing="4" BorderThickness="12">
                     <TextBlock Text="Name" />
-                    <TextBlock Text="Is 64-bit" />
                     <TextBlock Text="Time awake" />
+                    <TextBlock Text="Is 64-bit" />
                 </StackPanel>
                 <StackPanel Spacing="4" Margin="0,12,12,12">
                     <TextBlock x:Name="pcName" Text="PC name" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
-                    <TextBlock x:Name="is64Bit" Text="Yes" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
                     <TextBlock x:Name="timeAwake" Text="00:00:00:00" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
+                    <TextBlock x:Name="is64Bit" Text="Yes" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
                 </StackPanel>
             </StackPanel>
         </Expander>
