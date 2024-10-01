@@ -28,6 +28,14 @@ namespace Fluentver.Views
         public PC()
         {
             this.InitializeComponent();
+            SetPCInfo();
+        }
+
+        private void SetPCInfo()
+        {
+            pcName.Text = Environment.MachineName;
+            is64Bit.Text = Environment.Is64BitOperatingSystem ? "Yes" : "No";
+        }
         }
     }
 }
