@@ -145,5 +145,6 @@ namespace Fluentver
         }
 
         private void ActivationState_Click(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:activation") { UseShellExecute = true });
+        private void RenamePC_Click(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:about") { UseShellExecute = true });
     }
 }
