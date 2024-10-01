@@ -28,6 +28,8 @@ namespace Fluentver.Views
         public PC()
         {
             this.InitializeComponent();
+
+            SetAwakeTime();
             SetPCInfo();
         }
 
@@ -35,6 +37,38 @@ namespace Fluentver.Views
         {
             pcName.Text = Environment.MachineName;
             is64Bit.Text = Environment.Is64BitOperatingSystem ? "Yes" : "No";
+        }
+
+        private void SetAwakeTime()
+        {
+            var timespan = TimeSpan.FromMilliseconds(Environment.TickCount64);
+
+            string seconds = timespan.Seconds <= 9 ? "0" + timespan.Seconds : timespan.Seconds.ToString();
+            string minutes = timespan.Minutes <= 9 ? "0" + timespan.Minutes : timespan.Minutes.ToString();
+            string hours = timespan.Hours <= 9 ? "0" + timespan.Hours : timespan.Hours.ToString();
+            string days = timespan.Days <= 9 ? "0" + timespan.Days : timespan.Days.ToString();
+
+            timeAwake.Text = days + ":" + hours + ":" + minutes + ":" + seconds;
+
+            var timer = new Timer();
+            timer.Interval = 1000;
+            timer.Elapsed += (object sender, ElapsedEventArgs e) =>
+            {
+                timer.Stop();
+
+                var timespan = TimeSpan.FromMilliseconds(Environment.TickCount64);
+
+                string seconds = timespan.Seconds <= 9 ? "0" + timespan.Seconds : timespan.Seconds.ToString();
+                string minutes = timespan.Minutes <= 9 ? "0" + timespan.Minutes : timespan.Minutes.ToString();
+                string hours = timespan.Hours <= 9 ? "0" + timespan.Hours : timespan.Hours.ToString();
+                string days = timespan.Days <= 9 ? "0" + timespan.Days : timespan.Days.ToString();
+
+                if (timeAwake is not null)
+                    this.DispatcherQueue.TryEnqueue(() => timeAwake.Text = days + ":" + hours + ":" + minutes + ":" + seconds);
+                timer.Interval = 1000;
+                timer.Start();
+            };
+            timer.Start();
         }
         }
     }
