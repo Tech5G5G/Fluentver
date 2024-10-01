@@ -26,7 +26,6 @@ using Windows.Graphics;
 using Windows.Security.Cryptography.Core;
 using Windows.System;
 using Windows.UI.ViewManagement;
-using static System.Formats.Asn1.AsnWriter;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
