@@ -26,8 +26,7 @@
             </StackPanel>
         </Expander>
         <Expander x:Name="pcSpecs" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Specifications">
-            <StackPanel>
-            </StackPanel>
+            <StackPanel x:Name="cpuList" />
         </Expander>
     </StackPanel>
 </Page>
