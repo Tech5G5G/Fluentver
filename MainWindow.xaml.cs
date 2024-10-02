@@ -117,31 +117,33 @@ namespace Fluentver
         private void RootNV_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             NavigationViewItem selectedItem = args.SelectedItem as NavigationViewItem;
+            GlyphButton button = new() { Visibility = Visibility.Collapsed };
             Type page;
-            Visibility activationStateVisibility;
 
             switch (selectedItem.Name)
             {
+                default:
                 case "About_NavItem":
                     page = typeof(About);
-                    activationStateVisibility = Visibility.Visible;
+
+                    button = new GlyphButton() { Name = "activationState", Glyph = "\uEB95", Text = "Activation state" };
+                    button.Click += ActivationState_Click;
                     break;
                 case "Users_NavItem":
                     page = typeof(Users);
-                    activationStateVisibility = Visibility.Collapsed;
                     break;
                 case "PC_NavItem":
                     page = typeof(PC);
-                    activationStateVisibility = Visibility.Collapsed;
-                    break;
-                default:
-                    page = typeof(About);
-                    activationStateVisibility = Visibility.Visible;
+
+                    button = new GlyphButton() { Name = "renamePC", Glyph = "\uE8AC", Text = "Rename your computer" };
+                    button.Click += RenamePC_Click;
                     break;
             }
 
             ContentFrame.Navigate(page, null, new SlideNavigationTransitionInfo { Effect = SlideNavigationTransitionEffect.FromBottom });
-            activationState.Visibility = activationStateVisibility;
+            
+            toolbar.Children.Clear();
+            toolbar.Children.Add(button);
         }
 
         private void ActivationState_Click(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:activation") { UseShellExecute = true });
