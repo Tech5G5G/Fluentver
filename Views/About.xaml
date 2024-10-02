@@ -30,7 +30,11 @@
                 </StackPanel>
                 <TextBlock x:Name="copyrightText" Margin="12,0,0,0" Text="©️ Microsoft Corporation. All rights reserved." IsTextSelectionEnabled="True" />
                 <StackPanel BorderThickness="12">
-                    <TextBlock Text="The product is licensed under the Microsoft Software License Terms to:" IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
+                    <StackPanel Orientation="Horizontal" Spacing="3">
+                        <TextBlock Text="The product is licensed under the" IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
+                        <HyperlinkButton NavigateUri="https://www.microsoft.com/en-us/useterms" Padding="0" Content="Microsoft Software License Terms" />
+                    </StackPanel>
+                    <TextBlock Text="to:" IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <HyperlinkButton x:Name="usernameText" Click="Navigate_UsersPage" IsRightTapEnabled="True" RightTapped="Name_RightTapped" Content="Username placeholder" />
                         <HyperlinkButton x:Name="orgNameText" Click="Navigate_UsersPage" IsRightTapEnabled="True" RightTapped="Name_RightTapped" Content="Org name placeholder" />
