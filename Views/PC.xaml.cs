@@ -14,6 +14,7 @@ using System.Timers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics;
+using System.Management;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -29,12 +30,32 @@ namespace Fluentver.Views
         {
             this.InitializeComponent();
 
-            SetAwakeTime();
             SetPCInfo();
+            SetPCSpecs();
+        }
+
+        private void SetPCSpecs()
+        {
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Processor");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                cpuList.Children.Add(new TextBlock() { Text = (string)mo["Name"] });
+            }
+
+            mos = new ManagementObjectSearcher("select * from Win32_VideoController");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                cpuList.Children.Add(new TextBlock() { Text = (string)mo["Name"] });
+            }
+
+            var i = System.GC.GetGCMemoryInfo();
+            cpuList.Children.Add(new TextBlock() { Text = i.TotalAvailableMemoryBytes.ToString() });
         }
 
         private void SetPCInfo()
         {
+            SetAwakeTime();
+
             pcName.Text = Environment.MachineName;
             is64Bit.Text = Environment.Is64BitOperatingSystem ? "Yes" : "No";
         }
