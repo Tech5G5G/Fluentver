@@ -9,7 +9,7 @@
     xmlns:ui="using:CommunityToolkit.WinUI"
     NavigationCacheMode="Required"
     mc:Ignorable="d">
-
+    
     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
         <Expander x:Name="pcInfo" Expanding="PCInfo_WindowHeight_Increase" Collapsed="PCInfo_WindowHeight_Decrease" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Information">
             <StackPanel Orientation="Horizontal">
@@ -28,7 +28,9 @@
             </StackPanel>
         </Expander>
         <Expander x:Name="pcSpecs" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Specifications">
-            <StackPanel x:Name="cpuList" />
+            <StackPanel x:Name="cpuList" Orientation="Horizontal" BorderThickness="12" Spacing="12">
+                <ProgressRing x:Name="cpuListRing" Height="20" Width="20" />
+            </StackPanel>
         </Expander>
     </StackPanel>
 </Page>
