@@ -87,9 +87,23 @@ namespace Fluentver.Views
         {
             SetAwakeTime();
 
+            var deviceInformation = new EasClientDeviceInformation();
+            productName.Text = deviceInformation.SystemProductName.ToString();
+
+            try
+            {
+                string displayName = Registry.GetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters", "Hostname", "").ToString();
+
+                if (!string.IsNullOrWhiteSpace(displayName))
+                    pcName.Text = displayName;
+                else
             pcName.Text = Environment.MachineName;
             is64Bit.Text = Environment.Is64BitOperatingSystem ? "Yes" : "No";
         }
+            catch (Exception)
+            {
+                pcName.Text = Environment.MachineName;
+            }
 
         private void SetAwakeTime()
         {
