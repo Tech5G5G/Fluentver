@@ -107,6 +107,9 @@ namespace Fluentver.Views
 
             osType.Text = Environment.Is64BitOperatingSystem ? "64-bit operating system" : "32-bit operating system";
         }
+
+        private bool canTimeAwakeBeUpdated = true;
+        private void TimeAwake_SelectionChanged(object sender, RoutedEventArgs e) => canTimeAwakeBeUpdated = string.IsNullOrEmpty(timeAwake.SelectedText);
         private void SetAwakeTime()
         {
             var timespan = TimeSpan.FromMilliseconds(Environment.TickCount64);
@@ -124,6 +127,8 @@ namespace Fluentver.Views
             {
                 timer.Stop();
 
+                if (canTimeAwakeBeUpdated)
+                {
                 var timespan = TimeSpan.FromMilliseconds(Environment.TickCount64);
 
                 string seconds = timespan.Seconds <= 9 ? "0" + timespan.Seconds : timespan.Seconds.ToString();
@@ -133,6 +138,8 @@ namespace Fluentver.Views
 
                 if (timeAwake is not null)
                     this.DispatcherQueue.TryEnqueue(() => timeAwake.Text = days + ":" + hours + ":" + minutes + ":" + seconds);
+                }
+                }
                 timer.Interval = 1000;
                 timer.Start();
             };
