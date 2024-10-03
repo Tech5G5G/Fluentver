@@ -127,7 +127,7 @@ namespace Fluentver
                 case "About_NavItem":
                     page = typeof(About);
                     button = new GlyphButton() { Name = "activationState", Glyph = "\uEB95", Text = "Activation state" };
-                    button.Click += ActivationState_Click;
+                    button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:activation") { UseShellExecute = true });
                     break;
                 case "Users_NavItem":
                     page = typeof(Users);
@@ -137,7 +137,7 @@ namespace Fluentver
                 case "PC_NavItem":
                     page = typeof(PC);
                     button = new GlyphButton() { Name = "renamePC", Glyph = "\uE8AC", Text = "Rename your PC" };
-                    button.Click += RenamePC_Click;
+                    button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:about") { UseShellExecute = true });
                     button2 = new GlyphButton() { Name = "taskManager", Glyph = "\uE9D9", Text = "Task manager" };
                     button2.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("taskmgr") { UseShellExecute = true });
                     break;
@@ -149,8 +149,5 @@ namespace Fluentver
             toolbar.Children.Add(button);
             toolbar.Children.Add(button2);
         }
-
-        private void ActivationState_Click(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:activation") { UseShellExecute = true });
-        private void RenamePC_Click(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:about") { UseShellExecute = true });
     }
 }
