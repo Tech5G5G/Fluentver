@@ -105,6 +105,8 @@ namespace Fluentver.Views
                 pcName.Text = Environment.MachineName;
             }
 
+            osType.Text = Environment.Is64BitOperatingSystem ? "64-bit operating system" : "32-bit operating system";
+        }
         private void SetAwakeTime()
         {
             var timespan = TimeSpan.FromMilliseconds(Environment.TickCount64);
