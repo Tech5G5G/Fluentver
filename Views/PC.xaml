@@ -17,7 +17,7 @@
                     <TextBlock Text="Device name" />
                     <TextBlock Text="Product name" />
                     <TextBlock Text="Time awake" />
-                    <TextBlock Text="Is 64-bit" />
+                    <TextBlock Text="OS type" />
                 </StackPanel>
                 <StackPanel Spacing="4" Margin="0,12,12,12">
                     <TextBlock x:Name="pcName" Text="PC name" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
