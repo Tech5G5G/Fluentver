@@ -41,21 +41,46 @@ namespace Fluentver.Views
         [DllImport("kernel32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool GetPhysicallyInstalledSystemMemory(out long TotalMemoryInKilobytes);
+
+        private async void SetPCSpecs()
         {
+            var specsLabels = new StackPanel() { Spacing = 4 };
+            specsLabels.Children.Add(new TextBlock() { Text = "CPU" });
+            specsLabels.Children.Add(new TextBlock() { Text = "GPU" });
+            specsLabels.Children.Add(new TextBlock() { Text = "RAM" });
+
+            var specsList = new StackPanel() { Spacing = 4 };
+
+            string cpuName = await Task.Run(() =>
+            {
+                List<string> names = [];
             ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Processor");
             foreach (ManagementObject mo in mos.Get())
             {
-                cpuList.Children.Add(new TextBlock() { Text = (string)mo["Name"] });
+                    names.Add((string)mo["Name"]);
             }
+                return names[0];
+            });
 
-            mos = new ManagementObjectSearcher("select * from Win32_VideoController");
+            string gpuName = await Task.Run(() =>
+            {
+                List<string> names = [];
+                ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_VideoController");
             foreach (ManagementObject mo in mos.Get())
             {
-                cpuList.Children.Add(new TextBlock() { Text = (string)mo["Name"] });
+                    names.Add((string)mo["Name"]);
             }
+                return names[0];
+            });
 
-            var i = System.GC.GetGCMemoryInfo();
-            cpuList.Children.Add(new TextBlock() { Text = i.TotalAvailableMemoryBytes.ToString() });
+            GetPhysicallyInstalledSystemMemory(out long memoryKB);
+            specsList.Children.Add(new TextBlock() { Text = cpuName, Foreground = Application.Current.Resources["TextFillColorSecondaryBrush"] as SolidColorBrush, IsTextSelectionEnabled = true });
+            specsList.Children.Add(new TextBlock() { Text = gpuName, Foreground = Application.Current.Resources["TextFillColorSecondaryBrush"] as SolidColorBrush, IsTextSelectionEnabled = true });
+            specsList.Children.Add(new TextBlock() { Text = ((int)(memoryKB / 1048576)).ToString() + " GB", Foreground = Application.Current.Resources["TextFillColorSecondaryBrush"] as SolidColorBrush, IsTextSelectionEnabled = true });
+
+            cpuListRing.Visibility = Visibility.Collapsed;
+            cpuList.Children.Add(specsLabels);
+            cpuList.Children.Add(specsList);
         }
 
         private void SetPCInfo()
