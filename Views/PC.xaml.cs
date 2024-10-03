@@ -54,11 +54,11 @@ namespace Fluentver.Views
             string cpuName = await Task.Run(() =>
             {
                 List<string> names = [];
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Processor");
-            foreach (ManagementObject mo in mos.Get())
-            {
+                ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Processor");
+                foreach (ManagementObject mo in mos.Get())
+                {
                     names.Add((string)mo["Name"]);
-            }
+                }
                 return names[0];
             });
 
@@ -66,10 +66,10 @@ namespace Fluentver.Views
             {
                 List<string> names = [];
                 ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_VideoController");
-            foreach (ManagementObject mo in mos.Get())
-            {
+                foreach (ManagementObject mo in mos.Get())
+                {
                     names.Add((string)mo["Name"]);
-            }
+                }
                 return names[0];
             });
 
@@ -97,9 +97,8 @@ namespace Fluentver.Views
                 if (!string.IsNullOrWhiteSpace(displayName))
                     pcName.Text = displayName;
                 else
-            pcName.Text = Environment.MachineName;
-            is64Bit.Text = Environment.Is64BitOperatingSystem ? "Yes" : "No";
-        }
+                    pcName.Text = Environment.MachineName;
+            }
             catch (Exception)
             {
                 pcName.Text = Environment.MachineName;
@@ -129,16 +128,19 @@ namespace Fluentver.Views
 
                 if (canTimeAwakeBeUpdated)
                 {
-                var timespan = TimeSpan.FromMilliseconds(Environment.TickCount64);
+                    var timespan = TimeSpan.FromMilliseconds(Environment.TickCount64);
 
-                string seconds = timespan.Seconds <= 9 ? "0" + timespan.Seconds : timespan.Seconds.ToString();
-                string minutes = timespan.Minutes <= 9 ? "0" + timespan.Minutes : timespan.Minutes.ToString();
-                string hours = timespan.Hours <= 9 ? "0" + timespan.Hours : timespan.Hours.ToString();
-                string days = timespan.Days <= 9 ? "0" + timespan.Days : timespan.Days.ToString();
+                    string seconds = timespan.Seconds <= 9 ? "0" + timespan.Seconds : timespan.Seconds.ToString();
+                    string minutes = timespan.Minutes <= 9 ? "0" + timespan.Minutes : timespan.Minutes.ToString();
+                    string hours = timespan.Hours <= 9 ? "0" + timespan.Hours : timespan.Hours.ToString();
+                    string days = timespan.Days <= 9 ? "0" + timespan.Days : timespan.Days.ToString();
 
-                if (timeAwake is not null)
-                    this.DispatcherQueue.TryEnqueue(() => timeAwake.Text = days + ":" + hours + ":" + minutes + ":" + seconds);
-                }
+                    try
+                    {
+                        this.DispatcherQueue.TryEnqueue(() => timeAwake.Text = days + ":" + hours + ":" + minutes + ":" + seconds);
+                    }
+                    catch (COMException) { }
+                    catch (Exception) { }
                 }
                 timer.Interval = 1000;
                 timer.Start();
