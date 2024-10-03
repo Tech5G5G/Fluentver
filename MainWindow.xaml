@@ -43,7 +43,7 @@
                         <KeyboardAccelerator Modifiers="Control" Key="Number1" />
                     </NavigationViewItem.KeyboardAccelerators>
                 </NavigationViewItem>
-                <NavigationViewItem x:Name="PC_NavItem" ToolTipService.ToolTip="Your PC's name and specs" Icon="{ui:FontIcon Glyph=&#xE7F4;}" Content="Your PC">
+                <NavigationViewItem x:Name="PC_NavItem" ToolTipService.ToolTip="Your PC's info and specs" Icon="{ui:FontIcon Glyph=&#xE7F4;}" Content="Your PC">
                     <NavigationViewItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="Number2" />
                     </NavigationViewItem.KeyboardAccelerators>
