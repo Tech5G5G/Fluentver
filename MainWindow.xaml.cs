@@ -118,6 +118,7 @@ namespace Fluentver
         {
             NavigationViewItem selectedItem = args.SelectedItem as NavigationViewItem;
             GlyphButton button = new() { Visibility = Visibility.Collapsed };
+            GlyphButton button2 = new() { Visibility = Visibility.Collapsed };
             Type page;
 
             switch (selectedItem.Name)
@@ -125,18 +126,20 @@ namespace Fluentver
                 default:
                 case "About_NavItem":
                     page = typeof(About);
-
                     button = new GlyphButton() { Name = "activationState", Glyph = "\uEB95", Text = "Activation state" };
                     button.Click += ActivationState_Click;
                     break;
                 case "Users_NavItem":
                     page = typeof(Users);
+                    button = new GlyphButton() { Name = "managerUsers", Glyph = "\uE8FA", Text = "Manage other users" };
+                    button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:otherusers") { UseShellExecute = true });
                     break;
                 case "PC_NavItem":
                     page = typeof(PC);
-
-                    button = new GlyphButton() { Name = "renamePC", Glyph = "\uE8AC", Text = "Rename your computer" };
+                    button = new GlyphButton() { Name = "renamePC", Glyph = "\uE8AC", Text = "Rename your PC" };
                     button.Click += RenamePC_Click;
+                    button2 = new GlyphButton() { Name = "taskManager", Glyph = "\uE9D9", Text = "Task manager" };
+                    button2.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("taskmgr") { UseShellExecute = true });
                     break;
             }
 
@@ -144,6 +147,7 @@ namespace Fluentver
             
             toolbar.Children.Clear();
             toolbar.Children.Add(button);
+            toolbar.Children.Add(button2);
         }
 
         private void ActivationState_Click(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:activation") { UseShellExecute = true });
