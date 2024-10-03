@@ -14,7 +14,8 @@
         <Expander x:Name="pcInfo" Expanding="PCInfo_WindowHeight_Increase" Collapsed="PCInfo_WindowHeight_Decrease" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Information">
             <StackPanel Orientation="Horizontal">
                 <StackPanel Spacing="4" BorderThickness="12">
-                    <TextBlock Text="Name" />
+                    <TextBlock Text="Device name" />
+                    <TextBlock Text="Product name" />
                     <TextBlock Text="Time awake" />
                     <TextBlock Text="Is 64-bit" />
                 </StackPanel>
