@@ -167,7 +167,7 @@ namespace Fluentver
                     break;
             }
 
-            ContentFrame.Navigate(page, null, new SlideNavigationTransitionInfo { Effect = SlideNavigationTransitionEffect.FromBottom });
+            ContentFrame.Navigate(page, null, new EntranceNavigationTransitionInfo());
 
             SetWindowHeight(windowHeight);
             
