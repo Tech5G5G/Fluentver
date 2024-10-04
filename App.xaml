@@ -25,6 +25,21 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="local:UserEntry">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="local:UserEntry">
+                            <StackPanel Spacing="8" Orientation="Horizontal" Padding="0,12,5,12">
+                                <PersonPicture ProfilePicture="{TemplateBinding ProfilePicture}" Height="40" Width="40" />
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{TemplateBinding DisplayName}" />
+                                    <TextBlock Text="{TemplateBinding AccountName}" Foreground="{ThemeResource TextFillColorSecondary}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
