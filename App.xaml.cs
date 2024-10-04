@@ -205,5 +205,20 @@ namespace Fluentver
 
             return userPropertyResult;
         }
+
+        public static async Task<BitmapImage> GetCurrentUserPicture(UserPictureSize pictureSize)
+        {
+            IReadOnlyList<User> users = await User.FindAllAsync();
+
+            var current = users.Where(p => p.AuthenticationStatus == UserAuthenticationStatus.LocallyAuthenticated &&
+                                        p.Type == UserType.LocalUser).FirstOrDefault();
+
+            var pictureStream = await current.GetPictureAsync(pictureSize);
+            var openedPictureStream = await pictureStream.OpenReadAsync();
+            var bitmapImage = new BitmapImage();
+            bitmapImage.SetSource(openedPictureStream);
+            
+            return bitmapImage;
+        }
     }
 }
