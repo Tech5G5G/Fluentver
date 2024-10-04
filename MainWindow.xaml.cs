@@ -35,6 +35,26 @@ namespace Fluentver
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        private void SetWindowHeight(int height)
+        {
+            if (AppTitleBar.XamlRoot is not null && this.AppWindow is not null)
+            {
+                SizeInt32 size;
+                size.Width = this.AppWindow.Size.Width;
+                size.Height = (int)(height * AppTitleBar.XamlRoot.RasterizationScale);
+                this.AppWindow.Resize(size);
+            }
+        }
+
+        public int AboutWindowHeight { get { return about; } set { about = value; SetWindowHeight(about); } }
+        private int about = 590;
+
+        public int PCWindowHeight { get { return pc; } set { pc = value; SetWindowHeight(pc); } }
+        private int pc = 465;
+
+        public int UsersWindowHeight { get { return users; } set { users = value; SetWindowHeight(users); } }
+        private int users = 590;
+
         [DllImport("uxtheme.dll", EntryPoint = "#135", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern int SetPreferredAppMode(int preferredAppMode);
 
