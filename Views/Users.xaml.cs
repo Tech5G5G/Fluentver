@@ -38,7 +38,7 @@ namespace Fluentver
             this.InitializeComponent();
 
             SetUserInfo();
-
+            GetAllUsers();
         }
 
         private async void SetUserInfo()
@@ -48,24 +48,19 @@ namespace Fluentver
             userPhotoImage.ImageSource = await App.GetCurrentUserPicture(UserPictureSize.Size1080x1080);
         }
 
-
-
-        private string GetUserPhotoPath()
+        private async void GetAllUsers()
         {
-            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            IReadOnlyList<User> users = await User.FindAllAsync();
 
-            string[] files = Directory.GetFiles("C:\\Users\\Public\\AccountPictures\\" + identity.User as string);
-
-            string photoPath = "C:\\ProgramData\\Microsoft\\User Account Pictures\\user.png";
-            foreach (string file in files)
+            foreach (User user in users)
             {
-                if (file.Contains("1080"))
-                {
-                    photoPath = file;
-                }
-            }
+                var pictureStream = await user.GetPictureAsync(UserPictureSize.Size1080x1080);
+                var openedPictureStream = await pictureStream.OpenReadAsync();
+                var image = new BitmapImage();
+                image.SetSource(openedPictureStream);
 
-            return photoPath;
+                usersList.Children.Add(new UserEntry() { ProfilePicture = image, DisplayName = (string)await user.GetPropertyAsync(KnownUserProperties.DisplayName), AccountName = (string)await user.GetPropertyAsync(KnownUserProperties.AccountName) });
+            }
         }
 
         private void UserPhoto_PointerEntered(object sender, PointerRoutedEventArgs e) => cameraHover.Visibility = Visibility.Visible;
