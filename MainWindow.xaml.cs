@@ -139,6 +139,7 @@ namespace Fluentver
             NavigationViewItem selectedItem = args.SelectedItem as NavigationViewItem;
             GlyphButton button = new() { Visibility = Visibility.Collapsed };
             GlyphButton button2 = new() { Visibility = Visibility.Collapsed };
+            int windowHeight;
             Type page;
 
             switch (selectedItem.Name)
@@ -148,11 +149,13 @@ namespace Fluentver
                     page = typeof(About);
                     button = new GlyphButton() { Name = "activationState", Glyph = "\uEB95", Text = "Activation state" };
                     button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:activation") { UseShellExecute = true });
+                    windowHeight = AboutWindowHeight;
                     break;
                 case "Users_NavItem":
                     page = typeof(Users);
                     button = new GlyphButton() { Name = "managerUsers", Glyph = "\uE8FA", Text = "Manage other users" };
                     button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:otherusers") { UseShellExecute = true });
+                    windowHeight = UsersWindowHeight;
                     break;
                 case "PC_NavItem":
                     page = typeof(PC);
@@ -160,10 +163,13 @@ namespace Fluentver
                     button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:about") { UseShellExecute = true });
                     button2 = new GlyphButton() { Name = "taskManager", Glyph = "\uE9D9", Text = "Task manager" };
                     button2.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("taskmgr") { UseShellExecute = true });
+                    windowHeight = PCWindowHeight;
                     break;
             }
 
             ContentFrame.Navigate(page, null, new SlideNavigationTransitionInfo { Effect = SlideNavigationTransitionEffect.FromBottom });
+
+            SetWindowHeight(windowHeight);
             
             toolbar.Children.Clear();
             toolbar.Children.Add(button);
