@@ -137,12 +137,7 @@ namespace Fluentver.Views
                     string hours = timespan.Hours <= 9 ? "0" + timespan.Hours : timespan.Hours.ToString();
                     string days = timespan.Days <= 9 ? "0" + timespan.Days : timespan.Days.ToString();
 
-                    try
-                    {
-                        this.DispatcherQueue.TryEnqueue(() => timeAwake.Text = days + ":" + hours + ":" + minutes + ":" + seconds);
-                    }
-                    catch (COMException) { }
-                    catch (Exception) { }
+                    this.DispatcherQueue.TryEnqueue(() => timeAwake.Text = days + ":" + hours + ":" + minutes + ":" + seconds);
                 }
                 timer.Interval = 1000;
                 timer.Start();
@@ -165,11 +160,11 @@ namespace Fluentver.Views
         }
 
         private void PCSpecs_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
-            {
+        {
             MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
             if (mw is not null && cpuListRing is not null)
                 mw.PCWindowHeight = mw.PCWindowHeight + 90;
-            }
+        }
 
         private void PCSpecs_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
         {
