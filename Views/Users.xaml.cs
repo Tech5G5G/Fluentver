@@ -37,12 +37,12 @@ namespace Fluentver
         {
             this.InitializeComponent();
 
-            AsyncMethods();
+            SetUserInfo();
 
             userPhotoImage.ImageSource = new BitmapImage() { UriSource = new Uri(GetUserPhotoPath()) };
         }
 
-        private async void AsyncMethods()
+        private async void SetUserInfo()
         {
             userDisplayName.Text = await App.GetCurrentUserInfo(KnownUserProperties.DisplayName);
             userAccountName.Text = await App.GetCurrentUserInfo(KnownUserProperties.AccountName);
