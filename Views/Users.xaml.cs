@@ -39,13 +39,13 @@ namespace Fluentver
 
             SetUserInfo();
 
-            userPhotoImage.ImageSource = new BitmapImage() { UriSource = new Uri(GetUserPhotoPath()) };
         }
 
         private async void SetUserInfo()
         {
             userDisplayName.Text = await App.GetCurrentUserInfo(KnownUserProperties.DisplayName);
             userAccountName.Text = await App.GetCurrentUserInfo(KnownUserProperties.AccountName);
+            userPhotoImage.ImageSource = await App.GetCurrentUserPicture(UserPictureSize.Size1080x1080);
         }
 
 
