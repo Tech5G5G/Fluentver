@@ -77,48 +77,28 @@ namespace Fluentver
         {
             MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
             if (mw is not null)
-            {
-                SizeInt32 newSize = new SizeInt32();
-                newSize.Width = mw.AppWindow.Size.Width;
-                newSize.Height = mw.AppWindow.Size.Height + (int)(90 * windowsInfo.XamlRoot.RasterizationScale);
-                mw.AppWindow.Resize(newSize);
-            }
+                mw.AboutWindowHeight = mw.AboutWindowHeight + 90;
         }
 
         private void WindowsInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
         {
             MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
             if (mw is not null)
-            {
-                SizeInt32 newSize = new SizeInt32();
-                newSize.Width = mw.AppWindow.Size.Width;
-                newSize.Height = mw.AppWindow.Size.Height - (int)(90 * windowsInfo.XamlRoot.RasterizationScale);
-                mw.AppWindow.Resize(newSize);
-            }
+                mw.AboutWindowHeight = mw.AboutWindowHeight - 90;
         }
 
         private void LegalInfo_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
         {
             MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
             if (mw is not null)
-            {
-                SizeInt32 newSize = new SizeInt32();
-                newSize.Width = mw.AppWindow.Size.Width;
-                newSize.Height = mw.AppWindow.Size.Height + (int)(195 * legalInfo.XamlRoot.RasterizationScale);
-                mw.AppWindow.Resize(newSize);
-            }
+                mw.AboutWindowHeight = mw.AboutWindowHeight + 195;
         }
 
         private void LegalInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
         {
             MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
             if (mw is not null)
-            {
-                SizeInt32 newSize = new SizeInt32();
-                newSize.Width = mw.AppWindow.Size.Width;
-                newSize.Height = mw.AppWindow.Size.Height - (int)(195 * legalInfo.XamlRoot.RasterizationScale);
-                mw.AppWindow.Resize(newSize);
-            }
+                mw.AboutWindowHeight = mw.AboutWindowHeight - 195;
         }
 
         private void Name_RightTapped(object sender, RightTappedRoutedEventArgs e)

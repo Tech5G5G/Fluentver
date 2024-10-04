@@ -81,6 +81,8 @@ namespace Fluentver.Views
             cpuListRing.Visibility = Visibility.Collapsed;
             cpuList.Children.Add(specsLabels);
             cpuList.Children.Add(specsList);
+
+            ((MainWindow)((App)Application.Current).m_window).PCWindowHeight = 507;
         }
 
         private void SetPCInfo()
@@ -152,24 +154,28 @@ namespace Fluentver.Views
         {
             MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
             if (pcInfo.XamlRoot is not null)
-            {
-                SizeInt32 newSize = new SizeInt32();
-                newSize.Width = mw.AppWindow.Size.Width;
-                newSize.Height = mw.AppWindow.Size.Height + (int)(90 * pcInfo.XamlRoot.RasterizationScale);
-                mw.AppWindow.Resize(newSize);
-            }
+                mw.PCWindowHeight = mw.PCWindowHeight + 112;
         }
 
         private void PCInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
         {
             MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
             if (pcInfo.XamlRoot is not null)
+                mw.PCWindowHeight = mw.PCWindowHeight - 112;
+        }
+
+        private void PCSpecs_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
             {
-                SizeInt32 newSize = new SizeInt32();
-                newSize.Width = mw.AppWindow.Size.Width;
-                newSize.Height = mw.AppWindow.Size.Height - (int)(90 * pcInfo.XamlRoot.RasterizationScale);
-                mw.AppWindow.Resize(newSize);
+            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            if (mw is not null && cpuListRing is not null)
+                mw.PCWindowHeight = mw.PCWindowHeight + 90;
             }
+
+        private void PCSpecs_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
+        {
+            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            if (mw is not null)
+                mw.PCWindowHeight = mw.PCWindowHeight - 90;
         }
     }
 }
