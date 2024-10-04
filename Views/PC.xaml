@@ -27,7 +27,7 @@
                 </StackPanel>
             </StackPanel>
         </Expander>
-        <Expander x:Name="pcSpecs" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Specifications">
+        <Expander x:Name="pcSpecs" Expanding="PCSpecs_WindowHeight_Increase" Collapsed="PCSpecs_WindowHeight_Decrease" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Specifications">
             <StackPanel x:Name="cpuList" Orientation="Horizontal" BorderThickness="12" Spacing="12">
                 <ProgressRing x:Name="cpuListRing" Height="20" Width="20" />
             </StackPanel>
