@@ -52,6 +52,7 @@ namespace Fluentver
         {
             IReadOnlyList<User> users = await User.FindAllAsync();
 
+            int i = 0;
             foreach (User user in users)
             {
                 var pictureStream = await user.GetPictureAsync(UserPictureSize.Size1080x1080);
@@ -60,7 +61,17 @@ namespace Fluentver
                 image.SetSource(openedPictureStream);
 
                 usersList.Children.Add(new UserEntry() { ProfilePicture = image, DisplayName = (string)await user.GetPropertyAsync(KnownUserProperties.DisplayName), AccountName = (string)await user.GetPropertyAsync(KnownUserProperties.AccountName) });
+
+                i++;
             }
+
+            var mw = (MainWindow)((App)Application.Current).m_window;
+            mw.UsersWindowHeight = i switch
+            {
+                2 => mw.UsersWindowHeight + 80,
+                >= 3 => mw.UsersWindowHeight + 145,
+                _ => mw.UsersWindowHeight + 17,
+            };
         }
 
         private void UserPhoto_PointerEntered(object sender, PointerRoutedEventArgs e) => cameraHover.Visibility = Visibility.Visible;
