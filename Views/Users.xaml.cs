@@ -39,7 +39,11 @@ namespace Fluentver
 
             SetUserInfo();
             GetAllUsers();
+
+            usersList.SizeChanged += (object sender, SizeChangedEventArgs e) => usersHeight = (int)this.users.ActualHeight - 48;
         }
+
+        private int usersHeight;
 
         private async void SetUserInfo()
         {
