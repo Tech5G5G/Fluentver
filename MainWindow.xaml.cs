@@ -46,13 +46,13 @@ namespace Fluentver
             }
         }
 
-        public int AboutWindowHeight { get { return about; } set { about = value; SetWindowHeight(about); } }
+        public int AboutWindowHeight { get { return about; } set { about = value; if ((RootNV.SelectedItem as NavigationViewItem).Name == "About_NavItem") SetWindowHeight(value); } }
         private int about = 590;
 
-        public int PCWindowHeight { get { return pc; } set { pc = value; SetWindowHeight(pc); } }
+        public int PCWindowHeight { get { return pc; } set { pc = value; if ((RootNV.SelectedItem as NavigationViewItem).Name == "PC_NavItem") SetWindowHeight(value); } }
         private int pc = 465;
 
-        public int UsersWindowHeight { get { return users; } set { users = value; SetWindowHeight(users); } }
+        public int UsersWindowHeight { get { return users; } set { users = value; if ((RootNV.SelectedItem as NavigationViewItem).Name == "Users_NavItem") SetWindowHeight(value); } }
         private int users = 590;
 
         [DllImport("uxtheme.dll", EntryPoint = "#135", SetLastError = true, CharSet = CharSet.Unicode)]
