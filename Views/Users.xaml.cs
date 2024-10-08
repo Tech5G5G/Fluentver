@@ -77,5 +77,33 @@ namespace Fluentver
             cameraHoverColor.Fill = new SolidColorBrush(Colors.Black);
             Process.Start(new ProcessStartInfo("ms-settings:yourinfo") { UseShellExecute = true });
         }
+
+        private void UserInfo_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
+        {
+            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            if (userInfo.XamlRoot is not null)
+                mw.UsersWindowHeight = mw.UsersWindowHeight + 75;
+        }
+
+        private void UserInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
+        {
+            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            if (userInfo.XamlRoot is not null)
+                mw.UsersWindowHeight = mw.UsersWindowHeight - 75;
+        }
+
+        private void Users_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
+        {
+            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            if (userInfo.XamlRoot is not null)
+                mw.UsersWindowHeight = mw.UsersWindowHeight + usersHeight;
+        }
+
+        private void Users_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
+        {
+            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            if (userInfo.XamlRoot is not null)
+                mw.UsersWindowHeight = mw.UsersWindowHeight - usersHeight;
+        }
     }
 }
