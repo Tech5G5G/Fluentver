@@ -53,6 +53,11 @@
                         <KeyboardAccelerator Modifiers="Control" Key="Number3" />
                     </NavigationViewItem.KeyboardAccelerators>
                 </NavigationViewItem>
+                <NavigationViewItem x:Name="Storage_NavItem" ToolTipService.ToolTip="List of your disks" Icon="{ui:FontIcon Glyph=&#xEDA2;}" Content="Storage">
+                    <NavigationViewItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="Number4" />
+                    </NavigationViewItem.KeyboardAccelerators>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" x:FieldModifier="public" />
         </NavigationView>
