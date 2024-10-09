@@ -47,7 +47,12 @@ namespace Fluentver
 
         private async void SetUserInfo()
         {
-            userDisplayName.Text = await App.GetCurrentUserInfo(KnownUserProperties.DisplayName);
+            string userDisplayName = await App.GetCurrentUserInfo(KnownUserProperties.DisplayName);
+            if (string.IsNullOrWhiteSpace(userDisplayName))
+                this.userDisplayName.Text = Environment.UserName;
+            else
+                this.userDisplayName.Text = userDisplayName;
+
             userAccountName.Text = await App.GetCurrentUserInfo(KnownUserProperties.AccountName);
             userPhotoImage.ImageSource = await App.GetCurrentUserPicture(UserPictureSize.Size1080x1080);
         }
@@ -64,7 +69,11 @@ namespace Fluentver
                 var image = new BitmapImage();
                 image.SetSource(openedPictureStream);
 
-                usersList.Children.Add(new UserEntry() { ProfilePicture = image, DisplayName = (string)await user.GetPropertyAsync(KnownUserProperties.DisplayName), AccountName = (string)await user.GetPropertyAsync(KnownUserProperties.AccountName) });
+                string displayName = await App.GetCurrentUserInfo(KnownUserProperties.DisplayName);
+                if (string.IsNullOrWhiteSpace(displayName))
+                    displayName = Environment.UserName;
+
+                usersList.Children.Add(new UserEntry() { ProfilePicture = image, DisplayName = displayName, AccountName = (string)await user.GetPropertyAsync(KnownUserProperties.AccountName) });
 
                 i++;
             }
