@@ -9,10 +9,17 @@
     xmlns:ui="using:CommunityToolkit.WinUI"
     NavigationCacheMode="Required"
     mc:Ignorable="d">
-    
+
     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
         <Expander x:Name="pcInfo" Expanding="PCInfo_WindowHeight_Increase" Collapsed="PCInfo_WindowHeight_Decrease" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Information">
             <StackPanel Orientation="Horizontal">
+                <Border BorderThickness="8" Height="88" Width="148" CornerRadius="4" BorderBrush="Black" Margin="12,0,0,0">
+                    <Rectangle Height="80" Width="140" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Rectangle.Fill>
+                            <ImageBrush x:Name="pcBackground" Stretch="UniformToFill" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Border>
                 <StackPanel Spacing="4" BorderThickness="12">
                     <TextBlock Text="Device name" />
                     <TextBlock Text="Product name" />
