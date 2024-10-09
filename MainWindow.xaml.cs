@@ -168,6 +168,14 @@ namespace Fluentver
                     button2.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("taskmgr") { UseShellExecute = true });
                     windowHeight = PCWindowHeight;
                     break;
+                case "Storage_NavItem":
+                    page = typeof(Storage);
+                    button = new GlyphButton() { Name = "manageStorage", Glyph = "\uEDA2", Text = "Manage storage" };
+                    button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:storagesense") { UseShellExecute = true });
+                    button2 = new GlyphButton() { Name = "refreshStorage", Glyph = "\uE72C", Text = "Refresh" };
+                    button2.Click += (object sender, RoutedEventArgs e) => App.StoragePage?.Reload();
+                    windowHeight = StorageWindowHeight;
+                    break;
             }
 
             ContentFrame.Navigate(page, null, new EntranceNavigationTransitionInfo());
