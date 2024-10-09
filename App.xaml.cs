@@ -158,6 +158,8 @@ namespace Fluentver
 
         public Window m_window;
 
+        public static Storage StoragePage { get; set; }
+
         private double GetScaleFromDpi(uint dpi)
         {
             double scale = 1;
