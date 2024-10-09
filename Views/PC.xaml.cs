@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Microsoft.Win32;
 using System.Runtime.InteropServices;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
