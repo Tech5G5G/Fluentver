@@ -41,10 +41,10 @@ namespace Fluentver
         private async void SetNames()
         {
             string orgName = await App.GetCurrentUserInfo(KnownUserProperties.DomainName);
-            if (orgName != "" && orgName is not null)
-                orgNameText.Content = orgName;
-            else
+            if (string.IsNullOrWhiteSpace(orgName))
                 orgNameText.Visibility = Visibility.Collapsed;
+            else
+                orgNameText.Content = orgName;
 
             usernameText.Content = await App.GetCurrentUserInfo(KnownUserProperties.AccountName);
         }
