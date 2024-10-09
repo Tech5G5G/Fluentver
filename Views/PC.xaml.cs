@@ -108,6 +108,8 @@ namespace Fluentver.Views
             }
 
             osType.Text = Environment.Is64BitOperatingSystem ? "64-bit operating system" : "32-bit operating system";
+
+            pcBackground.ImageSource = new BitmapImage() { UriSource = new Uri("C:\\Users\\" + Environment.UserName + "\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper") };
         }
 
         private bool canTimeAwakeBeUpdated = true;
