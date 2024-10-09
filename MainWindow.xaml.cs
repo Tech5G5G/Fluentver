@@ -156,7 +156,7 @@ namespace Fluentver
                     break;
                 case "Users_NavItem":
                     page = typeof(Users);
-                    button = new GlyphButton() { Name = "managerUsers", Glyph = "\uE8FA", Text = "Manage other users" };
+                    button = new GlyphButton() { Name = "manageUsers", Glyph = "\uE8FA", Text = "Manage other users" };
                     button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:otherusers") { UseShellExecute = true });
                     windowHeight = UsersWindowHeight;
                     break;
