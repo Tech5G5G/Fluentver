@@ -29,6 +29,7 @@
     <None Remove="Assets\Windows-Logos.ttf" />
     <None Remove="Users.xaml" />
     <None Remove="Views\PC.xaml" />
+    <None Remove="Views\Storage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -61,6 +62,11 @@
     <Content Update="Assets\Windows-Logos.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Storage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="About.xaml">
