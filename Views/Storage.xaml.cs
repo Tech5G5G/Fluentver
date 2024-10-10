@@ -36,7 +36,7 @@ namespace Fluentver.Views
 
         public void Reload() => Content = new Storage();
 
-        private void GetAllDisks()
+        private async void GetAllDisks()
         {
             var drives = DriveInfo.GetDrives();
             foreach (var drive in drives)
