@@ -76,11 +76,11 @@ namespace Fluentver.Views
 
                 var info = new StackPanel() { Orientation = Orientation.Vertical, Spacing = 4 };
 
-                var freeSpace = new TextBlock() { Text = (drive.TotalFreeSpace / 1073741824) + " GB", Foreground = (SolidColorBrush)App.Current.Resources["TextFillColorSecondaryBrush"], IsTextSelectionEnabled = true };
+                var freeSpace = new TextBlock() { Text = freeSpaceNumber + freeSpaceDataUnit, Foreground = (SolidColorBrush)App.Current.Resources["TextFillColorSecondaryBrush"], IsTextSelectionEnabled = true };
                 freeSpace.ActualThemeChanged += (FrameworkElement sender, object args) => (sender as TextBlock).Foreground = (SolidColorBrush)App.Current.Resources["TextFillColorSecondaryBrush"];
                 info.Children.Add(freeSpace);
 
-                var totalSpace = new TextBlock() { Text = (drive.TotalSize / 1073741824) + " GB", Foreground = (SolidColorBrush)App.Current.Resources["TextFillColorSecondaryBrush"], IsTextSelectionEnabled = true };
+                var totalSpace = new TextBlock() { Text = totalSpaceNumber + totalSpaceDataUnit, Foreground = (SolidColorBrush)App.Current.Resources["TextFillColorSecondaryBrush"], IsTextSelectionEnabled = true };
                 totalSpace.ActualThemeChanged += (FrameworkElement sender, object args) => (sender as TextBlock).Foreground = (SolidColorBrush)App.Current.Resources["TextFillColorSecondaryBrush"];
                 info.Children.Add(totalSpace);
 
