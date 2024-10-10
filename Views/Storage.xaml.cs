@@ -38,6 +38,9 @@ namespace Fluentver.Views
 
         private async void GetAllDisks()
         {
+            var mw = ((MainWindow)((App)Application.Current).m_window);
+            mw.StorageWindowHeight = 200;
+
             var drives = DriveInfo.GetDrives();
             foreach (var drive in drives)
             {
