@@ -63,6 +63,7 @@ namespace Fluentver.Views
 
                 var diskSpace = new Grid();
                 diskSpace.Children.Add(new ProgressRing() { IsIndeterminate = false, Maximum = drive.TotalSize, Value = drive.TotalSize - drive.TotalFreeSpace, Background = new SolidColorBrush(Colors.DarkGray), Height = 75, Width = 75 });
+                diskSpace.Children.Add(new FontIcon() { Glyph = drive.DriveType switch { DriveType.Removable => "\uE88E", DriveType.Network => "\uE968", DriveType.CDRom => "\uE958", _ => "\uEDA2" }, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center });
                 content.Children.Add(diskSpace);
 
                 var labels = new StackPanel() { Orientation = Orientation.Vertical, Spacing = 4 };
