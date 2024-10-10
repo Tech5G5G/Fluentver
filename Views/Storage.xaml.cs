@@ -55,6 +55,12 @@ namespace Fluentver.Views
 
                 var content = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(12), Spacing = 12 };
 
+                string totalSpaceDataUnit = drive.TotalSize switch { < 1024 => " B", < 1048576 => " KB", < 1073741824 => " MB", < 1099511627776 => " GB", < 1125899906842624 => " TB", < 1152921504606846976 => " PB", _ => " EB" };
+                string freeSpaceDataUnit = drive.TotalFreeSpace switch { < 1024 => " B", < 1048576 => " KB", < 1073741824 => " MB", < 1099511627776 => " GB", < 1125899906842624 => " TB", < 1152921504606846976 => " PB", _ => " EB" };
+
+                int totalSpaceNumber = drive.TotalSize switch { < 1024 => (int)drive.TotalSize, < 1048576 => (int)(drive.TotalSize / 1024), < 1073741824 => (int)(drive.TotalSize / 1048576), < 1099511627776 => (int)(drive.TotalSize / 1073741824), < 1125899906842624 => (int)(drive.TotalSize / 1099511627776), < 1152921504606846976 => (int)(drive.TotalSize / 1125899906842624), _ => (int)(drive.TotalSize / 1152921504606846976) };
+                int freeSpaceNumber = drive.TotalFreeSpace switch { < 1024 => (int)drive.TotalFreeSpace, < 1048576 => (int)(drive.TotalFreeSpace / 1024), < 1073741824 => (int)(drive.TotalFreeSpace / 1048576), < 1099511627776 => (int)(drive.TotalFreeSpace / 1073741824), < 1125899906842624 => (int)(drive.TotalFreeSpace / 1099511627776), < 1152921504606846976 => (int)(drive.TotalFreeSpace / 1125899906842624), _ => (int)(drive.TotalFreeSpace / 1152921504606846976) };
+
                 var diskSpace = new Grid();
                 diskSpace.Children.Add(new ProgressRing() { IsIndeterminate = false, Maximum = drive.TotalSize / (double)1073741824, Value = (drive.TotalSize / (double)1073741824) - (drive.TotalFreeSpace / (double)1073741824), Background = new SolidColorBrush(Colors.DarkGray), Height = 75, Width = 75 });
                 content.Children.Add(diskSpace);
