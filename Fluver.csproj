@@ -23,9 +23,25 @@
     <AppInstallerUri>https://www.github.com/tech5g5g/fluentver</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 	<WindowsSdkPackageVersion>10.0.22621.38</WindowsSdkPackageVersion>
+	<ApplicationIcon>Fluentver.ico</ApplicationIcon>
+	<PublishAot>False</PublishAot>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="About.xaml" />
+    <None Remove="Assets\Square150x150Logo.scale-100.png" />
+    <None Remove="Assets\Square44x44Logo.scale-100.png" />
+    <None Remove="Assets\Square44x44Logo.scale-125.png" />
+    <None Remove="Assets\Square44x44Logo.scale-150.png" />
+    <None Remove="Assets\Square44x44Logo.scale-400.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-16_altform-lightunplated.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-256.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-256_altform-lightunplated.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-256_altform-unplated.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-32_altform-unplated.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-48.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-48_altform-lightunplated.png" />
+    <None Remove="Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
+    <None Remove="Assets\Square71x71Logo.scale-200.png" />
     <None Remove="Assets\Windows-Logos.ttf" />
     <None Remove="Users.xaml" />
     <None Remove="Views\PC.xaml" />
@@ -39,7 +55,7 @@
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Fluentver.ico" />
   </ItemGroup>
 
   <ItemGroup>
