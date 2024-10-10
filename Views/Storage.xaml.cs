@@ -89,7 +89,16 @@ namespace Fluentver.Views
                 content.Children.Add(info);
                 expander.Content = content;
                 disksList.Children.Add(expander);
+        private void DiskInfo_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
+        {
+            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            mw.StorageWindowHeight = mw.StorageWindowHeight + 138;
             }
+
+        private void DiskInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
+        {
+            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            mw.StorageWindowHeight = mw.StorageWindowHeight - 138;
         }
     }
 }
