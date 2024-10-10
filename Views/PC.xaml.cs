@@ -83,7 +83,8 @@ namespace Fluentver.Views
             cpuList.Children.Add(specsLabels);
             cpuList.Children.Add(specsList);
 
-            ((MainWindow)((App)Application.Current).m_window).PCWindowHeight = 507;
+            var mw = (MainWindow)((App)Application.Current).m_window;
+            mw.PCWindowHeight = mw.PCWindowHeight + 42;
         }
 
         private void SetPCInfo()
