@@ -62,7 +62,7 @@ namespace Fluentver.Views
                 int freeSpaceNumber = drive.TotalFreeSpace switch { < 1024 => (int)drive.TotalFreeSpace, < 1048576 => (int)(drive.TotalFreeSpace / 1024), < 1073741824 => (int)(drive.TotalFreeSpace / 1048576), < 1099511627776 => (int)(drive.TotalFreeSpace / 1073741824), < 1125899906842624 => (int)(drive.TotalFreeSpace / 1099511627776), < 1152921504606846976 => (int)(drive.TotalFreeSpace / 1125899906842624), _ => (int)(drive.TotalFreeSpace / 1152921504606846976) };
 
                 var diskSpace = new Grid();
-                diskSpace.Children.Add(new ProgressRing() { IsIndeterminate = false, Maximum = drive.TotalSize / (double)1073741824, Value = (drive.TotalSize / (double)1073741824) - (drive.TotalFreeSpace / (double)1073741824), Background = new SolidColorBrush(Colors.DarkGray), Height = 75, Width = 75 });
+                diskSpace.Children.Add(new ProgressRing() { IsIndeterminate = false, Maximum = drive.TotalSize, Value = drive.TotalSize - drive.TotalFreeSpace, Background = new SolidColorBrush(Colors.DarkGray), Height = 75, Width = 75 });
                 content.Children.Add(diskSpace);
 
                 var labels = new StackPanel() { Orientation = Orientation.Vertical, Spacing = 4 };
