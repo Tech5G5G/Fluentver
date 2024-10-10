@@ -22,7 +22,7 @@
                 <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="AppTitle" 
-               Text="About Windows" 
+               Text="Fluver" 
                Style="{StaticResource CaptionTextBlockStyle}"
                Grid.Column="1"
                VerticalAlignment="Center"
