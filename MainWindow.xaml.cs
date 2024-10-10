@@ -56,7 +56,7 @@ namespace Fluentver
         private int users = 428;
 
         public int StorageWindowHeight { get { return storage; } set { storage = value; if ((RootNV.SelectedItem as NavigationViewItem).Name == "Storage_NavItem") SetWindowHeight(value); } }
-        private int storage = 700;
+        private int storage = 200;
 
         [DllImport("uxtheme.dll", EntryPoint = "#135", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern int SetPreferredAppMode(int preferredAppMode);
