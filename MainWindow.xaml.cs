@@ -144,6 +144,7 @@ namespace Fluentver
             GlyphButton button = new() { Visibility = Visibility.Collapsed };
             GlyphButton button2 = new() { Visibility = Visibility.Collapsed };
             int windowHeight;
+            string windowTitle;
             Type page;
 
             switch (selectedItem.Name)
@@ -154,12 +155,14 @@ namespace Fluentver
                     button = new GlyphButton() { Name = "activationState", Glyph = "\uEB95", Text = "Activation state" };
                     button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:activation") { UseShellExecute = true });
                     windowHeight = AboutWindowHeight;
+                    windowTitle = "About";
                     break;
                 case "Users_NavItem":
                     page = typeof(Users);
                     button = new GlyphButton() { Name = "manageUsers", Glyph = "\uE8FA", Text = "Manage other users" };
                     button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:otherusers") { UseShellExecute = true });
                     windowHeight = UsersWindowHeight;
+                    windowTitle = "Users";
                     break;
                 case "PC_NavItem":
                     page = typeof(PC);
@@ -168,6 +171,7 @@ namespace Fluentver
                     button2 = new GlyphButton() { Name = "taskManager", Glyph = "\uE9D9", Text = "Task manager" };
                     button2.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("taskmgr") { UseShellExecute = true });
                     windowHeight = PCWindowHeight;
+                    windowTitle = "Your PC";
                     break;
                 case "Storage_NavItem":
                     page = typeof(Storage);
@@ -176,12 +180,14 @@ namespace Fluentver
                     button2 = new GlyphButton() { Name = "refreshStorage", Glyph = "\uE72C", Text = "Refresh" };
                     button2.Click += (object sender, RoutedEventArgs e) => App.StoragePage?.Reload();
                     windowHeight = StorageWindowHeight;
+                    windowTitle = "Storage";
                     break;
             }
 
             ContentFrame.Navigate(page, null, new EntranceNavigationTransitionInfo());
 
             SetWindowHeight(windowHeight);
+            AppWindow.Title = windowTitle;
             
             toolbar.Children.Clear();
             toolbar.Children.Add(button);
