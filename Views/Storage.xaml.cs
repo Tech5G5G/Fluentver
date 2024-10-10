@@ -97,7 +97,11 @@ namespace Fluentver.Views
                 info.Children.Add(driveFormat);
 
                 content.Children.Add(info);
+
                 expander.Content = content;
+                expander.Expanding += DiskInfo_WindowHeight_Increase;
+                expander.Collapsed += DiskInfo_WindowHeight_Decrease;
+
                 disksList.Children.Add(expander);
         private void DiskInfo_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
         {
