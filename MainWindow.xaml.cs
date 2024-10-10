@@ -67,7 +67,8 @@ namespace Fluentver
 
             SetTitleBar(AppTitleBar);
             ExtendsContentIntoTitleBar = true;
-            Title = "About Windows";
+            Title = "Fluver";
+            this.AppWindow.SetIcon("Fluentver.ico");
 
             var presenter = this.AppWindow.Presenter as OverlappedPresenter;
             presenter.IsMaximizable = presenter.IsMinimizable = presenter.IsResizable = false;
