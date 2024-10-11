@@ -50,7 +50,7 @@ namespace Fluentver.Views
                     HorizontalAlignment = HorizontalAlignment.Stretch,
                     IsExpanded = true,
                     Padding = new Thickness(0),
-                    Header = drive.VolumeLabel
+                    Header = string.IsNullOrWhiteSpace(drive.VolumeLabel) ? drive.Name : drive.VolumeLabel
                 };
 
                 var content = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(12), Spacing = 12 };
