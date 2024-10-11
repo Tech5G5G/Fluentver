@@ -9,15 +9,15 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="4b383819-457f-4372-aa42-97815e3bc2a6"
-    Publisher="CN=ignac"
+    Name="Tech5G5G.Fluver"
+    Publisher="CN=6A412899-897E-4FB8-A2C7-EF01EAAF4C9B"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="4b383819-457f-4372-aa42-97815e3bc2a6" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Fluver</DisplayName>
-    <PublisherDisplayName>ignac</PublisherDisplayName>
+    <PublisherDisplayName>Tech5G5G</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -40,7 +40,7 @@
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"  Square71x71Logo="Assets\Square71x71Logo.png"/>
+        <uap:DefaultTile Square71x71Logo="Assets\Square71x71Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
