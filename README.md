@@ -2,7 +2,7 @@
 <p align="center"><strong>A modern version of winver made in WinUI</strong></p>
 
 <p align='center'>
-  <img src='https://github.com/Tech5G5G/Fluentver/blob/master/Temp%20Showcase.png?raw=true' height='500'>
+  <img src='https://github.com/Tech5G5G/Fluentver/blob/release-update/Showcase.png?raw=true' height='500'>
 </p>
 
 ## Installation
