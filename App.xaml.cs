@@ -160,6 +160,8 @@ namespace Fluentver
 
         public static Storage StoragePage { get; set; }
 
+        public static PC pcPage { get; set; }
+
         private double GetScaleFromDpi(uint dpi)
         {
             double scale = 1;
