@@ -22,7 +22,7 @@
                 <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="AppTitle" 
-               Text="About Windows" 
+               Text="Fluver" 
                Style="{StaticResource CaptionTextBlockStyle}"
                Grid.Column="1"
                VerticalAlignment="Center"
@@ -43,9 +43,19 @@
                         <KeyboardAccelerator Modifiers="Control" Key="Number1" />
                     </NavigationViewItem.KeyboardAccelerators>
                 </NavigationViewItem>
-                <NavigationViewItem x:Name="Users_NavItem" ToolTipService.ToolTip="Your info and other users" Icon="People" Content="Users">
+                <NavigationViewItem x:Name="PC_NavItem" ToolTipService.ToolTip="Your PC's info and specs" Icon="{ui:FontIcon Glyph=&#xE7F4;}" Content="Your PC">
                     <NavigationViewItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="Number2" />
+                    </NavigationViewItem.KeyboardAccelerators>
+                </NavigationViewItem>
+                <NavigationViewItem x:Name="Users_NavItem" ToolTipService.ToolTip="Your info and other users" Icon="People" Content="Users">
+                    <NavigationViewItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="Number3" />
+                    </NavigationViewItem.KeyboardAccelerators>
+                </NavigationViewItem>
+                <NavigationViewItem x:Name="Storage_NavItem" ToolTipService.ToolTip="List of your disks" Icon="{ui:FontIcon Glyph=&#xEDA2;}" Content="Storage">
+                    <NavigationViewItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="Number4" />
                     </NavigationViewItem.KeyboardAccelerators>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
@@ -60,14 +70,7 @@
                 <ToolTip Content="OK" Visibility="Collapsed" />
             </ToolTipService.ToolTip>
         </Button>
-        <StackPanel Margin="8,8,0,8" Orientation="Horizontal" Spacing="8" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-            <Button x:Name="activationState" Click="ActivationState_Click" Opacity="1">
-                <StackPanel Spacing="8" Orientation="Horizontal">
-                    <FontIcon Glyph="&#xEB95;" FontSize="16" />
-                    <TextBlock Text="Activation state" />
-                </StackPanel>
-            </Button>
-            <local:GlyphButton Glyph="&#xEB95;" Text="1234" Click="ActivationState_Click" />
+        <StackPanel x:Name="toolbar" Margin="8,8,0,8" Orientation="Horizontal" Spacing="8" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <StackPanel.ChildrenTransitions>
                 <TransitionCollection>
                     <RepositionThemeTransition />

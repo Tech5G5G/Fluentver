@@ -10,7 +10,7 @@
     mc:Ignorable="d">
 
     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
-        <Expander x:Name="userInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Your info">
+        <Expander x:Name="userInfo" Expanding="UserInfo_WindowHeight_Increase" Collapsed="UserInfo_WindowHeight_Decrease" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Your info">
             <StackPanel Orientation="Horizontal">
                 <Grid Margin="12">
                     <Ellipse Height="50" Width="50" PointerEntered="UserPhoto_PointerEntered">
@@ -24,25 +24,15 @@
                     </Grid>
                 </Grid>
                 <StackPanel Spacing="4" Margin="0,12,12,12" VerticalAlignment="Center">
-                    <TextBlock x:Name="userDisplayName" Text="Display name" TextWrapping="NoWrap" />
-                    <TextBlock x:Name="userAccountName" Text="Email/user name" Foreground="{ThemeResource TextFillColorSecondary}" TextWrapping="NoWrap" />
+                    <TextBlock x:Name="userDisplayName" Text="Display name" IsTextSelectionEnabled="True" TextWrapping="NoWrap" />
+                    <TextBlock x:Name="userAccountName" Text="Email/user name" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" TextWrapping="NoWrap" />
                 </StackPanel>
             </StackPanel>
         </Expander>
-        <Expander x:Name="legalInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Legal">
-            <StackPanel>
-                <StackPanel BorderThickness="12">
-                    <TextBlock x:Name="prText" Text="The Windows operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions." TextWrapping="WrapWholeWords" />
-                </StackPanel>
-                <TextBlock x:Name="copyrightText" Margin="12,0,0,0" Text="©️ Microsoft Corporation. All rights reserved." />
-                <StackPanel BorderThickness="12">
-                    <TextBlock Text="The product is licensed under the Microsoft Software License Terms to:" TextWrapping="WrapWholeWords" />
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <HyperlinkButton x:Name="usernameText" IsRightTapEnabled="True" Content="Username placeholder" />
-                        <HyperlinkButton x:Name="orgNameText" IsRightTapEnabled="True" Content="Org name placeholder" />
-                    </StackPanel>
-                </StackPanel>
-            </StackPanel>
+        <Expander x:Name="users" Expanding="Users_WindowHeight_Increase" Collapsed="Users_WindowHeight_Decrease" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Users">
+            <ScrollViewer MaxHeight="193">
+                <StackPanel x:Name="usersList" Margin="12,0" />
+            </ScrollViewer>
         </Expander>
     </StackPanel>
 </Page>

@@ -1,3 +1,4 @@
+﻿using Fluentver.Views;
 ﻿using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -5,6 +6,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
 using System;
@@ -26,13 +28,44 @@ using Windows.Graphics;
 using Windows.Security.Cryptography.Core;
 using Windows.System;
 using Windows.UI.ViewManagement;
-using static System.Formats.Asn1.AsnWriter;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Fluentver
 {
+    public sealed class UserEntry : Control
+    {
+        public UserEntry()
+        {
+            this.DefaultStyleKey = typeof(UserEntry);
+        }
+
+        public ImageSource ProfilePicture
+        {
+            get { return (ImageSource)GetValue(ProfilePictureProperty); }
+            set { SetValue(ProfilePictureProperty, value); }
+        }
+
+        public static readonly DependencyProperty ProfilePictureProperty = DependencyProperty.Register("ProfilePicture", typeof(ImageSource), typeof(UserEntry), new PropertyMetadata(null));
+
+        public string DisplayName
+        {
+            get { return (string)GetValue(DisplayNameProperty); }
+            set { SetValue(DisplayNameProperty, value); }
+        }
+
+        public static readonly DependencyProperty DisplayNameProperty = DependencyProperty.Register("DisplayName", typeof(string), typeof(UserEntry), new PropertyMetadata(string.Empty));
+
+        public string AccountName
+        {
+            get { return (string)GetValue(AccountNameProperty); }
+            set { SetValue(AccountNameProperty, value); }
+        }
+
+        public static readonly DependencyProperty AccountNameProperty = DependencyProperty.Register("AccountName", typeof(string), typeof(UserEntry), new PropertyMetadata(string.Empty));
+    }
+
     public sealed class GlyphButton : Control
     {
         public GlyphButton()
@@ -125,6 +158,8 @@ namespace Fluentver
 
         public Window m_window;
 
+        public static Storage StoragePage { get; set; }
+
         private double GetScaleFromDpi(uint dpi)
         {
             double scale = 1;
@@ -161,7 +196,7 @@ namespace Fluentver
             return scale;
         }
 
-        public async Task<string> GetCurrentUserInfo(string userProperty)
+        public static async Task<string> GetCurrentUserInfo(string userProperty)
         {
             IReadOnlyList<User> users = await User.FindAllAsync();
 
@@ -172,6 +207,21 @@ namespace Fluentver
             string userPropertyResult = (string)data;
 
             return userPropertyResult;
+        }
+
+        public static async Task<BitmapImage> GetCurrentUserPicture(UserPictureSize pictureSize)
+        {
+            IReadOnlyList<User> users = await User.FindAllAsync();
+
+            var current = users.Where(p => p.AuthenticationStatus == UserAuthenticationStatus.LocallyAuthenticated &&
+                                        p.Type == UserType.LocalUser).FirstOrDefault();
+
+            var pictureStream = await current.GetPictureAsync(pictureSize);
+            var openedPictureStream = await pictureStream.OpenReadAsync();
+            var bitmapImage = new BitmapImage();
+            bitmapImage.SetSource(openedPictureStream);
+            
+            return bitmapImage;
         }
     }
 }
