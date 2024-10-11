@@ -76,16 +76,20 @@ namespace Fluentver.Views
             });
 
             GetPhysicallyInstalledSystemMemory(out long memoryKB);
-            specsList.Children.Add(new TextBlock() { Text = cpuName, Foreground = Application.Current.Resources["TextFillColorSecondaryBrush"] as SolidColorBrush, IsTextSelectionEnabled = true });
-            specsList.Children.Add(new TextBlock() { Text = gpuName, Foreground = Application.Current.Resources["TextFillColorSecondaryBrush"] as SolidColorBrush, IsTextSelectionEnabled = true });
-            specsList.Children.Add(new TextBlock() { Text = ((int)(memoryKB / 1048576)).ToString() + " GB", Foreground = Application.Current.Resources["TextFillColorSecondaryBrush"] as SolidColorBrush, IsTextSelectionEnabled = true });
+            try
+            {
+                specsList.Children.Add(new TextBlock() { Text = cpuName, Foreground = Application.Current.Resources["TextFillColorSecondaryBrush"] as SolidColorBrush, IsTextSelectionEnabled = true });
+                specsList.Children.Add(new TextBlock() { Text = gpuName, Foreground = Application.Current.Resources["TextFillColorSecondaryBrush"] as SolidColorBrush, IsTextSelectionEnabled = true });
+                specsList.Children.Add(new TextBlock() { Text = ((int)(memoryKB / 1048576)).ToString() + " GB", Foreground = Application.Current.Resources["TextFillColorSecondaryBrush"] as SolidColorBrush, IsTextSelectionEnabled = true });
 
-            cpuListRing.Visibility = Visibility.Collapsed;
-            cpuList.Children.Add(specsLabels);
-            cpuList.Children.Add(specsList);
+                cpuListRing.Visibility = Visibility.Collapsed;
+                cpuList.Children.Add(specsLabels);
+                cpuList.Children.Add(specsList);
 
-            var mw = (MainWindow)((App)Application.Current).m_window;
-            mw.PCWindowHeight = mw.PCWindowHeight + 42;
+                var mw = (MainWindow)((App)Application.Current).m_window;
+                mw.PCWindowHeight = mw.PCWindowHeight + 42;
+            }
+            catch (Exception) { }
         }
 
         private void SetPCInfo()
