@@ -23,5 +23,3 @@ You can also use Windows' built in package manager to install Fluver. Simply ope
 ```
 winget install 9n3lmss7xl2k
 ```
-### Via MSIX Package
-You can use an MSIX package to install Fluver. Go to the [releases page](https://github.com/Tech5G5G/Fluentver/releases), find the latest version, navigate to the assets section, and download the package that corresponds to your system. Then, open the downloaded file and follow the instructions to install the application.
