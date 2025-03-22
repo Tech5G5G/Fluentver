@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "Fluentver (Package)": {
+    "Fluver (Package)": {
       "commandName": "MsixPackage"
     },
-    "Fluentver (Unpackaged)": {
+    "Fluver (Unpackaged)": {
       "commandName": "Project"
     }
   }
