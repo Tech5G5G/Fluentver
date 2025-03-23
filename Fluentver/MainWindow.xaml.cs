@@ -15,6 +15,8 @@ namespace Fluentver
             public static SolidColorBrush WindowCaptionForegroundDisabled => (SolidColorBrush)Application.Current.Resources["WindowCaptionForegroundDisabled"];
         }
 
+        public ObservableCollection<GlyphButton> ToolbarButtons { get; } = [];
+
         public MainWindow()
         {
             this.InitializeComponent();
