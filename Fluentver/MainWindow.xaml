@@ -32,7 +32,10 @@
             <FontIcon x:Name="windowsLogo" FontFamily="{StaticResource WindowsLogos}" Glyph="&#xE911;" FontSize="40" />
             <TextBlock x:Name="windowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />
         </StackPanel>
-        <NavigationView x:Name="RootNV" x:FieldModifier="public" Margin="0,94,0,48" SelectionChanged="RootNV_SelectionChanged" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" IsPaneToggleButtonVisible="False" IsSettingsVisible="False">
+        <NavigationView x:Name="RootNV" x:FieldModifier="public"
+                        SelectedItem="{x:Bind About_NavItem}" SelectionChanged="RootNV_SelectionChanged"
+                        PaneDisplayMode="Top" IsSettingsVisible="False"
+                        IsBackButtonVisible="Collapsed" IsPaneToggleButtonVisible="False">
             <NavigationView.Resources>
                 <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent" />
                 <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="Transparent" />

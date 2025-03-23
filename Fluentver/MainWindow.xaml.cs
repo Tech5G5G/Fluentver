@@ -80,8 +80,6 @@ namespace Fluentver
 
             SetWindowsLogo();
 
-            RootNV.SelectedItem = About_NavItem;
-
             this.Closed += (object sender, WindowEventArgs args) => App.pcPage?.StopTimer();
         }
 
