@@ -25,6 +25,7 @@
 	<ApplicationIcon>Assets\Fluver.ico</ApplicationIcon>
 	<PublishAot>False</PublishAot>
 	<GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
+	<WindowsSdkPackageVersion>10.0.26100.46</WindowsSdkPackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="About.xaml" />
