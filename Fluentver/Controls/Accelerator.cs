@@ -2,7 +2,7 @@
 
 namespace Fluentver.Controls
 {
-    public sealed partial class Accelerator : NavigationViewItem
+    public sealed partial class Accelerator : FrameworkElement
     {
         public static readonly DependencyProperty CtrlProperty =
             DependencyProperty.RegisterAttached("Ctrl",
@@ -10,11 +10,11 @@ namespace Fluentver.Controls
                 typeof(Accelerator),
                 new PropertyMetadata(false, UpdateCtrl));
 
-        public static VirtualKey GetCtrl(NavigationViewItem target) => (VirtualKey)target.GetValue(CtrlProperty);
+        public static VirtualKey GetCtrl(FrameworkElement target) => (VirtualKey)target.GetValue(CtrlProperty);
 
-        public static void SetCtrl(NavigationViewItem target, VirtualKey value) => target.SetValue(CtrlProperty, value);
+        public static void SetCtrl(FrameworkElement target, VirtualKey value) => target.SetValue(CtrlProperty, value);
 
-        private static void UpdateCtrl(DependencyObject sender, DependencyPropertyChangedEventArgs args) => (sender as NavigationViewItem).KeyboardAccelerators.Add(new()
+        private static void UpdateCtrl(DependencyObject sender, DependencyPropertyChangedEventArgs args) => (sender as FrameworkElement).KeyboardAccelerators.Add(new()
         {
             Key = (VirtualKey)args.NewValue,
             Modifiers = VirtualKeyModifiers.Control
@@ -27,11 +27,11 @@ namespace Fluentver.Controls
                 typeof(Accelerator),
                 new PropertyMetadata(false, UpdateAlt));
 
-        public static VirtualKey GetAlt(NavigationViewItem target) => (VirtualKey)target.GetValue(AltProperty);
+        public static VirtualKey GetAlt(FrameworkElement target) => (VirtualKey)target.GetValue(AltProperty);
 
-        public static void SetAlt(NavigationViewItem target, VirtualKey value) => target.SetValue(AltProperty, value);
+        public static void SetAlt(FrameworkElement target, VirtualKey value) => target.SetValue(AltProperty, value);
 
-        private static void UpdateAlt(DependencyObject sender, DependencyPropertyChangedEventArgs args) => (sender as NavigationViewItem).KeyboardAccelerators.Add(new()
+        private static void UpdateAlt(DependencyObject sender, DependencyPropertyChangedEventArgs args) => (sender as FrameworkElement).KeyboardAccelerators.Add(new()
         {
             Key = (VirtualKey)args.NewValue,
             Modifiers = VirtualKeyModifiers.Menu
@@ -44,11 +44,11 @@ namespace Fluentver.Controls
                 typeof(Accelerator),
                 new PropertyMetadata(false, UpdateShift));
 
-        public static VirtualKey GetShift(NavigationViewItem target) => (VirtualKey)target.GetValue(AltProperty);
+        public static VirtualKey GetShift(FrameworkElement target) => (VirtualKey)target.GetValue(AltProperty);
 
-        public static void SetShift(NavigationViewItem target, VirtualKey value) => target.SetValue(AltProperty, value);
+        public static void SetShift(FrameworkElement target, VirtualKey value) => target.SetValue(AltProperty, value);
 
-        private static void UpdateShift(DependencyObject sender, DependencyPropertyChangedEventArgs args) => (sender as NavigationViewItem).KeyboardAccelerators.Add(new()
+        private static void UpdateShift(DependencyObject sender, DependencyPropertyChangedEventArgs args) => (sender as FrameworkElement).KeyboardAccelerators.Add(new()
         {
             Key = (VirtualKey)args.NewValue,
             Modifiers = VirtualKeyModifiers.Shift
