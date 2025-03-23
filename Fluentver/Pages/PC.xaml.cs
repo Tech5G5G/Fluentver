@@ -1,8 +1,7 @@
-using System.Timers;
 using System.Management;
+using System.Runtime.InteropServices;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Microsoft.Win32;
-using System.Runtime.InteropServices;
 
 namespace Fluentver.Pages
 {
@@ -18,6 +17,7 @@ namespace Fluentver.Pages
 
             SetPCInfo();
             SetPCSpecs();
+            SetAwakeTime(true);
         }
 
         [DllImport("kernel32.dll")]
@@ -81,8 +81,6 @@ namespace Fluentver.Pages
 
         private void SetPCInfo()
         {
-            SetAwakeTime();
-
             var deviceInformation = new EasClientDeviceInformation();
             productName.Text = deviceInformation.SystemProductName.ToString();
 
@@ -105,53 +103,18 @@ namespace Fluentver.Pages
             pcBackground.ImageSource = new BitmapImage() { UriSource = new Uri("C:\\Users\\" + Environment.UserName + "\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper") };
         }
         
-        private object timerLock = new object();
-        private Timer timer = new Timer();
+        readonly DispatcherTimer timer = new() { Interval = TimeSpan.FromSeconds(1) };
 
-        public void StopTimer()
+        private void SetAwakeTime(bool setupTimer = false)
         {
-            lock (timerLock) timer.Stop();
-        }
-
-        private bool canTimeAwakeBeUpdated = true;
-        private void TimeAwake_SelectionChanged(object sender, RoutedEventArgs e) => canTimeAwakeBeUpdated = string.IsNullOrEmpty(timeAwake.SelectedText);
-        private void SetAwakeTime()
-        {
-            var timespan = TimeSpan.FromMilliseconds(Environment.TickCount64);
-
-            string seconds = timespan.Seconds <= 9 ? "0" + timespan.Seconds : timespan.Seconds.ToString();
-            string minutes = timespan.Minutes <= 9 ? "0" + timespan.Minutes : timespan.Minutes.ToString();
-            string hours = timespan.Hours <= 9 ? "0" + timespan.Hours : timespan.Hours.ToString();
-            string days = timespan.Days <= 9 ? "0" + timespan.Days : timespan.Days.ToString();
-
-            timeAwake.Text = days + ":" + hours + ":" + minutes + ":" + seconds;
-
-            timer.Interval = 1000;
-            timer.Elapsed += (object sender, ElapsedEventArgs e) =>
+            if (setupTimer)
             {
-                lock (timerLock)
-                {
-                    if(!timer.Enabled)
-                        return;
+                timer.Tick += (s, e) => SetAwakeTime();
+                timer.Start();
+            }
 
-                    timer.Stop();
-
-                    if (canTimeAwakeBeUpdated)
-                    {
-                        var timespan = TimeSpan.FromMilliseconds(Environment.TickCount64);
-
-                        string seconds = timespan.Seconds <= 9 ? "0" + timespan.Seconds : timespan.Seconds.ToString();
-                        string minutes = timespan.Minutes <= 9 ? "0" + timespan.Minutes : timespan.Minutes.ToString();
-                        string hours = timespan.Hours <= 9 ? "0" + timespan.Hours : timespan.Hours.ToString();
-                        string days = timespan.Days <= 9 ? "0" + timespan.Days : timespan.Days.ToString();
-
-                        this.DispatcherQueue.TryEnqueue(() => timeAwake.Text = days + ":" + hours + ":" + minutes + ":" + seconds);
-                    }
-                    timer.Interval = 1000;
-                    timer.Start();
-                }
-            };
-            timer.Start();
+            if (string.IsNullOrEmpty(timeAwake.SelectedText))
+                timeAwake.Text = TimeSpan.FromMilliseconds(Environment.TickCount64).ToString(@"dd\:hh\:mm\:ss");
         }
     }
 }

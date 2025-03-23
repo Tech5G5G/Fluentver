@@ -23,9 +23,7 @@ namespace Fluentver
 
             SetTitleBar(titleBar);
             ExtendsContentIntoTitleBar = true;
-
             AppWindow.SetIcon("Assets/Fluver.ico");
-            Closed += (s, e) => App.pcPage?.StopTimer();
 
             var presenter = AppWindow.Presenter as OverlappedPresenter;
             presenter.IsMaximizable = presenter.IsMinimizable = presenter.IsResizable = false;

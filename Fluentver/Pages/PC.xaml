@@ -34,7 +34,7 @@
                 <StackPanel Spacing="4" Margin="0,12,12,12">
                     <TextBlock x:Name="pcName" Text="Device name" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
                     <TextBlock x:Name="productName" Text="Product name" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
-                    <TextBlock x:Name="timeAwake" Text="00:00:00:00" SelectionChanged="TimeAwake_SelectionChanged" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
+                    <TextBlock x:Name="timeAwake" Text="00:00:00:00" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
                     <TextBlock x:Name="osType" Text="64-bit operating system" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
                 </StackPanel>
             </StackPanel>
