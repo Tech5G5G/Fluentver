@@ -35,7 +35,9 @@
             </ScrollViewer>
         </Expander>
         <StackPanel.ChildrenTransitions>
-            <RepositionThemeTransition IsStaggeringEnabled="False" />
+            <TransitionCollection>
+                <RepositionThemeTransition IsStaggeringEnabled="False" />
+            </TransitionCollection>
         </StackPanel.ChildrenTransitions>
     </StackPanel>
 </Page>

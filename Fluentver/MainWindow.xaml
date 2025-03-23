@@ -61,8 +61,7 @@
             <StackPanel x:Name="toolbar" Margin="8,8,0,8" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Left">
                 <StackPanel.ChildrenTransitions>
                     <TransitionCollection>
-                        <RepositionThemeTransition />
-                        <EntranceThemeTransition />
+                <RepositionThemeTransition IsStaggeringEnabled="False" />
                     </TransitionCollection>
                 </StackPanel.ChildrenTransitions>
             </StackPanel>
