@@ -20,34 +20,23 @@
             <FontIcon x:Name="windowsLogo" FontFamily="{StaticResource WindowsLogos}" Glyph="&#xE911;" FontSize="40" />
             <TextBlock x:Name="windowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />
         </StackPanel>
-        <NavigationView x:Name="RootNV" x:FieldModifier="public"
-                        SelectedItem="{x:Bind About_NavItem}" SelectionChanged="RootNV_SelectionChanged"
-                        PaneDisplayMode="Top" IsSettingsVisible="False"
-                        IsBackButtonVisible="Collapsed" IsPaneToggleButtonVisible="False">
-            <NavigationView.Resources>
-                <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent" />
-                <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="Transparent" />
-            </NavigationView.Resources>
-            <NavigationView.MenuItems>
-                <NavigationViewItem x:Name="About_NavItem"
-                                    Icon="{ui:FontIcon Glyph=&#xE946;}" Content="About"
+        <SelectorBar x:Name="bar" SelectionChanged="Bar_SelectionChanged" HorizontalAlignment="Center">
+            <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE946;}" Text="About"
                                     ToolTipService.ToolTip="Windows specs and legal"
                                     controls:Accelerator.Ctrl="Number1" />
-                <NavigationViewItem x:Name="PC_NavItem"
-                                    Icon="{ui:FontIcon Glyph=&#xE7F4;}" Content="Your PC"
+            <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE7F4;}" Text="Your PC"
                                     ToolTipService.ToolTip="Your PC's info and specs"
                                     controls:Accelerator.Ctrl="Number2" />
-                <NavigationViewItem x:Name="Users_NavItem"
-                                    Icon="People" Content="Users"
+            <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE716;}" Text="Users"
                                     ToolTipService.ToolTip="Your info and other users"
                                     controls:Accelerator.Ctrl="Number3" />
-                <NavigationViewItem x:Name="Storage_NavItem"
-                                    Icon="{ui:FontIcon Glyph=&#xEDA2;}" Content="Storage"
-                                    ToolTipService.ToolTip="List of your disks"
+            <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xEDA2;}" Text="Storage"
+                             ToolTipService.ToolTip="A list of your disks"
                                     controls:Accelerator.Ctrl="Number4" />
-            </NavigationView.MenuItems>
+            <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xF1AD;}" Text="Insider"
+                             ToolTipService.ToolTip="" />
+        </SelectorBar>
             <Frame x:Name="ContentFrame" x:FieldModifier="public" />
-        </NavigationView>
         <Grid Padding="8,8,8,17">
             <StackPanel x:Name="toolbar" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Left">
                 <StackPanel.ChildrenTransitions>

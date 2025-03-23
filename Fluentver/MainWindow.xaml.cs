@@ -32,6 +32,8 @@ namespace Fluentver
             titleBar.ActualThemeChanged += (s, e) => WindowHelper.SetAppTheme(s.ActualTheme);
 
             SizeToElement(Content as FrameworkElement, Dimensions.Height);
+            bar.SetSelectedIndex(0);
+
             SetWindowsDisplay();
         }
 
@@ -52,54 +54,22 @@ namespace Fluentver
 
         private void CloseWindow(object sender, RoutedEventArgs args) => Close();
 
-        private void RootNV_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        int previousIndex;
+        private void Bar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
         {
-            NavigationViewItem selectedItem = args.SelectedItem as NavigationViewItem;
-            GlyphButton button = new() { Visibility = Visibility.Collapsed };
-            GlyphButton button2 = new() { Visibility = Visibility.Collapsed };
-            string windowTitle;
-            Type page;
+            AppWindow.Title = sender.SelectedItem.Text;
+            int currentIndex = sender.GetSelectedIndex();
 
-            switch (selectedItem.Name)
+            ContentFrame.Navigate(currentIndex switch
             {
-                default:
-                case "About_NavItem":
-                    page = typeof(About);
-                    button = new GlyphButton() { Name = "activationState", Glyph = "\uEB95", Text = "Activation state" };
-                    button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:activation") { UseShellExecute = true });
-                    windowTitle = "About";
-                    break;
-                case "Users_NavItem":
-                    page = typeof(Users);
-                    button = new GlyphButton() { Name = "manageUsers", Glyph = "\uE8FA", Text = "Manage other users" };
-                    button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:otherusers") { UseShellExecute = true });
-                    windowTitle = "Users";
-                    break;
-                case "PC_NavItem":
-                    page = typeof(PC);
-                    button = new GlyphButton() { Name = "renamePC", Glyph = "\uE8AC", Text = "Rename your PC" };
-                    button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:about") { UseShellExecute = true });
-                    button2 = new GlyphButton() { Name = "taskManager", Glyph = "\uE9D9", Text = "Task manager" };
-                    button2.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("taskmgr") { UseShellExecute = true });
-                    windowTitle = "Your PC";
-                    break;
-                case "Storage_NavItem":
-                    page = typeof(Storage);
-                    button = new GlyphButton() { Name = "manageStorage", Glyph = "\uEDA2", Text = "Manage storage" };
-                    button.Click += (object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:storagesense") { UseShellExecute = true });
-                    button2 = new GlyphButton() { Name = "refreshStorage", Glyph = "\uE72C", Text = "Refresh" };
-                    button2.Click += (object sender, RoutedEventArgs e) => App.StoragePage?.Reload();
-                    windowTitle = "Storage";
-                    break;
-            }
-
-            ContentFrame.Navigate(page, null, new EntranceNavigationTransitionInfo());
-
-            AppWindow.Title = windowTitle;
-            
-            toolbar.Children.Clear();
-            toolbar.Children.Add(button);
-            toolbar.Children.Add(button2);
+                1 => typeof(PC),
+                2 => typeof(Users),
+                3 => typeof(Storage),
+                _ => typeof(About),
+            },
+            this,
+            new SlideNavigationTransitionInfo { Effect = previousIndex - currentIndex > 0 ? SlideNavigationTransitionEffect.FromLeft : SlideNavigationTransitionEffect.FromRight });
+            previousIndex = currentIndex;
         }
     }
 }
