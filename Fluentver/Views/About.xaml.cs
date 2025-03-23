@@ -40,13 +40,13 @@ namespace Fluentver
 
         private async void SetNames()
         {
-            string orgName = await App.GetCurrentUserInfo(KnownUserProperties.DomainName);
+            string orgName = await UserHelper.GetCurrentUserInfoAsync(KnownUserProperties.DomainName);
             if (string.IsNullOrWhiteSpace(orgName))
                 orgNameText.Visibility = Visibility.Collapsed;
             else
                 orgNameText.Content = orgName;
 
-            usernameText.Content = await App.GetCurrentUserInfo(KnownUserProperties.AccountName);
+            usernameText.Content = await UserHelper.GetCurrentUserInfoAsync(KnownUserProperties.AccountName);
         }
 
         private void SetWindowsInformation()
@@ -75,28 +75,28 @@ namespace Fluentver
 
         private void WindowsInfo_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
         {
-            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            MainWindow mw = App.MainWindow;
             if (mw is not null)
                 mw.AboutWindowHeight = mw.AboutWindowHeight + 90;
         }
 
         private void WindowsInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
         {
-            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            MainWindow mw = App.MainWindow;
             if (mw is not null)
                 mw.AboutWindowHeight = mw.AboutWindowHeight - 90;
         }
 
         private void LegalInfo_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
         {
-            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            MainWindow mw = App.MainWindow;
             if (mw is not null)
                 mw.AboutWindowHeight = mw.AboutWindowHeight + 195;
         }
 
         private void LegalInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
         {
-            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            MainWindow mw = App.MainWindow;
             if (mw is not null)
                 mw.AboutWindowHeight = mw.AboutWindowHeight - 195;
         }
@@ -136,7 +136,7 @@ namespace Fluentver
 
         private void Navigate_UsersPage(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = (MainWindow)((App)Application.Current).m_window;
+            MainWindow mw = App.MainWindow;
             mw.RootNV.SelectedItem = mw.RootNV.MenuItems.First(i => ((NavigationViewItem)i).Name == "Users_NavItem");
             mw.ContentFrame.Navigate(typeof(Users), null, new SlideNavigationTransitionInfo { Effect = SlideNavigationTransitionEffect.FromRight });
         }

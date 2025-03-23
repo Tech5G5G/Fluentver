@@ -47,14 +47,14 @@ namespace Fluentver
 
         private async void SetUserInfo()
         {
-            string userDisplayName = await App.GetCurrentUserInfo(KnownUserProperties.DisplayName);
+            string userDisplayName = await UserHelper.GetCurrentUserInfoAsync(KnownUserProperties.DisplayName);
             if (string.IsNullOrWhiteSpace(userDisplayName))
                 this.userDisplayName.Text = Environment.UserName;
             else
                 this.userDisplayName.Text = userDisplayName;
 
-            userAccountName.Text = await App.GetCurrentUserInfo(KnownUserProperties.AccountName);
-            userPhotoImage.ImageSource = await App.GetCurrentUserPicture(UserPictureSize.Size1080x1080);
+            userAccountName.Text = await UserHelper.GetCurrentUserInfoAsync(KnownUserProperties.AccountName);
+            userPhotoImage.ImageSource = await UserHelper.GetCurrentUserPictureAsync(UserPictureSize.Size1080x1080);
         }
 
         private async void GetAllUsers()
@@ -69,7 +69,7 @@ namespace Fluentver
                 var image = new BitmapImage();
                 image.SetSource(openedPictureStream);
 
-                string displayName = await App.GetCurrentUserInfo(KnownUserProperties.DisplayName);
+                string displayName = await UserHelper.GetCurrentUserInfoAsync(KnownUserProperties.DisplayName);
                 if (string.IsNullOrWhiteSpace(displayName))
                     displayName = Environment.UserName;
 
@@ -78,7 +78,7 @@ namespace Fluentver
                 i++;
             }
 
-            var mw = (MainWindow)((App)Application.Current).m_window;
+            var mw = App.MainWindow;
             mw.UsersWindowHeight = i switch
             {
                 2 => mw.UsersWindowHeight + 80,
@@ -104,28 +104,28 @@ namespace Fluentver
 
         private void UserInfo_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
         {
-            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            MainWindow mw = App.MainWindow;
             if (userInfo.XamlRoot is not null)
                 mw.UsersWindowHeight = mw.UsersWindowHeight + 75;
         }
 
         private void UserInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
         {
-            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            MainWindow mw = App.MainWindow;
             if (userInfo.XamlRoot is not null)
                 mw.UsersWindowHeight = mw.UsersWindowHeight - 75;
         }
 
         private void Users_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
         {
-            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            MainWindow mw = App.MainWindow;
             if (userInfo.XamlRoot is not null)
                 mw.UsersWindowHeight = mw.UsersWindowHeight + usersHeight;
         }
 
         private void Users_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
         {
-            MainWindow mw = (MainWindow)((App)(Application.Current)).m_window;
+            MainWindow mw = App.MainWindow;
             if (userInfo.XamlRoot is not null)
                 mw.UsersWindowHeight = mw.UsersWindowHeight - usersHeight;
         }
