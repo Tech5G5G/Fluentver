@@ -95,74 +95,20 @@ namespace Fluentver
             this.InitializeComponent();
         }
 
-        [DllImport("User32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        public static extern uint GetDpiForWindow(IntPtr hwnd);
-
         /// <summary>
         /// Invoked when the application is launched.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
-        {
-            m_window = new MainWindow();
-            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(m_window);
-            Microsoft.UI.WindowId windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
-            Microsoft.UI.Windowing.AppWindow appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
-
-            if (appWindow is not null)
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
             {
-                double scale = GetScaleFromDpi(GetDpiForWindow(hWnd));
-
-                var newSize = new SizeInt32();
-                newSize.Width = (int)(480 * scale);
-                newSize.Height = (int)(590 * scale);
-                appWindow.Resize(newSize);
-            }
-
-            m_window.Activate();
+            MainWindow = new();
+            MainWindow.Activate();
         }
 
-        public Window m_window;
+        public static MainWindow MainWindow { get; set; }
 
         public static Storage StoragePage { get; set; }
 
         public static PC pcPage { get; set; }
-
-        private double GetScaleFromDpi(uint dpi)
-        {
-            double scale = 1;
-            switch (dpi)
-            {
-                case < 120:
-                    scale = 1;
-                    break;
-                case < 144:
-                    scale = 1.25;
-                    break;
-                case < 168:
-                    scale = 1.5;
-                    break;
-                case < 192:
-                    scale = 1.75;
-                    break;
-                case < 216:
-                    scale = 2;
-                    break;
-                case < 240:
-                    scale = 2.25;
-                    break;
-                case < 288:
-                    scale = 2.5;
-                    break;
-                case < 312:
-                    scale = 3;
-                    break;
-                default:
-                    scale = (double)dpi / 100;
-                    break;
-            }
-            return scale;
-        }
-
     }
 }
