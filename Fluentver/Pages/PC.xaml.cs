@@ -4,7 +4,7 @@ using Windows.Security.ExchangeActiveSyncProvisioning;
 using Microsoft.Win32;
 using System.Runtime.InteropServices;
 
-namespace Fluentver.Views
+namespace Fluentver.Pages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

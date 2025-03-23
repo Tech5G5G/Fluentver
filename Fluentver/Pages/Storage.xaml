@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <controls:InfoPage
-    x:Class="Fluentver.Views.Storage"
+    x:Class="Fluentver.Pages.Storage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Fluentver.Views"

@@ -4,10 +4,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.System;
 using Windows.System.Profile;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
-namespace Fluentver
+namespace Fluentver.Pages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

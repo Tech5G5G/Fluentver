@@ -17,7 +17,7 @@ global using Microsoft.UI.Xaml.Media;
 global using Microsoft.UI.Xaml.Media.Imaging;
 global using Microsoft.UI.Xaml.Navigation;
 global using WinUIEx;
-global using Fluentver.Views;
+global using Fluentver.Pages;
 global using Fluentver.Helpers;
 global using Fluentver.Controls;
 global using Fluentver.Extensions;

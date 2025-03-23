@@ -47,8 +47,8 @@
     <None Remove="Controls\GlyphButton.xaml" />
     <None Remove="Controls\UserEntry.xaml" />
     <None Remove="Users.xaml" />
-    <None Remove="Views\PC.xaml" />
-    <None Remove="Views\Storage.xaml" />
+    <None Remove="Pages\PC.xaml" />
+    <None Remove="Pages\Storage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
