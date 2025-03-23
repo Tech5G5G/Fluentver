@@ -1,32 +1,6 @@
-﻿using Microsoft.UI;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Microsoft.UI.Windowing;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using Microsoft.Win32;
-using Windows.System;
 using Windows.Graphics;
-using System.Threading.Tasks;
-using Windows.UI.Text;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml.Media.Animation;
-using Windows.ApplicationModel.DataTransfer;
-using Fluentver.Views;
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Fluentver
 {
@@ -34,14 +8,19 @@ namespace Fluentver
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainWindow : Window
+        private static class Brushes
     {
+            public static SolidColorBrush WindowCaptionForeground => (SolidColorBrush)Application.Current.Resources["WindowCaptionForeground"];
+            public static SolidColorBrush WindowCaptionForegroundDisabled => (SolidColorBrush)Application.Current.Resources["WindowCaptionForegroundDisabled"];
+        }
+
         private void SetWindowHeight(int height)
         {
-            if (AppTitleBar.XamlRoot is not null && this.AppWindow is not null)
+            if (titleBar.XamlRoot is not null && this.AppWindow is not null)
             {
                 SizeInt32 size;
                 size.Width = this.AppWindow.Size.Width;
-                size.Height = (int)(height * AppTitleBar.XamlRoot.RasterizationScale);
+                size.Height = (int)(height * titleBar.XamlRoot.RasterizationScale);
                 this.AppWindow.Resize(size);
             }
         }
@@ -58,27 +37,21 @@ namespace Fluentver
         public int StorageWindowHeight { get { return storage; } set { storage = value; if ((RootNV.SelectedItem as NavigationViewItem).Name == "Storage_NavItem") SetWindowHeight(value); } }
         private int storage = 200;
 
-        [DllImport("uxtheme.dll", EntryPoint = "#135", SetLastError = true, CharSet = CharSet.Unicode)]
-        private static extern int SetPreferredAppMode(int preferredAppMode);
-
         public MainWindow()
         {
             this.InitializeComponent();
 
-            SetTitleBar(AppTitleBar);
+            SetTitleBar(titleBar);
             ExtendsContentIntoTitleBar = true;
-            Title = "Fluver";
-            AppWindow.SetIcon("Assets/Fluver.ico");
 
-            var presenter = this.AppWindow.Presenter as OverlappedPresenter;
+            AppWindow.SetIcon("Assets/Fluver.ico");
+            Closed += (s, e) => App.pcPage?.StopTimer();
+
+            var presenter = AppWindow.Presenter as OverlappedPresenter;
             presenter.IsMaximizable = presenter.IsMinimizable = presenter.IsResizable = false;
 
-            this.Activated += MainWindow_Activated;
-            AppTitleBar.ActualThemeChanged += AppTitleBar_ActualThemeChanged;
-            if (AppTitleBar.ActualTheme == ElementTheme.Dark)
-                SetPreferredAppMode(2);
-
-            SetWindowsLogo();
+            WindowHelper.SetAppTheme(titleBar.ActualTheme);
+            titleBar.ActualThemeChanged += (s, e) => WindowHelper.SetAppTheme(s.ActualTheme);
 
             SetWindowsDisplay();
         }
@@ -96,44 +69,9 @@ namespace Fluentver
                 windowsVersionText.Text = "Windows 10";
                 windowsVersionText.FontWeight = FontWeights.Normal;
             }
-            windowsVersionText.Text = windows;
         }
 
-        private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
-        {
-            if (args.WindowActivationState == WindowActivationState.Deactivated)
-                AppTitle.Foreground = (SolidColorBrush)App.Current.Resources["WindowCaptionForegroundDisabled"];
-            else
-                AppTitle.Foreground = (SolidColorBrush)App.Current.Resources["WindowCaptionForeground"];
-        }
-
-        private void AppTitleBar_ActualThemeChanged(FrameworkElement sender, object args)
-        {
-            var currentTheme = sender.ActualTheme;
-
-            AppTitle.Foreground = (SolidColorBrush)App.Current.Resources["WindowCaptionForeground"];
-
-            if (currentTheme == ElementTheme.Light)
-            {
-                this.AppWindow.TitleBar.ButtonForegroundColor = Colors.Black;
-                this.AppWindow.TitleBar.ButtonHoverForegroundColor = Colors.Black;
-                this.AppWindow.TitleBar.InactiveForegroundColor = ((SolidColorBrush)App.Current.Resources["WindowCaptionForegroundDisabled"]).Color;
-                this.AppWindow.TitleBar.ButtonPressedForegroundColor = Colors.Black;
-
-                SetPreferredAppMode(1);
-            }
-            else if (currentTheme == ElementTheme.Dark)
-            {
-                this.AppWindow.TitleBar.ButtonForegroundColor = Colors.White;
-                this.AppWindow.TitleBar.ButtonHoverForegroundColor = Colors.White;
-                this.AppWindow.TitleBar.InactiveForegroundColor = ((SolidColorBrush)App.Current.Resources["WindowCaptionForegroundDisabled"]).Color;
-                this.AppWindow.TitleBar.ButtonPressedForegroundColor = Colors.White;
-
-                SetPreferredAppMode(2);
-            }
-        }
-
-        private void CloseWindow(object sender, RoutedEventArgs args) => ((App)Application.Current).m_window.Close();
+        private void CloseWindow(object sender, RoutedEventArgs args) => Close();
 
         private void RootNV_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
