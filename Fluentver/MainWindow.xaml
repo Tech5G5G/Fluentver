@@ -38,26 +38,22 @@
                 <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="Transparent" />
             </NavigationView.Resources>
             <NavigationView.MenuItems>
-                <NavigationViewItem x:Name="About_NavItem" ToolTipService.ToolTip="Windows specs and legal" Icon="{ui:FontIcon Glyph=&#xE946;}" Content="About">
-                    <NavigationViewItem.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="Number1" />
-                    </NavigationViewItem.KeyboardAccelerators>
-                </NavigationViewItem>
-                <NavigationViewItem x:Name="PC_NavItem" ToolTipService.ToolTip="Your PC's info and specs" Icon="{ui:FontIcon Glyph=&#xE7F4;}" Content="Your PC">
-                    <NavigationViewItem.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="Number2" />
-                    </NavigationViewItem.KeyboardAccelerators>
-                </NavigationViewItem>
-                <NavigationViewItem x:Name="Users_NavItem" ToolTipService.ToolTip="Your info and other users" Icon="People" Content="Users">
-                    <NavigationViewItem.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="Number3" />
-                    </NavigationViewItem.KeyboardAccelerators>
-                </NavigationViewItem>
-                <NavigationViewItem x:Name="Storage_NavItem" ToolTipService.ToolTip="List of your disks" Icon="{ui:FontIcon Glyph=&#xEDA2;}" Content="Storage">
-                    <NavigationViewItem.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="Number4" />
-                    </NavigationViewItem.KeyboardAccelerators>
-                </NavigationViewItem>
+                <NavigationViewItem x:Name="About_NavItem"
+                                    Icon="{ui:FontIcon Glyph=&#xE946;}" Content="About"
+                                    ToolTipService.ToolTip="Windows specs and legal"
+                                    controls:Accelerator.Ctrl="Number1" />
+                <NavigationViewItem x:Name="PC_NavItem"
+                                    Icon="{ui:FontIcon Glyph=&#xE7F4;}" Content="Your PC"
+                                    ToolTipService.ToolTip="Your PC's info and specs"
+                                    controls:Accelerator.Ctrl="Number2" />
+                <NavigationViewItem x:Name="Users_NavItem"
+                                    Icon="People" Content="Users"
+                                    ToolTipService.ToolTip="Your info and other users"
+                                    controls:Accelerator.Ctrl="Number3" />
+                <NavigationViewItem x:Name="Storage_NavItem"
+                                    Icon="{ui:FontIcon Glyph=&#xEDA2;}" Content="Storage"
+                                    ToolTipService.ToolTip="List of your disks"
+                                    controls:Accelerator.Ctrl="Number4" />
             </NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" x:FieldModifier="public" />
         </NavigationView>
