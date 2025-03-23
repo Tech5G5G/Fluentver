@@ -22,7 +22,7 @@
     <AppInstallerUri>https://www.github.com/tech5g5g/fluentver</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 	<WindowsSdkPackageVersion>10.0.22621.38</WindowsSdkPackageVersion>
-	<ApplicationIcon>Fluentver.ico</ApplicationIcon>
+	<ApplicationIcon>Assets\Fluver.ico</ApplicationIcon>
 	<PublishAot>False</PublishAot>
 	<GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
   </PropertyGroup>
@@ -43,6 +43,8 @@
     <None Remove="Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
     <None Remove="Assets\Square71x71Logo.scale-200.png" />
     <None Remove="Assets\Windows-Logos.ttf" />
+    <None Remove="Controls\GlyphButton.xaml" />
+    <None Remove="Controls\UserEntry.xaml" />
     <None Remove="Users.xaml" />
     <None Remove="Views\PC.xaml" />
     <None Remove="Views\Storage.xaml" />
@@ -62,6 +64,7 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250310001" />
     <PackageReference Include="System.Management" Version="9.0.3" />
+    <PackageReference Include="WinUIEx" Version="2.5.1" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
@@ -77,6 +80,11 @@
     <Content Update="Assets\Windows-Logos.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\UserEntry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Storage.xaml">
@@ -95,6 +103,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\PC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\GlyphButton.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
