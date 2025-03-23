@@ -57,16 +57,17 @@
             </NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" x:FieldModifier="public" />
         </NavigationView>
-        <Button Content="OK" Click="CloseWindow" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="8" Style="{ThemeResource AccentButtonStyle}">
+        <Grid>
+            <Button Content="OK" Click="CloseWindow" HorizontalAlignment="Right" Margin="8" Style="{ThemeResource AccentButtonStyle}">
             <Button.KeyboardAccelerators>
                 <KeyboardAccelerator Key="Enter" />
                 <KeyboardAccelerator Key="Escape" />
             </Button.KeyboardAccelerators>
             <ToolTipService.ToolTip>
-                <ToolTip Content="OK" Visibility="Collapsed" />
+                    <ToolTip Visibility="Collapsed" />
             </ToolTipService.ToolTip>
         </Button>
-        <StackPanel x:Name="toolbar" Margin="8,8,0,8" Orientation="Horizontal" Spacing="8" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <StackPanel x:Name="toolbar" Margin="8,8,0,8" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Left">
             <StackPanel.ChildrenTransitions>
                 <TransitionCollection>
                     <RepositionThemeTransition />
@@ -75,4 +76,10 @@
             </StackPanel.ChildrenTransitions>
         </StackPanel>
     </Grid>
-</Window>
+        <StackPanel.ChildrenTransitions>
+            <TransitionCollection>
+                <RepositionThemeTransition IsStaggeringEnabled="False" />
+            </TransitionCollection>
+        </StackPanel.ChildrenTransitions>
+    </StackPanel>
+</controls:SizeWindow>
