@@ -10,7 +10,7 @@
     mc:Ignorable="d">
 
     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
-        <Expander x:Name="userInfo" Expanding="UserInfo_WindowHeight_Increase" Collapsed="UserInfo_WindowHeight_Decrease" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Your info">
+        <Expander x:Name="userInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Your info">
             <StackPanel Orientation="Horizontal">
                 <Grid Margin="12">
                     <Ellipse Height="50" Width="50" PointerEntered="UserPhoto_PointerEntered">
@@ -29,7 +29,7 @@
                 </StackPanel>
             </StackPanel>
         </Expander>
-        <Expander x:Name="users" Expanding="Users_WindowHeight_Increase" Collapsed="Users_WindowHeight_Decrease" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Users">
+        <Expander x:Name="users" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Users">
             <ScrollViewer MaxHeight="193">
                 <StackPanel x:Name="usersList" Margin="12,0" />
             </ScrollViewer>

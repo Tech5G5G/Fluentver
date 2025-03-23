@@ -77,14 +77,6 @@ namespace Fluentver
 
                 i++;
             }
-
-            var mw = App.MainWindow;
-            mw.UsersWindowHeight = i switch
-            {
-                2 => mw.UsersWindowHeight + 80,
-                >= 3 => mw.UsersWindowHeight + 145,
-                _ => mw.UsersWindowHeight + 17,
-            };
         }
 
         private void UserPhoto_PointerEntered(object sender, PointerRoutedEventArgs e) => cameraHover.Visibility = Visibility.Visible;
@@ -100,34 +92,6 @@ namespace Fluentver
         {
             cameraHoverColor.Fill = new SolidColorBrush(Colors.Black);
             Process.Start(new ProcessStartInfo("ms-settings:yourinfo") { UseShellExecute = true });
-        }
-
-        private void UserInfo_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            if (userInfo.XamlRoot is not null)
-                mw.UsersWindowHeight = mw.UsersWindowHeight + 75;
-        }
-
-        private void UserInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            if (userInfo.XamlRoot is not null)
-                mw.UsersWindowHeight = mw.UsersWindowHeight - 75;
-        }
-
-        private void Users_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            if (userInfo.XamlRoot is not null)
-                mw.UsersWindowHeight = mw.UsersWindowHeight + usersHeight;
-        }
-
-        private void Users_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            if (userInfo.XamlRoot is not null)
-                mw.UsersWindowHeight = mw.UsersWindowHeight - usersHeight;
         }
     }
 }

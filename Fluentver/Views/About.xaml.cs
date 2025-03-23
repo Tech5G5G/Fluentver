@@ -73,34 +73,6 @@ namespace Fluentver
             prText.Text = "The " + windows + " " + productionEdition + " operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions.";
         }
 
-        private void WindowsInfo_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            if (mw is not null)
-                mw.AboutWindowHeight = mw.AboutWindowHeight + 90;
-        }
-
-        private void WindowsInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            if (mw is not null)
-                mw.AboutWindowHeight = mw.AboutWindowHeight - 90;
-        }
-
-        private void LegalInfo_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            if (mw is not null)
-                mw.AboutWindowHeight = mw.AboutWindowHeight + 195;
-        }
-
-        private void LegalInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            if (mw is not null)
-                mw.AboutWindowHeight = mw.AboutWindowHeight - 195;
-        }
-
         private void Name_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             HyperlinkButton nameText = sender as HyperlinkButton;

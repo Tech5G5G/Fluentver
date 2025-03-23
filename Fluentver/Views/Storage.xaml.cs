@@ -39,7 +39,6 @@ namespace Fluentver.Views
         private async void GetAllDisks()
         {
             var mw = App.MainWindow;
-            mw.StorageWindowHeight = 200;
 
             var drives = DriveInfo.GetDrives();
             foreach (var drive in drives)
@@ -99,26 +98,11 @@ namespace Fluentver.Views
                 content.Children.Add(info);
 
                 expander.Content = content;
-                expander.Expanding += DiskInfo_WindowHeight_Increase;
-                expander.Collapsed += DiskInfo_WindowHeight_Decrease;
 
                 disksList.Children.Add(expander);
 
                 await Task.Delay(10);
-                mw.StorageWindowHeight = mw.StorageWindowHeight + (drives[0] == drive ? 186 : 194);
             }
-        }
-
-        private void DiskInfo_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            mw.StorageWindowHeight = mw.StorageWindowHeight + 138;
-        }
-
-        private void DiskInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            mw.StorageWindowHeight = mw.StorageWindowHeight - 138;
         }
     }
 }

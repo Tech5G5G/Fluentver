@@ -95,7 +95,6 @@ namespace Fluentver.Views
                 cpuList.Children.Add(specsList);
 
                 var mw = App.MainWindow;
-                mw.PCWindowHeight = mw.PCWindowHeight + 42;
             }
             catch (Exception) { }
         }
@@ -173,34 +172,6 @@ namespace Fluentver.Views
                 }
             };
             timer.Start();
-        }
-
-        private void PCInfo_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            if (pcInfo.XamlRoot is not null)
-                mw.PCWindowHeight = mw.PCWindowHeight + 112;
-        }
-
-        private void PCInfo_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            if (pcInfo.XamlRoot is not null)
-                mw.PCWindowHeight = mw.PCWindowHeight - 112;
-        }
-
-        private void PCSpecs_WindowHeight_Increase(Expander sender, ExpanderExpandingEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            if (mw is not null && cpuListRing is not null)
-                mw.PCWindowHeight = mw.PCWindowHeight + 90;
-        }
-
-        private void PCSpecs_WindowHeight_Decrease(Expander sender, ExpanderCollapsedEventArgs args)
-        {
-            MainWindow mw = App.MainWindow;
-            if (mw is not null)
-                mw.PCWindowHeight = mw.PCWindowHeight - 90;
         }
     }
 }
