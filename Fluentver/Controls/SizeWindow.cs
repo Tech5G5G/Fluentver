@@ -14,9 +14,20 @@ public partial class SizeWindow : Window
         set => manager.Height = value;
     }
 
+    public bool DoubleClickToMaximize { get; set; } = true;
+
     readonly WindowManager manager;
 
-    public SizeWindow() => manager = WindowManager.Get(this);
+    public SizeWindow()
+    {
+        manager = WindowManager.Get(this);
+        manager.WindowMessageReceived += (s, e) =>
+        {
+            if (DoubleClickToMaximize && e.Message.MessageId == 0x00A3) //WM_NCLBUTTONDBLCLK
+                e.Handled = true;
+        };
+    }
+
     public void SizeToElement(FrameworkElement element, Dimensions trackedDimensions = Dimensions.Width | Dimensions.Height)
     {
         element.SizeChanged += (s, e) =>

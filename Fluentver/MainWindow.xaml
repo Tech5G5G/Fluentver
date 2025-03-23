@@ -10,7 +10,7 @@
     xmlns:ex="using:WinUIEx"
     xmlns:controls="using:Fluentver.Controls"
     mc:Ignorable="d"
-    Title="Fluver" Width="480" Height="590">
+    Title="Fluver" Width="480" Height="582" DoubleClickToMaximize="True">
     <Window.SystemBackdrop>
         <MicaBackdrop />
     </Window.SystemBackdrop>
