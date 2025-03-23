@@ -8,7 +8,13 @@ namespace Fluentver.Controls
             this.DefaultStyleKey = typeof(GlyphButton);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) => Click?.Invoke(sender, e);
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProcessName is not null)
+                Process.Start(new ProcessStartInfo(ProcessName) { UseShellExecute = true });
+
+            Click?.Invoke(sender, e);
+        }
 
         public event RoutedEventHandler Click;
 
@@ -27,5 +33,7 @@ namespace Fluentver.Controls
         }
 
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph", typeof(string), typeof(GlyphButton), new PropertyMetadata(string.Empty));
+
+        public string ProcessName { get; set; }
     }
 }
