@@ -11,7 +11,7 @@
     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
         <StackPanel.ChildrenTransitions>
             <TransitionCollection>
-                <RepositionThemeTransition />
+                <RepositionThemeTransition IsStaggeringEnabled="False" />
             </TransitionCollection>
         </StackPanel.ChildrenTransitions>
         <Expander x:Name="windowsInfo" Expanding="WindowsInfo_WindowHeight_Increase" Collapsed="WindowsInfo_WindowHeight_Decrease" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Windows specifications">

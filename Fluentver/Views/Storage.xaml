@@ -8,5 +8,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
-    <StackPanel x:Name="disksList" VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0" />
+    <StackPanel x:Name="disksList" VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
+        <StackPanel.ChildrenTransitions>
+            <TransitionCollection>
+                <RepositionThemeTransition IsStaggeringEnabled="False" />
+            </TransitionCollection>
+        </StackPanel.ChildrenTransitions>
+    </StackPanel>
 </Page>
