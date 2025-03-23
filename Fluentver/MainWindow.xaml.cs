@@ -80,23 +80,20 @@ namespace Fluentver
 
             SetWindowsLogo();
 
-            this.Closed += (object sender, WindowEventArgs args) => App.pcPage?.StopTimer();
+            SetWindowsDisplay();
         }
 
-        private void SetWindowsLogo()
+        private void SetWindowsDisplay()
         {
-            int build = Environment.OSVersion.Version.Build;
-
-            string windows;
-            if (build >= 22000)
+            if (Environment.OSVersion.Version.Build >= 22000)
             {
-                windows = "Windows 11";
                 windowsLogo.Glyph = "\xE911";
+                windowsVersionText.Text = "Windows 11";
             }
             else
             {
-                windows = "Windows 10";
                 windowsLogo.Glyph = "\xE910";
+                windowsVersionText.Text = "Windows 10";
                 windowsVersionText.FontWeight = FontWeights.Normal;
             }
             windowsVersionText.Text = windows;
