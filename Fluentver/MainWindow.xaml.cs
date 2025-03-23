@@ -55,6 +55,7 @@ namespace Fluentver
             WindowHelper.SetAppTheme(titleBar.ActualTheme);
             titleBar.ActualThemeChanged += (s, e) => WindowHelper.SetAppTheme(s.ActualTheme);
 
+            SizeToElement(Content as FrameworkElement, Dimensions.Height);
             SetWindowsDisplay();
         }
 
