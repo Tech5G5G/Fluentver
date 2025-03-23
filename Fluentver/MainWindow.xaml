@@ -68,9 +68,7 @@
             </StackPanel>
         </Grid>
         <StackPanel.ChildrenTransitions>
-            <TransitionCollection>
                 <RepositionThemeTransition IsStaggeringEnabled="False" />
-            </TransitionCollection>
         </StackPanel.ChildrenTransitions>
     </StackPanel>
 </controls:SizeWindow>

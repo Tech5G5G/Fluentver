@@ -10,9 +10,7 @@
     NavigationCacheMode="Required">
     <StackPanel x:Name="disksList" VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
         <StackPanel.ChildrenTransitions>
-            <TransitionCollection>
-                <RepositionThemeTransition IsStaggeringEnabled="False" />
-            </TransitionCollection>
+            <RepositionThemeTransition IsStaggeringEnabled="False" />
         </StackPanel.ChildrenTransitions>
     </StackPanel>
 </Page>

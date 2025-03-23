@@ -9,11 +9,6 @@
     NavigationCacheMode="Required"
     mc:Ignorable="d">
     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
-        <StackPanel.ChildrenTransitions>
-            <TransitionCollection>
-                <RepositionThemeTransition IsStaggeringEnabled="False" />
-            </TransitionCollection>
-        </StackPanel.ChildrenTransitions>
         <Expander x:Name="windowsInfo" Expanding="WindowsInfo_WindowHeight_Increase" Collapsed="WindowsInfo_WindowHeight_Decrease" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Windows specifications">
             <StackPanel Orientation="Horizontal">
                 <StackPanel Spacing="4" BorderThickness="12">
@@ -47,5 +42,8 @@
                 </StackPanel>
             </StackPanel>
         </Expander>
+        <StackPanel.ChildrenTransitions>
+            <RepositionThemeTransition IsStaggeringEnabled="False" />
+        </StackPanel.ChildrenTransitions>
     </StackPanel>
 </Page>

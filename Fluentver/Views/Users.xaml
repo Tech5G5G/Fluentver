@@ -34,5 +34,8 @@
                 <StackPanel x:Name="usersList" Margin="12,0" />
             </ScrollViewer>
         </Expander>
+        <StackPanel.ChildrenTransitions>
+            <RepositionThemeTransition IsStaggeringEnabled="False" />
+        </StackPanel.ChildrenTransitions>
     </StackPanel>
 </Page>

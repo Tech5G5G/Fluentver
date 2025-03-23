@@ -39,5 +39,8 @@
                 <ProgressRing x:Name="cpuListRing" Height="20" Width="20" />
             </StackPanel>
         </Expander>
+        <StackPanel.ChildrenTransitions>
+            <RepositionThemeTransition IsStaggeringEnabled="False" />
+        </StackPanel.ChildrenTransitions>
     </StackPanel>
 </Page>
