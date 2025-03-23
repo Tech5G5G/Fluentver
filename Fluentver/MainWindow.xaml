@@ -7,7 +7,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
-    xmlns:ex="using:WinUIEx"
     xmlns:controls="using:Fluentver.Controls"
     mc:Ignorable="d"
     Title="Fluver" Width="480" Height="582" DoubleClickToMaximize="True">
@@ -16,7 +15,7 @@
     </Window.SystemBackdrop>
 
     <StackPanel>
-        <ex:TitleBar x:Name="titleBar" Title="Fluver" HorizontalAlignment="Stretch" Height="32" />
+        <TitleBar x:Name="titleBar" Title="Fluver" HorizontalAlignment="Stretch" Height="32" />
         <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Top">
             <FontIcon x:Name="windowsLogo" FontFamily="{StaticResource WindowsLogos}" Glyph="&#xE911;" FontSize="40" />
             <TextBlock x:Name="windowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />
