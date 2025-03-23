@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Window
+<controls:SizeWindow
     x:Class="Fluentver.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Fluentver"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:ex="using:WinUIEx"
+    xmlns:controls="using:Fluentver.Controls"
+    mc:Ignorable="d"
+    Title="Fluver" Width="480" Height="590">
     <Window.SystemBackdrop>
         <MicaBackdrop />
     </Window.SystemBackdrop>
@@ -49,23 +51,23 @@
         </NavigationView>
         <Grid>
             <Button Content="OK" Click="CloseWindow" HorizontalAlignment="Right" Margin="8" Style="{ThemeResource AccentButtonStyle}">
-            <Button.KeyboardAccelerators>
-                <KeyboardAccelerator Key="Enter" />
-                <KeyboardAccelerator Key="Escape" />
-            </Button.KeyboardAccelerators>
-            <ToolTipService.ToolTip>
+                <Button.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="Enter" />
+                    <KeyboardAccelerator Key="Escape" />
+                </Button.KeyboardAccelerators>
+                <ToolTipService.ToolTip>
                     <ToolTip Visibility="Collapsed" />
-            </ToolTipService.ToolTip>
-        </Button>
+                </ToolTipService.ToolTip>
+            </Button>
             <StackPanel x:Name="toolbar" Margin="8,8,0,8" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Left">
-            <StackPanel.ChildrenTransitions>
-                <TransitionCollection>
-                    <RepositionThemeTransition />
-                    <EntranceThemeTransition />
-                </TransitionCollection>
-            </StackPanel.ChildrenTransitions>
-        </StackPanel>
-    </Grid>
+                <StackPanel.ChildrenTransitions>
+                    <TransitionCollection>
+                        <RepositionThemeTransition />
+                        <EntranceThemeTransition />
+                    </TransitionCollection>
+                </StackPanel.ChildrenTransitions>
+            </StackPanel>
+        </Grid>
         <StackPanel.ChildrenTransitions>
             <TransitionCollection>
                 <RepositionThemeTransition IsStaggeringEnabled="False" />

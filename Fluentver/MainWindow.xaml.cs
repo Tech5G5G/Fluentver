@@ -1,5 +1,6 @@
-using Windows.Graphics;
+﻿using Windows.Graphics;
 using Microsoft.UI.Text;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Media.Animation;
 
 namespace Fluentver
@@ -7,9 +8,10 @@ namespace Fluentver
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainWindow : Window
-        private static class Brushes
+    public sealed partial class MainWindow : SizeWindow
     {
+        private static class Brushes
+        {
             public static SolidColorBrush WindowCaptionForeground => (SolidColorBrush)Application.Current.Resources["WindowCaptionForeground"];
             public static SolidColorBrush WindowCaptionForegroundDisabled => (SolidColorBrush)Application.Current.Resources["WindowCaptionForegroundDisabled"];
         }
