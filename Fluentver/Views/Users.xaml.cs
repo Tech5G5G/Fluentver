@@ -59,17 +59,15 @@ namespace Fluentver
 
         private async void GetAllUsers()
         {
-            IReadOnlyList<User> users = await User.FindAllAsync();
-
             int i = 0;
-            foreach (User user in users)
+            foreach (User user in await UserHelper.GetUsersAsync())
             {
                 var pictureStream = await user.GetPictureAsync(UserPictureSize.Size1080x1080);
                 var openedPictureStream = await pictureStream.OpenReadAsync();
                 var image = new BitmapImage();
                 image.SetSource(openedPictureStream);
 
-                string displayName = await UserHelper.GetCurrentUserInfoAsync(KnownUserProperties.DisplayName);
+                string displayName = (string)await user.GetPropertyAsync(KnownUserProperties.DisplayName);
                 if (string.IsNullOrWhiteSpace(displayName))
                     displayName = Environment.UserName;
 

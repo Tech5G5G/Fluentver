@@ -4,6 +4,8 @@ namespace Fluentver.Helpers
 {
     public static class UserHelper
     {
+        public static async Task<IReadOnlyList<User>> GetUsersAsync() => await User.FindAllAsync();
+
         public static async Task<string> GetCurrentUserInfoAsync(string userProperty)
         {
             var user = await GetCurrentUserAsync();
