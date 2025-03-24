@@ -8,10 +8,15 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
-  <Identity
+  <!--<Identity
     Name="Tech5G5G.Fluver"
     Publisher="CN=6A412899-897E-4FB8-A2C7-EF01EAAF4C9B"
-    Version="1.0.0.0" />
+    Version="1.0.0.0" />-->
+
+  <Identity
+    Name="Tech5G5G.Fluver"
+    Publisher="CN=ignac"
+    Version="1.1.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="4b383819-457f-4372-aa42-97815e3bc2a6" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
