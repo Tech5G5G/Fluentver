@@ -5,8 +5,9 @@ public partial class InfoPage : Page
 {
     public IList<GlyphButton> ToolbarButtons { get; } = [];
 
-    public ObservableCollection<Expander> Children { get; } = [];
+    public Setting<ApplicationDataCompositeValue> ExpanderStates { get; set; } = SettingValues.ExpanderStates;
 
+    public ObservableCollection<Expander> Children { get; } = [];
     readonly StackPanel content;
 
     public InfoPage()
@@ -26,12 +27,11 @@ public partial class InfoPage : Page
             {
                 var expander = e.NewItems[0] as Expander;
                 string key = (string)expander.Header;
-                var setting = SettingValues.ExpanderStates;
 
-                expander.IsExpanded = TryGetExpanderExpanded(key, setting, () => UpdateExpanderExpanded(key, true, setting));
+                expander.IsExpanded = TryGetExpanderExpanded(key, ExpanderStates, () => UpdateExpanderExpanded(key, true, ExpanderStates));
 
-                expander.Expanding += (s, e) => UpdateExpanderExpanded(key, true, setting);
-                expander.Collapsed += (s, e) => UpdateExpanderExpanded(key, false, setting);
+                expander.Expanding += (s, e) => UpdateExpanderExpanded(key, true, ExpanderStates);
+                expander.Collapsed += (s, e) => UpdateExpanderExpanded(key, false, ExpanderStates);
 
                 content.Children.Add(expander);
             }

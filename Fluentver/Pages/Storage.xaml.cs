@@ -8,6 +8,7 @@ namespace Fluentver.Pages
         public Storage()
         {
             this.InitializeComponent();
+            ExpanderStates = SettingValues.DiskExpanderStates;
             
             GetAllDisks();
             App.StoragePage = this;

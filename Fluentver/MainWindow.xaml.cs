@@ -1,6 +1,5 @@
 ﻿using Microsoft.UI.Text;
 using Microsoft.UI.Windowing;
-using Microsoft.UI.Xaml.Media.Animation;
 
 namespace Fluentver
 {
