@@ -22,9 +22,9 @@
                     <TextBlock Text="Build" />
                 </StackPanel>
                 <StackPanel Spacing="4" Margin="0,12,12,12">
-                    <TextBlock x:Name="editionText" Text="Windows" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
-                    <TextBlock x:Name="versionText" Text="XXHX" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
-                    <TextBlock x:Name="buildText" Text="XXXXX.XXXX" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondary}" />
+                <TextBlock x:Name="editionText" Text="Windows" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
+                <TextBlock x:Name="versionText" Text="XXHX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
+                <TextBlock x:Name="buildText" Text="XXXXX.XXXX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
                 </StackPanel>
             </StackPanel>
         </Expander>
