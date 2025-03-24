@@ -12,45 +12,38 @@
     <controls:InfoPage.ToolbarButtons>
         <controls:GlyphButton Glyph="&#xEB95;" Text="Activation state" ProcessName="ms-settings:activation" />
     </controls:InfoPage.ToolbarButtons>
-    
-    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
-        <Expander x:Name="windowsInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Windows specifications">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Spacing="4" BorderThickness="12">
-                    <TextBlock Text="Edition" />
-                    <TextBlock Text="Version" />
-                    <TextBlock Text="Build" />
-                </StackPanel>
-                <StackPanel Spacing="4" Margin="0,12,12,12">
+
+    <Expander x:Name="windowsInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Windows specifications">
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Spacing="4" BorderThickness="12">
+                <TextBlock Text="Edition" />
+                <TextBlock Text="Version" />
+                <TextBlock Text="Build" />
+            </StackPanel>
+            <StackPanel Spacing="4" Margin="0,12,12,12">
                 <TextBlock x:Name="editionText" Text="Windows" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
                 <TextBlock x:Name="versionText" Text="XXHX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
                 <TextBlock x:Name="buildText" Text="XXXXX.XXXX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
+            </StackPanel>
+        </StackPanel>
+    </Expander>
+    <Expander x:Name="legalInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Legal">
+        <StackPanel>
+            <StackPanel BorderThickness="12">
+                <TextBlock x:Name="prText" Text="The Windows operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions." IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
+            </StackPanel>
+            <TextBlock x:Name="copyrightText" Margin="12,0,0,0" Text="©️ Microsoft Corporation. All rights reserved." IsTextSelectionEnabled="True" />
+            <StackPanel BorderThickness="12">
+                <StackPanel Orientation="Horizontal" Spacing="3">
+                    <TextBlock Text="The product is licensed under the" IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
+                    <HyperlinkButton NavigateUri="https://www.microsoft.com/en-us/useterms" Padding="0" Content="Microsoft Software License Terms" />
+                </StackPanel>
+                <TextBlock Text="to:" IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <HyperlinkButton x:Name="usernameText" Click="Navigate_UsersPage" IsRightTapEnabled="True" RightTapped="Name_RightTapped" Content="Username placeholder" />
+                    <HyperlinkButton x:Name="orgNameText" Click="Navigate_UsersPage" IsRightTapEnabled="True" RightTapped="Name_RightTapped" Content="Org name placeholder" />
                 </StackPanel>
             </StackPanel>
-        </Expander>
-        <Expander x:Name="legalInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Legal">
-            <StackPanel>
-                <StackPanel BorderThickness="12">
-                    <TextBlock x:Name="prText" Text="The Windows operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions." IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
-                </StackPanel>
-                <TextBlock x:Name="copyrightText" Margin="12,0,0,0" Text="©️ Microsoft Corporation. All rights reserved." IsTextSelectionEnabled="True" />
-                <StackPanel BorderThickness="12">
-                    <StackPanel Orientation="Horizontal" Spacing="3">
-                        <TextBlock Text="The product is licensed under the" IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
-                        <HyperlinkButton NavigateUri="https://www.microsoft.com/en-us/useterms" Padding="0" Content="Microsoft Software License Terms" />
-                    </StackPanel>
-                    <TextBlock Text="to:" IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <HyperlinkButton x:Name="usernameText" Click="Navigate_UsersPage" IsRightTapEnabled="True" RightTapped="Name_RightTapped" Content="Username placeholder" />
-                        <HyperlinkButton x:Name="orgNameText" Click="Navigate_UsersPage" IsRightTapEnabled="True" RightTapped="Name_RightTapped" Content="Org name placeholder" />
-                    </StackPanel>
-                </StackPanel>
-            </StackPanel>
-        </Expander>
-        <StackPanel.ChildrenTransitions>
-            <TransitionCollection>
-                <RepositionThemeTransition IsStaggeringEnabled="False" />
-            </TransitionCollection>
-        </StackPanel.ChildrenTransitions>
-    </StackPanel>
+        </StackPanel>
+    </Expander>
 </controls:InfoPage>

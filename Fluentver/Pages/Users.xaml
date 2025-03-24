@@ -13,35 +13,28 @@
         <controls:GlyphButton Glyph="&#xE8FA;" Text="Manage other users" ProcessName="ms-settings:otherusers" />
     </controls:InfoPage.ToolbarButtons>
 
-    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
-        <Expander x:Name="userInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Your info">
-            <StackPanel Orientation="Horizontal">
-                <Grid Margin="12">
-                    <Ellipse Height="50" Width="50" PointerEntered="UserPhoto_PointerEntered">
-                        <Ellipse.Fill>
-                            <ImageBrush x:Name="userPhotoImage" ImageSource="ms-appx:///Assets/StoreLogo.png" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <Grid x:Name="cameraHover" Visibility="Collapsed">
-                        <Ellipse x:Name="cameraHoverColor" PointerPressed="UserPhoto_PointerPressed" PointerReleased="UserPhoto_PointerReleased" PointerExited="UserPhoto_PointerExited" Fill="Black" Opacity="0.5" Height="50" Width="50" />
-                        <FontIcon Glyph="&#xE722;" PointerPressed="UserPhoto_PointerPressed" PointerReleased="UserPhoto_PointerReleased" PointerExited="UserPhoto_PointerExited" Foreground="White" />
-                    </Grid>
+    <Expander x:Name="userInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Your info">
+        <StackPanel Orientation="Horizontal">
+            <Grid Margin="12">
+                <Ellipse Height="50" Width="50" PointerEntered="UserPhoto_PointerEntered">
+                    <Ellipse.Fill>
+                        <ImageBrush x:Name="userPhotoImage" ImageSource="ms-appx:///Assets/StoreLogo.png" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Grid x:Name="cameraHover" Visibility="Collapsed">
+                    <Ellipse x:Name="cameraHoverColor" PointerPressed="UserPhoto_PointerPressed" PointerReleased="UserPhoto_PointerReleased" PointerExited="UserPhoto_PointerExited" Fill="Black" Opacity="0.5" Height="50" Width="50" />
+                    <FontIcon Glyph="&#xE722;" PointerPressed="UserPhoto_PointerPressed" PointerReleased="UserPhoto_PointerReleased" PointerExited="UserPhoto_PointerExited" Foreground="White" />
                 </Grid>
-                <StackPanel Spacing="4" Margin="0,12,12,12" VerticalAlignment="Center">
-                    <TextBlock x:Name="userDisplayName" Text="Display name" IsTextSelectionEnabled="True" TextWrapping="NoWrap" />
+            </Grid>
+            <StackPanel Spacing="4" Margin="0,12,12,12" VerticalAlignment="Center">
+                <TextBlock x:Name="userDisplayName" Text="Display name" IsTextSelectionEnabled="True" TextWrapping="NoWrap" />
                 <TextBlock x:Name="userAccountName" Text="Email/user name" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" TextWrapping="NoWrap" />
-                </StackPanel>
             </StackPanel>
-        </Expander>
-        <Expander x:Name="users" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Users">
-            <ScrollViewer MaxHeight="193">
-                <StackPanel x:Name="usersList" Margin="12,0" />
-            </ScrollViewer>
-        </Expander>
-        <StackPanel.ChildrenTransitions>
-            <TransitionCollection>
-                <RepositionThemeTransition IsStaggeringEnabled="False" />
-            </TransitionCollection>
-        </StackPanel.ChildrenTransitions>
-    </StackPanel>
+        </StackPanel>
+    </Expander>
+    <Expander x:Name="users" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Users">
+        <ScrollViewer MaxHeight="193">
+            <StackPanel x:Name="usersList" Margin="12,0" />
+        </ScrollViewer>
+    </Expander>
 </controls:InfoPage>

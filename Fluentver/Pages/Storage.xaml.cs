@@ -78,7 +78,7 @@ namespace Fluentver.Pages
 
                 expander.Content = content;
 
-                disksList.Children.Add(expander);
+                Children.Add(expander);
 
                 await Task.Delay(10);
             }

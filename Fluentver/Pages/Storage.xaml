@@ -13,12 +13,4 @@
         <controls:GlyphButton Glyph="&#xEDA2;" Text="Manage storage" ProcessName="ms-settings:storagesense" />
         <controls:GlyphButton Glyph="&#xE72C;" Text="Refresh" Click="Reload" />
     </controls:InfoPage.ToolbarButtons>
-    
-    <StackPanel x:Name="disksList" VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
-        <StackPanel.ChildrenTransitions>
-            <TransitionCollection>
-                <RepositionThemeTransition IsStaggeringEnabled="False" />
-            </TransitionCollection>
-        </StackPanel.ChildrenTransitions>
-    </StackPanel>
 </controls:InfoPage>

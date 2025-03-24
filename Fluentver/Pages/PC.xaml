@@ -15,7 +15,7 @@
         <controls:GlyphButton Glyph="&#xE9D9;" Text="Task Manager" ProcessName="taskmgr" />
     </controls:InfoPage.ToolbarButtons>
 
-    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Spacing="8" Margin="8,0,8,0">
+    <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Information">
         <Expander x:Name="pcInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Information">
             <StackPanel Orientation="Horizontal">
                 <Border BorderThickness="8" Height="88" Width="148" CornerRadius="4" BorderBrush="Black" Margin="12,0,0,0">
@@ -44,10 +44,4 @@
                 <ProgressRing x:Name="cpuListRing" Height="20" Width="20" />
             </StackPanel>
         </Expander>
-        <StackPanel.ChildrenTransitions>
-            <TransitionCollection>
-                <RepositionThemeTransition IsStaggeringEnabled="False" />
-            </TransitionCollection>
-        </StackPanel.ChildrenTransitions>
-    </StackPanel>
 </controls:InfoPage>
