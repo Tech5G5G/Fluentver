@@ -16,7 +16,6 @@
     </controls:InfoPage.ToolbarButtons>
 
     <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Information">
-        <Expander x:Name="pcInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Information">
             <StackPanel Orientation="Horizontal">
                 <Border BorderThickness="8" Height="88" Width="148" CornerRadius="4" BorderBrush="Black" Margin="12,0,0,0">
                     <Rectangle Height="80" Width="140" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -39,9 +38,38 @@
                 </StackPanel>
             </StackPanel>
         </Expander>
-        <Expander x:Name="pcSpecs" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Specifications">
-            <StackPanel x:Name="cpuList" Orientation="Horizontal" BorderThickness="12" Spacing="12">
-                <ProgressRing x:Name="cpuListRing" Height="20" Width="20" />
-            </StackPanel>
+    <Expander Header="Specifications" IsExpanded="True" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" Padding="12">
+        <Grid>
+            <Grid x:Name="specsGrid" ColumnSpacing="12" RowSpacing="4" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="CPU" />
+                <TextBlock x:Name="cpu" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" />
+                <TextBlock x:Name="cpuUsageLabel" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" HorizontalAlignment="Right" Grid.Column="2" />
+                <ProgressBar x:Name="cpuUsage" Maximum="100" HorizontalAlignment="Stretch" Margin="0,0,0,4" Grid.ColumnSpan="3" Grid.Row="1" />
+
+                <TextBlock Text="GPU" Grid.Row="2" />
+                <TextBlock x:Name="gpu" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="2" />
+                <TextBlock x:Name="gpuUsageLabel" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="2" />
+                <ProgressBar x:Name="gpuUsage" Maximum="100" HorizontalAlignment="Stretch" Margin="0,0,0,4" Grid.ColumnSpan="3" Grid.Row="3" />
+
+                <TextBlock Text="RAM" Grid.Row="4" />
+                <TextBlock x:Name="ram" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="4" />
+                <TextBlock x:Name="ramUsageLabel" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="4" />
+                <ProgressBar x:Name="ramUsage" Maximum="100" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Grid.Row="6" />
+            </Grid>
+            <ProgressRing x:Name="loadingIndicator" Height="20" Width="20" VerticalAlignment="Center" />
+        </Grid>
         </Expander>
 </controls:InfoPage>
