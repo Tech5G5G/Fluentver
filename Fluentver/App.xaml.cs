@@ -27,7 +27,5 @@
         public static MainWindow MainWindow { get; set; }
 
         public static Storage StoragePage { get; set; }
-
-        public static PC pcPage { get; set; }
     }
 }
