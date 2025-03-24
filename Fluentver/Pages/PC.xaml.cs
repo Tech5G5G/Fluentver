@@ -1,8 +1,3 @@
-using System.Management;
-using System.Runtime.InteropServices;
-using Windows.Security.ExchangeActiveSyncProvisioning;
-using Microsoft.Win32;
-
 namespace Fluentver.Pages
 {
     /// <summary>
@@ -10,83 +5,28 @@ namespace Fluentver.Pages
     /// </summary>
     public sealed partial class PC : InfoPage
     {
+        readonly DispatcherTimer timer = new() { Interval = TimeSpan.FromSeconds(1) };
+
         public PC()
         {
             this.InitializeComponent();
-            App.pcPage = this;
+
+            Loaded += (s, e) => timer.Start();
+            Unloaded += (s, e) => timer.Stop();
 
             SetPCInfo();
-            SetPCSpecs();
+            SetPCUsage(true);
             SetAwakeTime(true);
-        }
-
-        [DllImport("kernel32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool GetPhysicallyInstalledSystemMemory(out long TotalMemoryInKilobytes);
-
-        private async void SetPCSpecs()
-        {
-            var specsLabels = new StackPanel() { Spacing = 4 };
-            specsLabels.Children.Add(new TextBlock() { Text = "CPU" });
-            specsLabels.Children.Add(new TextBlock() { Text = "GPU" });
-            specsLabels.Children.Add(new TextBlock() { Text = "RAM" });
-
-            var specsList = new StackPanel() { Spacing = 4 };
-
-            string cpuName = await Task.Run(() =>
-            {
-                List<string> names = [];
-                ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Processor");
-                foreach (ManagementObject mo in mos.Get())
-                {
-                    names.Add((string)mo["Name"]);
-                }
-                return names[0];
-            });
-
-            string gpuName = await Task.Run(() =>
-            {
-                List<string> names = [];
-                ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_VideoController");
-                foreach (ManagementObject mo in mos.Get())
-                {
-                    names.Add((string)mo["Name"]);
-                }
-                return names[0];
-            });
-
-            GetPhysicallyInstalledSystemMemory(out long memoryKB);
-            try
-            {
-                var cpuText = new TextBlock() { Text = cpuName, Foreground = Application.Current.Resources["TextFillColorSecondaryBrush"] as SolidColorBrush, IsTextSelectionEnabled = true };
-                cpuText.ActualThemeChanged += (FrameworkElement sender, object args) => (sender as TextBlock).Foreground = (SolidColorBrush)App.Current.Resources["TextFillColorSecondaryBrush"];
-                specsList.Children.Add(cpuText);
-
-                var gpuText = new TextBlock() { Text = gpuName, Foreground = Application.Current.Resources["TextFillColorSecondaryBrush"] as SolidColorBrush, IsTextSelectionEnabled = true };
-                gpuText.ActualThemeChanged += (FrameworkElement sender, object args) => (sender as TextBlock).Foreground = (SolidColorBrush)App.Current.Resources["TextFillColorSecondaryBrush"];
-                specsList.Children.Add(gpuText);
-
-                var ramText = new TextBlock() { Text = ((int)(memoryKB / 1048576)).ToString() + " GB", Foreground = Application.Current.Resources["TextFillColorSecondaryBrush"] as SolidColorBrush, IsTextSelectionEnabled = true };
-                ramText.ActualThemeChanged += (FrameworkElement sender, object args) => (sender as TextBlock).Foreground = (SolidColorBrush)App.Current.Resources["TextFillColorSecondaryBrush"];
-                specsList.Children.Add(ramText);
-
-                cpuListRing.Visibility = Visibility.Collapsed;
-                cpuList.Children.Add(specsLabels);
-                cpuList.Children.Add(specsList);
-
-                var mw = App.MainWindow;
-            }
-            catch (Exception) { }
         }
 
         private void SetPCInfo()
         {
-            var deviceInformation = new EasClientDeviceInformation();
+            var deviceInformation = new Windows.Security.ExchangeActiveSyncProvisioning.EasClientDeviceInformation();
             productName.Text = deviceInformation.SystemProductName.ToString();
 
             try
             {
-                string displayName = Registry.GetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters", "Hostname", "").ToString();
+                string displayName = Microsoft.Win32.Registry.GetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters", "Hostname", "").ToString();
 
                 if (!string.IsNullOrWhiteSpace(displayName))
                     pcName.Text = displayName;
@@ -102,15 +42,40 @@ namespace Fluentver.Pages
 
             pcBackground.ImageSource = new BitmapImage() { UriSource = new Uri("C:\\Users\\" + Environment.UserName + "\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper") };
         }
-        
-        readonly DispatcherTimer timer = new() { Interval = TimeSpan.FromSeconds(1) };
 
-        private void SetAwakeTime(bool setupTimer = false)
+        private async void SetPCUsage(bool hookTimer = false)
         {
-            if (setupTimer)
+            RAMHelper ramHelper = new();
+
+            if (hookTimer)
+            {
+                cpu.Text = await Task.Run(() => CPUHelper.CPUName);
+                gpu.Text = await Task.Run(() => GPUHelper.GPUName);
+                ram.Text = $"{Math.Ceiling(ramHelper.TotalRAM)} GB";
+
+                loadingIndicator.Visibility = Visibility.Collapsed;
+                specsGrid.Visibility = Visibility.Visible;
+
+                timer.Tick += (s, e) => SetPCUsage();
+            }
+
+            cpuUsageLabel.Text = $"{cpuUsage.Value = await Task.Run(() => CPUHelper.CPUUsage):N0}%";
+            gpuUsageLabel.Text = $"{gpuUsage.Value = await Task.Run(() => GPUHelper.GPUUsage):N0}%";
+
+            ramUsage.Value = ramHelper.UsedRAMPercent;
+            ramUsageLabel.Text = $"{ramHelper.UsedRAM:N0} GB";
+        }
+
+        private void SetAwakeTime(bool hookTimer = false)
+        {
+            if (hookTimer)
             {
                 timer.Tick += (s, e) => SetAwakeTime();
-                timer.Start();
+                timeAwake.LosingFocus += (s, e) =>
+                {
+                    if (e.NewFocusedElement is not Popup) //Reset text selection if focus isn't lost to a popup
+                        timeAwake.Select(timeAwake.ContentStart, timeAwake.ContentStart);
+                };
             }
 
             if (string.IsNullOrEmpty(timeAwake.SelectedText))
