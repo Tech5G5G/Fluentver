@@ -46,6 +46,7 @@
     <None Remove="Assets\Windows-Logos.ttf" />
     <None Remove="Controls\GlyphButton.xaml" />
     <None Remove="Controls\UserEntry.xaml" />
+    <None Remove="Settings\SettingsPage.xaml" />
     <None Remove="Users.xaml" />
     <None Remove="Pages\PC.xaml" />
     <None Remove="Pages\Storage.xaml" />
@@ -82,6 +83,11 @@
     <Content Update="Assets\Windows-Logos.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Settings\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\UserEntry.xaml">
