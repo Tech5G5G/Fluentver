@@ -15,7 +15,22 @@
     </Window.SystemBackdrop>
 
     <StackPanel>
-        <TitleBar x:Name="titleBar" Title="Fluver" HorizontalAlignment="Stretch" Height="32" />
+        <Grid x:Name="titleBarGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="46" />
+                <ColumnDefinition Width="46" />
+            </Grid.ColumnDefinitions>
+            <TitleBar x:Name="titleBar" Title="Fluver" HorizontalAlignment="Stretch" Height="31" />
+            <Button x:Name="settingsButton"
+                    CornerRadius="0" BorderThickness="0" Background="Transparent"
+                    Width="46" Height="31" Grid.Column="1"
+                    controls:Accelerator.Ctrl="I"
+                    ToolTipService.ToolTip="Settings" ToolTipService.Placement="Bottom"
+                    Click="SettingsButton_Click">
+                <FontIcon x:Name="settingsIcon" Glyph="&#xE713;" FontSize="14" />
+            </Button>
+        </Grid>
         <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Top">
             <FontIcon x:Name="windowsLogo" FontFamily="{StaticResource WindowsLogos}" Glyph="&#xE911;" FontSize="40" />
             <TextBlock x:Name="windowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />

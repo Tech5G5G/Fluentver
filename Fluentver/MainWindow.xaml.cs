@@ -8,12 +8,6 @@ namespace Fluentver
     /// </summary>
     public sealed partial class MainWindow : SizeWindow
     {
-        private static class Brushes
-        {
-            public static SolidColorBrush WindowCaptionForeground => (SolidColorBrush)Application.Current.Resources["WindowCaptionForeground"];
-            public static SolidColorBrush WindowCaptionForegroundDisabled => (SolidColorBrush)Application.Current.Resources["WindowCaptionForegroundDisabled"];
-        }
-
         public ObservableCollection<GlyphButton> ToolbarButtons { get; } = [];
 
         public MainWindow()
@@ -30,8 +24,9 @@ namespace Fluentver
             WindowHelper.SetAppTheme(titleBar.ActualTheme);
             titleBar.ActualThemeChanged += (s, e) => WindowHelper.SetAppTheme(s.ActualTheme);
 
-            SizeToElement(Content as FrameworkElement, Dimensions.Height);
-            bar.SetSelectedIndex(0);
+            Activated += (s, e) => settingsIcon.Foreground = (SolidColorBrush)(e.WindowActivationState == WindowActivationState.Deactivated ?
+            Application.Current.Resources["WindowCaptionForegroundDisabled"] :
+            Application.Current.Resources["WindowCaptionForeground"]);
 
             bar.SetSelectedIndex(0);
             SetWindowsDisplay();
