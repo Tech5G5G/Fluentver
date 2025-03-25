@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Fluentver.Settings.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Fluentver.Settings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d">
+
+    <StackPanel Spacing="4" Padding="8,0,8,17">
+        <controls:SettingsExpander HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}" Header="Language" Description="The display language for the application" IsExpanded="True">
+            <ComboBox>
+                <x:String>English (United States)</x:String>
+                <x:String>Greek (word "Greek" in Greek)</x:String>
+                <x:String>Polish (Polski)</x:String>
+            </ComboBox>
+            <controls:SettingsExpander.Items>
+                <controls:SettingsCard Header="Translation author" />
+            </controls:SettingsExpander.Items>
+        </controls:SettingsExpander>
+        <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE7E8;}" Header="Startup page" Description="The page to display at startup" />
+        <StackPanel.ChildrenTransitions>
+            <TransitionCollection>
+                <RepositionThemeTransition IsStaggeringEnabled="False" />
+            </TransitionCollection>
+        </StackPanel.ChildrenTransitions>
+    </StackPanel>
+</Page>
