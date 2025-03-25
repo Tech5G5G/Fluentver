@@ -33,6 +33,7 @@ namespace Fluentver
             SizeToElement(Content as FrameworkElement, Dimensions.Height);
             bar.SetSelectedIndex(0);
 
+            bar.SetSelectedIndex(0);
             SetWindowsDisplay();
         }
 
