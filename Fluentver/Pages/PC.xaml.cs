@@ -24,23 +24,15 @@ namespace Fluentver.Pages
             var deviceInformation = new Windows.Security.ExchangeActiveSyncProvisioning.EasClientDeviceInformation();
             productName.Text = deviceInformation.SystemProductName.ToString();
 
-            try
+            var architecture = RuntimeInformation.OSArchitecture;
+            osType.Text = architecture switch
             {
-                string displayName = Microsoft.Win32.Registry.GetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters", "Hostname", "").ToString();
-
-                if (!string.IsNullOrWhiteSpace(displayName))
-                    pcName.Text = displayName;
-                else
-                    pcName.Text = Environment.MachineName;
-            }
-            catch (Exception)
-            {
-                pcName.Text = Environment.MachineName;
-            }
-
-            osType.Text = Environment.Is64BitOperatingSystem ? "64-bit operating system" : "32-bit operating system";
-
-            pcBackground.ImageSource = new BitmapImage() { UriSource = new Uri("C:\\Users\\" + Environment.UserName + "\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper") };
+                Architecture.X86 => "32-bit",
+                Architecture.X64 => "64-bit",
+                Architecture.Arm => "ARM",
+                Architecture.Arm64 => "ARM64",
+                _ => architecture.ToString()
+            };
         }
 
         private async void SetPCUsage(bool hookTimer = false)
