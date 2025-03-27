@@ -55,3 +55,12 @@ public class EnumSetting<T>(string key, T defaultValue) where T : Enum
 
     public event TypedEventHandler<EnumSetting<T>, T> ValueChanged;
 }
+
+public enum Pages
+{
+    About,
+    PC,
+    Users,
+    Storage,
+    Insider
+}

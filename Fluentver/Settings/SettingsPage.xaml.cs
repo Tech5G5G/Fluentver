@@ -8,6 +8,10 @@
         public SettingsPage()
         {
             this.InitializeComponent();
+
+            startupPage.SelectedIndex = (int)SettingValues.StartupPage.Value;
         }
+
+        private void StartupPage_SelectionChanged(object sender, SelectionChangedEventArgs e) => SettingValues.StartupPage.Value = (Pages)startupPage.SelectedIndex;
     }
 }

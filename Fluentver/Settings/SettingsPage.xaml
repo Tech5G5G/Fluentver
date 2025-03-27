@@ -11,7 +11,7 @@
     mc:Ignorable="d">
 
     <StackPanel Spacing="4" Padding="8,0,8,17">
-        <controls:SettingsExpander HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}" Header="Language" Description="The display language for the application" IsExpanded="True">
+        <controls:SettingsExpander HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}" Header="Language" Description="Change the display language of the application" IsExpanded="True">
             <ComboBox>
                 <x:String>English (United States)</x:String>
                 <x:String>Greek (word "Greek" in Greek)</x:String>
@@ -21,7 +21,14 @@
                 <controls:SettingsCard Header="Translation author" />
             </controls:SettingsExpander.Items>
         </controls:SettingsExpander>
-        <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE7E8;}" Header="Startup page" Description="The page to display at startup" />
+        <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE7E8;}" Header="Startup page" Description="Change the page to display at startup">
+            <ComboBox x:Name="startupPage" SelectionChanged="StartupPage_SelectionChanged">
+                <x:String>About</x:String>
+                <x:String>Your PC</x:String>
+                <x:String>Users</x:String>
+                <x:String>Storage</x:String>
+            </ComboBox>
+        </controls:SettingsCard>
         <StackPanel.ChildrenTransitions>
             <TransitionCollection>
                 <RepositionThemeTransition IsStaggeringEnabled="False" />

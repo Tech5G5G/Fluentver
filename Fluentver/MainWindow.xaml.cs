@@ -28,7 +28,7 @@ namespace Fluentver
             Application.Current.Resources["WindowCaptionForegroundDisabled"] :
             Application.Current.Resources["WindowCaptionForeground"]);
 
-            bar.SetSelectedIndex(0);
+            bar.SetSelectedIndex((int)SettingValues.StartupPage.Value);
             SetWindowsDisplay();
         }
 
