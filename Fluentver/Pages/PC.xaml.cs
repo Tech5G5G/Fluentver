@@ -56,11 +56,11 @@ namespace Fluentver.Pages
                 timer.Tick += (s, e) => SetPCUsage();
             }
 
-            cpuUsageLabel.Text = $"{cpuUsage.Value = await Task.Run(() => CPUHelper.CPUUsage):N0}%";
-            gpuUsageLabel.Text = $"{gpuUsage.Value = await Task.Run(() => GPUHelper.GPUUsage):N0}%";
+            cpuUsageLabel.SetTextFriendly($"{cpuUsage.Value = await Task.Run(() => CPUHelper.CPUUsage):N0}%");
+            gpuUsageLabel.SetTextFriendly($"{gpuUsage.Value = await Task.Run(() => GPUHelper.GPUUsage):N0}%");
 
             ramUsage.Value = ramHelper.UsedRAMPercent;
-            ramUsageLabel.Text = $"{ramHelper.UsedRAM:N0} GB";
+            ramUsageLabel.SetTextFriendly($"{ramHelper.UsedRAM:N0} GB");
         }
 
         private void SetAwakeTime(bool hookTimer = false)
@@ -70,6 +70,10 @@ namespace Fluentver.Pages
                 timer.Tick += (s, e) => SetAwakeTime();
                 timeAwake.LosingFocus += TextDisplay_LosingFocus;
             }
+
+            timeAwake.SetTextFriendly(TimeSpan.FromMilliseconds(Environment.TickCount64).ToString(@"dd\:hh\:mm\:ss"));
+        }
+
         private void TextDisplay_LosingFocus(UIElement sender, LosingFocusEventArgs args)
                 {
             if (sender is TextBlock text && args.NewFocusedElement is not Popup) //Reset text selection if focus isn't lost to a popup
