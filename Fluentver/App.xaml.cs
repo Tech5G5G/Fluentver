@@ -26,6 +26,8 @@
 
         public static MainWindow MainWindow { get; set; }
 
+        public static RenamerWindow RenamerWindow { get; set; }
+
         public static Storage StoragePage { get; set; }
     }
 }

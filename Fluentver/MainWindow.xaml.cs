@@ -1,4 +1,4 @@
-namespace Fluentver
+﻿namespace Fluentver
 {
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
@@ -21,7 +21,7 @@ namespace Fluentver
             WindowHelper.SetAppTheme(titleBar.ActualTheme);
             titleBar.ActualThemeChanged += (s, e) => WindowHelper.SetAppTheme(s.ActualTheme);
 
-            Activated += (s, e) => settingsIcon.Foreground = (SolidColorBrush)(e.WindowActivationState == WindowActivationState.Deactivated ?
+            Closed += (s, e) => App.RenamerWindow?.Close();
             Activated += (s, e) => settingsIcon.Style = (Style)(e.WindowActivationState == WindowActivationState.Deactivated ?
             settingsButton.Resources["FontIconTitleBarInactiveStyle"] :
             settingsButton.Resources["FontIconTitleBarStyle"]);
