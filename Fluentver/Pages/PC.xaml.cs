@@ -21,8 +21,9 @@ namespace Fluentver.Pages
 
         private void SetPCInfo()
         {
-            var deviceInformation = new Windows.Security.ExchangeActiveSyncProvisioning.EasClientDeviceInformation();
-            productName.Text = deviceInformation.SystemProductName.ToString();
+            pcName.Text = SystemHelper.SystemName;
+            productName.Text = SystemHelper.SystemProductName;
+            pcBackground.ImageSource = new BitmapImage { UriSource = SystemHelper.CurrentUserWallpaper };
 
             var architecture = RuntimeInformation.OSArchitecture;
             osType.Text = architecture switch
