@@ -11,33 +11,44 @@
     NavigationCacheMode="Required"
     mc:Ignorable="d">
     <controls:InfoPage.ToolbarButtons>
-        <controls:GlyphButton Glyph="&#xE8AC;" Text="Rename your PC" ProcessName="ms-settings:about" />
+        <controls:GlyphButton Glyph="&#xE8AC;" Text="Rename your PC" Click="RenamePCButton_Click" /> <!--ProcessName="ms-settings:about"-->
         <controls:GlyphButton Glyph="&#xE9D9;" Text="Task Manager" ProcessName="taskmgr" />
     </controls:InfoPage.ToolbarButtons>
 
-    <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Information">
-            <StackPanel Orientation="Horizontal">
-                <Border BorderThickness="8" Height="88" Width="148" CornerRadius="4" BorderBrush="Black" Margin="12,0,0,0">
-                    <Rectangle Height="80" Width="140" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Rectangle.Fill>
-                            <ImageBrush x:Name="pcBackground" Stretch="UniformToFill" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </Border>
-                <StackPanel Spacing="4" BorderThickness="12">
-                    <TextBlock Text="Device name" />
-                    <TextBlock Text="Product name" />
-                    <TextBlock Text="Time awake" />
-                    <TextBlock Text="OS type" />
-                </StackPanel>
-                <StackPanel Spacing="4" Margin="0,12,12,12">
-                <TextBlock x:Name="pcName" Text="Device name" Style="{ThemeResource SecondaryDisplayTextBlockStyle}"/>
-                <TextBlock x:Name="productName" Text="Product name" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
-                <TextBlock x:Name="osType" Text="64-bit operating system" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
-                <TextBlock x:Name="timeAwake" Text="00:00:00:00" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
-                </StackPanel>
-            </StackPanel>
-        </Expander>
+    <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12" Header="Information">
+        <Grid ColumnSpacing="12" RowSpacing="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Rectangle Height="88" Width="148"
+                       RadiusX="6" RadiusY="6"
+                       Stroke="Black" StrokeThickness="8"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Grid.Column="0" Grid.RowSpan="4">
+                <Rectangle.Fill>
+                    <ImageBrush x:Name="pcBackground" Stretch="UniformToFill" />
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <TextBlock Text="Device name" Grid.Column="1" Grid.Row="0" />
+            <TextBlock Text="Product name" Grid.Column="1" Grid.Row="1" />
+            <TextBlock Text="Architecture" Grid.Column="1" Grid.Row="2" />
+            <TextBlock Text="Time awake" Grid.Column="1" Grid.Row="3" />
+
+            <TextBlock x:Name="pcName" Text="Device name" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="0" />
+            <TextBlock x:Name="productName" Text="Product name" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="1" />
+            <TextBlock x:Name="osType" Text="64-bit" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="2" />
+            <TextBlock x:Name="timeAwake" Text="00:00:00:00" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="3" />
+        </Grid>
+    </Expander>
     <Expander Header="Specifications" IsExpanded="True" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" Padding="12">
         <Grid>
             <Grid x:Name="specsGrid" ColumnSpacing="12" RowSpacing="4" Visibility="Collapsed">
@@ -71,5 +82,5 @@
             </Grid>
             <ProgressRing x:Name="loadingIndicator" Height="20" Width="20" VerticalAlignment="Center" />
         </Grid>
-        </Expander>
+    </Expander>
 </controls:InfoPage>
