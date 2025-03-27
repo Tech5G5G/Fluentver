@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 namespace Fluentver.Pages
 {
     /// <summary>
@@ -75,13 +77,17 @@ namespace Fluentver.Pages
         }
 
         private void TextDisplay_LosingFocus(UIElement sender, LosingFocusEventArgs args)
-                {
+        {
             if (sender is TextBlock text && args.NewFocusedElement is not Popup) //Reset text selection if focus isn't lost to a popup
                 text.Select(text.ContentStart, text.ContentStart);
-            }
+        }
 
-            if (string.IsNullOrEmpty(timeAwake.SelectedText))
-                timeAwake.Text = TimeSpan.FromMilliseconds(Environment.TickCount64).ToString(@"dd\:hh\:mm\:ss");
+        private void RenamePCButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.RenamerWindow is null)
+                (App.RenamerWindow = new()).Activate();
+            else
+                WindowHelper.ActivateWindow(WinRT.Interop.WindowNative.GetWindowHandle(App.RenamerWindow));
         }
     }
 }
