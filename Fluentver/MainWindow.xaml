@@ -29,6 +29,14 @@
                     ToolTipService.ToolTip="Settings" ToolTipService.Placement="Bottom"
                     Click="SettingsButton_Click">
                 <FontIcon x:Name="settingsIcon" Glyph="&#xE713;" FontSize="14" />
+                <Button.Resources>
+                    <Style x:Key="FontIconTitleBarStyle" TargetType="FontIcon">
+                        <Setter Property="Foreground" Value="{ThemeResource TitleBarCaptionButtonForegroundColor}" />
+                    </Style>
+                    <Style x:Key="FontIconTitleBarInactiveStyle" TargetType="FontIcon">
+                        <Setter Property="Foreground" Value="{ThemeResource TitleBarCaptionButtonInactiveForegroundColor}" />
+                    </Style>
+                </Button.Resources>
             </Button>
         </Grid>
         <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Top">

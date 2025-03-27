@@ -25,8 +25,9 @@ namespace Fluentver
             titleBar.ActualThemeChanged += (s, e) => WindowHelper.SetAppTheme(s.ActualTheme);
 
             Activated += (s, e) => settingsIcon.Foreground = (SolidColorBrush)(e.WindowActivationState == WindowActivationState.Deactivated ?
-            Application.Current.Resources["WindowCaptionForegroundDisabled"] :
-            Application.Current.Resources["WindowCaptionForeground"]);
+            Activated += (s, e) => settingsIcon.Style = (Style)(e.WindowActivationState == WindowActivationState.Deactivated ?
+            settingsButton.Resources["FontIconTitleBarInactiveStyle"] :
+            settingsButton.Resources["FontIconTitleBarStyle"]);
 
             bar.SetSelectedIndex((int)SettingValues.StartupPage.Value);
             SetWindowsDisplay();
