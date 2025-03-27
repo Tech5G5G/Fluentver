@@ -46,6 +46,10 @@ namespace Fluentver.Pages
                 gpu.Text = await Task.Run(() => GPUHelper.GPUName);
                 ram.Text = $"{Math.Ceiling(ramHelper.TotalRAM)} GB";
 
+                cpuUsageLabel.LosingFocus += TextDisplay_LosingFocus;
+                gpuUsageLabel.LosingFocus += TextDisplay_LosingFocus;
+                ramUsageLabel.LosingFocus += TextDisplay_LosingFocus;
+
                 loadingIndicator.Visibility = Visibility.Collapsed;
                 specsGrid.Visibility = Visibility.Visible;
 
@@ -64,11 +68,12 @@ namespace Fluentver.Pages
             if (hookTimer)
             {
                 timer.Tick += (s, e) => SetAwakeTime();
-                timeAwake.LosingFocus += (s, e) =>
+                timeAwake.LosingFocus += TextDisplay_LosingFocus;
+            }
+        private void TextDisplay_LosingFocus(UIElement sender, LosingFocusEventArgs args)
                 {
-                    if (e.NewFocusedElement is not Popup) //Reset text selection if focus isn't lost to a popup
-                        timeAwake.Select(timeAwake.ContentStart, timeAwake.ContentStart);
-                };
+            if (sender is TextBlock text && args.NewFocusedElement is not Popup) //Reset text selection if focus isn't lost to a popup
+                text.Select(text.ContentStart, text.ContentStart);
             }
 
             if (string.IsNullOrEmpty(timeAwake.SelectedText))
