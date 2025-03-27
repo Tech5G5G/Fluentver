@@ -1,6 +1,3 @@
-﻿using Microsoft.UI.Text;
-using Microsoft.UI.Windowing;
-
 namespace Fluentver
 {
     /// <summary>
@@ -44,7 +41,7 @@ namespace Fluentver
             {
                 windowsLogo.Glyph = "\xE910";
                 windowsVersionText.Text = "Windows 10";
-                windowsVersionText.FontWeight = FontWeights.Normal;
+                windowsVersionText.FontWeight = Microsoft.UI.Text.FontWeights.Normal;
             }
         }
 
