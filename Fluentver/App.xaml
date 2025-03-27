@@ -13,6 +13,8 @@
             <Style TargetType="TextBlock" x:Key="SecondaryDisplayTextBlockStyle" BasedOn="{StaticResource BodyTextBlockStyle}">
                 <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
                 <Setter Property="IsTextSelectionEnabled" Value="True" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="TextWrapping" Value="NoWrap" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
