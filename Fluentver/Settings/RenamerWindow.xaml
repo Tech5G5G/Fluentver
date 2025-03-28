@@ -56,7 +56,11 @@
                     <ToolTip Visibility="Collapsed" />
                 </ToolTipService.ToolTip>
             </Button>
-            <Button x:Name="cancelButton" Content="Cancel" Grid.Column="3" Click="Cancel" />
+            <Button x:Name="cancelButton" Content="Cancel" Grid.Column="3" Click="Cancel">
+                <Button.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="Escape" />
+                </Button.KeyboardAccelerators>
+            </Button>
         </Grid>
     </Grid>
 </controls:SizeWindow>
