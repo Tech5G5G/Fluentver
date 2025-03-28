@@ -26,6 +26,18 @@ public partial class SizeWindow : Window
             manager.Height = e.NewSize.Height;
     }
 
+    public bool IsDialogWindow
+    {
+        get => !AppWindow.IsShownInSwitchers;
+        set
+        {
+            WindowHelper.ActivateWindow(this.GetWindowHandle());
+            AppWindow.IsShownInSwitchers = DoubleClickToMaximize = !value;
+            if (AppWindow.Presenter is OverlappedPresenter presenter)
+                presenter.IsResizable = presenter.IsMaximizable = presenter.IsMinimizable = !(presenter.IsAlwaysOnTop = value);
+        }
+    }
+
     public double Width
     {
         get => manager.Width;
@@ -57,7 +69,7 @@ public partial class SizeWindow : Window
             switch (e.Message.MessageId)
             {
                 case 0x00A3 when !DoubleClickToMaximize: //WM_NCLBUTTONDBLCLK
-                e.Handled = true;
+                    e.Handled = true;
                     break;
                 case 0x007E: //WM_DISPLAYCHANGE
                     ResolutionChanged?.Invoke(this, null);
