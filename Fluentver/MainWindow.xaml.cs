@@ -65,7 +65,6 @@
             previousIndex = currentIndex;
         }
 
-        //TODO: Fix this code
         StackPanel mainContent;
         StackPanel settingsPage;
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
