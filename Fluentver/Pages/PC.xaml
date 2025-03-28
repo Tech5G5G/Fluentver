@@ -28,15 +28,21 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Rectangle Height="88" Width="148"
-                       RadiusX="6" RadiusY="6"
-                       Stroke="Black" StrokeThickness="8"
-                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="0" Grid.RowSpan="4">
-                <Rectangle.Fill>
-                    <ImageBrush x:Name="pcBackground" Stretch="UniformToFill" />
-                </Rectangle.Fill>
-            </Rectangle>
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition IsStaggeringEnabled="False" />
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+            
+            <Border CornerRadius="6" BorderThickness="6" BorderBrush="Black" Grid.RowSpan="4">
+                <Viewbox Stretch="Uniform" Height="80">
+                    <Rectangle x:Name="backgroundRect">
+                        <Rectangle.Fill>
+                            <ImageBrush x:Name="pcBackground" Stretch="UniformToFill" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Viewbox>
+            </Border>
 
             <TextBlock Text="Device name" Grid.Column="1" Grid.Row="0" />
             <TextBlock Text="Product name" Grid.Column="1" Grid.Row="1" />

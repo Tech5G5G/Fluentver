@@ -19,6 +19,7 @@ namespace Fluentver.Pages
             SetPCInfo();
             SetPCUsage(true);
             SetAwakeTime(true);
+            ApplyDisplayResolution(true);
         }
 
         private void SetPCInfo()
@@ -74,6 +75,19 @@ namespace Fluentver.Pages
             }
 
             timeAwake.SetTextFriendly(TimeSpan.FromMilliseconds(Environment.TickCount64).ToString(@"dd\:hh\:mm\:ss"));
+        }
+
+        private void ApplyDisplayResolution(bool hookEvents = false)
+        {
+            if (hookEvents)
+            {
+                App.MainWindow.ResolutionChanged += (s, e) => ApplyDisplayResolution();
+                App.MainWindow.PositionChanged += (s, e) => ApplyDisplayResolution();
+            }
+
+            var size = DisplayArea.GetFromWindowId(App.MainWindow.AppWindow.Id, DisplayAreaFallback.Primary).OuterBounds;
+            backgroundRect.Width = size.Width;
+            backgroundRect.Height = size.Height;
         }
 
         private void TextDisplay_LosingFocus(UIElement sender, LosingFocusEventArgs args)
