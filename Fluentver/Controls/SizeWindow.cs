@@ -42,15 +42,27 @@ public partial class SizeWindow : Window
 
     public bool DoubleClickToMaximize { get; set; } = true;
 
+    public event TypedEventHandler<SizeWindow, object> ResolutionChanged;
+
+    public event TypedEventHandler<SizeWindow, Windows.Graphics.PointInt32> PositionChanged;
+
     readonly WindowManager manager;
 
     public SizeWindow()
     {
         manager = WindowManager.Get(this);
+        manager.PositionChanged += (s, e) => PositionChanged?.Invoke(this, e);
         manager.WindowMessageReceived += (s, e) =>
         {
-            if (!DoubleClickToMaximize && e.Message.MessageId == 0x00A3) //WM_NCLBUTTONDBLCLK
+            switch (e.Message.MessageId)
+            {
+                case 0x00A3 when !DoubleClickToMaximize: //WM_NCLBUTTONDBLCLK
                 e.Handled = true;
+                    break;
+                case 0x007E: //WM_DISPLAYCHANGE
+                    ResolutionChanged?.Invoke(this, null);
+                    break;
+            }
         };
     }
 }
