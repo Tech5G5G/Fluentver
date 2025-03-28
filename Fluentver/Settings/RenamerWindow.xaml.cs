@@ -3,7 +3,7 @@
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RenamerWindow : Window
+    public sealed partial class RenamerWindow : SizeWindow
     {
         public RenamerWindow()
         {
@@ -12,7 +12,6 @@
 
             SetTitleBar(titleBar);
             ExtendsContentIntoTitleBar = true;
-            AppWindow.SetPresenter(AppWindowPresenterKind.CompactOverlay);
 
             name.Header = $"Current name: {SystemHelper.SystemName}";
         }
