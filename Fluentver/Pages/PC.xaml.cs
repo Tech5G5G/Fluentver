@@ -101,7 +101,7 @@ namespace Fluentver.Pages
             if (App.RenamerWindow is null)
                 (App.RenamerWindow = new()).Activate();
             else
-                WindowHelper.ActivateWindow(WinRT.Interop.WindowNative.GetWindowHandle(App.RenamerWindow));
+                WindowHelper.ActivateWindow(App.RenamerWindow.GetWindowHandle());
         }
     }
 }
