@@ -11,8 +11,8 @@ namespace Fluentver.Pages
         {
             this.InitializeComponent();
 
-            SetWindowsInformation();
             SetNames();
+            SetWindowsInformation();
         }
 
         private void SetNames()
@@ -24,26 +24,12 @@ namespace Fluentver.Pages
 
         private void SetWindowsInformation()
         {
-            string HKLMWinNTCurrent = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion";
-            ulong deviceFamilyVersion = ulong.Parse(AnalyticsInfo.VersionInfo.DeviceFamilyVersion);
+            editionText.Text = $"{(SystemHelper.IsWindows11 ? "Windows 11" : "Windows 10")} {SystemHelper.WindowsEdition}";
+            versionText.Text = SystemHelper.WindowsVersionDisplayName;
+            buildText.Text = $"{SystemHelper.WindowsBuild}.{SystemHelper.WindowsRevision}";
 
-            string displayName = Registry.GetValue(HKLMWinNTCurrent, "DisplayVersion", "").ToString();
-            int build = Environment.OSVersion.Version.Build;
-            ulong revision = deviceFamilyVersion & 0x000000000000FFFF;
-            int currentYear = DateTime.Now.Year;
-
-            copyrightText.Text = "© " + currentYear.ToString() + " Microsoft Corporation. All rights reserved.";
-            versionText.Text = displayName;
-            buildText.Text = build.ToString() + "." + revision.ToString();
-
-            string windows = build >= 22000 ? "Windows 11" : "Windows 10";
-
-            string productName = Registry.GetValue(HKLMWinNTCurrent, "ProductName", "").ToString();
-            string productionEdition = productName.Remove(0, 11);
-
-            editionText.Text = windows + " " + productionEdition;
-
-            prText.Text = "The " + windows + " " + productionEdition + " operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions.";
+            trademark.Text = $"The {editionText.Text} operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions.";
+            copyright.Text = $"© {DateTime.Now.Year} Microsoft Corporation. All rights reserved.";
         }
 
         private void Navigate_UsersPage(object sender, RoutedEventArgs e) => App.MainWindow.SelectedIndex = 2;
