@@ -44,6 +44,17 @@
                     <Run Text="to:" />
                 </Paragraph>
             </RichTextBlock>
+            <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
+                <HyperlinkButton x:Name="username" Padding="0" Click="Navigate_UsersPage">
+                    <HyperlinkButton.ContextFlyout>
+                        <CommandBarFlyout Placement="RightEdgeAlignedTop">
+                            <CommandBarFlyout.SecondaryCommands>
+                                <AppBarButton Icon="{ui:FontIcon Glyph=&#xE8C8;}" Label="Copy" Click="CopyUsername" />
+                                <AppBarButton Label="Go to users" Click="Navigate_UsersPage" />
+                            </CommandBarFlyout.SecondaryCommands>
+                        </CommandBarFlyout>
+                    </HyperlinkButton.ContextFlyout>
+                </HyperlinkButton>
                 <TextBlock x:Name="orgName" IsTextSelectionEnabled="True" />
             </StackPanel>
         </StackPanel>

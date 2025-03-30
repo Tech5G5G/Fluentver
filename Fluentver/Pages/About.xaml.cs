@@ -54,38 +54,7 @@ namespace Fluentver.Pages
             prText.Text = "The " + windows + " " + productionEdition + " operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions.";
         }
 
-        private void Name_RightTapped(object sender, RightTappedRoutedEventArgs e)
-        {
-            HyperlinkButton nameText = sender as HyperlinkButton;
-
-            CommandBarFlyout optionsFlyout = new CommandBarFlyout();
-            AppBarButton copyButton = new AppBarButton() { Icon = new FontIcon() { Glyph = "\uE8C8" }, Tag = (string)nameText.Content };
-            AppBarButton openPageButton = new AppBarButton() { Label = "Go to the users page", Icon = new FontIcon() { Glyph = "\uE716" } };
-
-            ToolTipService.SetToolTip(copyButton, "Copy the selected text");
-
-            copyButton.Click += (object sender, RoutedEventArgs e) =>
-            {
-                AppBarButton senderButton = sender as AppBarButton;
-
-                DataPackage dataPackage = new DataPackage();
-                dataPackage.SetText(senderButton.Tag as string);
-
-                Clipboard.SetContent(dataPackage);
-
-                optionsFlyout.Hide();
-            };
-            openPageButton.Click += Navigate_UsersPage;
-
-            optionsFlyout.PrimaryCommands.Add(copyButton);
-            optionsFlyout.SecondaryCommands.Add(openPageButton);
-
-            FlyoutShowOptions myOption = new FlyoutShowOptions();
-            myOption.ShowMode = FlyoutShowMode.Transient;
-            myOption.Placement = FlyoutPlacementMode.Bottom;
-
-            optionsFlyout.ShowAt(nameText, myOption);
-        }
+        private void Navigate_UsersPage(object sender, RoutedEventArgs e) => App.MainWindow.SelectedIndex = 2;
 
         private void Navigate_UsersPage(object sender, RoutedEventArgs e)
         {
