@@ -22,6 +22,20 @@
         {
             MainWindow = new();
             MainWindow.Activate();
+
+#if !DEBUG
+            UnhandledException += (s, e) =>
+            {
+                e.Handled = true;
+                var notification = new Microsoft.Windows.AppNotifications.Builder.AppNotificationBuilder()
+                    .AddText("An exception was thrown.")
+                    .AddText($"Type: {e.Exception.GetType()}")
+                    .AddText($"Message: {e.Message}\r\n" +
+                             $"HResult: {e.Exception.HResult}")
+                    .BuildNotification();
+                Microsoft.Windows.AppNotifications.AppNotificationManager.Default.Show(notification);
+            };
+#endif
         }
 
         public static MainWindow MainWindow { get; set; }
