@@ -45,6 +45,7 @@
     <None Remove="Assets\Square71x71Logo.scale-200.png" />
     <None Remove="Assets\Windows-Logos.ttf" />
     <None Remove="Controls\GlyphButton.xaml" />
+    <None Remove="Controls\Styles.xaml" />
     <None Remove="Controls\UserEntry.xaml" />
     <None Remove="Settings\RenamerWindow.xaml" />
     <None Remove="Settings\SettingsPage.xaml" />
@@ -67,6 +68,7 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250310001" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="9.0.3" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.3" />
     <PackageReference Include="System.Management" Version="9.0.3" />
     <PackageReference Include="WinUIEx" Version="2.5.1" />
     <Manifest Include="$(ApplicationManifest)" />
@@ -84,6 +86,11 @@
     <Content Update="Assets\Windows-Logos.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Settings\RenamerWindow.xaml">
