@@ -44,10 +44,10 @@
                 </Viewbox>
             </Border>
 
-            <TextBlock Text="Device name" Grid.Column="1" Grid.Row="0" />
-            <TextBlock Text="Product name" Grid.Column="1" Grid.Row="1" />
-            <TextBlock Text="Architecture" Grid.Column="1" Grid.Row="2" />
-            <TextBlock Text="Time awake" Grid.Column="1" Grid.Row="3" />
+            <TextBlock Text="Device name" Style="{ThemeResource AnimatedBodyTextBlockStyle}" Grid.Column="1" Grid.Row="0" />
+            <TextBlock Text="Product name" Style="{ThemeResource AnimatedBodyTextBlockStyle}" Grid.Column="1" Grid.Row="1" />
+            <TextBlock Text="Architecture" Style="{ThemeResource AnimatedBodyTextBlockStyle}" Grid.Column="1" Grid.Row="2" />
+            <TextBlock Text="Time awake" Style="{ThemeResource AnimatedBodyTextBlockStyle}" Grid.Column="1" Grid.Row="3" />
 
             <TextBlock x:Name="pcName" Text="Device name" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="0" />
             <TextBlock x:Name="productName" Text="Product name" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="1" />
