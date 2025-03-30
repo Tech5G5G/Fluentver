@@ -1,5 +1,3 @@
-using Windows.System;
-
 namespace Fluentver.Pages
 {
     /// <summary>
@@ -7,54 +5,40 @@ namespace Fluentver.Pages
     /// </summary>
     public sealed partial class Users : InfoPage
     {
+        ObservableCollection<UserEntry> users = [];
+
         public Users()
         {
             this.InitializeComponent();
-
-            SetUserInfo();
-            GetAllUsers();
+            GetUsers();
         }
 
-        private async void SetUserInfo()
+        private void GetUsers() => Task.Run(async () =>
         {
-            string userDisplayName = await UserHelper.GetCurrentUserInfoAsync(KnownUserProperties.DisplayName);
-            if (string.IsNullOrWhiteSpace(userDisplayName))
-                this.userDisplayName.Text = Environment.UserName;
-            else
-                this.userDisplayName.Text = userDisplayName;
+            var currentUser = await UserHelper.GetCurrentUserAsync();
+            var users = await UserHelper.GetAllUsersAsync();
 
-            userAccountName.Text = await UserHelper.GetCurrentUserInfoAsync(KnownUserProperties.AccountName);
-            userPhotoImage.ImageSource = await UserHelper.GetCurrentUserPictureAsync(UserPictureSize.Size1080x1080);
-        }
-
-        private async void GetAllUsers()
-        {
-            int i = 0;
-            foreach (User user in await UserHelper.GetUsersAsync())
+            DispatcherQueue.TryEnqueue(() =>
             {
-                var pictureStream = await user.GetPictureAsync(UserPictureSize.Size1080x1080);
-                var openedPictureStream = await pictureStream.OpenReadAsync();
-                var image = new BitmapImage();
-                image.SetSource(openedPictureStream);
+                userPicture.ProfilePicture = currentUser.GetPicture();
+                userPicture.DisplayName = userDisplayName.Text = currentUser.GetBestDisplayName();
+                userAccountName.Text = currentUser.GetEmailAddress();
 
-                string displayName = (string)await user.GetPropertyAsync(KnownUserProperties.DisplayName);
-                if (string.IsNullOrWhiteSpace(displayName))
-                    displayName = Environment.UserName;
+                foreach (var user in users)
+                    this.users.Add(new()
+                    {
+                        ProfilePicture = user.GetPicture(),
+                        DisplayName = user.GetBestDisplayName(),
+                        AccountName = user.GetEmailAddress()
+                    });
 
-                usersList.Children.Add(new UserEntry() { ProfilePicture = image, DisplayName = displayName, AccountName = (string)await user.GetPropertyAsync(KnownUserProperties.AccountName) });
-
-                i++;
-            }
-        }
-
-        private void UserPhoto_PointerEntered(object sender, PointerRoutedEventArgs e) => cameraHover.Visibility = Visibility.Visible;
-        private void UserPhoto_PointerPressed(object sender, PointerRoutedEventArgs e) => cameraHoverColor.Fill = new SolidColorBrush(Colors.DarkGray);
-
-        private void UserPhoto_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            cameraHover.Visibility = Visibility.Collapsed;
-            cameraHoverColor.Fill = new SolidColorBrush(Colors.Black);
-        }
+                if (!this.users.Any())
+                {
+                    usersList.Visibility = Visibility.Collapsed;
+                    otherUsersLabel.Visibility = Visibility.Visible;
+                }
+            }); 
+        });
 
         private void UserPicture_Click(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:yourinfo") { UseShellExecute = true });
     }
