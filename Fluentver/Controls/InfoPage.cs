@@ -35,6 +35,11 @@ public partial class InfoPage : Page
 
                 content.Children.Add(expander);
             }
+            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                var expander = e.NewItems[0] as Expander;
+                content.Children.Remove(expander);
+            }
         };
     }
 
