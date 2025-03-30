@@ -15,15 +15,11 @@ namespace Fluentver.Pages
             SetNames();
         }
 
-        private async void SetNames()
+        private void SetNames()
         {
-            string orgName = await UserHelper.GetCurrentUserInfoAsync(KnownUserProperties.DomainName);
-            if (string.IsNullOrWhiteSpace(orgName))
-                orgNameText.Visibility = Visibility.Collapsed;
-            else
-                orgNameText.Content = orgName;
-
-            usernameText.Content = await UserHelper.GetCurrentUserInfoAsync(KnownUserProperties.AccountName);
+            username.Content = SystemHelper.RegisteredOwner;
+            orgName.Text = SystemHelper.RegisteredOrganization;
+            if (string.IsNullOrWhiteSpace(orgName.Text)) orgName.Visibility = Visibility.Collapsed;
         }
 
         private void SetWindowsInformation()
