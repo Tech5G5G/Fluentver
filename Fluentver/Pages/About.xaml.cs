@@ -1,4 +1,4 @@
-using Windows.ApplicationModel.DataTransfer;
+﻿using Windows.ApplicationModel.DataTransfer;
 
 namespace Fluentver.Pages
 {
@@ -34,11 +34,11 @@ namespace Fluentver.Pages
 
         private void Navigate_UsersPage(object sender, RoutedEventArgs e) => App.MainWindow.SelectedIndex = 2;
 
-        private void Navigate_UsersPage(object sender, RoutedEventArgs e)
+        private void CopyUsername(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = App.MainWindow;
-            //mw.RootNV.SelectedItem = mw.RootNV.MenuItems.First(i => ((NavigationViewItem)i).Name == "Users_NavItem");
-            mw.ContentFrame.Navigate(typeof(Users), null, new SlideNavigationTransitionInfo { Effect = SlideNavigationTransitionEffect.FromRight });
+            DataPackage package = new();
+            package.SetText((string)username.Content);
+            Clipboard.SetContent(package);
         }
     }
 }
