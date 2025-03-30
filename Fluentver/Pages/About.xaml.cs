@@ -1,8 +1,4 @@
-﻿using Microsoft.Win32;
-using Microsoft.UI.Xaml.Media.Animation;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.System;
-using Windows.System.Profile;
 
 namespace Fluentver.Pages
 {
