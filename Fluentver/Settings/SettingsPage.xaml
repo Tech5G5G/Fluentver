@@ -13,6 +13,7 @@
     <StackPanel Spacing="4" Padding="8,0,8,17">
         <controls:SettingsExpander HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}" Header="Language" Description="Change the display language of the application" IsExpanded="True">
             <ComboBox>
+                <x:String>Windows (Default)</x:String>
                 <x:String>English (United States)</x:String>
                 <x:String>Greek (word "Greek" in Greek)</x:String>
                 <x:String>Polish (Polski)</x:String>
