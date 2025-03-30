@@ -44,6 +44,7 @@
                     <Run Text="to:" />
                 </Paragraph>
             </RichTextBlock>
+                <TextBlock x:Name="orgName" IsTextSelectionEnabled="True" />
             </StackPanel>
         </StackPanel>
     </Expander>
