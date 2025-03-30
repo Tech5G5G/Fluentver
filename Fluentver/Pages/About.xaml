@@ -6,6 +6,7 @@
     xmlns:local="using:Fluentver.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:controls="using:Fluentver.Controls"
     NavigationCacheMode="Required"
     mc:Ignorable="d">
@@ -14,19 +15,27 @@
         <controls:GlyphButton Glyph="&#xE895;" Text="Windows Update" ProcessName="ms-settings:windowsupdate" />
     </controls:InfoPage.ToolbarButtons>
 
-    <Expander x:Name="windowsInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Windows specifications">
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Spacing="4" BorderThickness="12">
-                <TextBlock Text="Edition" />
-                <TextBlock Text="Version" />
-                <TextBlock Text="Build" />
-            </StackPanel>
-            <StackPanel Spacing="4" Margin="0,12,12,12">
-                <TextBlock x:Name="editionText" Text="Windows" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
-                <TextBlock x:Name="versionText" Text="XXHX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
-                <TextBlock x:Name="buildText" Text="XXXXX.XXXX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
-            </StackPanel>
-        </StackPanel>
+    <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12" Header="Windows specifications">
+        <Grid ColumnSpacing="12" RowSpacing="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Edition" />
+            <TextBlock x:Name="editionText" Text="Windows" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" />
+
+            <TextBlock Text="Version" Grid.Row="1" />
+            <TextBlock x:Name="versionText" Text="XXHX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="1" />
+
+            <TextBlock Text="Build" Grid.Row="2" />
+            <TextBlock x:Name="buildText" Text="XXXXX.XXXX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="2" />
+        </Grid>
     </Expander>
     <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12" Header="Legal">
         <StackPanel Spacing="8">
