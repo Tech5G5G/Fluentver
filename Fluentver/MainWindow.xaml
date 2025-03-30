@@ -59,7 +59,7 @@
             <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xF1AD;}" Text="Insider"
                              ToolTipService.ToolTip="" />
         </SelectorBar>
-        <Frame x:Name="ContentFrame" x:FieldModifier="public" />
+        <Frame x:Name="ContentFrame" />
         <Grid Padding="8,8,8,17">
             <ItemsControl x:Name="toolbar" HorizontalAlignment="Left" ItemsSource="{x:Bind ToolbarButtons}">
                 <ItemsControl.ItemsPanel>
