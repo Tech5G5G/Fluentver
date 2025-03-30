@@ -32,9 +32,10 @@
             </StackPanel>
         </StackPanel>
     </Expander>
-    <Expander x:Name="users" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Users">
-        <ScrollViewer MaxHeight="193">
-            <StackPanel x:Name="usersList" Margin="12,0" />
-        </ScrollViewer>
+    <Expander HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Other users">
+        <Grid>
+            <ListView x:Name="usersList" SelectionMode="None" Margin="-4,0,0,0" MaxHeight="193" ItemsSource="{x:Bind users}" />
+            <TextBlock x:Name="otherUsersLabel" Text="No other users found." HorizontalAlignment="Center" Visibility="Collapsed" />
+        </Grid>
     </Expander>
 </controls:InfoPage>
