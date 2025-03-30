@@ -5,6 +5,12 @@
     /// </summary>
     public sealed partial class MainWindow : SizeWindow
     {
+        public int SelectedIndex
+        {
+            get => bar.GetSelectedIndex();
+            set => bar.SetSelectedIndex(value);
+        }
+
         public ObservableCollection<GlyphButton> ToolbarButtons { get; } = [];
 
         public MainWindow()
