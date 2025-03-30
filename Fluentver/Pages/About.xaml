@@ -11,6 +11,7 @@
     mc:Ignorable="d">
     <controls:InfoPage.ToolbarButtons>
         <controls:GlyphButton Glyph="&#xEB95;" Text="Activation state" ProcessName="ms-settings:activation" />
+        <controls:GlyphButton Glyph="&#xE895;" Text="Windows Update" ProcessName="ms-settings:windowsupdate" />
     </controls:InfoPage.ToolbarButtons>
 
     <Expander x:Name="windowsInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Windows specifications">
