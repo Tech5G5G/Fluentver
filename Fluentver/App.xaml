@@ -8,14 +8,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <ResourceDictionary Source="/Controls/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="WindowsLogos">/Assets/Windows-Logos.ttf#Windows-Logos</FontFamily>
-            <Style TargetType="TextBlock" x:Key="SecondaryDisplayTextBlockStyle" BasedOn="{StaticResource BodyTextBlockStyle}">
-                <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
-                <Setter Property="IsTextSelectionEnabled" Value="True" />
-                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-                <Setter Property="TextWrapping" Value="NoWrap" />
-            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
