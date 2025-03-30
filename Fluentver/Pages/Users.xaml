@@ -6,6 +6,7 @@
     xmlns:local="using:Fluentver.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:controls="using:Fluentver.Controls"
     NavigationCacheMode="Required"
     mc:Ignorable="d">
@@ -13,22 +14,20 @@
         <controls:GlyphButton Glyph="&#xE8FA;" Text="Manage other users" ProcessName="ms-settings:otherusers" />
     </controls:InfoPage.ToolbarButtons>
 
-    <Expander x:Name="userInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Your info">
+    <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Your info">
         <StackPanel Orientation="Horizontal">
             <Grid Margin="12">
-                <Ellipse Height="50" Width="50" PointerEntered="UserPhoto_PointerEntered">
-                    <Ellipse.Fill>
-                        <ImageBrush x:Name="userPhotoImage" ImageSource="ms-appx:///Assets/StoreLogo.png" />
-                    </Ellipse.Fill>
-                </Ellipse>
-                <Grid x:Name="cameraHover" Visibility="Collapsed">
-                    <Ellipse x:Name="cameraHoverColor" PointerPressed="UserPhoto_PointerPressed" PointerReleased="UserPhoto_PointerReleased" PointerExited="UserPhoto_PointerExited" Fill="Black" Opacity="0.5" Height="50" Width="50" />
-                    <FontIcon Glyph="&#xE722;" PointerPressed="UserPhoto_PointerPressed" PointerReleased="UserPhoto_PointerReleased" PointerExited="UserPhoto_PointerExited" Foreground="White" />
-                </Grid>
+                <PersonPicture x:Name="userPicture" Height="50" Width="50" />
+                <Button Content="{ui:FontIcon Glyph=&#xE722;}" Foreground="Transparent" Background="Transparent" CornerRadius="25" Height="52" Width="52" Style="{ThemeResource NoTiltButtonStyle}" Click="UserPicture_Click">
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#80000000" />
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#80A9A9A9" />
+                    </Button.Resources>
+                </Button>
             </Grid>
             <StackPanel Spacing="4" Margin="0,12,12,12" VerticalAlignment="Center">
                 <TextBlock x:Name="userDisplayName" Text="Display name" IsTextSelectionEnabled="True" TextWrapping="NoWrap" />
-                <TextBlock x:Name="userAccountName" Text="Email/user name" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" TextWrapping="NoWrap" />
+                <TextBlock x:Name="userAccountName" Text="Email/username" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" TextWrapping="NoWrap" />
             </StackPanel>
         </StackPanel>
     </Expander>
