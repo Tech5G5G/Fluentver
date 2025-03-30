@@ -56,10 +56,6 @@ namespace Fluentver.Pages
             cameraHoverColor.Fill = new SolidColorBrush(Colors.Black);
         }
 
-        private void UserPhoto_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            cameraHoverColor.Fill = new SolidColorBrush(Colors.Black);
-            Process.Start(new ProcessStartInfo("ms-settings:yourinfo") { UseShellExecute = true });
-        }
+        private void UserPicture_Click(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:yourinfo") { UseShellExecute = true });
     }
 }
