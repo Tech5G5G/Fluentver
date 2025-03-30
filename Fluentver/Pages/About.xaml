@@ -27,22 +27,23 @@
             </StackPanel>
         </StackPanel>
     </Expander>
-    <Expander x:Name="legalInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Legal">
-        <StackPanel>
-            <StackPanel BorderThickness="12">
-                <TextBlock x:Name="prText" Text="The Windows operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions." IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
-            </StackPanel>
-            <TextBlock x:Name="copyrightText" Margin="12,0,0,0" Text="©️ Microsoft Corporation. All rights reserved." IsTextSelectionEnabled="True" />
-            <StackPanel BorderThickness="12">
-                <StackPanel Orientation="Horizontal" Spacing="3">
-                    <TextBlock Text="The product is licensed under the" IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
-                    <HyperlinkButton NavigateUri="https://www.microsoft.com/en-us/useterms" Padding="0" Content="Microsoft Software License Terms" />
-                </StackPanel>
-                <TextBlock Text="to:" IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <HyperlinkButton x:Name="usernameText" Click="Navigate_UsersPage" IsRightTapEnabled="True" RightTapped="Name_RightTapped" Content="Username placeholder" />
-                    <HyperlinkButton x:Name="orgNameText" Click="Navigate_UsersPage" IsRightTapEnabled="True" RightTapped="Name_RightTapped" Content="Org name placeholder" />
-                </StackPanel>
+    <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12" Header="Legal">
+        <StackPanel Spacing="8">
+            <RichTextBlock TextWrapping="WrapWholeWords">
+                <Paragraph>
+                    <Run x:Name="trademark" Text="The Windows operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions." />
+                </Paragraph>
+                <Paragraph Margin="0,12,0,0">
+                    <Run x:Name="copyright" Text="©️ Microsoft Corporation. All rights reserved." />
+                </Paragraph>
+                <Paragraph Margin="0,12,0,0">
+                    <Run Text="The product is licensed under the" />
+                    <Hyperlink NavigateUri="https://www.microsoft.com/en-us/useterms" UnderlineStyle="None">
+                        <Run Text="Microsoft Software License Terms" />
+                    </Hyperlink>
+                    <Run Text="to:" />
+                </Paragraph>
+            </RichTextBlock>
             </StackPanel>
         </StackPanel>
     </Expander>
