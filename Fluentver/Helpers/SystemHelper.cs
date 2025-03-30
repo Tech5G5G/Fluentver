@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Windows.System.Profile;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Microsoft.Win32;
 
@@ -70,6 +71,27 @@ namespace Fluentver.Helpers
 
         /// <summary>Gets the product name of the system.</summary>
         public static string SystemProductName => easInfo.SystemProductName;
+
+        /// <summary>Gets the display name of the current version of Windows.</summary>
+        public static string WindowsVersionDisplayName => (string)Registry.GetValue(CurrentVersion, "DisplayVersion", string.Empty);
+
+        /// <summary>Gets the build of the current version of Windows.</summary>
+        public static int WindowsBuild => Environment.OSVersion.Version.Build;
+
+        /// <summary>Gets the revision number of the current version of Windows.</summary>
+        public static int WindowsRevision => (int)(ulong.Parse(AnalyticsInfo.VersionInfo.DeviceFamilyVersion) & 0xFFFF);
+
+        /// <summary>Gets the edition of Windows installed.</summary>
+        public static string WindowsEdition => ((string)Registry.GetValue(CurrentVersion, "ProductName", string.Empty))[11..];
+
+        /// <summary>Gets the registed owner of the edition of Windows installed.</summary>
+        public static string RegisteredOwner => (string)Registry.GetValue(CurrentVersion, "RegisteredOwner", string.Empty);
+
+        /// <summary>Gets the registed organization of the edition of Windows installed.</summary>
+        public static string RegisteredOrganization => (string)Registry.GetValue(CurrentVersion, "RegisteredOrganization", string.Empty);
+
+        /// <summary>Gets a <see cref="bool"/> indicating whether Windows 11 is installed.</summary>
+        public static bool IsWindows11 => WindowsBuild >= 22000;
 
         /// <summary>Gets a <see cref="Uri"/> to the current user's wallpaper.</summary>
         public static Uri CurrentUserWallpaper => new($@"C:\Users\{Environment.UserName}\AppData\Roaming\Microsoft\Windows\Themes\TranscodedWallpaper");
