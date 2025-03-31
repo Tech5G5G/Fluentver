@@ -1,5 +1,7 @@
-﻿namespace Fluentver.Controls;
+﻿using System.Collections.Specialized;
 
+namespace Fluentver.Controls
+{
 [Microsoft.UI.Xaml.Markup.ContentProperty(Name = nameof(Children))]
 public partial class InfoPage : Page
 {
@@ -25,6 +27,7 @@ public partial class InfoPage : Page
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
+                    case NotifyCollectionChangedAction.Add:
                 var expander = e.NewItems[0] as Expander;
                 string key = (string)expander.Header;
 
@@ -72,4 +75,5 @@ public partial class InfoPage : Page
                 mw.ToolbarButtons.Add(button);
         }
     }
+}
 }
