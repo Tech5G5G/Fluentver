@@ -58,6 +58,8 @@ public partial class SizeWindow : Window
 
     public event TypedEventHandler<SizeWindow, Windows.Graphics.PointInt32> PositionChanged;
 
+    public event TypedEventHandler<SizeWindow, nint> DeviceChanged;
+
     readonly WindowManager manager;
 
     public SizeWindow()
@@ -73,6 +75,9 @@ public partial class SizeWindow : Window
                     break;
                 case 0x007E: //WM_DISPLAYCHANGE
                     ResolutionChanged?.Invoke(this, null);
+                    break;
+                case 0x219 when e.Message.WParam == 0x7: //WM_DEVICECHANGE, DBT_DEVNODES_CHANGED
+                    DeviceChanged?.Invoke(this, e.Message.LParam);
                     break;
             }
         };
