@@ -29,7 +29,8 @@ public partial class InfoPage : Page
             {
                     case NotifyCollectionChangedAction.Add:
                 var expander = e.NewItems[0] as Expander;
-                string key = (string)expander.Header;
+                        if (expander.Header is not string key)
+                            return;
 
                 expander.IsExpanded = TryGetExpanderExpanded(key, ExpanderStates, () => UpdateExpanderExpanded(key, true, ExpanderStates));
 
