@@ -11,7 +11,6 @@ namespace Fluentver.Pages
             ExpanderStates = SettingValues.DiskExpanderStates;
             
             GetAllDisks();
-            App.StoragePage = this;
         }
 
         private void GetAllDisks(bool hookEvent = false)
