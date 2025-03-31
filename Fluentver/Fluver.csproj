@@ -45,6 +45,7 @@
     <None Remove="Assets\Square71x71Logo.scale-200.png" />
     <None Remove="Assets\Windows-Logos.ttf" />
     <None Remove="Controls\GlyphButton.xaml" />
+    <None Remove="Controls\StorageExpander.xaml" />
     <None Remove="Controls\Styles.xaml" />
     <None Remove="Controls\UserEntry.xaml" />
     <None Remove="Settings\RenamerWindow.xaml" />
@@ -86,6 +87,11 @@
     <Content Update="Assets\Windows-Logos.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\StorageExpander.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\Styles.xaml">
