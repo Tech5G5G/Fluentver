@@ -14,7 +14,7 @@ namespace Fluentver.Pages
             App.StoragePage = this;
         }
 
-        public void Reload(object sender, RoutedEventArgs e) => Content = new Storage();
+        private void GetAllDisks(bool hookEvent = false)
 
         private async void GetAllDisks()
         {
