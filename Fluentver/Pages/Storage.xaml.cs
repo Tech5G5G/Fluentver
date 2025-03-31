@@ -10,14 +10,13 @@ namespace Fluentver.Pages
             this.InitializeComponent();
             ExpanderStates = SettingValues.DiskExpanderStates;
             
-            GetAllDisks();
+            GetAllDisks(true);
         }
 
         private void GetAllDisks(bool hookEvent = false)
-
-        private async void GetAllDisks()
         {
-            var mw = App.MainWindow;
+            if (hookEvent)
+                App.MainWindow.DeviceChanged += (s, e) => GetAllDisks();
 
             var drives = DriveInfo.GetDrives();
             foreach (var drive in drives)
