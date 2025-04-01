@@ -11,7 +11,7 @@
     <StackPanel Spacing="8" Orientation="Horizontal" Padding="0,12,5,12">
         <PersonPicture ProfilePicture="{x:Bind ProfilePicture}" DisplayName="{x:Bind DisplayName}" Height="40" Width="40" />
         <StackPanel VerticalAlignment="Center">
-            <TextBlock Text="{x:Bind DisplayName}" IsTextSelectionEnabled="True" />
+            <TextBlock Text="{x:Bind DisplayName}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" IsTextSelectionEnabled="True" />
             <TextBlock Text="{x:Bind AccountName}" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
         </StackPanel>
     </StackPanel>

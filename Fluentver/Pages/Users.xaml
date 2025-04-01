@@ -26,8 +26,8 @@
                 </Button>
             </Grid>
             <StackPanel Spacing="4" Margin="0,12,12,12" VerticalAlignment="Center">
-                <TextBlock x:Name="userDisplayName" Text="Display name" IsTextSelectionEnabled="True" TextWrapping="NoWrap" />
-                <TextBlock x:Name="userAccountName" Text="Email/username" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" TextWrapping="NoWrap" />
+                <TextBlock x:Name="userDisplayName" Text="Display name" IsTextSelectionEnabled="True" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"  />
+                <TextBlock x:Name="userAccountName" Text="Email/username" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
             </StackPanel>
         </StackPanel>
     </Expander>
