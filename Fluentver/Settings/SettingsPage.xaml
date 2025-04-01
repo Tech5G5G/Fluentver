@@ -23,7 +23,7 @@
             </controls:SettingsExpander.Items>
         </controls:SettingsExpander>
         <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE7E8;}" Header="Startup page" Description="Change the page to display at startup">
-            <ComboBox x:Name="startupPage" SelectionChanged="StartupPage_SelectionChanged">
+            <ComboBox x:Name="startupPage">
                 <x:String>About</x:String>
                 <x:String>Your PC</x:String>
                 <x:String>Users</x:String>
