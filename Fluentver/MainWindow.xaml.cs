@@ -24,6 +24,9 @@
             var presenter = AppWindow.Presenter as OverlappedPresenter;
             presenter.IsMaximizable = presenter.IsMinimizable = presenter.IsResizable = false;
 
+            SystemBackdrop = SettingValues.Backdrop.Value.ToSystemBackdrop();
+            SettingValues.Backdrop.ValueChanged += (s, e) => SystemBackdrop = e.ToSystemBackdrop();
+
             WindowHelper.SetAppTheme(titleBar.ActualTheme);
             titleBar.ActualThemeChanged += (s, e) => WindowHelper.SetAppTheme(s.ActualTheme);
 

@@ -30,6 +30,9 @@
                 <x:String>Storage</x:String>
             </ComboBox>
         </controls:SettingsCard>
+        <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE727;}" Header="Backdrop" Description="Change the material shown as the window backdrop">
+            <ComboBox x:Name="backdrop" ItemsSource="{x:Bind backdrops}" />
+        </controls:SettingsCard>
         <StackPanel.ChildrenTransitions>
             <TransitionCollection>
                 <RepositionThemeTransition IsStaggeringEnabled="False" />

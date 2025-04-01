@@ -13,6 +13,13 @@
             SetTitleBar(titleBar);
             ExtendsContentIntoTitleBar = true;
 
+            SystemBackdrop = SettingValues.Backdrop.Value.ToSystemBackdrop();
+            SettingValues.Backdrop.ValueChanged += (s, e) =>
+            {
+                if (App.RenamerWindow == this)
+                    SystemBackdrop = e.ToSystemBackdrop();
+            };
+
             name.Header = $"Current name: {SystemHelper.SystemName}";
         }
 
