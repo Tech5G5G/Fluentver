@@ -36,7 +36,7 @@
             settingsButton.Resources["FontIconTitleBarInactiveStyle"] :
             settingsButton.Resources["FontIconTitleBarStyle"]);
 
-            bar.SetSelectedIndex((int)SettingValues.StartupPage.Value);
+            SelectedIndex = (int)SettingValues.StartupPage.Value;
             SetWindowsDisplay();
         }
 
@@ -75,47 +75,21 @@
             previousIndex = currentIndex;
         }
 
-        StackPanel mainContent;
-        StackPanel settingsPage;
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            if (mainContent is null && settingsPage is null) //Create settings page and set content to it
+            if (mainContent.Visibility == Visibility.Visible) //Show settings page
             {
-                mainContent = Content as StackPanel;
-                mainContent.Children.Remove(titleBarGrid);
-
-                Content = settingsPage = new()
-                {
-                    Children =
-                    {
-                        titleBarGrid,
-                        new SettingsPage()
-                    }
-                };
+                mainContent.Visibility = Visibility.Collapsed;
+                settingsPage.Visibility = Visibility.Visible;
 
                 settingsIcon.FontSize = 12;
                 settingsIcon.Glyph = "\uE72B";
                 ToolTipService.SetToolTip(settingsButton, "Back");
             }
-            else if (mainContent is null) //Set content to settings page
+            else //Restore main content
             {
-                mainContent = Content as StackPanel;
-                mainContent.Children.Remove(titleBarGrid);
-
-                settingsPage.Children.Insert(0, titleBarGrid);
-                Content = settingsPage;
-
-                settingsIcon.FontSize = 12;
-                settingsIcon.Glyph = "\uE72B";
-                ToolTipService.SetToolTip(settingsButton, "Back");
-            }
-            else //Reset content to main content
-            {
-                settingsPage.Children.Remove(titleBarGrid);
-
-                mainContent.Children.Insert(0, titleBarGrid);
-                Content = mainContent;
-                mainContent = null;
+                mainContent.Visibility = Visibility.Visible;
+                settingsPage.Visibility = Visibility.Collapsed;
 
                 settingsIcon.FontSize = 14;
                 settingsIcon.Glyph = "\uE713";

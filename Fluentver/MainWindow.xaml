@@ -7,15 +7,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:sett="using:Fluentver.Settings"
     xmlns:controls="using:Fluentver.Controls"
     mc:Ignorable="d"
     Title="Fluver" Width="480" Height="578" DoubleClickToMaximize="False" SizeToContent="Height">
-    <Window.SystemBackdrop>
-        <MicaBackdrop />
-    </Window.SystemBackdrop>
-
     <StackPanel>
-        <Grid x:Name="titleBarGrid">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="46" />
@@ -39,55 +36,58 @@
                 </Button.Resources>
             </Button>
         </Grid>
-        <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <FontIcon x:Name="windowsLogo" FontFamily="{StaticResource WindowsLogos}" Glyph="&#xE911;" FontSize="40" />
-            <TextBlock x:Name="windowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />
-        </StackPanel>
-        <SelectorBar x:Name="bar" SelectionChanged="Bar_SelectionChanged" HorizontalAlignment="Center">
-            <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE946;}" Text="About"
+        <StackPanel x:Name="mainContent">
+            <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <FontIcon x:Name="windowsLogo" FontFamily="{StaticResource WindowsLogos}" Glyph="&#xE911;" FontSize="40" />
+                <TextBlock x:Name="windowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />
+            </StackPanel>
+            <SelectorBar x:Name="bar" SelectionChanged="Bar_SelectionChanged" HorizontalAlignment="Center">
+                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE946;}" Text="About"
                              ToolTipService.ToolTip="Windows specs and legal"
                              controls:Accelerator.Ctrl="Number1" />
-            <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE7F4;}" Text="Your PC"
+                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE7F4;}" Text="Your PC"
                              ToolTipService.ToolTip="Your PC's info and specs"
                              controls:Accelerator.Ctrl="Number2" />
-            <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE716;}" Text="Users"
+                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE716;}" Text="Users"
                              ToolTipService.ToolTip="Your info and other users"
                              controls:Accelerator.Ctrl="Number3" />
-            <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xEDA2;}" Text="Storage"
+                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xEDA2;}" Text="Storage"
                              ToolTipService.ToolTip="A list of your disks"
                              controls:Accelerator.Ctrl="Number4" />
-            <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xF1AD;}" Text="Insider"
+                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xF1AD;}" Text="Insider"
                              ToolTipService.ToolTip="" />
-        </SelectorBar>
-        <Frame x:Name="ContentFrame" />
-        <Grid Padding="8,8,8,17">
-            <ItemsControl x:Name="toolbar" HorizontalAlignment="Left" ItemsSource="{x:Bind ToolbarButtons}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" Spacing="8">
-                            <StackPanel.ChildrenTransitions>
-                                <TransitionCollection>
-                                    <EntranceThemeTransition />
-                                </TransitionCollection>
-                            </StackPanel.ChildrenTransitions>
-                        </StackPanel>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-            <Button Content="OK" Click="CloseWindow" HorizontalAlignment="Right" Style="{ThemeResource AccentButtonStyle}">
-                <Button.KeyboardAccelerators>
-                    <KeyboardAccelerator Key="Enter" />
-                    <KeyboardAccelerator Key="Escape" />
-                </Button.KeyboardAccelerators>
-                <ToolTipService.ToolTip>
-                    <ToolTip Visibility="Collapsed" />
-                </ToolTipService.ToolTip>
-            </Button>
-        </Grid>
-        <StackPanel.ChildrenTransitions>
-            <TransitionCollection>
-                <RepositionThemeTransition IsStaggeringEnabled="False" />
-            </TransitionCollection>
-        </StackPanel.ChildrenTransitions>
+            </SelectorBar>
+            <Frame x:Name="ContentFrame" />
+            <Grid Padding="8,8,8,17">
+                <ItemsControl x:Name="toolbar" HorizontalAlignment="Left" ItemsSource="{x:Bind ToolbarButtons}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <StackPanel.ChildrenTransitions>
+                                    <TransitionCollection>
+                                        <EntranceThemeTransition />
+                                    </TransitionCollection>
+                                </StackPanel.ChildrenTransitions>
+                            </StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <Button Content="OK" Click="CloseWindow" HorizontalAlignment="Right" Style="{ThemeResource AccentButtonStyle}">
+                    <Button.KeyboardAccelerators>
+                        <KeyboardAccelerator Key="Enter" />
+                        <KeyboardAccelerator Key="Escape" />
+                    </Button.KeyboardAccelerators>
+                    <ToolTipService.ToolTip>
+                        <ToolTip Visibility="Collapsed" />
+                    </ToolTipService.ToolTip>
+                </Button>
+            </Grid>
+            <StackPanel.ChildrenTransitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition IsStaggeringEnabled="False" />
+                </TransitionCollection>
+            </StackPanel.ChildrenTransitions>
+        </StackPanel>
+        <sett:SettingsPage x:Name="settingsPage" Visibility="Collapsed" />
     </StackPanel>
 </controls:SizeWindow>
