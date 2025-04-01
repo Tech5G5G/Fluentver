@@ -33,6 +33,19 @@
         <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE727;}" Header="Backdrop" Description="Change the material shown as the window backdrop">
             <ComboBox x:Name="backdrop" ItemsSource="{x:Bind backdrops}" />
         </controls:SettingsCard>
+        <controls:SettingsExpander HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/StoreLogo.png}" Header="Fluver" Description="Version 1.1">
+            <controls:SettingsExpander.Items>
+                <controls:SettingsCard>
+                    <HyperlinkButton Content="What's new" NavigateUri="https://github.com/Tech5G5G/Fluentver/releases/tag/v1.1" />
+                </controls:SettingsCard>
+                <controls:SettingsCard>
+                    <HyperlinkButton Content="GitHub page" NavigateUri="https://github.com/Tech5G5G/Fluentver" />
+                </controls:SettingsCard>
+                <controls:SettingsCard>
+                    <HyperlinkButton Content="MIT License" NavigateUri="https://raw.githubusercontent.com/Tech5G5G/Fluentver/refs/heads/master/LICENSE" />
+                </controls:SettingsCard>
+            </controls:SettingsExpander.Items>
+        </controls:SettingsExpander>
         <StackPanel.ChildrenTransitions>
             <TransitionCollection>
                 <RepositionThemeTransition IsStaggeringEnabled="False" />
