@@ -32,10 +32,12 @@
 
             Closed += (s, e) => App.RenamerWindow?.Close();
             PositionChanged += (s, e) => Width = 480;
+
             Activated += (s, e) => settingsIcon.Style = (Style)(e.WindowActivationState == WindowActivationState.Deactivated ?
             settingsButton.Resources["FontIconTitleBarInactiveStyle"] :
             settingsButton.Resources["FontIconTitleBarStyle"]);
 
+            Accelerator.SetOEMAccelerator(Content, 188 /*VK_OEM_COMMA*/, Windows.System.VirtualKey.Control, () => SettingsButton_Click(null, null));
             SelectedIndex = (int)SettingValues.StartupPage.Value;
             SetWindowsDisplay();
         }

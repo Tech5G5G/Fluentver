@@ -1,4 +1,8 @@
-﻿using Windows.System;
+﻿using Microsoft.UI.Input;
+using Microsoft.UI.Xaml.Automation.Peers;
+using Microsoft.UI.Xaml.Automation.Provider;
+using Windows.System;
+using Windows.UI.Core;
 
 namespace Fluentver.Controls
 {
@@ -53,5 +57,21 @@ namespace Fluentver.Controls
             Key = (VirtualKey)args.NewValue,
             Modifiers = VirtualKeyModifiers.Shift
         });
+
+
+        /// <summary>Allows for setting element accelerators to OEM <see cref="VirtualKey"/> codes.</summary>
+        /// <param name="element">The <see cref="UIElement"/> to listen to keyboards events from.</param>
+        /// <param name="virtualKey">The OEM <see cref="VirtualKey"/> code to check for.</param>
+        /// <param name="modifier">The optional modifier to check for.</param>
+        /// <param name="invoked">The <see cref="Action"/> to invoke when <paramref name="modifier"/> and <paramref name="virtualKey"/> are pressed.</param>
+        public static void SetOEMAccelerator(UIElement element, int virtualKey, VirtualKey modifier, Action invoked)
+        {
+            element.KeyDown += (s, e) =>
+            {
+                if (e.Key == (VirtualKey)virtualKey &&
+                InputKeyboardSource.GetKeyStateForCurrentThread(modifier).HasFlag(CoreVirtualKeyStates.Down))
+                    invoked();
+            };
+        }
     }
 }
