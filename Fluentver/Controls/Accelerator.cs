@@ -59,7 +59,7 @@ namespace Fluentver.Controls
         });
 
 
-        /// <summary>Allows for setting element accelerators to OEM <see cref="VirtualKey"/> codes.</summary>
+        /// <summary>Creates keyboard accelerators that use OEM <see cref="VirtualKey"/> codes.</summary>
         /// <param name="element">The <see cref="UIElement"/> to listen to keyboards events from.</param>
         /// <param name="virtualKey">The OEM <see cref="VirtualKey"/> code to check for.</param>
         /// <param name="modifier">The optional modifier to check for.</param>
