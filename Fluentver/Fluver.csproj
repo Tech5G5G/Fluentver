@@ -23,9 +23,8 @@
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 	<WindowsSdkPackageVersion>10.0.22621.38</WindowsSdkPackageVersion>
 	<ApplicationIcon>Assets\Fluver.ico</ApplicationIcon>
-	<PublishAot>False</PublishAot>
 	<GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
-	<WindowsSdkPackageVersion>10.0.26100.46</WindowsSdkPackageVersion>
+	<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="About.xaml" />
@@ -48,6 +47,7 @@
     <None Remove="Controls\StorageExpander.xaml" />
     <None Remove="Controls\Styles.xaml" />
     <None Remove="Controls\UserEntry.xaml" />
+    <None Remove="Pages\Insider.xaml" />
     <None Remove="Settings\RenamerWindow.xaml" />
     <None Remove="Settings\SettingsPage.xaml" />
     <None Remove="Users.xaml" />
@@ -87,6 +87,11 @@
     <Content Update="Assets\Windows-Logos.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Insider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\StorageExpander.xaml">
@@ -147,4 +152,9 @@
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
+  <ItemGroup>
+    <PRIResource Update="Strings\en-US\Resources.resw">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </PRIResource>
+  </ItemGroup>
 </Project>
