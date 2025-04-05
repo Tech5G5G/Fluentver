@@ -14,30 +14,53 @@ namespace Fluentver.Helpers
 
         static readonly SecurityIdentifier currentSID = WindowsIdentity.GetCurrent().Owner;
 
-        static readonly PrincipalSearcher searcher = new(new UserPrincipal(new(ContextType.Machine)));
+        static Dictionary<SecurityIdentifier, UserPrincipal> users;
 
-        static readonly RegistryKey hUsers = RegistryKey.OpenBaseKey(RegistryHive.Users, RegistryView.Default);
+        static readonly Dictionary<string, string> personalEmails;
 
-        static readonly Dictionary<string, string> personalEmails = hUsers.OpenSubKey(StoredIdentities).GetSubKeyNames()
-            .ToDictionary(email => hUsers.OpenSubKey($"{StoredIdentities}\\{email}").GetSubKeyNames().FirstOrDefault(string.Empty));
+        static UserHelper()
+        {
+            var hkUsers = RegistryKey.OpenBaseKey(RegistryHive.Users, RegistryView.Default);
+            personalEmails = hkUsers.OpenSubKey(StoredIdentities).GetSubKeyNames()
+                .ToDictionary(email => hkUsers.OpenSubKey($"{StoredIdentities}\\{email}").GetSubKeyNames().FirstOrDefault(string.Empty));
+        }
 
         /// <summary>Gets the current <see cref="UserPrincipal"/>.</summary>
         /// <returns>The <see cref="UserPrincipal"/> of the current user, asynchronously.</returns>
         public static async Task<UserPrincipal> GetCurrentUserAsync()
         {
-            var users = await FindAllUsersAsync();
-            return users.First(i => i.Sid == currentSID);
+            await CheckUsersAsync();
+            return users[currentSID];
+        }
+
+        /// <summary>Gets a <see cref="UserPrincipal"/> using its <see cref="SecurityIdentifier"/>.</summary>
+        /// <param name="sid">The <see cref="SecurityIdentifier"/> of the user.</param>
+        /// <returns>A <see cref="UserPrincipal"/> whose <see cref="Principal.Sid"/> is equivalent to <paramref name="sid"/>, asynchronously.</returns>
+        public static async Task<UserPrincipal> GetUserFromSIDAsync(SecurityIdentifier sid)
+        {
+            await CheckUsersAsync();
+            return users[sid];
         }
 
         /// <summary>Gets an <see cref="Array"/> of <see cref="UserPrincipal"/> of all the users on the system, except for the current user.</summary>
         /// <returns>An <see cref="Array"/> of <see cref="UserPrincipal"/>, asynchronously.</returns>
         public static async Task<UserPrincipal[]> GetAllUsersAsync()
         {
-            var users = await FindAllUsersAsync();
-            return [.. users.Where(i => !i.Sid.Value.StartsWith(SIDStart) || i.Sid.Value[^3] != BuiltInEnd && i.Sid != currentSID).Cast<UserPrincipal>()];
+            await CheckUsersAsync();
+            return [.. users.Values.Where(i => i.Sid != currentSID)];
         }
 
-        private static async Task<UserPrincipal[]> FindAllUsersAsync() => await Task.Run(searcher.FindAll().Cast<UserPrincipal>().ToArray);
+        private static async Task CheckUsersAsync()
+        {
+            if (users is null)
+            {
+                PrincipalSearcher searcher = new(new UserPrincipal(new(ContextType.Machine)));
+                users = await Task.Run(() => searcher.FindAll()
+                    .Where(i => !i.Sid.Value.StartsWith(SIDStart) || i.Sid.Value[^3] != BuiltInEnd) //Filter out built-in accounts
+                    .Cast<UserPrincipal>()
+                    .ToDictionary(i => i.Sid));
+            }
+        }
 
         /// <summary>Gets a <see cref="BitmapImage"/> representation of the <paramref name="user"/>s account picture.</summary>
         /// <param name="user">The <see cref="UserPrincipal"/> to get the account picture of.</param>
