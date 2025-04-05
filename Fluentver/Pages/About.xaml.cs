@@ -17,16 +17,16 @@ namespace Fluentver.Pages
 
         private void SetNames()
         {
-            username.Content = SystemHelper.RegisteredOwner;
-            orgName.Text = SystemHelper.RegisteredOrganization;
+            username.Content = VersionHelper.RegisteredOwner;
+            orgName.Text = VersionHelper.RegisteredOrganization;
             if (string.IsNullOrWhiteSpace(orgName.Text)) orgName.Visibility = Visibility.Collapsed;
         }
 
         private void SetWindowsInformation()
         {
-            editionText.Text = $"{(SystemHelper.IsWindows11 ? "Windows 11" : "Windows 10")} {SystemHelper.WindowsEdition}";
-            versionText.Text = SystemHelper.WindowsVersionDisplayName;
-            buildText.Text = $"{SystemHelper.WindowsBuild}.{SystemHelper.WindowsRevision}";
+            editionText.Text = $"{(VersionHelper.IsWindows11 ? "Windows 11" : "Windows 10")} {VersionHelper.Edition}";
+            versionText.Text = VersionHelper.VersionDisplayName;
+            buildText.Text = $"{VersionHelper.Build}.{VersionHelper.Revision}";
 
             trademark.Text = $"The {editionText.Text} operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions.";
             copyright.Text = $"© {DateTime.Now.Year} Microsoft Corporation. All rights reserved.";

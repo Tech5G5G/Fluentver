@@ -44,7 +44,7 @@
 
         private void SetWindowsDisplay()
         {
-            if (SystemHelper.IsWindows11)
+            if (VersionHelper.IsWindows11)
             {
                 windowsLogo.Glyph = "\xE911";
                 windowsVersionText.Text = "Windows 11";
