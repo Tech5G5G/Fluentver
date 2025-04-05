@@ -39,6 +39,7 @@
 
             Accelerator.SetOEMAccelerator(Content, 188 /*VK_OEM_COMMA*/, Windows.System.VirtualKey.Control, () => SettingsButton_Click(null, null));
             SelectedIndex = (int)SettingValues.StartupPage.Value;
+            if (VersionHelper.IsWindowsInsider) wipItem.Visibility = Visibility.Visible;
             SetWindowsDisplay();
         }
 
@@ -70,6 +71,7 @@
                 1 => typeof(PC),
                 2 => typeof(Users),
                 3 => typeof(Storage),
+                4 => typeof(Insider),
                 _ => typeof(About),
             },
             this,

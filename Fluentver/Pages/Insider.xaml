@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<controls:InfoPage
+    x:Class="Fluentver.Pages.Insider"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Fluentver.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Fluentver.Controls"
+    NavigationCacheMode="Required"
+    mc:Ignorable="d">
+    <controls:InfoPage.ToolbarButtons>
+        <controls:GlyphButton Glyph="&#xF1AD;" Text="Windows Insider Program" ProcessName="ms-settings:windowsinsider" />
+    </controls:InfoPage.ToolbarButtons>
+
+    <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12" Header="Insider information">
+        <Grid ColumnSpacing="12" RowSpacing="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Channel" />
+            <TextBlock x:Name="channel" Text="Stable" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" />
+
+            <TextBlock Text="Branch" Grid.Row="1" />
+            <TextBlock x:Name="branch" Text="ni_release" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="1" />
+
+            <TextBlock Text="Account" Grid.Row="2" />
+            <ProgressRing x:Name="accountLoading" HorizontalAlignment="Left" VerticalAlignment="Center" Height="10" Width="10" Grid.Column="1" Grid.Row="2" />
+            <TextBlock x:Name="account" Text="Email/username" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Visibility="Collapsed" Grid.Column="1" Grid.Row="2" />
+        </Grid>
+    </Expander>
+    <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="6" Header="Links">
+        <StackPanel Spacing="4">
+            <HyperlinkButton x:Name="notesLink" Content="Latest build notes" />
+            <HyperlinkButton Content="Give feedback" Click="FeedbackButton_Click" />
+            <HyperlinkButton Content="Flight hub" NavigateUri="https://aka.ms/flighthub" />
+            <HyperlinkButton Content="Leave the program" NavigateUri="https://insider.windows.com/leave-program" />
+        </StackPanel>
+    </Expander>
+</controls:InfoPage>

@@ -13,6 +13,16 @@
 
             InitializeComboBox(startupPage, SettingValues.StartupPage);
             InitializeComboBox(backdrop, SettingValues.Backdrop);
+
+            DetermineWIPItemsVisibility();
+        }
+
+        private void DetermineWIPItemsVisibility()
+        {
+            if (VersionHelper.IsWindowsInsider)
+                wipItem.Visibility = Visibility.Visible;
+            else if (SettingValues.StartupPage == Pages.Insider)
+                startupPage.SelectedIndex = 0;
         }
 
         private static void InitializeComboBox<T>(ComboBox box, EnumSetting<T> setting) where T : Enum

@@ -54,8 +54,9 @@
                 <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xEDA2;}" Text="Storage"
                              ToolTipService.ToolTip="A list of your disks"
                              controls:Accelerator.Ctrl="Number4" />
-                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xF1AD;}" Text="Insider"
-                             ToolTipService.ToolTip="" />
+                <SelectorBarItem x:Name="wipItem" Visibility="Collapsed"
+                                 Icon="{ui:FontIcon Glyph=&#xF1AD;}" x:Uid="WIP"
+                                 controls:Accelerator.Ctrl="Number5" />
             </SelectorBar>
             <Frame x:Name="ContentFrame" />
             <Grid Padding="8,8,8,17">

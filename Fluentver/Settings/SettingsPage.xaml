@@ -28,6 +28,7 @@
                 <x:String>Your PC</x:String>
                 <x:String>Users</x:String>
                 <x:String>Storage</x:String>
+                <ComboBoxItem x:Name="wipItem" Content="Insider" Visibility="Collapsed" />
             </ComboBox>
         </controls:SettingsCard>
         <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE727;}" Header="Backdrop" Description="Change the material shown as the window backdrop">
