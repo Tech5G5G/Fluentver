@@ -21,7 +21,7 @@
 
             Task.Run(async () =>
             {
-                var user = await VersionHelper.GetWindowsInsiderAccountAsync();
+                var user = await VersionHelper.GetWIPAccountAsync();
                 string email = user.GetEmailAddress();
                 DispatcherQueue.TryEnqueue(() =>
                 {

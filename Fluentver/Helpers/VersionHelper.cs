@@ -56,7 +56,7 @@ namespace Fluentver.Helpers
 
         /// <summary>Gets the <see cref="UserPrincipal"/> that enrolled the system in WIP.</summary>
         /// <returns>The <see cref="UserPrincipal"/> that enrolled the system, asynchronously.</returns>
-        public static Task<UserPrincipal> GetWindowsInsiderAccountAsync() =>
+        public static Task<UserPrincipal> GetWIPAccountAsync() =>
             UserHelper.GetUserFromSIDAsync(new((string)Registry.GetValue(SystemHelper.HKLM + Applicability, "FlightingOwnerSID", string.Empty)));
 
         #endregion
