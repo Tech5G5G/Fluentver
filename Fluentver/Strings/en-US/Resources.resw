@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="About.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Windows specs and legal</value>
+  </data>
+  <data name="Exit.Content" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="PC.Text" xml:space="preserve">
+    <value>Your PC</value>
+  </data>
+  <data name="PC.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Your PC's info and specs</value>
+  </data>
+  <data name="SettingsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SettingsButtonBackTooltip" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Storage.Text" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="Storage.ToolTipService.ToolTip" xml:space="preserve">
+    <value>A list of your disks</value>
+  </data>
+  <data name="Users.Text" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Users.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Your info and other users</value>
+  </data>
+  <data name="WIP.Text" xml:space="preserve">
+    <value>Insider</value>
+  </data>
+  <data name="WIP.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Insider information and links</value>
+  </data>
+  <data name="Default.Content" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="English.Content" xml:space="preserve">
+    <value>English (United States)</value>
+  </data>
+  <data name="Greek.Content" xml:space="preserve">
+    <value>Greek (word greek in Greek)</value>
+  </data>
+  <data name="Polish.Content" xml:space="preserve">
+    <value>Polish (Polski)</value>
+  </data>
+  <data name="Mica.Content" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="Tabbed.Content" xml:space="preserve">
+    <value>Tabbed</value>
+  </data>
+  <data name="Acrylic.Content" xml:space="preserve">
+    <value>Acrylic</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version 1.1</value>
+  </data>
+  <data name="New.Content" xml:space="preserve">
+    <value>What's new</value>
+  </data>
+  <data name="GitHub.Content" xml:space="preserve">
+    <value>GitHub page</value>
+  </data>
+  <data name="MIT.Content" xml:space="preserve">
+    <value>MIT License</value>
+  </data>
+  <data name="Backdrop.Header" xml:space="preserve">
+    <value>Backdrop</value>
+  </data>
+  <data name="Backdrop.Description" xml:space="preserve">
+    <value>Change the material shown as the window backdrop</value>
+  </data>
+  <data name="Startup.Header" xml:space="preserve">
+    <value>Startup page</value>
+  </data>
+  <data name="Startup.Description" xml:space="preserve">
+    <value>Change the page to display at startup</value>
+  </data>
+  <data name="Language.Header" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Language.Description" xml:space="preserve">
+    <value>Change the display language of the application</value>
+  </data>
+  <data name="Translation.Header" xml:space="preserve">
+    <value>Translation author</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="Gigabytes" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="FreeSpace.Text" xml:space="preserve">
+    <value>Free space</value>
+  </data>
+  <data name="TotalSpace.Text" xml:space="preserve">
+    <value>Total space</value>
+  </data>
+  <data name="Mounted.Text" xml:space="preserve">
+    <value>Mounted at</value>
+  </data>
+  <data name="Format.Text" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="Type.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="CDRom" xml:space="preserve">
+    <value>Optical</value>
+  </data>
+  <data name="NoRootDirectory" xml:space="preserve">
+    <value>No root directory</value>
+  </data>
+  <data name="Removable" xml:space="preserve">
+    <value>Removable</value>
+  </data>
+  <data name="Fixed" xml:space="preserve">
+    <value>Fixed</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Ram" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="Kilobytes" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="Megabytes" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="Terabytes" xml:space="preserve">
+    <value>TB</value>
+  </data>
+  <data name="Petabytes" xml:space="preserve">
+    <value>PB</value>
+  </data>
+  <data name="Exabytes" xml:space="preserve">
+    <value>EB</value>
+  </data>
+  <data name="OtherUsers.Header" xml:space="preserve">
+    <value>Other users</value>
+  </data>
+  <data name="YourInfo.Header" xml:space="preserve">
+    <value>Your info</value>
+  </data>
+  <data name="OtherUsersLabel.Text" xml:space="preserve">
+    <value>No other users found.</value>
+  </data>
+  <data name="ManageStorage.Text" xml:space="preserve">
+    <value>Manage storage</value>
+  </data>
+  <data name="ManageOtherUsers.Text" xml:space="preserve">
+    <value>Manage other users</value>
+  </data>
+  <data name="X86" xml:space="preserve">
+    <value>32-bit</value>
+  </data>
+  <data name="X64" xml:space="preserve">
+    <value>64-bit</value>
+  </data>
+  <data name="Arm" xml:space="preserve">
+    <value>ARM</value>
+  </data>
+  <data name="Arm64" xml:space="preserve">
+    <value>ARM64</value>
+  </data>
+  <data name="Armv6" xml:space="preserve">
+    <value>ARMv6</value>
+  </data>
+  <data name="RenamePC.Text" xml:space="preserve">
+    <value>Rename your PC</value>
+  </data>
+  <data name="TaskMgr.Text" xml:space="preserve">
+    <value>Task Manager</value>
+  </data>
+  <data name="Information.Header" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="DeviceName.Text" xml:space="preserve">
+    <value>Device name</value>
+  </data>
+  <data name="ProductName.Text" xml:space="preserve">
+    <value>Product name</value>
+  </data>
+  <data name="Architecture.Text" xml:space="preserve">
+    <value>Architecture</value>
+  </data>
+  <data name="TimeAwake.Text" xml:space="preserve">
+    <value>Time awake</value>
+  </data>
+  <data name="Specs.Header" xml:space="preserve">
+    <value>Specifications</value>
+  </data>
+  <data name="CPU.Text" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="GPU.Text" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="Trademark" xml:space="preserve">
+    <value>The {0} operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions.</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>© {0} Microsoft Corporation. All rights reserved.</value>
+  </data>
+  <data name="Licensed.Text" xml:space="preserve">
+    <value>The product is licensed under the</value>
+  </data>
+  <data name="MSSoftwareTerms.Text" xml:space="preserve">
+    <value>Microsoft Software License Terms</value>
+  </data>
+  <data name="To.Text" xml:space="preserve">
+    <value>to:</value>
+  </data>
+  <data name="WinSpecs.Header" xml:space="preserve">
+    <value>Windows specifications</value>
+  </data>
+  <data name="Edition.Text" xml:space="preserve">
+    <value>Edition</value>
+  </data>
+  <data name="VersionLabel.Text" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Build.Text" xml:space="preserve">
+    <value>Build</value>
+  </data>
+  <data name="Legal.Header" xml:space="preserve">
+    <value>Legal</value>
+  </data>
+  <data name="Copy.Label" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="NavigateUsers.Label" xml:space="preserve">
+    <value>Go to users</value>
+  </data>
+  <data name="Activation.Text" xml:space="preserve">
+    <value>Activation state</value>
+  </data>
+  <data name="WinUpdate.Text" xml:space="preserve">
+    <value>Windows Update</value>
+  </data>
+  <data name="Stable" xml:space="preserve">
+    <value>Stable</value>
+  </data>
+  <data name="CanaryChannel" xml:space="preserve">
+    <value>Canary</value>
+  </data>
+  <data name="Dev" xml:space="preserve">
+    <value>Dev</value>
+  </data>
+  <data name="Beta" xml:space="preserve">
+    <value>Beta</value>
+  </data>
+  <data name="ReleasePreview" xml:space="preserve">
+    <value>Release Preview</value>
+  </data>
+  <data name="InsiderInfo.Header" xml:space="preserve">
+    <value>Insider information</value>
+  </data>
+  <data name="Channel.Text" xml:space="preserve">
+    <value>Channel</value>
+  </data>
+  <data name="Branch.Text" xml:space="preserve">
+    <value>Branch</value>
+  </data>
+  <data name="Account.Text" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Links.Header" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="Notes.Content" xml:space="preserve">
+    <value>Latest build notes</value>
+  </data>
+  <data name="Feedback.Content" xml:space="preserve">
+    <value>Give feedback</value>
+  </data>
+  <data name="FlightHub.Content" xml:space="preserve">
+    <value>Flight hub</value>
+  </data>
+  <data name="LeaveProgram.Content" xml:space="preserve">
+    <value>Leave the program</value>
+  </data>
+  <data name="WIPLink.Text" xml:space="preserve">
+    <value>Windows Insider Program</value>
+  </data>
+  <data name="NameBox.PlaceholderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PCRenamed.Text" xml:space="preserve">
+    <value>Your PC has been successfully renamed.</value>
+  </data>
+  <data name="FluverPowerShell.Text" xml:space="preserve">
+    <value>Fluver renames your PC using</value>
+  </data>
+  <data name="Next.Content" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Cancel.Content" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CurrentName" xml:space="preserve">
+    <value>Current name: {0}</value>
+  </data>
+  <data name="NameTooLong" xml:space="preserve">
+    <value>Your PC's name cannot be longer than 15 characters.</value>
+  </data>
+  <data name="NameInvaildCharacters" xml:space="preserve">
+    <value>Your PC's name cannot contain any of the following characters:
+\ / : * ? &lt; &gt; | or spaces.</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="ErrorPowerShell" xml:space="preserve">
+    <value>An error occured: Unable to start PowerShell.</value>
+  </data>
+</root>
