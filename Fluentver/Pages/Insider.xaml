@@ -10,10 +10,10 @@
     NavigationCacheMode="Required"
     mc:Ignorable="d">
     <controls:InfoPage.ToolbarButtons>
-        <controls:GlyphButton Glyph="&#xF1AD;" Text="Windows Insider Program" ProcessName="ms-settings:windowsinsider" />
+        <controls:GlyphButton x:Uid="WIPLink" Glyph="&#xF1AD;" ProcessName="ms-settings:windowsinsider" />
     </controls:InfoPage.ToolbarButtons>
 
-    <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12" Header="Insider information">
+    <Expander x:Uid="InsiderInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12">
         <Grid ColumnSpacing="12" RowSpacing="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -25,23 +25,23 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Channel" />
-            <TextBlock x:Name="channel" Text="Stable" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" />
+            <TextBlock x:Uid="Channel" />
+            <TextBlock x:Name="channel" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" />
 
-            <TextBlock Text="Branch" Grid.Row="1" />
+            <TextBlock x:Uid="Branch" Grid.Row="1" />
             <TextBlock x:Name="branch" Text="ni_release" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="1" />
 
-            <TextBlock Text="Account" Grid.Row="2" />
+            <TextBlock x:Uid="Account" Grid.Row="2" />
             <ProgressRing x:Name="accountLoading" HorizontalAlignment="Left" VerticalAlignment="Center" Height="10" Width="10" Grid.Column="1" Grid.Row="2" />
-            <TextBlock x:Name="account" Text="Email/username" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Visibility="Collapsed" Grid.Column="1" Grid.Row="2" />
+            <TextBlock x:Name="account" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Visibility="Collapsed" Grid.Column="1" Grid.Row="2" />
         </Grid>
     </Expander>
-    <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="6" Header="Links">
+    <Expander x:Uid="Links" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="6">
         <StackPanel Spacing="4">
-            <HyperlinkButton x:Name="notesLink" Content="Latest build notes" />
-            <HyperlinkButton Content="Give feedback" Click="FeedbackButton_Click" />
-            <HyperlinkButton Content="Flight hub" NavigateUri="https://aka.ms/flighthub" />
-            <HyperlinkButton Content="Leave the program" NavigateUri="https://insider.windows.com/leave-program" />
+            <HyperlinkButton x:Name="notesLink" x:Uid="Notes" />
+            <HyperlinkButton x:Uid="Feedback" Click="FeedbackButton_Click" />
+            <HyperlinkButton x:Uid="FlightHub" NavigateUri="https://aka.ms/flighthub" />
+            <HyperlinkButton x:Uid="LeaveProgram" NavigateUri="https://insider.windows.com/leave-program" />
         </StackPanel>
     </Expander>
 </controls:InfoPage>

@@ -7,6 +7,8 @@ namespace Fluentver.Pages
     /// </summary>
     public sealed partial class PC : InfoPage
     {
+        readonly string GB = StringsHelper.GetString("Gigabytes");
+
         readonly DispatcherTimer timer = new() { Interval = TimeSpan.FromSeconds(1) };
 
         public PC()
@@ -25,18 +27,13 @@ namespace Fluentver.Pages
         private void SetPCInfo()
         {
             pcName.Text = SystemHelper.SystemName;
-            productName.Text = SystemHelper.SystemProductName;
             pcBackground.ImageSource = new BitmapImage { UriSource = SystemHelper.CurrentUserWallpaper };
 
+            string name = SystemHelper.SystemProductName;
+            productName.Text = name == "System Product Name" ? StringsHelper.GetString("Unknown") : name;
+
             var architecture = RuntimeInformation.OSArchitecture;
-            osType.Text = architecture switch
-            {
-                Architecture.X86 => "32-bit",
-                Architecture.X64 => "64-bit",
-                Architecture.Arm => "ARM",
-                Architecture.Arm64 => "ARM64",
-                _ => architecture.ToString()
-            };
+            osType.Text = AssignerHelper.TryAssign(() => StringsHelper.GetString(architecture.ToString()), architecture.ToString);
         }
 
         private async void SetPCUsage(bool hookTimer = false)
@@ -47,7 +44,7 @@ namespace Fluentver.Pages
             {
                 cpu.Text = await Task.Run(() => CPUHelper.CPUName);
                 gpu.Text = await Task.Run(() => GPUHelper.GPUName);
-                ram.Text = $"{Math.Ceiling(ramHelper.TotalRAM)} GB";
+                ram.Text = $"{Math.Ceiling(ramHelper.TotalRAM)} {GB}";
 
                 cpuUsageLabel.LosingFocus += TextDisplay_LosingFocus;
                 gpuUsageLabel.LosingFocus += TextDisplay_LosingFocus;
@@ -63,7 +60,7 @@ namespace Fluentver.Pages
             gpuUsageLabel.SetTextFriendly($"{gpuUsage.Value = await Task.Run(() => GPUHelper.GPUUsage):N0}%");
 
             ramUsage.Value = ramHelper.UsedRAMPercent;
-            ramUsageLabel.SetTextFriendly($"{ramHelper.UsedRAM:N0} GB");
+            ramUsageLabel.SetTextFriendly($"{ramHelper.UsedRAM:N0} {GB}");
         }
 
         private void SetAwakeTime(bool hookTimer = false)

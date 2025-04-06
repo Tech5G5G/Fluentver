@@ -19,11 +19,10 @@
                 <ColumnDefinition Width="46" />
             </Grid.ColumnDefinitions>
             <TitleBar x:Name="titleBar" Title="Fluver" HorizontalAlignment="Stretch" Height="31" />
-            <Button x:Name="settingsButton"
+            <Button x:Name="settingsButton" x:Uid="SettingsButton"
                     CornerRadius="0" BorderThickness="0" Background="Transparent"
                     Width="46" Height="31" Grid.Column="1"
-                    controls:Accelerator.Ctrl="I"
-                    ToolTipService.ToolTip="Settings" ToolTipService.Placement="Bottom"
+                    ToolTipService.Placement="Bottom"
                     Click="SettingsButton_Click">
                 <FontIcon x:Name="settingsIcon" Glyph="&#xE713;" FontSize="14" />
                 <Button.Resources>
@@ -42,18 +41,14 @@
                 <TextBlock x:Name="windowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />
             </StackPanel>
             <SelectorBar x:Name="bar" SelectionChanged="Bar_SelectionChanged" HorizontalAlignment="Center">
-                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE946;}" Text="About"
-                             ToolTipService.ToolTip="Windows specs and legal"
-                             controls:Accelerator.Ctrl="Number1" />
-                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE7F4;}" Text="Your PC"
-                             ToolTipService.ToolTip="Your PC's info and specs"
-                             controls:Accelerator.Ctrl="Number2" />
-                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE716;}" Text="Users"
-                             ToolTipService.ToolTip="Your info and other users"
-                             controls:Accelerator.Ctrl="Number3" />
-                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xEDA2;}" Text="Storage"
-                             ToolTipService.ToolTip="A list of your disks"
-                             controls:Accelerator.Ctrl="Number4" />
+                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE946;}" x:Uid="About"
+                                 controls:Accelerator.Ctrl="Number1" />
+                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE7F4;}" x:Uid="PC"
+                                 controls:Accelerator.Ctrl="Number2" />
+                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE716;}" x:Uid="Users"
+                                 controls:Accelerator.Ctrl="Number3" />
+                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xEDA2;}" x:Uid="Storage"
+                                 controls:Accelerator.Ctrl="Number4" />
                 <SelectorBarItem x:Name="wipItem" Visibility="Collapsed"
                                  Icon="{ui:FontIcon Glyph=&#xF1AD;}" x:Uid="WIP"
                                  controls:Accelerator.Ctrl="Number5" />
@@ -73,14 +68,11 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
-                <Button Content="OK" Click="CloseWindow" HorizontalAlignment="Right" Style="{ThemeResource AccentButtonStyle}">
+                <Button x:Uid="Exit" Click="CloseWindow" HorizontalAlignment="Right" KeyboardAcceleratorPlacementMode="Hidden" Style="{ThemeResource AccentButtonStyle}">
                     <Button.KeyboardAccelerators>
                         <KeyboardAccelerator Key="Enter" />
                         <KeyboardAccelerator Key="Escape" />
                     </Button.KeyboardAccelerators>
-                    <ToolTipService.ToolTip>
-                        <ToolTip Visibility="Collapsed" />
-                    </ToolTipService.ToolTip>
                 </Button>
             </Grid>
             <StackPanel.ChildrenTransitions>

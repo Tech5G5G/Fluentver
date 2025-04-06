@@ -16,7 +16,7 @@
             branch.Text = VersionHelper.BuildBranch;
 
             var channel = VersionHelper.Channel;
-            notesLink.NavigateUri = new($"https://aka.ms/{channel.Replace(" ", null)}latest");
+            this.channel.Text = StringsHelper.GetString(channel.ToString());
             notesLink.NavigateUri = new($"https://aka.ms/{channel}latest");
 
             Task.Run(async () =>

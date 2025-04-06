@@ -5,8 +5,6 @@
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
-        private readonly Array backdrops = Enum.GetValues<BackdropType>();
-
         public SettingsPage()
         {
             this.InitializeComponent();

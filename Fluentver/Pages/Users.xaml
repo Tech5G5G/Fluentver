@@ -11,10 +11,10 @@
     NavigationCacheMode="Required"
     mc:Ignorable="d">
     <controls:InfoPage.ToolbarButtons>
-        <controls:GlyphButton Glyph="&#xE8FA;" Text="Manage other users" ProcessName="ms-settings:otherusers" />
+        <controls:GlyphButton x:Uid="ManageOtherUsers" Glyph="&#xE8FA;" ProcessName="ms-settings:otherusers" />
     </controls:InfoPage.ToolbarButtons>
 
-    <Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Your info">
+    <Expander x:Uid="YourInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0">
         <StackPanel Orientation="Horizontal">
             <Grid Margin="12">
                 <PersonPicture x:Name="userPicture" Height="50" Width="50" />
@@ -26,15 +26,15 @@
                 </Button>
             </Grid>
             <StackPanel Spacing="4" Margin="0,12,12,12" VerticalAlignment="Center">
-                <TextBlock x:Name="userDisplayName" Text="Display name" IsTextSelectionEnabled="True" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"  />
-                <TextBlock x:Name="userAccountName" Text="Email/username" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
+                <TextBlock x:Name="userDisplayName" IsTextSelectionEnabled="True" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"  />
+                <TextBlock x:Name="userAccountName" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
             </StackPanel>
         </StackPanel>
     </Expander>
-    <Expander HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0" Header="Other users">
+    <Expander x:Uid="OtherUsers" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0">
         <Grid>
             <ListView x:Name="usersList" SelectionMode="None" Margin="-4,0,0,0" MaxHeight="193" ItemsSource="{x:Bind users}" />
-            <TextBlock x:Name="otherUsersLabel" Text="No other users found." HorizontalAlignment="Center" Visibility="Collapsed" />
+            <TextBlock x:Name="otherUsersLabel" x:Uid="OtherUsersLabel" HorizontalAlignment="Center" Visibility="Collapsed" />
         </Grid>
     </Expander>
 </controls:InfoPage>

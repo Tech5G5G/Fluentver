@@ -88,7 +88,7 @@
 
                 settingsIcon.FontSize = 12;
                 settingsIcon.Glyph = "\uE72B";
-                ToolTipService.SetToolTip(settingsButton, "Back");
+                ToolTipService.SetToolTip(settingsButton, StringsHelper.GetString("SettingsButtonBackTooltip"));
             }
             else //Restore main content
             {
@@ -97,7 +97,7 @@
 
                 settingsIcon.FontSize = 14;
                 settingsIcon.Glyph = "\uE713";
-                ToolTipService.SetToolTip(settingsButton, "Settings");
+                ToolTipService.SetToolTip(settingsButton, StringsHelper.GetString("SettingsButton.ToolTipService.ToolTip"));
             }
         }
     }

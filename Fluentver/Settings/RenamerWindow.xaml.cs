@@ -12,6 +12,7 @@
 
             SetTitleBar(titleBar);
             ExtendsContentIntoTitleBar = true;
+            Title = StringsHelper.GetString("RenamePC.Text");
 
             SystemBackdrop = SettingValues.Backdrop.Value.ToSystemBackdrop();
             SettingValues.Backdrop.ValueChanged += (s, e) =>
@@ -20,7 +21,7 @@
                     SystemBackdrop = e.ToSystemBackdrop();
             };
 
-            name.Header = $"Current name: {SystemHelper.SystemName}";
+            name.Header = string.Format(StringsHelper.GetString("CurrentName"), SystemHelper.SystemName);
         }
 
         private void Name_TextChanged(object sender, TextChangedEventArgs args)
@@ -28,8 +29,8 @@
             nextButton.IsEnabled = SystemHelper.CheckNetBIOSName(name.Text, out var result);
             error.Text = result switch
             {
-                NetBIOSNameCheckResult.ExceedsMaxLength => "Your PC's name cannot be longer than 15 characters.",
-                NetBIOSNameCheckResult.InvalidCharacter => "Your PC's name cannot contain any of the following characters:\n\\ / : * ? < > | or spaces.",
+                NetBIOSNameCheckResult.ExceedsMaxLength => StringsHelper.GetString("NameTooLong"),
+                NetBIOSNameCheckResult.InvalidCharacter => StringsHelper.GetString("NameInvaildCharacters"),
                 _ => string.Empty
             };
         }
@@ -47,7 +48,7 @@
             finishingScreen.Visibility = Visibility.Visible;
             renamingScreen.Visibility = Visibility.Collapsed;
 
-            nextButton.Content = "Finish";
+            nextButton.Content = StringsHelper.GetString("Finish");
             nextButton.IsEnabled = cancelButton.IsEnabled = false;
 
             bool renamed = await SystemHelper.RenameSystem(name.Text);
@@ -57,7 +58,7 @@
 
             cancelButton.IsEnabled = !(nextButton.IsEnabled = renamed);
             if (!renamed)
-                closingText.Text = "An error occured: Unable to start PowerShell.";
+                closingText.Text = StringsHelper.GetString("ErrorPowerShell");
         }
 
         private void Name_KeyDown(object sender, KeyRoutedEventArgs e)

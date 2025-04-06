@@ -32,11 +32,11 @@
             mountPoint.Content = name;
             mountPoint.Click += (s, e) => Process.Start(new ProcessStartInfo(name) { UseShellExecute = true });
 
-            type.Text = info.DriveType.ToString();
+            type.Text = StringsHelper.GetString(info.DriveType.ToString());
             format.Text = info.DriveFormat;
         }
 
-        private static ReadOnlyDictionary<DriveType, string> driveIconDictionary = new(new Dictionary<DriveType, string>
+        private readonly static ReadOnlyDictionary<DriveType, string> driveIconDictionary = new(new Dictionary<DriveType, string>
         {
             {DriveType.Removable, "\uE88E"},
             {DriveType.Network, "\uE968"},

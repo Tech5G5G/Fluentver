@@ -28,8 +28,8 @@ namespace Fluentver.Pages
             versionText.Text = VersionHelper.VersionDisplayName;
             buildText.Text = $"{VersionHelper.Build}.{VersionHelper.Revision}";
 
-            trademark.Text = $"The {editionText.Text} operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions.";
-            copyright.Text = $"© {DateTime.Now.Year} Microsoft Corporation. All rights reserved.";
+            trademark.Text = string.Format(StringsHelper.GetString("Trademark"), editionText.Text);
+            copyright.Text = string.Format(StringsHelper.GetString("Copyright"), DateTime.Now.Year);
         }
 
         private void Navigate_UsersPage(object sender, RoutedEventArgs e) => App.MainWindow.SelectedIndex = 2;
