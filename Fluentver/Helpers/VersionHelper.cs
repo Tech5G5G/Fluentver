@@ -50,21 +50,9 @@ namespace Fluentver.Helpers
             key.GetValue("IsBuildFlightingEnabled") is int enabled &&
             enabled == 1;
 
-        /// <summary>Gets the current WIP channel installed on the system.</summary>
-        /// <remarks>This will be <see langword="null"/> if <see cref="IsWindowsInsider"/> is <see langword="false"/>.</remarks>
-        public static string Channel
-        {
-            get
-            {
-                string branch = (string)Registry.GetValue(SystemHelper.HKLM + Applicability, "BranchName", string.Empty);
-                return branch switch
-                {
-                    "CanaryChannel" => "Canary",
-                    "ReleasePreview" => "Release Preview",
-                    _ => branch
-                };
-            }
-        }
+        /// <summary>Gets the current <see cref="InsiderChannel"/> installed on the system.</summary>
+        /// <remarks>Returns <see cref="InsiderChannel.Stable"/> if <see cref="IsWindowsInsider"/> is <see langword="false"/>.</remarks>
+        public static InsiderChannel Channel => Enum.TryParse((string)Registry.GetValue(SystemHelper.HKLM + Applicability, "BranchName", string.Empty), out InsiderChannel channel) ? channel : InsiderChannel.Stable;
 
         /// <summary>Gets the <see cref="UserPrincipal"/> that enrolled the system in WIP.</summary>
         /// <returns>The <see cref="UserPrincipal"/> that enrolled the system, asynchronously.</returns>
@@ -72,5 +60,14 @@ namespace Fluentver.Helpers
             UserHelper.GetUserFromSIDAsync(new((string)Registry.GetValue(SystemHelper.HKLM + Applicability, "FlightingOwnerSID", string.Empty)));
 
         #endregion
+    }
+
+    public enum InsiderChannel
+    {
+        Stable,
+        CanaryChannel,
+        Dev,
+        Beta,
+        ReleasePreview
     }
 }
