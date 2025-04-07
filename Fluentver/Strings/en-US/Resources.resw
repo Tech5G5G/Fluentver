@@ -445,4 +445,13 @@
   <data name="ErrorPowerShell" xml:space="preserve">
     <value>An error occured: Unable to start PowerShell.</value>
   </data>
+  <data name="RestartAlert.Title" xml:space="preserve">
+    <value>Restart required</value>
+  </data>
+  <data name="RestartAlert.Message" xml:space="preserve">
+    <value>A restart is required to apply your language preferences.</value>
+  </data>
+  <data name="RestartButton.Content" xml:space="preserve">
+    <value>Restart</value>
+  </data>
 </root>
