@@ -136,7 +136,7 @@
     <value>Ustawienia</value>
   </data>
   <data name="SettingsButtonBackTooltip" xml:space="preserve">
-    <value>Z powrotem</value>
+    <value>Wstecz</value>
   </data>
   <data name="Storage.Text" xml:space="preserve">
     <value>Dyski</value>
