@@ -72,7 +72,7 @@
                 2 => typeof(Users),
                 3 => typeof(Storage),
                 4 => typeof(Insider),
-                _ => typeof(About),
+                _ => typeof(About)
             },
             this,
             new SlideNavigationTransitionInfo { Effect = previousIndex - currentIndex > 0 ? SlideNavigationTransitionEffect.FromLeft : SlideNavigationTransitionEffect.FromRight });

@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="About.xaml" />
+    <None Remove="Assets\SettingsLogo.png" />
     <None Remove="Assets\Square150x150Logo.scale-100.png" />
     <None Remove="Assets\Square44x44Logo.scale-100.png" />
     <None Remove="Assets\Square44x44Logo.scale-125.png" />
