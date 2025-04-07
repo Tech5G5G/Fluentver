@@ -28,13 +28,13 @@
             <ProgressRing x:Name="loadingIndicator" Width="40" Height="40" />
             <TextBlock x:Name="closingText" x:Uid="PCRenamed" Visibility="Collapsed" />
         </Grid>
-        <Grid ColumnSpacing="12" Padding="16"
+        <Grid Padding="16,0"
               BorderBrush="{ThemeResource SystemControlBackgroundBaseLowRevealBorderBrush}" BorderThickness="0,1,0,0"
               Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="12" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <RichTextBlock IsTextSelectionEnabled="False" VerticalAlignment="Center">
@@ -45,7 +45,7 @@
                     </Hyperlink>
                 </Paragraph>
             </RichTextBlock>
-            <Button x:Name="nextButton" x:Uid="Next" IsEnabled="False" KeyboardAcceleratorPlacementMode="Hidden" Style="{ThemeResource AccentButtonStyle}" Grid.Column="2" Click="NextButton_Click">
+            <Button x:Name="nextButton" x:Uid="Next" IsEnabled="False" KeyboardAcceleratorPlacementMode="Hidden" Style="{ThemeResource AccentButtonStyle}" Grid.Column="1" Click="NextButton_Click">
                 <Button.KeyboardAccelerators>
                     <KeyboardAccelerator Key="Enter" />
                 </Button.KeyboardAccelerators>
