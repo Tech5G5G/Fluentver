@@ -20,7 +20,7 @@ namespace Fluentver.Helpers
 
         static UserHelper()
         {
-            var hkUsers = RegistryKey.OpenBaseKey(RegistryHive.Users, RegistryView.Default);
+            using var hkUsers = RegistryKey.OpenBaseKey(RegistryHive.Users, RegistryView.Default);
             personalEmails = hkUsers.OpenSubKey(StoredIdentities).GetSubKeyNames()
                 .ToDictionary(email => hkUsers.OpenSubKey($"{StoredIdentities}\\{email}").GetSubKeyNames().FirstOrDefault(string.Empty));
         }
@@ -54,7 +54,7 @@ namespace Fluentver.Helpers
         {
             if (users is null)
             {
-                PrincipalSearcher searcher = new(new UserPrincipal(new(ContextType.Machine)));
+                using PrincipalSearcher searcher = new(new UserPrincipal(new(ContextType.Machine)));
                 users = await Task.Run(() => searcher.FindAll()
                     .Where(i => !i.Sid.Value.StartsWith(SIDStart) || i.Sid.Value[^3] != BuiltInEnd) //Filter out built-in accounts
                     .Cast<UserPrincipal>()

@@ -37,7 +37,7 @@ namespace Fluentver.Pages
                     usersList.Visibility = Visibility.Collapsed;
                     otherUsersLabel.Visibility = Visibility.Visible;
                 }
-            }); 
+            });
         });
 
         private void UserPicture_Click(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:yourinfo") { UseShellExecute = true });
