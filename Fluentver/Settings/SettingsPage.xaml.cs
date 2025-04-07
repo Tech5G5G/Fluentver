@@ -35,8 +35,9 @@ namespace Fluentver.Settings
             language.SelectionChanged += (s, e) =>
             {
                 string language = ApplicationLanguages.PrimaryLanguageOverride = languages.FirstOrDefault(x => x.Value == this.language.SelectedIndex).Key;
-
                 bool isRestartRequired = language != currentLanguage;
+
+                language = language == string.Empty ? ApplicationLanguages.Languages[0] : language;
                 restartAlert.IsOpen = isRestartRequired;
                 languageExpander.Margin = isRestartRequired ? new() : new(0, 0, 0, -4);
 
