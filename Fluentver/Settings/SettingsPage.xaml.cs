@@ -46,7 +46,12 @@ namespace Fluentver.Settings
                     restartAlert.Message = StringsHelper.GetString("RestartAlert.Message", language);
                     restartAlert.ActionButton.Content = StringsHelper.GetString("RestartButton.Content", language);
                 }
+
+                translatorButton.Content = StringsHelper.GetString("TranslationAuthor.Content", language);
+                translatorButton.NavigateUri = new(StringsHelper.GetString("TranslationAuthorURL", language));
             };
+
+            translatorButton.NavigateUri = new(StringsHelper.GetString("TranslationAuthorURL"));
         }
 
         private void DetermineWIPItemsVisibility()

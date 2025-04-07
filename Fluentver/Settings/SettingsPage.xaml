@@ -20,7 +20,9 @@
                 <ComboBoxItem x:Uid="Polish" />
             </ComboBox>
             <controls:SettingsExpander.Items>
-                <controls:SettingsCard x:Uid="Translation" />
+                <controls:SettingsCard x:Uid="Translation">
+                    <HyperlinkButton x:Name="translatorButton" x:Uid="TranslationAuthor" Padding="0" />
+                </controls:SettingsCard>
             </controls:SettingsExpander.Items>
         </controls:SettingsExpander>
         <InfoBar x:Name="restartAlert" x:Uid="RestartAlert" IsClosable="False" BorderBrush="{ThemeResource CardStrokeColorDefault}" BorderThickness="1">

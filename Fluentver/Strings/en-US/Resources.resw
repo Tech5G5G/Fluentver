@@ -454,4 +454,10 @@
   <data name="RestartButton.Content" xml:space="preserve">
     <value>Restart</value>
   </data>
+  <data name="TranslationAuthor.Content" xml:space="preserve">
+    <value>Tech5G5G</value>
+  </data>
+  <data name="TranslationAuthorURL" xml:space="preserve">
+    <value>https://www.github.com/tech5g5g</value>
+  </data>
 </root>
