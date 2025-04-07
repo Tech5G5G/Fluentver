@@ -1,10 +1,23 @@
-﻿namespace Fluentver.Settings
+﻿using Windows.Globalization;
+using Microsoft.Windows.AppLifecycle;
+
+namespace Fluentver.Settings
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
+        private readonly string currentLanguage = ApplicationLanguages.PrimaryLanguageOverride;
+
+        private readonly static Dictionary<string, int> languages = new()
+        {
+            { string.Empty, 0 },
+            { "en-US", 1 },
+            { "el-GR", 2 },
+            { "pl", 3 }
+        };
+
         public SettingsPage()
         {
             this.InitializeComponent();
@@ -12,7 +25,28 @@
             InitializeComboBox(startupPage, SettingValues.StartupPage);
             InitializeComboBox(backdrop, SettingValues.Backdrop);
 
+            InitializeLanguage();
             DetermineWIPItemsVisibility();
+        }
+
+        private void InitializeLanguage()
+        {
+            language.SelectedIndex = languages.TryGetValue(currentLanguage, out int index) ? index : 0;
+            language.SelectionChanged += (s, e) =>
+            {
+                string language = ApplicationLanguages.PrimaryLanguageOverride = languages.FirstOrDefault(x => x.Value == this.language.SelectedIndex).Key;
+
+                bool isRestartRequired = language != currentLanguage;
+                restartAlert.IsOpen = isRestartRequired;
+                languageExpander.Margin = isRestartRequired ? new() : new(0, 0, 0, -4);
+
+                if (isRestartRequired)
+                {
+                    restartAlert.Title = StringsHelper.GetString("RestartAlert.Title", language);
+                    restartAlert.Message = StringsHelper.GetString("RestartAlert.Message", language);
+                    restartAlert.ActionButton.Content = StringsHelper.GetString("RestartButton.Content", language);
+                }
+            };
         }
 
         private void DetermineWIPItemsVisibility()
@@ -33,5 +67,7 @@
                     setting.Value = value;
             };
         }
+
+        private void RestartButton_Click(object sender, RoutedEventArgs e) => AppInstance.Restart(string.Empty);
     }
 }

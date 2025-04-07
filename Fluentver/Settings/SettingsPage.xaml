@@ -12,8 +12,8 @@
     mc:Ignorable="d">
 
     <StackPanel Spacing="4" Padding="8,0,8,17">
-        <controls:SettingsExpander HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}" x:Uid="Language" IsExpanded="True">
-            <ComboBox>
+        <controls:SettingsExpander x:Name="languageExpander" HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}" x:Uid="Language" IsExpanded="True" Margin="0,0,0,-4">
+            <ComboBox x:Name="language">
                 <ComboBoxItem x:Uid="Default" />
                 <ComboBoxItem x:Uid="English" />
                 <ComboBoxItem x:Uid="Greek" />
@@ -23,6 +23,14 @@
                 <controls:SettingsCard x:Uid="Translation" />
             </controls:SettingsExpander.Items>
         </controls:SettingsExpander>
+        <InfoBar x:Name="restartAlert" x:Uid="RestartAlert" IsClosable="False" BorderBrush="{ThemeResource CardStrokeColorDefault}" BorderThickness="1">
+            <InfoBar.ActionButton>
+                <Button x:Uid="RestartButton" Click="RestartButton_Click" />
+            </InfoBar.ActionButton>
+            <InfoBar.Resources>
+                <SolidColorBrush x:Key="InfoBarInformationalSeverityBackgroundBrush" Color="{ThemeResource CardBackgroundFillColorDefault}" />
+            </InfoBar.Resources>
+        </InfoBar>
         <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE7E8;}" x:Uid="Startup">
             <ComboBox x:Name="startupPage">
                 <ComboBoxItem Content="{help:StringResource Id=About.Text}" />
