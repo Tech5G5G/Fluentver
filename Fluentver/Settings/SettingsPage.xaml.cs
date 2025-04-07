@@ -14,7 +14,7 @@ namespace Fluentver.Settings
         {
             { string.Empty, 0 },
             { "en-US", 1 },
-            { "el-GR", 2 },
+            { "el", 2 },
             { "pl", 3 }
         };
 
