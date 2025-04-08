@@ -21,9 +21,7 @@
     <AppxBundle>Never</AppxBundle>
     <AppInstallerUri>https://www.github.com/tech5g5g/fluentver</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-	<WindowsSdkPackageVersion>10.0.22621.38</WindowsSdkPackageVersion>
 	<ApplicationIcon>Assets\Fluver.ico</ApplicationIcon>
-	<GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
 	<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
