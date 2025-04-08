@@ -38,9 +38,8 @@
             settingsButton.Resources["FontIconTitleBarStyle"]);
 
             Accelerator.SetOEMAccelerator(Content, 188 /*VK_OEM_COMMA*/, Windows.System.VirtualKey.Control, () => SettingsButton_Click(null, null));
-            SelectedIndex = (int)SettingValues.StartupPage.Value;
-            if (VersionHelper.IsWindowsInsider) wipItem.Visibility = Visibility.Visible;
             SetWindowsDisplay();
+            SetupBar();
         }
 
         private void SetWindowsDisplay()
@@ -58,11 +57,39 @@
             }
         }
 
+        private void SetupBar()
+        {
+            SelectedIndex = (int)SettingValues.StartupPage.Value;
+            if (VersionHelper.IsWindowsInsider)
+                wipItem.Visibility = Visibility.Visible;
+            bar.Loaded += (s, e) =>
+            {
+                if (bar.ActualWidth >= 464)
+                {
+                    barScroller.HorizontalScrollMode = ScrollMode.Enabled;
+                    barScroller.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+
+                    barScroller.PointerEntered += (s, e) => EnableBarScroller(true, e.Pointer);
+                    barScroller.PointerExited += (s, e) => EnableBarScroller(false, e.Pointer);
+                }
+            };
+        }
+
+        private void EnableBarScroller(bool enable, Pointer pointer)
+        {
+            if (pointer.PointerDeviceType == Microsoft.UI.Input.PointerDeviceType.Mouse || !enable)
+            {
+                barScroller.Padding = enable ? new(0, 0, 0, 8) : new();
+                barScroller.HorizontalScrollBarVisibility = enable ? ScrollBarVisibility.Visible : ScrollBarVisibility.Hidden;
+            }
+        }
+
         private void CloseWindow(object sender, RoutedEventArgs args) => Close();
 
         int previousIndex;
         private void Bar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
         {
+            sender.SelectedItem.StartBringIntoView();
             AppWindow.Title = sender.SelectedItem.Text;
             int currentIndex = sender.GetSelectedIndex();
 

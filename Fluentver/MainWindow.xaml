@@ -41,19 +41,21 @@
                 <FontIcon x:Name="windowsLogo" FontFamily="{StaticResource WindowsLogos}" Glyph="&#xE911;" FontSize="40" />
                 <TextBlock x:Name="windowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />
             </StackPanel>
-            <SelectorBar x:Name="bar" SelectionChanged="Bar_SelectionChanged" HorizontalAlignment="Center">
-                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE946;}" x:Uid="About"
+            <ScrollViewer x:Name="barScroller" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
+                <SelectorBar x:Name="bar" SelectionChanged="Bar_SelectionChanged" HorizontalAlignment="Center">
+                    <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE946;}" x:Uid="About"
                                  controls:Accelerator.Ctrl="Number1" />
-                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE7F4;}" x:Uid="PC"
+                    <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE7F4;}" x:Uid="PC"
                                  controls:Accelerator.Ctrl="Number2" />
-                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE716;}" x:Uid="Users"
+                    <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE716;}" x:Uid="Users"
                                  controls:Accelerator.Ctrl="Number3" />
-                <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xEDA2;}" x:Uid="Storage"
+                    <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xEDA2;}" x:Uid="Storage"
                                  controls:Accelerator.Ctrl="Number4" />
-                <SelectorBarItem x:Name="wipItem" Visibility="Collapsed"
+                    <SelectorBarItem x:Name="wipItem" Visibility="Collapsed"
                                  Icon="{ui:FontIcon Glyph=&#xF1AD;}" x:Uid="WIP"
                                  controls:Accelerator.Ctrl="Number5" />
-            </SelectorBar>
+                </SelectorBar>
+            </ScrollViewer>
             <Frame x:Name="ContentFrame" />
             <Grid Padding="8,8,8,17">
                 <ItemsControl x:Name="toolbar" HorizontalAlignment="Left" ItemsSource="{x:Bind ToolbarButtons}">
