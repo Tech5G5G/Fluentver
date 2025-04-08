@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application
+    x:Class="Fluentver.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Fluentver">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <ResourceDictionary Source="/Controls/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <FontFamily x:Key="WindowsLogos">/Assets/Windows-Logos.ttf#Windows-Logos</FontFamily>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

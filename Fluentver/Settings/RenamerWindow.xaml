@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<controls:SizeWindow
+    x:Class="Fluentver.Settings.RenamerWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Fluentver.Settings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Fluentver.Controls"
+    mc:Ignorable="d"
+    Width="480" Height="270" IsDialogWindow="True">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="65" />
+        </Grid.RowDefinitions>
+        <Grid Background="{ThemeResource LayerOnMicaBaseAltFillColorDefault}" Grid.RowSpan="2" />
+        <Grid x:Name="titleBar" Padding="24,16,24,12">
+            <TextBlock x:Uid="RenamePC" Style="{ThemeResource TitleTextBlockStyle}" />
+        </Grid>
+        <StackPanel x:Name="renamingScreen" Spacing="12" Padding="24,0,24,24" Grid.Row="1">
+            <TextBox x:Name="name" x:Uid="NameBox" Width="200" HorizontalAlignment="Left" KeyDown="Name_KeyDown" TextChanged="Name_TextChanged" />
+            <TextBlock x:Name="error" Foreground="{ThemeResource SystemErrorTextColor}" />
+        </StackPanel>
+        <Grid x:Name="finishingScreen" Padding="24,0,24,24" Grid.Row="1" Visibility="Collapsed">
+            <ProgressRing x:Name="loadingIndicator" Width="40" Height="40" />
+            <TextBlock x:Name="closingText" x:Uid="PCRenamed" Visibility="Collapsed" />
+        </Grid>
+        <Grid Padding="16,0"
+              BorderBrush="{ThemeResource SystemControlBackgroundBaseLowRevealBorderBrush}" BorderThickness="0,1,0,0"
+              Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <RichTextBlock IsTextSelectionEnabled="False" VerticalAlignment="Center">
+                <Paragraph>
+                    <Run x:Uid="FluverPowerShell" />
+                    <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/rename-computer" UnderlineStyle="None">
+                        <Run Text="PowerShell." />
+                    </Hyperlink>
+                </Paragraph>
+            </RichTextBlock>
+            <Button x:Name="nextButton" x:Uid="Next" IsEnabled="False" KeyboardAcceleratorPlacementMode="Hidden" Style="{ThemeResource AccentButtonStyle}" Grid.Column="1" Click="NextButton_Click">
+                <Button.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="Enter" />
+                </Button.KeyboardAccelerators>
+            </Button>
+            <Button x:Name="cancelButton" x:Uid="Cancel" KeyboardAcceleratorPlacementMode="Hidden" Grid.Column="3" Click="Cancel">
+                <Button.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="Escape" />
+                </Button.KeyboardAccelerators>
+            </Button>
+        </Grid>
+    </Grid>
+</controls:SizeWindow>

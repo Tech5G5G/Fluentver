@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Fluentver.Settings.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Fluentver.Settings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:help="using:Fluentver.Helpers"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d">
+
+    <StackPanel Spacing="4" Padding="8,0,8,17">
+        <controls:SettingsExpander x:Name="languageExpander" HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}" x:Uid="Language" IsExpanded="True" Margin="0,0,0,-4">
+            <ComboBox x:Name="language">
+                <ComboBoxItem x:Uid="Default" />
+                <ComboBoxItem x:Uid="English" />
+                <ComboBoxItem x:Uid="Greek" />
+                <ComboBoxItem x:Uid="Polish" />
+            </ComboBox>
+            <controls:SettingsExpander.Items>
+                <controls:SettingsCard x:Uid="Translation">
+                    <HyperlinkButton x:Name="translatorButton" x:Uid="TranslationAuthor" Padding="0" />
+                </controls:SettingsCard>
+            </controls:SettingsExpander.Items>
+        </controls:SettingsExpander>
+        <InfoBar x:Name="restartAlert" x:Uid="RestartAlert" IsClosable="False" BorderBrush="{ThemeResource CardStrokeColorDefault}" BorderThickness="1">
+            <InfoBar.ActionButton>
+                <Button x:Uid="RestartButton" Click="RestartButton_Click" />
+            </InfoBar.ActionButton>
+            <InfoBar.Resources>
+                <SolidColorBrush x:Key="InfoBarInformationalSeverityBackgroundBrush" Color="{ThemeResource CardBackgroundFillColorDefault}" />
+            </InfoBar.Resources>
+        </InfoBar>
+        <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE7E8;}" x:Uid="Startup">
+            <ComboBox x:Name="startupPage">
+                <ComboBoxItem Content="{help:StringResource Id=About.Text}" />
+                <ComboBoxItem Content="{help:StringResource Id=PC.Text}" />
+                <ComboBoxItem Content="{help:StringResource Id=Users.Text}" />
+                <ComboBoxItem Content="{help:StringResource Id=Storage.Text}" />
+                <ComboBoxItem x:Name="wipItem" Content="{help:StringResource Id=WIP.Text}" Visibility="Collapsed" />
+            </ComboBox>
+        </controls:SettingsCard>
+        <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE727;}" x:Uid="Backdrop">
+            <ComboBox x:Name="backdrop">
+                <ComboBoxItem x:Uid="Mica" />
+                <ComboBoxItem x:Uid="Tabbed" />
+                <ComboBoxItem x:Uid="Acrylic" />
+            </ComboBox>
+        </controls:SettingsCard>
+        <controls:SettingsExpander HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/SettingsLogo.png}" Header="Fluver" Description="{help:StringResource Id=Version}">
+            <controls:SettingsExpander.Items>
+                <controls:SettingsCard>
+                    <HyperlinkButton x:Uid="New" NavigateUri="https://github.com/Tech5G5G/Fluentver/releases/tag/v1.1" />
+                </controls:SettingsCard>
+                <controls:SettingsCard>
+                    <HyperlinkButton x:Uid="GitHub" NavigateUri="https://github.com/Tech5G5G/Fluentver" />
+                </controls:SettingsCard>
+                <controls:SettingsCard>
+                    <HyperlinkButton x:Uid="MIT" NavigateUri="https://raw.githubusercontent.com/Tech5G5G/Fluentver/refs/heads/master/LICENSE" />
+                </controls:SettingsCard>
+            </controls:SettingsExpander.Items>
+        </controls:SettingsExpander>
+        <StackPanel.ChildrenTransitions>
+            <TransitionCollection>
+                <RepositionThemeTransition IsStaggeringEnabled="False" />
+            </TransitionCollection>
+        </StackPanel.ChildrenTransitions>
+    </StackPanel>
+</Page>

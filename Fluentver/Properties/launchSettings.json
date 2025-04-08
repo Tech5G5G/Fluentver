@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Fluver (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Fluver (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
