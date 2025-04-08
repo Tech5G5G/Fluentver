@@ -10,7 +10,7 @@ public static class DriveInfoExtensions
     /// <summary>Gets the best name to be display in UI.</summary>
     /// <param name="drive">The <see cref="DriveInfo"/> to get the best name of.</param>
     /// <returns>If it passes <see cref="string.IsNullOrWhiteSpace(string?)"/>, <see cref="DriveInfo.VolumeLabel"/>. Otherwise, <see cref="DriveInfo.Name"/>.</returns>
-    public static string GetBestDisplayName(this DriveInfo drive) => string.IsNullOrWhiteSpace(drive.VolumeLabel) ? drive.Name : drive.VolumeLabel;
+    public static string GetBestDisplayName(this DriveInfo drive) => string.IsNullOrWhiteSpace(drive.VolumeLabel) ? drive.Name.Replace(":\\", ":") : drive.VolumeLabel;
 
     /// <summary>Gets the <see cref="StorageUnit"/> of <see cref="DriveInfo.TotalFreeSpace"/>.</summary>
     /// <param name="drive">The <see cref="DriveInfo"/> to get the <see cref="StorageUnit"/> of.</param>
@@ -29,7 +29,7 @@ public static class DriveInfoExtensions
     public static string FormatValue(this StorageUnit unit, long value)
     {
         var info = UnitDictionary[unit];
-        return $"{value / info.AmountInBytes} {info.Extension}";
+        return $"{Math.Round((double)value / info.AmountInBytes)} {info.Extension}";
     }
 
     /// <summary>Contains <see cref="UnitInfo"/>s for <see cref="StorageUnit"/>s.</summary>
