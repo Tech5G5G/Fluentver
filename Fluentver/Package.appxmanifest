@@ -13,7 +13,7 @@
     Publisher="CN=6A412899-897E-4FB8-A2C7-EF01EAAF4C9B"
     Version="1.1.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="4b383819-457f-4372-aa42-97815e3bc2a6" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="c5da44bb-0cb8-432a-be25-14d135ad4dd4" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Fluver</DisplayName>
