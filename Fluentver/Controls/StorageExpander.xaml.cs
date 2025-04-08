@@ -2,10 +2,12 @@
 {
     public sealed partial class StorageExpander : Expander
     {
+        public DriveInfo DriveInfo { get; private set; }
+
         public StorageExpander(DriveInfo info)
         {
             this.InitializeComponent();
-            SetExpanderDetails(info);
+            SetExpanderDetails(DriveInfo = info);
         }
 
         private void SetExpanderDetails(DriveInfo info)
