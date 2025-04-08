@@ -33,7 +33,8 @@
 
   <Resources>
     <Resource Language="en-US"/>
-	<Resource Language="pl-PL"/>
+	  <Resource Language="el-GR"/>
+	  <Resource Language="pl-PL"/>
   </Resources>
 
   <Applications>
