@@ -21,7 +21,7 @@ namespace Fluentver.Pages
             var expanders = AssignerHelper.TryAssign(DriveInfo.GetDrives, () => []).Select(drive =>
             {
                 Expander expander = null;
-                if (drive.IsReady && (expander = Children.FirstOrDefault(i => (string)i.Header == drive.GetBestDisplayName(), null)) is null)
+                if (drive.IsReady && (expander = Children.FirstOrDefault(i => (i as StorageExpander).DriveInfo.RootDirectory.FullName == drive.RootDirectory.FullName, null)) is null)
                     Children.Add(expander = AssignerHelper.TryAssign(() => new StorageExpander(drive)));
                 return expander;
             });
