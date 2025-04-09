@@ -2,12 +2,12 @@ Privacy Policy
 
 Last updated on April 8, 2025
 
-This privacy policy applies to the Fluver app (hereafter referred to as the "Application"). The Application is an open-source service, provided "**AS IS**," and is committed to protecting your privacy.
+This privacy policy applies to the Fluver app (hereafter referred to as the "Application"). The Application is an open-source service, provided "AS IS," and is committed to protecting your privacy.
 
 
 Information Collection and Use
 
-We value your privacy and aim to be transparent about our practices. The Application **does not** collect or share any personally identifiable information publicly. However, in the course of providing the Application, certain information may be collected internally, such as **email addresses** and **names** (if provided by the user).
+We value your privacy and aim to be transparent about our practices. The Application does not collect or share any personally identifiable information publicly. However, in the course of providing the Application, certain information may be collected internally, such as email addresses and names (if provided by the user).
 
 This information may be used to enhance user experience or support specific features within the Application. We do not sell or share your data with third parties.
 
