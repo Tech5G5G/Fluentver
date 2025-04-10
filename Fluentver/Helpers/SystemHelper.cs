@@ -7,6 +7,7 @@ namespace Fluentver.Helpers
     public static class SystemHelper
     {
         public const string HKLM = @"HKEY_LOCAL_MACHINE\";
+        public const string HKCU = @"HKEY_CURRENT_USER\";
 
         private static readonly Regex regex = new(@"[/:*?<>| " + "\"]");
         private static readonly EasClientDeviceInformation easInfo = new();
@@ -70,8 +71,34 @@ namespace Fluentver.Helpers
         /// <summary>Gets the product name of the system.</summary>
         public static string SystemProductName => easInfo.SystemProductName;
 
-        /// <summary>Gets a <see cref="Uri"/> to the current user's wallpaper.</summary>
-        public static Uri CurrentUserWallpaper => new($@"C:\Users\{Environment.UserName}\AppData\Roaming\Microsoft\Windows\Themes\TranscodedWallpaper");
+        /// <summary>Gets a <see cref="Brush"/> representing the curent user's wallpaper.</summary>
+        public static Brush UserWallpaperBrush
+        {
+            get
+            {
+                var type = (BackgroundType)Registry.GetValue(HKCU + "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Wallpapers", "BackgroundType", BackgroundType.Picture);
+                switch (type)
+                {
+                    case BackgroundType.SolidColor:
+                        byte[] rgb = [.. ((string)Registry.GetValue(HKCU + "Control Panel\\Colors", "Background", "0 0 0")).Split(' ').Select(i => byte.TryParse(i, out byte result) ? result : (byte)0)];
+                        return new SolidColorBrush(Windows.UI.Color.FromArgb(0xFF, rgb[0], rgb[1], rgb[2]));
+
+                    case BackgroundType.Picture:
+                        if (Registry.GetValue(HKCU + "Control Panel\\Desktop", "WallPaper", string.Empty) is not string wallpaper || string.IsNullOrWhiteSpace(wallpaper))
+                            break;
+                        return new ImageBrush { ImageSource = new BitmapImage { UriSource = new(wallpaper) }, Stretch = Stretch.UniformToFill };
+                }
+                return new ImageBrush { ImageSource = new BitmapImage { UriSource = new($@"C:\Users\{Environment.UserName}\AppData\Roaming\Microsoft\Windows\Themes\TranscodedWallpaper") }, Stretch = Stretch.UniformToFill };
+            }
+        }
+
+        private enum BackgroundType
+        {
+            Picture,
+            SolidColor,
+            Slideshow,
+            Spotlight
+        }
     }
 
     public enum NetBIOSNameCheckResult

@@ -27,7 +27,7 @@ namespace Fluentver.Pages
         private void SetPCInfo()
         {
             pcName.Text = SystemHelper.SystemName;
-            pcBackground.ImageSource = new BitmapImage { UriSource = SystemHelper.CurrentUserWallpaper };
+            backgroundRect.Fill = SystemHelper.UserWallpaperBrush;
 
             string name = SystemHelper.SystemProductName;
             productName.Text = name == "System Product Name" ? StringsHelper.GetString("Unknown") : name;

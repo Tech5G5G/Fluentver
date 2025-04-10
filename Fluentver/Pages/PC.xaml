@@ -34,14 +34,10 @@
                     <RepositionThemeTransition IsStaggeringEnabled="False" />
                 </TransitionCollection>
             </Grid.ChildrenTransitions>
-            
+
             <Border CornerRadius="6" BorderThickness="6" BorderBrush="Black" Grid.RowSpan="4">
                 <Viewbox Stretch="Uniform" Height="80">
-                    <Rectangle x:Name="backgroundRect">
-                        <Rectangle.Fill>
-                            <ImageBrush x:Name="pcBackground" Stretch="UniformToFill" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                    <Rectangle x:Name="backgroundRect" />
                 </Viewbox>
             </Border>
 
