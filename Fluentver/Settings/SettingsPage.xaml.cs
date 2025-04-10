@@ -15,7 +15,8 @@ namespace Fluentver.Settings
             { string.Empty, 0 },
             { "en-US", 1 },
             { "el", 2 },
-            { "pl", 3 }
+            { "pl", 3 },
+            { "zh-Hans-CN", 4 }
         };
 
         public SettingsPage()
@@ -34,7 +35,7 @@ namespace Fluentver.Settings
             language.SelectedIndex = languages.TryGetValue(currentLanguage, out int index) ? index : 0;
             language.SelectionChanged += (s, e) =>
             {
-                string language = ApplicationLanguages.PrimaryLanguageOverride = languages.FirstOrDefault(x => x.Value == this.language.SelectedIndex).Key;
+                string language = ApplicationLanguages.PrimaryLanguageOverride = languages.First(x => x.Value == this.language.SelectedIndex).Key;
                 bool isRestartRequired = language != currentLanguage;
 
                 language = language == string.Empty ? ApplicationLanguages.Languages[0] : language;
