@@ -20,10 +20,10 @@
     <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
     <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime κωδικοποιημένο σειριακό αντικείμενο .NET Framework]</value>
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
     <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime κωδικοποιημένη συμβολοσειρά που αντιπροσωπεύει μια μορφή πίνακα byte του αντικειμένου .NET Framework]</value>
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
                 
@@ -45,19 +45,19 @@
     read any of the formats listed below.
     
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : Το αντικείμενο πρέπει να είναι σειριακό με 
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : και στη συνέχεια κωδικοποιήθηκε με κωδικοποίηση base64.
+            : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : Το αντικείμενο πρέπει να είναι σειριακό με
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : και στη συνέχεια κωδικοποιείται με κωδικοποίηση base64.
+            : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : Το αντικείμενο πρέπει να είναι σειριακό σε ένα byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
-            : και στη συνέχεια κωδικοποιείται με κωδικοποίηση base64.
+            : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -459,5 +459,8 @@
   </data>
   <data name="TranslationAuthorURL" xml:space="preserve">
     <value>https://github.com/JohnysTech</value>
+  </data>
+  <data name="SimplifiedChinese.Content" xml:space="preserve">
+    <value>Simplified Chinese (简体中文)</value>
   </data>
 </root>

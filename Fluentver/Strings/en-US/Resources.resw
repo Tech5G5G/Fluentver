@@ -460,4 +460,7 @@
   <data name="TranslationAuthorURL" xml:space="preserve">
     <value>https://www.github.com/tech5g5g</value>
   </data>
+  <data name="SimplifiedChinese.Content" xml:space="preserve">
+    <value>Simplified Chinese (简体中文)</value>
+  </data>
 </root>
