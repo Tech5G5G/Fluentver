@@ -20,10 +20,10 @@
     <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
     <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime以序列化形式编码.NET Framework]</value>
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
     <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime编码字符串，且字节数组形式呈现为.NET Framework]</value>
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
                 
@@ -45,19 +45,19 @@
     read any of the formats listed below.
     
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : 该对象必须序列化为 
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : 并且使用base64进行编码。
+            : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : 该对象必须序列化为
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : 并且使用base64进行编码。
+            : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : 该对象必须序列化为涉及
-            : System.ComponentModel.TypeConverter
-            : 的字节数组并且使用base64进行编码。
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -168,9 +168,6 @@
   <data name="Polish.Content" xml:space="preserve">
     <value>Polish (Polski)</value>
   </data>
-  <data name="SimplifiedChinese.Content" xml:space="preserve">
-    <value>简体中文</value>
-  </data>
   <data name="Mica.Content" xml:space="preserve">
     <value>云母</value>
   </data>
@@ -181,7 +178,7 @@
     <value>亚克力</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>版本: 1.1</value>
+    <value>版本: 1.1.1</value>
   </data>
   <data name="New.Content" xml:space="preserve">
     <value>新增内容</value>
@@ -336,11 +333,11 @@
   <data name="Copyright" xml:space="preserve">
     <value>© {0} Microsoft Corporation. 保留所有权利。</value>
   </data>
-  <data name="MSSoftwareTerms.Text" xml:space="preserve">
-    <value>根据Microsoft软件许可条款，</value>
-  </data>
   <data name="Licensed.Text" xml:space="preserve">
     <value>许可如下用户使用本产品</value>
+  </data>
+  <data name="MSSoftwareTerms.Text" xml:space="preserve">
+    <value>根据Microsoft软件许可条款，</value>
   </data>
   <data name="To.Text" xml:space="preserve">
     <value>：</value>
@@ -462,5 +459,8 @@
   </data>
   <data name="TranslationAuthorURL" xml:space="preserve">
     <value>https://github.com/EZStudio-M357</value>
+  </data>
+  <data name="SimplifiedChinese.Content" xml:space="preserve">
+    <value>简体中文</value>
   </data>
 </root>
