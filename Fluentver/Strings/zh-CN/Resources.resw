@@ -121,7 +121,7 @@
     <value>关于</value>
   </data>
   <data name="About.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Windows规格和法律</value>
+    <value>Windows规格</value>
   </data>
   <data name="Exit.Content" xml:space="preserve">
     <value>确定</value>
@@ -148,13 +148,13 @@
     <value>用户</value>
   </data>
   <data name="Users.ToolTipService.ToolTip" xml:space="preserve">
-    <value>你和其他用户的信息</value>
+    <value>用户信息</value>
   </data>
   <data name="WIP.Text" xml:space="preserve">
     <value>Insider</value>
   </data>
   <data name="WIP.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Insider信息和链接</value>
+    <value>Insider 信息和链接</value>
   </data>
   <data name="Default.Content" xml:space="preserve">
     <value>默认</value>
@@ -193,13 +193,13 @@
     <value>材质</value>
   </data>
   <data name="Backdrop.Description" xml:space="preserve">
-    <value>更改窗口的显示材质</value>
+    <value>更改窗口显示材质</value>
   </data>
   <data name="Startup.Header" xml:space="preserve">
     <value>启动页</value>
   </data>
   <data name="Startup.Description" xml:space="preserve">
-    <value>更改启动时的默认页</value>
+    <value>更改启动时默认页</value>
   </data>
   <data name="Language.Header" xml:space="preserve">
     <value>语言</value>
@@ -223,7 +223,7 @@
     <value>总容量</value>
   </data>
   <data name="Mounted.Text" xml:space="preserve">
-    <value>磁盘对应盘符</value>
+    <value>盘符</value>
   </data>
   <data name="Format.Text" xml:space="preserve">
     <value>格式化</value>
@@ -232,7 +232,7 @@
     <value>类型</value>
   </data>
   <data name="CDRom" xml:space="preserve">
-    <value>光学设备</value>
+    <value>光盘</value>
   </data>
   <data name="NoRootDirectory" xml:space="preserve">
     <value>没有根目录</value>
@@ -328,22 +328,22 @@
     <value>GPU</value>
   </data>
   <data name="Trademark" xml:space="preserve">
-    <value>{0}操作系统及其用户界面受美国和其他国家/地区的商标法和其他待颁布或已颁布的知识产权法保护。</value>
+    <value>{0} 操作系统及其用户界面受美国和其他国家/地区的商标法和其他待颁布或已颁布的知识产权法保护。</value>
   </data>
   <data name="Copyright" xml:space="preserve">
-    <value>© {0} Microsoft Corporation. 保留所有权利。</value>
-  </data>
-  <data name="Licensed.Text" xml:space="preserve">
-    <value>许可如下用户使用本产品</value>
+    <value>© {0} Microsoft Corporation。 保留所有权利。</value>
   </data>
   <data name="MSSoftwareTerms.Text" xml:space="preserve">
     <value>根据Microsoft软件许可条款，</value>
+  </data>
+  <data name="Licensed.Text" xml:space="preserve">
+    <value>许可如下用户使用本产品</value>
   </data>
   <data name="To.Text" xml:space="preserve">
     <value>：</value>
   </data>
   <data name="WinSpecs.Header" xml:space="preserve">
-    <value>Windows规格</value>
+    <value>Windows 规格</value>
   </data>
   <data name="Edition.Text" xml:space="preserve">
     <value>SKU版本</value>
@@ -355,7 +355,7 @@
     <value>Build</value>
   </data>
   <data name="Legal.Header" xml:space="preserve">
-    <value>法律</value>
+    <value>声明</value>
   </data>
   <data name="Copy.Label" xml:space="preserve">
     <value>复制</value>
@@ -367,7 +367,7 @@
     <value>激活状态</value>
   </data>
   <data name="WinUpdate.Text" xml:space="preserve">
-    <value>Windows更新</value>
+    <value>Windows 更新</value>
   </data>
   <data name="Stable" xml:space="preserve">
     <value>稳定版</value>
@@ -385,7 +385,7 @@
     <value>Release Preview</value>
   </data>
   <data name="InsiderInfo.Header" xml:space="preserve">
-    <value>Insider信息</value>
+    <value>Insider 信息</value>
   </data>
   <data name="Channel.Text" xml:space="preserve">
     <value>测试通道</value>
@@ -412,7 +412,7 @@
     <value>退出该计划</value>
   </data>
   <data name="WIPLink.Text" xml:space="preserve">
-    <value>Windows Insider用户体验计划</value>
+    <value>Windows Insider 用户体验计划</value>
   </data>
   <data name="NameBox.PlaceholderText" xml:space="preserve">
     <value>名称</value>
@@ -430,20 +430,20 @@
     <value>取消</value>
   </data>
   <data name="CurrentName" xml:space="preserve">
-    <value>目前的名称：{0}</value>
+    <value>当前名称：{0}</value>
   </data>
   <data name="NameTooLong" xml:space="preserve">
     <value>计算机名称不得多于15个字符。</value>
   </data>
   <data name="NameInvaildCharacters" xml:space="preserve">
     <value>计算机名称不得包含以下任何字符：
-\ / : * ? &lt; &gt; | or spaces.</value>
+\ / : * ? &lt; &gt; 以及空格。</value>
   </data>
   <data name="Finish" xml:space="preserve">
     <value>完成</value>
   </data>
   <data name="ErrorPowerShell" xml:space="preserve">
-    <value>有错误发生：无法启动Powershell。</value>
+    <value>错误：无法启动Powershell。</value>
   </data>
   <data name="RestartAlert.Title" xml:space="preserve">
     <value>需要重启</value>
