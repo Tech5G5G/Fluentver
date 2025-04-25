@@ -16,6 +16,7 @@
         public MainWindow()
         {
             this.InitializeComponent();
+            App.MainWindow = this;
 
             SetTitleBar(titleBar);
             ExtendsContentIntoTitleBar = true;
