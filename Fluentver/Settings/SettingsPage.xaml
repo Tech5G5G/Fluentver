@@ -18,6 +18,7 @@
                 <ComboBoxItem x:Uid="English" />
                 <ComboBoxItem x:Uid="Greek" />
                 <ComboBoxItem x:Uid="Polish" />
+                <ComboBoxItem x:Uid="Russian" />
                 <ComboBoxItem x:Uid="SimplifiedChinese" />
             </ComboBox>
             <controls:SettingsExpander.Items>

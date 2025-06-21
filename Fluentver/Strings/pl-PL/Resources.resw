@@ -168,6 +168,9 @@
   <data name="Polish.Content" xml:space="preserve">
     <value>Polski</value>
   </data>
+  <data name="Russian.Content" xml:space="preserve">
+    <value>Rosyjski (Русский)</value>
+  </data>
   <data name="Mica.Content" xml:space="preserve">
     <value>Mika</value>
   </data>

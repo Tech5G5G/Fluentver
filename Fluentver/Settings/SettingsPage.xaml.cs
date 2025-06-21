@@ -16,7 +16,8 @@ namespace Fluentver.Settings
             { "en-US", 1 },
             { "el", 2 },
             { "pl", 3 },
-            { "zh-Hans-CN", 4 }
+            { "ru", 4 },
+            { "zh-Hans-CN", 5 }
         };
 
         public SettingsPage()
