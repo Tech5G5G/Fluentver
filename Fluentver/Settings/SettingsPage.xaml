@@ -54,7 +54,7 @@
         <controls:SettingsExpander HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/SettingsLogo.png}" Header="Fluver" Description="{help:StringResource Id=Version}">
             <controls:SettingsExpander.Items>
                 <controls:SettingsCard>
-                    <HyperlinkButton x:Uid="New" NavigateUri="https://github.com/Tech5G5G/Fluentver/releases/tag/v1.1.2" />
+                    <HyperlinkButton x:Uid="New" NavigateUri="https://github.com/Tech5G5G/Fluentver/releases/tag/v1.1.3" />
                 </controls:SettingsCard>
                 <controls:SettingsCard>
                     <HyperlinkButton x:Uid="GitHub" NavigateUri="https://github.com/Tech5G5G/Fluentver" />

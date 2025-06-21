@@ -181,7 +181,7 @@
     <value>Akryl</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Wersja 1.1.2</value>
+    <value>Wersja 1.1.3</value>
   </data>
   <data name="New.Content" xml:space="preserve">
     <value>Co nowego</value>
@@ -424,8 +424,7 @@
     <value>Nazwa komputera została pomyślnie zmieniona.</value>
   </data>
   <data name="FluverPowerShell.Text" xml:space="preserve">
-    <value>Fluver zmienia nazwę komputera za pomocą
-</value>
+    <value>Fluver zmienia nazwę komputera za pomocą</value>
   </data>
   <data name="Next.Content" xml:space="preserve">
     <value>Dalej</value>
