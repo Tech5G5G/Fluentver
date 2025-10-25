@@ -181,7 +181,7 @@
     <value>Acrylic</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Версия 1.1.3</value>
+    <value>Версия 1.1.4</value>
   </data>
   <data name="New.Content" xml:space="preserve">
     <value>Что нового</value>
@@ -465,5 +465,8 @@
   </data>
   <data name="SimplifiedChinese.Content" xml:space="preserve">
     <value>Simplified Chinese (简体中文)</value>
+  </data>
+  <data name="German.Content" xml:space="preserve">
+    <value>German (Deutsch)</value>
   </data>
 </root>

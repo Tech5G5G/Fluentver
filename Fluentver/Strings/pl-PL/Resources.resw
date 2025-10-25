@@ -466,4 +466,7 @@
   <data name="SimplifiedChinese.Content" xml:space="preserve">
     <value>Uproszczony chiński (简体中文)</value>
   </data>
+  <data name="German.Content" xml:space="preserve">
+    <value>Niemiecki (Deutsch)</value>
+  </data>
 </root>

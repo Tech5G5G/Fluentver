@@ -14,10 +14,11 @@ namespace Fluentver.Settings
         {
             { string.Empty, 0 },
             { "en-US", 1 },
-            { "el", 2 },
-            { "pl", 3 },
-            { "ru", 4 },
-            { "zh-Hans-CN", 5 }
+            { "de", 2 },
+            { "el", 3 },
+            { "pl", 4 },
+            { "ru", 5 },
+            { "zh-Hans-CN", 6 }
         };
 
         public SettingsPage()

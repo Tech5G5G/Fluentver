@@ -118,58 +118,58 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About.Text" xml:space="preserve">
-    <value>Πληροφορίες</value>
+    <value>Über</value>
   </data>
   <data name="About.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Πληροφορίες Windows</value>
+    <value>Windows-Spezifikationen und Rechtliches</value>
   </data>
   <data name="Exit.Content" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="PC.Text" xml:space="preserve">
-    <value>Ο Υπολογιστής σας</value>
+    <value>Dieser PC</value>
   </data>
   <data name="PC.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Γενικές πληροφορίες του υπολογιστή σας</value>
+    <value>PC-Infos und Spezifikationen</value>
   </data>
   <data name="SettingsButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Ρυθμίσεις</value>
+    <value>Einstellungen</value>
   </data>
   <data name="SettingsButtonBackTooltip" xml:space="preserve">
-    <value>Πίσω</value>
+    <value>Zurück</value>
   </data>
   <data name="Storage.Text" xml:space="preserve">
-    <value>Χώρος αποθήκευσης</value>
+    <value>Speicher</value>
   </data>
   <data name="Storage.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Μια λίστα απο τους δίσκους σας</value>
+    <value>Eine Liste aller Laufwerke</value>
   </data>
   <data name="Users.Text" xml:space="preserve">
-    <value>Χρήστες</value>
+    <value>Benutzer</value>
   </data>
   <data name="Users.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Οι πληροφορίες σας και άλλοι χρήστες</value>
+    <value>Deine Kontoinformationen und weitere Benutzer</value>
   </data>
   <data name="WIP.Text" xml:space="preserve">
     <value>Insider</value>
   </data>
   <data name="WIP.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Πληροφορίες για τους Insiders και links</value>
+    <value>Insider-Informationen und Links</value>
   </data>
   <data name="Default.Content" xml:space="preserve">
-    <value>Default</value>
+    <value>Standart</value>
   </data>
   <data name="English.Content" xml:space="preserve">
-    <value>English (United States)</value>
+    <value>Englisch (Vereinigte Staaten)</value>
   </data>
   <data name="Greek.Content" xml:space="preserve">
-    <value>Ελληνικά</value>
+    <value>Griechisch (Ελληνικά)</value>
   </data>
   <data name="Polish.Content" xml:space="preserve">
-    <value>Polish (Polski)</value>
+    <value>Polnisch (Polski)</value>
   </data>
   <data name="Russian.Content" xml:space="preserve">
-    <value>Russian (Русский)</value>
+    <value>Russisch (Русский)</value>
   </data>
   <data name="Mica.Content" xml:space="preserve">
     <value>Mica</value>
@@ -178,76 +178,76 @@
     <value>Tabbed</value>
   </data>
   <data name="Acrylic.Content" xml:space="preserve">
-    <value>Ακρυλικό</value>
+    <value>Acrylic</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Έκδοση: 1.1.4</value>
+    <value>Version 1.1.3</value>
   </data>
   <data name="New.Content" xml:space="preserve">
-    <value>Τι καινούργιο υπάρχει</value>
+    <value>Was ist neu?</value>
   </data>
   <data name="GitHub.Content" xml:space="preserve">
-    <value>GitHub page</value>
+    <value>GitHub-Seite</value>
   </data>
   <data name="MIT.Content" xml:space="preserve">
-    <value>Άδεια MIT</value>
+    <value>MIT-Lizenz</value>
   </data>
   <data name="Backdrop.Header" xml:space="preserve">
-    <value>Φόντο</value>
+    <value>Hintergrund</value>
   </data>
   <data name="Backdrop.Description" xml:space="preserve">
-    <value>Αλλάξτε το υλικό που εμφανίζεται ως φόντο του παραθύρου</value>
+    <value>Ändern des Materials, das als Fensterhintergrund angezeigt wird</value>
   </data>
   <data name="Startup.Header" xml:space="preserve">
-    <value>Σελίδα εκκίνισης</value>
+    <value>Startseite</value>
   </data>
   <data name="Startup.Description" xml:space="preserve">
-    <value>Αλλάξτε τη σελίδα για εμφάνιση κατά την εκκίνηση</value>
+    <value>Ändern der Seite, die beim Start angezeigt wird</value>
   </data>
   <data name="Language.Header" xml:space="preserve">
-    <value>Γλώσσα</value>
+    <value>Sprache</value>
   </data>
   <data name="Language.Description" xml:space="preserve">
-    <value>Αλλάξτε την γλώσσα της εφαρμογής</value>
+    <value>Ändere die Anzeigesprache der App</value>
   </data>
   <data name="Translation.Header" xml:space="preserve">
-    <value>Μεταφραστής</value>
+    <value>Übersetzer</value>
   </data>
   <data name="Unknown" xml:space="preserve">
-    <value>Άγνωστος</value>
+    <value>Unbekannt</value>
   </data>
   <data name="Gigabytes" xml:space="preserve">
     <value>GB</value>
   </data>
   <data name="FreeSpace.Text" xml:space="preserve">
-    <value>Ελέυθερος αποθήκευτηκός χώρος</value>
+    <value>Freier Speicher</value>
   </data>
   <data name="TotalSpace.Text" xml:space="preserve">
-    <value>Συνολικός χώρος</value>
+    <value>Gesamtgröße</value>
   </data>
   <data name="Mounted.Text" xml:space="preserve">
-    <value>Τοποθετημένο στο</value>
+    <value>Eingehängt in</value>
   </data>
   <data name="Format.Text" xml:space="preserve">
-    <value>Μορφή</value>
+    <value>Format</value>
   </data>
   <data name="Type.Text" xml:space="preserve">
-    <value>Τύπος</value>
+    <value>Typ</value>
   </data>
   <data name="CDRom" xml:space="preserve">
-    <value>Οπτικό</value>
+    <value>Optisch</value>
   </data>
   <data name="NoRootDirectory" xml:space="preserve">
-    <value>Χωρίς ριζικό κατάλογο</value>
+    <value>Kein Wurzelverzeichnis</value>
   </data>
   <data name="Removable" xml:space="preserve">
-    <value>Αφαιρούμενος</value>
+    <value>Entfernbar</value>
   </data>
   <data name="Fixed" xml:space="preserve">
-    <value>Φτιαχμένο</value>
+    <value>Fixiert</value>
   </data>
   <data name="Network" xml:space="preserve">
-    <value>Δίκτυο</value>
+    <value>Netzwerk</value>
   </data>
   <data name="Ram" xml:space="preserve">
     <value>RAM</value>
@@ -271,25 +271,25 @@
     <value>EB</value>
   </data>
   <data name="OtherUsers.Header" xml:space="preserve">
-    <value>Άλλοι χρήστες</value>
+    <value>Andere Benutzer</value>
   </data>
   <data name="YourInfo.Header" xml:space="preserve">
-    <value>Οι πληροφορίες σου</value>
+    <value>Deine Kontoinformationen</value>
   </data>
   <data name="OtherUsersLabel.Text" xml:space="preserve">
-    <value>Δεν βρέθηκαν άλλοι χρήστες.</value>
+    <value>Keine weiteren Benutzer gefunden.</value>
   </data>
   <data name="ManageStorage.Text" xml:space="preserve">
-    <value>Διαχειριστείτε τον αποθηκευτικό σας χώρο</value>
+    <value>Speicher verwalten</value>
   </data>
   <data name="ManageOtherUsers.Text" xml:space="preserve">
-    <value>Διαχειριστείτε άλλους χρήστες</value>
+    <value>Andere Benutzer verwalten</value>
   </data>
   <data name="X86" xml:space="preserve">
-    <value>32-bit</value>
+    <value>32-Bit</value>
   </data>
   <data name="X64" xml:space="preserve">
-    <value>64-bit</value>
+    <value>64-Bit</value>
   </data>
   <data name="Arm" xml:space="preserve">
     <value>ARM</value>
@@ -301,79 +301,79 @@
     <value>ARMv6</value>
   </data>
   <data name="RenamePC.Text" xml:space="preserve">
-    <value>Μετονομάστε τον υπολογιστή σας</value>
+    <value>Diesen PC umbenennen</value>
   </data>
   <data name="TaskMgr.Text" xml:space="preserve">
-    <value>Διαχείριση εργασιών</value>
+    <value>Task-Manager</value>
   </data>
   <data name="Information.Header" xml:space="preserve">
-    <value>Πληροφορίες</value>
+    <value>Informationen</value>
   </data>
   <data name="DeviceName.Text" xml:space="preserve">
-    <value>Όνομα συσκευής</value>
+    <value>Gerätename</value>
   </data>
   <data name="ProductName.Text" xml:space="preserve">
-    <value>Όνομα προϊόντος</value>
+    <value>Produktname</value>
   </data>
   <data name="Architecture.Text" xml:space="preserve">
-    <value>Αρχιτεκτονική</value>
+    <value>Architektur</value>
   </data>
   <data name="TimeAwake.Text" xml:space="preserve">
-    <value>Χρόνος λειτουργίας </value>
+    <value>Betriebszeit</value>
   </data>
   <data name="Specs.Header" xml:space="preserve">
-    <value>Προδιαγραφές</value>
+    <value>Spezifikationen</value>
   </data>
   <data name="CPU.Text" xml:space="preserve">
     <value>CPU</value>
   </data>
   <data name="GPU.Text" xml:space="preserve">
-    <value>GPU</value>
+    <value>Grafikkarte</value>
   </data>
   <data name="Trademark" xml:space="preserve">
-    <value>Το λειτουργικό σύστημα {0} και η διεπαφή χρήστη του προστατεύονται από εμπορικά σήματα και άλλα εκκρεμή ή υπάρχοντα δικαιώματα πνευματικής ιδιοκτησίας στις Ηνωμένες Πολιτείες και σε άλλες χώρες/περιοχές.</value>
+    <value>Das Betriebssystem {0} und die zugehörige Benutzeroberfläche sind durch Marken- und andere rechtsabhängige bzw. bestehende gewerbliche Schutz- und Urheberrechte in den Vereinigten Staaten und anderen Ländern geschützt.</value>
   </data>
   <data name="Copyright" xml:space="preserve">
-    <value>© {0} Microsoft Corporation. All rights reserved.</value>
+    <value>© {0} Microsoft Corporation. Alle Rechte vorbehalten.</value>
   </data>
   <data name="Licensed.Text" xml:space="preserve">
-    <value>Αυτό το προϊόν δίδεται προς τον χρήστη σύμφωνα με τους</value>
+    <value>Dieses Produkt ist unter den</value>
   </data>
   <data name="MSSoftwareTerms.Text" xml:space="preserve">
-    <value>Όρους άδεια χρήσης λογισμικού της Microsoft</value>
+    <value>Microsoft-Softwarelizenzbedingungen</value>
   </data>
   <data name="To.Text" xml:space="preserve">
-    <value>σε:</value>
+    <value>lizenziert für:</value>
   </data>
   <data name="WinSpecs.Header" xml:space="preserve">
-    <value>Προδιαγραφές windows</value>
+    <value>Windows-Spezifikationen</value>
   </data>
   <data name="Edition.Text" xml:space="preserve">
-    <value>Έκδοση</value>
+    <value>Edition</value>
   </data>
   <data name="VersionLabel.Text" xml:space="preserve">
-    <value>Εκδοχή</value>
+    <value>Version</value>
   </data>
   <data name="Build.Text" xml:space="preserve">
     <value>Build</value>
   </data>
   <data name="Legal.Header" xml:space="preserve">
-    <value>Δηκαιώματα</value>
+    <value>Rechtliches</value>
   </data>
   <data name="Copy.Label" xml:space="preserve">
-    <value>Αντίγραφο</value>
+    <value>Kopieren</value>
   </data>
   <data name="NavigateUsers.Label" xml:space="preserve">
-    <value>Μεταβείτε στους χρήστες</value>
+    <value>Zu 'Konten' wechseln</value>
   </data>
   <data name="Activation.Text" xml:space="preserve">
-    <value>Κατάσταση ενεργοποιήσης</value>
+    <value>Aktivierungsstatus</value>
   </data>
   <data name="WinUpdate.Text" xml:space="preserve">
     <value>Windows Update</value>
   </data>
   <data name="Stable" xml:space="preserve">
-    <value>Σταθερό</value>
+    <value>Stable</value>
   </data>
   <data name="CanaryChannel" xml:space="preserve">
     <value>Canary</value>
@@ -388,85 +388,85 @@
     <value>Release Preview</value>
   </data>
   <data name="InsiderInfo.Header" xml:space="preserve">
-    <value>Πληροφορίες Insider</value>
+    <value>Windows-Insider-Informationen</value>
   </data>
   <data name="Channel.Text" xml:space="preserve">
-    <value>Channel</value>
+    <value>Kanal</value>
   </data>
   <data name="Branch.Text" xml:space="preserve">
-    <value>Branch</value>
+    <value>Zweig</value>
   </data>
   <data name="Account.Text" xml:space="preserve">
-    <value>Λογαριασμός</value>
+    <value>Konto</value>
   </data>
   <data name="Links.Header" xml:space="preserve">
-    <value>Σύνδεσμοι</value>
+    <value>Links</value>
   </data>
   <data name="Notes.Content" xml:space="preserve">
-    <value>Νεότερες σημειώσεις του πιο πρόσφατου build</value>
+    <value>Neueste Build-Hinweise</value>
   </data>
   <data name="Feedback.Content" xml:space="preserve">
-    <value>Δώστε σχόλια</value>
+    <value>Feedback geben</value>
   </data>
   <data name="FlightHub.Content" xml:space="preserve">
-    <value>Flight hub</value>
+    <value>Flight-Hub</value>
   </data>
   <data name="LeaveProgram.Content" xml:space="preserve">
-    <value>Αποχώρηση από το πρόγραμμα</value>
+    <value>Das Insider-Programm verlassen</value>
   </data>
   <data name="WIPLink.Text" xml:space="preserve">
-    <value>Πρόγραμμα Windows Insider</value>
+    <value>Windows-Insider-Program</value>
   </data>
   <data name="NameBox.PlaceholderText" xml:space="preserve">
-    <value>Όνομα</value>
+    <value>Name</value>
   </data>
   <data name="PCRenamed.Text" xml:space="preserve">
-    <value>Ο υπολογιστής σας μετονομάστηκε με επιτυχία.</value>
+    <value>Dieser PC wurde erfolgreich umbenannt.</value>
   </data>
   <data name="FluverPowerShell.Text" xml:space="preserve">
-    <value>Το Fluver μετονομάζει τον υπολογιστή σας χρησιμοποιώντας</value>
+    <value>Fluver benennt diesen PC um mithilfe von</value>
   </data>
   <data name="Next.Content" xml:space="preserve">
-    <value>Επόμενο</value>
+    <value>Weiter</value>
   </data>
   <data name="Cancel.Content" xml:space="preserve">
-    <value>Ακύρωση</value>
+    <value>Abbrechen</value>
   </data>
   <data name="CurrentName" xml:space="preserve">
-    <value>Τρέχον όνομα: {0}</value>
+    <value>Gerätename: {0}</value>
   </data>
   <data name="NameTooLong" xml:space="preserve">
-    <value>Το όνομα του υπολογιστή σας δεν μπορεί να υπερβαίνει τους 15 χαρακτήρες.</value>
+    <value>Der Name des PCs darf nicht länger als 15 Zeichen sein.</value>
   </data>
   <data name="NameInvaildCharacters" xml:space="preserve">
-    <value>Το όνομα του υπολογιστή σας δεν μπορεί να περιέχει κανέναν από τους παρακάτω χαρακτήρες:
-\ / : * ? &lt; &gt; | or spaces.</value>
+    <value>Der Name des PCs darf keine der folgenden Zeichen enthalten:
+\ / : * ? &lt; &gt; | oder Leerzeichen.</value>
   </data>
   <data name="Finish" xml:space="preserve">
-    <value>Τέλος</value>
+    <value>Abschließen</value>
   </data>
   <data name="ErrorPowerShell" xml:space="preserve">
-    <value>An error occured: Unable to start PowerShell.</value>
+    <value>Ein Fehler ist aufgetreten: PowerShell konnte nicht gestartet werden.</value>
   </data>
   <data name="RestartAlert.Title" xml:space="preserve">
-    <value>Απετείται επανεκκίνηση</value>
+    <value>Neustart erforderlich</value>
   </data>
   <data name="RestartAlert.Message" xml:space="preserve">
-    <value>Απαιτείται επανεκκίνηση για την εφαρμογή των προτιμήσεων γλώσσας σας.</value>
+    <value>Ein Neustart ist erforderlich, um die Spracheinstellungen zu übernehmen.</value>
   </data>
   <data name="RestartButton.Content" xml:space="preserve">
-    <value>Επανεκκίνηση</value>
+    <value>Neustart</value>
   </data>
   <data name="TranslationAuthor.Content" xml:space="preserve">
-    <value>JohnysTech</value>
+    <value>puyomi2k</value>
   </data>
   <data name="TranslationAuthorURL" xml:space="preserve">
-    <value>https://github.com/JohnysTech</value>
+    <value>https://www.github.com/puyomi2k</value>
   </data>
   <data name="SimplifiedChinese.Content" xml:space="preserve">
-    <value>Simplified Chinese (简体中文)</value>
+    <value>Chinesisch - vereinfacht (简体中文)</value>
   </data>
   <data name="German.Content" xml:space="preserve">
-    <value>German (Deutsch)</value>
+    <value>Deutsch (Deutschland)</value>
   </data>
 </root>

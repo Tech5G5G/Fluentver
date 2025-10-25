@@ -181,7 +181,7 @@
     <value>亚克力</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>版本: 1.1.3</value>
+    <value>版本: 1.1.4</value>
   </data>
   <data name="New.Content" xml:space="preserve">
     <value>新增内容</value>
@@ -336,11 +336,11 @@
   <data name="Copyright" xml:space="preserve">
     <value>© {0} Microsoft Corporation。 保留所有权利。</value>
   </data>
-  <data name="MSSoftwareTerms.Text" xml:space="preserve">
-    <value>根据Microsoft软件许可条款，</value>
-  </data>
   <data name="Licensed.Text" xml:space="preserve">
     <value>许可如下用户使用本产品</value>
+  </data>
+  <data name="MSSoftwareTerms.Text" xml:space="preserve">
+    <value>根据Microsoft软件许可条款，</value>
   </data>
   <data name="To.Text" xml:space="preserve">
     <value>：</value>
@@ -465,5 +465,8 @@
   </data>
   <data name="SimplifiedChinese.Content" xml:space="preserve">
     <value>简体中文</value>
+  </data>
+  <data name="German.Content" xml:space="preserve">
+    <value>German (Deutsch)</value>
   </data>
 </root>

@@ -16,6 +16,7 @@
             <ComboBox x:Name="language">
                 <ComboBoxItem x:Uid="Default" />
                 <ComboBoxItem x:Uid="English" />
+                <ComboBoxItem x:Uid="German" />
                 <ComboBoxItem x:Uid="Greek" />
                 <ComboBoxItem x:Uid="Polish" />
                 <ComboBoxItem x:Uid="Russian" />
