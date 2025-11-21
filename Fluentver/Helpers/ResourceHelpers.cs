@@ -1,4 +1,4 @@
-﻿using System.Management;
+using System.Management;
 using System.Runtime.InteropServices;
 
 namespace Fluentver.Helpers;
@@ -8,13 +8,19 @@ public static class CPUHelper
 {
     /// <summary>Gets the name of the CPU.</summary>
     /// <value>The name of the CPU.</value>
-    public static string CPUName => new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Processor").Get().Cast<ManagementObject>().Select(i => (string)i["Name"]).FirstOrDefault(string.Empty);
+    public static string CPUName =>
+        new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Processor")
+            .Get()
+            .Cast<ManagementObject>()
+            .Select(i => (string)i["Name"])
+            .FirstOrDefault(string.Empty);
 
     /// <summary>Gets the CPU usage.</summary>
     /// <value>The percent of the CPU used.</value>
     public static float CPUUsage => utility.NextValue();
 
-    private static readonly PerformanceCounter utility = new("Processor Information", "% Processor Utility", "_Total");
+    private static readonly PerformanceCounter utility =
+        new("Processor Information", "% Processor Utility", "_Total");
 }
 
 /// <summary>Gets GPU statistics.</summary>
@@ -22,7 +28,79 @@ public static class GPUHelper
 {
     /// <summary>Gets the name of the GPU.</summary>
     /// <value>The name of the GPU.</value>
-    public static string GPUName => new ManagementObjectSearcher("select * from Win32_VideoController").Get().Cast<ManagementObject>().Select(i => (string)i["Name"]).FirstOrDefault(string.Empty);
+    public static string GPUName
+    {
+        get
+        {
+            try
+            {
+                var searcher = new ManagementObjectSearcher("select * from Win32_VideoController");
+                var results = searcher.Get().Cast<ManagementObject>().ToList();
+
+                // Build candidate list with useful properties
+                var candidates = results
+                    .Select(mo => new
+                    {
+                        Name = (mo["Name"] as string) ?? string.Empty,
+                        Pnp = (mo["PNPDeviceID"] as string) ?? string.Empty,
+                        Compatibility = (mo["AdapterCompatibility"] as string) ?? string.Empty,
+                        Ram = TryGetAdapterRam(mo),
+                    })
+                    .Where(x => !string.IsNullOrWhiteSpace(x.Name))
+                    .ToList();
+
+                // Filter out obvious virtual/adapters
+                string[] virtualHints = new[]
+                {
+                    "virtual",
+                    "microsoft basic",
+                    "remote",
+                    "vmware",
+                    "parallels",
+                    "remote display",
+                    "meta",
+                    "oculus",
+                };
+
+                var physical = candidates
+                    .Where(c => c.Pnp.IndexOf("PCI\\", StringComparison.OrdinalIgnoreCase) >= 0)
+                    .Where(c =>
+                        !virtualHints.Any(h =>
+                            c.Name.IndexOf(h, StringComparison.OrdinalIgnoreCase) >= 0
+                            || c.Compatibility.IndexOf(h, StringComparison.OrdinalIgnoreCase) >= 0
+                        )
+                    )
+                    .ToList();
+
+                // Prefer AMD/NVIDIA by compatibility string
+                var preferred = physical
+                    .Where(c =>
+                        c.Compatibility.IndexOf("AMD", StringComparison.OrdinalIgnoreCase) >= 0
+                        || c.Name.IndexOf("Radeon", StringComparison.OrdinalIgnoreCase) >= 0
+                        || c.Compatibility.IndexOf("NVIDIA", StringComparison.OrdinalIgnoreCase)
+                            >= 0
+                    )
+                    .OrderByDescending(c => c.Ram)
+                    .FirstOrDefault();
+
+                if (preferred != null)
+                    return preferred.Name;
+
+                // Otherwise pick the physical GPU with the largest dedicated RAM
+                var largestPhysical = physical.OrderByDescending(c => c.Ram).FirstOrDefault();
+                if (largestPhysical != null)
+                    return largestPhysical.Name;
+
+                // Fallback to any adapter with largest RAM
+                var largestAny = candidates.OrderByDescending(c => c.Ram).FirstOrDefault();
+                return largestAny?.Name ?? string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+    }
 
     /// <summary>Gets the GPU usage.</summary>
     /// <returns>The percent of the GPU used.</returns>
@@ -30,38 +108,175 @@ public static class GPUHelper
     {
         get
         {
-            float sum = 0;
-            List<PerformanceCounter> trunicate = [];
+            float sum = 0f;
+            var toRemove = new List<PerformanceCounter>();
             lock (gpuCounters)
             {
                 foreach (var counter in gpuCounters)
                 {
-                    sum += AssignerHelper.TryAssign(counter.NextValue, () =>
+                    try
                     {
-                        trunicate.Add(counter);
-                        return 0;
-                    });
+                        // NextValue is a method; wrap call in lambda for AssignerHelper
+                        sum += AssignerHelper.TryAssign(
+                            () => counter.NextValue(),
+                            () =>
+                            {
+                                toRemove.Add(counter);
+                                return 0f;
+                            }
+                        );
+                    }
+                    catch
+                    {
+                        toRemove.Add(counter);
+                    }
                 }
-                foreach (var counter in trunicate)
-                    gpuCounters.Remove(counter);
+
+                foreach (var c in toRemove)
+                {
+                    try
+                    {
+                        gpuCounters.Remove(c);
+                        c.Dispose();
+                    }
+                    catch { }
+                }
             }
+
             return sum;
         }
     }
 
     private static readonly List<PerformanceCounter> gpuCounters = GetGPUCounters();
+
     private static List<PerformanceCounter> GetGPUCounters()
     {
-        var category = new PerformanceCounterCategory("GPU Engine");
-        var counterNames = category.GetInstanceNames();
-
-        return [.. counterNames.Where(counterName => counterName.EndsWith("engtype_3D"))
-            .SelectMany(category.GetCounters)
-            .Where(counter =>
+        var list = new List<PerformanceCounter>();
+        try
+        {
+            var category = new PerformanceCounterCategory("GPU Engine");
+            var instanceNames = category.GetInstanceNames();
+            // Determine which phys index is most likely the primary GPU by counting occurrences
+            var physCounts = new Dictionary<int, int>();
+            foreach (
+                var instance in instanceNames.Where(n =>
+                    n.EndsWith("engtype_3D", StringComparison.OrdinalIgnoreCase)
+                )
+            )
             {
-                var values = counter.InstanceName.Split('_');
-                return counter.CounterName == "Utilization Percentage" && values[Array.IndexOf(values, "phys") + 1] == "0";
-            })];
+                var parts = instance.Split('_');
+                int physIndex = -1;
+                for (int i = 0; i < parts.Length - 1; i++)
+                {
+                    if (string.Equals(parts[i], "phys", StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (int.TryParse(parts[i + 1], out var idx))
+                        {
+                            physIndex = idx;
+                            break;
+                        }
+                    }
+                }
+
+                if (physIndex >= 0)
+                {
+                    physCounts.TryGetValue(physIndex, out var cnt);
+                    physCounts[physIndex] = cnt + 1;
+                }
+            }
+
+            int? selectedPhys = null;
+            if (physCounts.Count == 1)
+            {
+                selectedPhys = physCounts.Keys.First();
+            }
+            else if (physCounts.Count > 1)
+            {
+                // choose phys index with the most 3D engine instances (heuristic for primary GPU)
+                selectedPhys = physCounts.OrderByDescending(kv => kv.Value).First().Key;
+            }
+
+            foreach (
+                var instance in instanceNames.Where(n =>
+                    n.EndsWith("engtype_3D", StringComparison.OrdinalIgnoreCase)
+                )
+            )
+            {
+                try
+                {
+                    // if selectedPhys is set, only take instances that belong to that phys index
+                    if (selectedPhys.HasValue)
+                    {
+                        var parts = instance.Split('_');
+                        int physIndex = -1;
+                        for (int i = 0; i < parts.Length - 1; i++)
+                        {
+                            if (string.Equals(parts[i], "phys", StringComparison.OrdinalIgnoreCase))
+                            {
+                                if (int.TryParse(parts[i + 1], out var idx))
+                                {
+                                    physIndex = idx;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (physIndex != selectedPhys.Value)
+                            continue;
+                    }
+
+                    var counters = category.GetCounters(instance);
+                    foreach (var c in counters)
+                    {
+                        if (
+                            string.Equals(
+                                c.CounterName,
+                                "Utilization Percentage",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                        {
+                            list.Add(
+                                new PerformanceCounter(
+                                    "GPU Engine",
+                                    "Utilization Percentage",
+                                    instance,
+                                    readOnly: true
+                                )
+                            );
+                        }
+                    }
+                }
+                catch
+                { /* ignore instances that can't be read */
+                }
+            }
+        }
+        catch { }
+
+        return list;
+    }
+
+    private static ulong TryGetAdapterRam(ManagementObject mo)
+    {
+        try
+        {
+            var val = mo["AdapterRAM"];
+            if (val == null)
+                return 0;
+
+            if (val is ulong ul)
+                return ul;
+            if (val is uint ui)
+                return ui;
+            if (val is int i)
+                return (ulong)i;
+            if (ulong.TryParse(val.ToString(), out var parsed))
+                return parsed;
+        }
+        catch { }
+
+        return 0;
     }
 }
 
