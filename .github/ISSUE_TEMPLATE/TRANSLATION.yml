@@ -5,14 +5,11 @@ labels: ["translation"]
 assignees:
   - tech5g5g
 body:
-  - type: markdown
-    attributes:
-      value: >
-        Thank you for taking the time to translate Fluver!
-        Before requesting your language, please make sure the following is correct:
   - type: checkboxes
     attributes:
-      label: ""
+      label: >
+        Thank you for taking the time to translate Fluver!
+        Before requesting your language, please make sure the following is correct:
       options:
         - label: This is not a duplicate of another request
           required: true
