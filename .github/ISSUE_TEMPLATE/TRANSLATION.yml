@@ -1,0 +1,30 @@
+name: 🌐 Translation
+description: Add a translation
+title: "[TRANSLATION] "
+labels: ["translation"]
+assignees:
+  - tech5g5g
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thank you for taking the time to translate Fluver!
+        Before requesting your language, please make sure the following is correct:
+  - type: checkboxes
+    attributes:
+      options:
+        - label: This is not a duplicate of another request
+          required: true
+  - type: input
+    attributes:
+      label: Language
+      description: The name of the language you are adding.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Translation
+      description: The contents of your translated RESW file.
+    validations:
+      required: true
+      
