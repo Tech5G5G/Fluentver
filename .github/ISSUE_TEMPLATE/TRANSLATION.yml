@@ -11,8 +11,8 @@ body:
         Thank you for taking the time to translate Fluver!
         Before requesting your language, please make sure the following is correct:
   - type: checkboxes
-    label: ""
     attributes:
+      label: ""
       options:
         - label: This is not a duplicate of another request
           required: true
