@@ -26,6 +26,18 @@ public static class CPUHelper
 /// <summary>Gets GPU statistics.</summary>
 public static class GPUHelper
 {
+    private static readonly string[] VirtualHints = new[]
+    {
+        "virtual",
+        "microsoft basic",
+        "remote",
+        "vmware",
+        "parallels",
+        "remote display",
+        "meta",
+        "oculus",
+    };
+
     /// <summary>Gets the name of the GPU.</summary>
     /// <value>The name of the GPU.</value>
     public static string GPUName
@@ -39,6 +51,7 @@ public static class GPUHelper
 
                 // Build candidate list with useful properties
                 var candidates = results
+                    .Where(mo => !string.IsNullOrWhiteSpace((mo["Name"] as string) ?? string.Empty))
                     .Select(mo => new
                     {
                         Name = (mo["Name"] as string) ?? string.Empty,
@@ -46,28 +59,14 @@ public static class GPUHelper
                         Compatibility = (mo["AdapterCompatibility"] as string) ?? string.Empty,
                         Ram = TryGetAdapterRam(mo),
                     })
-                    .Where(x => !string.IsNullOrWhiteSpace(x.Name))
                     .ToList();
 
-                // Filter out obvious virtual/adapters
-                string[] virtualHints = new[]
-                {
-                    "virtual",
-                    "microsoft basic",
-                    "remote",
-                    "vmware",
-                    "parallels",
-                    "remote display",
-                    "meta",
-                    "oculus",
-                };
-
                 var physical = candidates
-                    .Where(c => c.Pnp.IndexOf("PCI\\", StringComparison.OrdinalIgnoreCase) >= 0)
+                    .Where(c => c.Pnp.Contains("PCI\\", StringComparison.OrdinalIgnoreCase))
                     .Where(c =>
-                        !virtualHints.Any(h =>
-                            c.Name.IndexOf(h, StringComparison.OrdinalIgnoreCase) >= 0
-                            || c.Compatibility.IndexOf(h, StringComparison.OrdinalIgnoreCase) >= 0
+                        !VirtualHints.Any(h =>
+                            c.Name.Contains(h, StringComparison.OrdinalIgnoreCase)
+                            || c.Compatibility.Contains(h, StringComparison.OrdinalIgnoreCase)
                         )
                     )
                     .ToList();
@@ -75,20 +74,19 @@ public static class GPUHelper
                 // Prefer AMD/NVIDIA by compatibility string
                 var preferred = physical
                     .Where(c =>
-                        c.Compatibility.IndexOf("AMD", StringComparison.OrdinalIgnoreCase) >= 0
-                        || c.Name.IndexOf("Radeon", StringComparison.OrdinalIgnoreCase) >= 0
-                        || c.Compatibility.IndexOf("NVIDIA", StringComparison.OrdinalIgnoreCase)
-                            >= 0
+                        c.Compatibility.Contains("AMD", StringComparison.OrdinalIgnoreCase)
+                        || c.Name.Contains("Radeon", StringComparison.OrdinalIgnoreCase)
+                        || c.Compatibility.Contains("NVIDIA", StringComparison.OrdinalIgnoreCase)
                     )
                     .OrderByDescending(c => c.Ram)
                     .FirstOrDefault();
 
-                if (preferred != null)
+                if (preferred is not null)
                     return preferred.Name;
 
                 // Otherwise pick the physical GPU with the largest dedicated RAM
                 var largestPhysical = physical.OrderByDescending(c => c.Ram).FirstOrDefault();
-                if (largestPhysical != null)
+                if (largestPhysical is not null)
                     return largestPhysical.Name;
 
                 // Fallback to any adapter with largest RAM
@@ -114,22 +112,15 @@ public static class GPUHelper
             {
                 foreach (var counter in gpuCounters)
                 {
-                    try
-                    {
-                        // NextValue is a method; wrap call in lambda for AssignerHelper
-                        sum += AssignerHelper.TryAssign(
-                            () => counter.NextValue(),
-                            () =>
-                            {
-                                toRemove.Add(counter);
-                                return 0f;
-                            }
-                        );
-                    }
-                    catch
-                    {
-                        toRemove.Add(counter);
-                    }
+                    // NextValue is a method; wrap call in lambda for AssignerHelper
+                    sum += AssignerHelper.TryAssign(
+                        () => counter.NextValue(),
+                        () =>
+                        {
+                            toRemove.Add(counter);
+                            return 0f;
+                        }
+                    );
                 }
 
                 foreach (var c in toRemove)
@@ -164,19 +155,7 @@ public static class GPUHelper
                 )
             )
             {
-                var parts = instance.Split('_');
-                int physIndex = -1;
-                for (int i = 0; i < parts.Length - 1; i++)
-                {
-                    if (string.Equals(parts[i], "phys", StringComparison.OrdinalIgnoreCase))
-                    {
-                        if (int.TryParse(parts[i + 1], out var idx))
-                        {
-                            physIndex = idx;
-                            break;
-                        }
-                    }
-                }
+                int physIndex = GetPhysIndexFromInstance(instance);
 
                 if (physIndex >= 0)
                 {
@@ -207,19 +186,7 @@ public static class GPUHelper
                     // if selectedPhys is set, only take instances that belong to that phys index
                     if (selectedPhys.HasValue)
                     {
-                        var parts = instance.Split('_');
-                        int physIndex = -1;
-                        for (int i = 0; i < parts.Length - 1; i++)
-                        {
-                            if (string.Equals(parts[i], "phys", StringComparison.OrdinalIgnoreCase))
-                            {
-                                if (int.TryParse(parts[i + 1], out var idx))
-                                {
-                                    physIndex = idx;
-                                    break;
-                                }
-                            }
-                        }
+                        int physIndex = GetPhysIndexFromInstance(instance);
 
                         if (physIndex != selectedPhys.Value)
                             continue;
@@ -255,6 +222,20 @@ public static class GPUHelper
         catch { }
 
         return list;
+    }
+
+    private static int GetPhysIndexFromInstance(string instance)
+    {
+        var parts = instance.Split('_');
+        for (int i = 0; i < parts.Length - 1; i++)
+        {
+            if (string.Equals(parts[i], "phys", StringComparison.OrdinalIgnoreCase))
+            {
+                if (int.TryParse(parts[i + 1], out var idx))
+                    return idx;
+            }
+        }
+        return -1;
     }
 
     private static ulong TryGetAdapterRam(ManagementObject mo)
