@@ -1,4 +1,4 @@
-﻿namespace Fluentver.Helpers;
+﻿namespace Fluver.Helpers;
 
 /// <summary>Provides methods to assign values using the try statement.</summary>
 public static class AssignerHelper

@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace Fluentver.Pages
+namespace Fluver.Pages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 
-namespace Fluentver.Helpers
+namespace Fluver.Helpers
 {
     public static class SystemHelper
     {

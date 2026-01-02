@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Markup;
 using Microsoft.Windows.ApplicationModel.Resources;
 
-namespace Fluentver.Helpers
+namespace Fluver.Helpers
 {
     public static class StringsHelper
     {

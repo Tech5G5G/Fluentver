@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Composition.SystemBackdrops;
 
-namespace Fluentver.Extensions
+namespace Fluver.Extensions
 {
     public static class OtherExtensions
     {

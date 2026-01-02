@@ -1,4 +1,4 @@
-﻿namespace Fluentver.Settings;
+﻿namespace Fluver.Settings;
 
 public class Setting<T>(string key, T defaultValue)
 {

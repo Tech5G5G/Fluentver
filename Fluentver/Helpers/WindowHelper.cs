@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Fluentver.Helpers
+namespace Fluver.Helpers
 {
     public static class WindowHelper
     {

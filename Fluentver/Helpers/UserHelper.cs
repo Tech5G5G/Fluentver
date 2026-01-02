@@ -2,7 +2,7 @@
 using System.DirectoryServices.AccountManagement;
 using Microsoft.Win32;
 
-namespace Fluentver.Helpers
+namespace Fluver.Helpers
 {
     public static class UserHelper
     {

@@ -1,7 +1,7 @@
 using System.Management;
 using System.Runtime.InteropServices;
 
-namespace Fluentver.Helpers;
+namespace Fluver.Helpers;
 
 /// <summary>Gets CPU statistics.</summary>
 public static class CPUHelper

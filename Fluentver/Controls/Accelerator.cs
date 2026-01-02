@@ -1,7 +1,7 @@
 ﻿using Windows.System;
 using Windows.UI.Core;
 
-namespace Fluentver.Controls
+namespace Fluver.Controls
 {
     public static class Accelerator
     {

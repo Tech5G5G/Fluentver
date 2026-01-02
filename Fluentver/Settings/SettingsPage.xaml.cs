@@ -1,7 +1,7 @@
 ﻿using Windows.Globalization;
 using Microsoft.Windows.AppLifecycle;
 
-namespace Fluentver.Settings
+namespace Fluver.Settings
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

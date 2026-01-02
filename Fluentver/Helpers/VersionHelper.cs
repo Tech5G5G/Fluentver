@@ -2,7 +2,7 @@
 using Windows.System.Profile;
 using Microsoft.Win32;
 
-namespace Fluentver.Helpers
+namespace Fluver.Helpers
 {
     public static class VersionHelper
     {

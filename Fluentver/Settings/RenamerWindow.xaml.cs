@@ -1,4 +1,4 @@
-﻿namespace Fluentver.Settings
+﻿namespace Fluver.Settings
 {
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.

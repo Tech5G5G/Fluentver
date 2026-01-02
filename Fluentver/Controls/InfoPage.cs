@@ -1,6 +1,6 @@
 ﻿using System.Collections.Specialized;
 
-namespace Fluentver.Controls
+namespace Fluver.Controls
 {
     [Microsoft.UI.Xaml.Markup.ContentProperty(Name = nameof(Children))]
     public partial class InfoPage : Page

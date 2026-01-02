@@ -1,4 +1,4 @@
-﻿namespace Fluentver.Controls;
+﻿namespace Fluver.Controls;
 
 [Microsoft.UI.Xaml.Markup.ContentProperty(Name = nameof(Content))]
 public partial class WindowEx : Window

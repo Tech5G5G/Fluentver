@@ -1,4 +1,4 @@
-﻿namespace Fluentver.Extensions;
+﻿namespace Fluver.Extensions;
 
 public static class ControlExtensions
 {
