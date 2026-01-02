@@ -11,7 +11,7 @@
   <Identity
     Name="Tech5G5G.Fluver"
     Publisher="CN=6A412899-897E-4FB8-A2C7-EF01EAAF4C9B"
-    Version="1.1.4.0" />
+    Version="1.1.5.0" />
 
   <mp:PhoneIdentity PhoneProductId="c5da44bb-0cb8-432a-be25-14d135ad4dd4" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
