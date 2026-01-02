@@ -38,7 +38,7 @@
             settingsButton.Resources["FontIconTitleBarInactiveStyle"] :
             settingsButton.Resources["FontIconTitleBarStyle"]);
 
-            Accelerator.SetOEMAccelerator(Content, 188 /*VK_OEM_COMMA*/, Windows.System.VirtualKey.Control, () => SettingsButton_Click(null, null));
+            Accelerator.SetOEMAccelerator(Content, 188 /*VK_OEM_COMMA*/, Windows.System.VirtualKey.Control, () => SettingsButton_Click(settingsButton, null));
             SetWindowsDisplay();
             SetupBar();
         }
@@ -94,16 +94,20 @@
             AppWindow.Title = sender.SelectedItem.Text;
             int currentIndex = sender.GetSelectedIndex();
 
-            ContentFrame.Navigate(currentIndex switch
-            {
-                1 => typeof(PC),
-                2 => typeof(Users),
-                3 => typeof(Storage),
-                4 => typeof(Insider),
-                _ => typeof(About)
-            },
-            this,
-            new SlideNavigationTransitionInfo { Effect = previousIndex - currentIndex > 0 ? SlideNavigationTransitionEffect.FromLeft : SlideNavigationTransitionEffect.FromRight });
+            ContentFrame.Navigate(
+                currentIndex switch
+                {
+                    1 => typeof(PC),
+                    2 => typeof(Users),
+                    3 => typeof(Storage),
+                    4 => typeof(Insider),
+                    _ => typeof(About)
+                },
+                this,
+                new SlideNavigationTransitionInfo
+                {
+                    Effect = previousIndex - currentIndex > 0 ? SlideNavigationTransitionEffect.FromLeft : SlideNavigationTransitionEffect.FromRight
+                });
             previousIndex = currentIndex;
         }
 
