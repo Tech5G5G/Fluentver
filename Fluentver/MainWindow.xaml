@@ -44,15 +44,20 @@
             <ScrollViewer x:Name="barScroller" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
                 <SelectorBar x:Name="bar" SelectionChanged="Bar_SelectionChanged" HorizontalAlignment="Center">
                     <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE946;}" x:Uid="About"
+                                     controls:Accelerator.Key="Number1"
                                  controls:Accelerator.Ctrl="Number1" />
                     <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE7F4;}" x:Uid="PC"
+                                     controls:Accelerator.Key="Number2"
                                  controls:Accelerator.Ctrl="Number2" />
                     <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE716;}" x:Uid="Users"
+                                     controls:Accelerator.Key="Number3"
                                  controls:Accelerator.Ctrl="Number3" />
                     <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xEDA2;}" x:Uid="Storage"
+                                     controls:Accelerator.Key="Number4"
                                  controls:Accelerator.Ctrl="Number4" />
                     <SelectorBarItem x:Name="wipItem" Visibility="Collapsed"
                                  Icon="{ui:FontIcon Glyph=&#xF1AD;}" x:Uid="WIP"
+                                     controls:Accelerator.Key="Number5"
                                  controls:Accelerator.Ctrl="Number5" />
                 </SelectorBar>
             </ScrollViewer>
