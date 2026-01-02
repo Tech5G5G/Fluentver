@@ -11,18 +11,18 @@
     <PublishProfile>win-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
-	<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-	<AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
-	<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-	<AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-	<AppxPackageDir>C:\Users\ignac\Downloads\</AppxPackageDir>
-	<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-	<GenerateTestArtifacts>True</GenerateTestArtifacts>
-	<AppxBundle>Never</AppxBundle>
-	<GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
-	<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-	<ApplicationIcon>Assets\Fluver.ico</ApplicationIcon>
-	<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxPackageDir>C:\Users\ignac\Downloads\</AppxPackageDir>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Never</AppxBundle>
+    <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <ApplicationIcon>Assets\Fluver.ico</ApplicationIcon>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="Assets\LargeTile.scale-100.png" />
