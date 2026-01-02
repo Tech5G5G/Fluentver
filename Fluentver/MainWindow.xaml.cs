@@ -32,7 +32,7 @@
             titleBar.ActualThemeChanged += (s, e) => WindowHelper.SetAppTheme(s.ActualTheme);
 
             Closed += (s, e) => App.RenamerWindow?.Close();
-            PositionChanged += (s, e) => Width = 480;
+            MinWidth = MaxWidth = 480;
 
             Activated += (s, e) => settingsIcon.Style = (Style)(e.WindowActivationState == WindowActivationState.Deactivated ?
             settingsButton.Resources["FontIconTitleBarInactiveStyle"] :
