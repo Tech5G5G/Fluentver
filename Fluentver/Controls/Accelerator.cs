@@ -1,63 +1,79 @@
-﻿using Microsoft.UI.Input;
-using Microsoft.UI.Xaml.Automation.Peers;
-using Microsoft.UI.Xaml.Automation.Provider;
-using Windows.System;
+﻿using Windows.System;
 using Windows.UI.Core;
 
 namespace Fluentver.Controls
 {
-    public sealed partial class Accelerator : FrameworkElement
+    public static class Accelerator
     {
-        public static readonly DependencyProperty CtrlProperty =
-            DependencyProperty.RegisterAttached("Ctrl",
-                typeof(VirtualKey),
-                typeof(Accelerator),
-                new PropertyMetadata(false, UpdateCtrl));
+        #region Key Property
 
-        public static VirtualKey GetCtrl(FrameworkElement target) => (VirtualKey)target.GetValue(CtrlProperty);
+        public static VirtualKey GetKey(UIElement target) => (VirtualKey)target.GetValue(KeyProperty);
 
-        public static void SetCtrl(FrameworkElement target, VirtualKey value) => target.SetValue(CtrlProperty, value);
+        public static void SetKey(UIElement target, VirtualKey value) => target.SetValue(KeyProperty, value);
 
-        private static void UpdateCtrl(DependencyObject sender, DependencyPropertyChangedEventArgs args) => (sender as FrameworkElement).KeyboardAccelerators.Add(new()
-        {
-            Key = (VirtualKey)args.NewValue,
-            Modifiers = VirtualKeyModifiers.Control
-        });
+        public static DependencyProperty KeyProperty { get; } =
+            DependencyProperty.RegisterAttached("Key", typeof(VirtualKey), typeof(Accelerator), new PropertyMetadata(VirtualKey.None, KeyPropertyChanged));
 
+        private static void KeyPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args) =>
+            (sender as UIElement).KeyboardAccelerators.Add(new() { Key = (VirtualKey)args.NewValue });
 
-        public static readonly DependencyProperty AltProperty =
-            DependencyProperty.RegisterAttached("Alt",
-                typeof(VirtualKey),
-                typeof(Accelerator),
-                new PropertyMetadata(false, UpdateAlt));
+        #endregion
 
-        public static VirtualKey GetAlt(FrameworkElement target) => (VirtualKey)target.GetValue(AltProperty);
+        #region Ctrl Property
 
-        public static void SetAlt(FrameworkElement target, VirtualKey value) => target.SetValue(AltProperty, value);
+        public static VirtualKey GetCtrl(UIElement target) => (VirtualKey)target.GetValue(CtrlProperty);
 
-        private static void UpdateAlt(DependencyObject sender, DependencyPropertyChangedEventArgs args) => (sender as FrameworkElement).KeyboardAccelerators.Add(new()
-        {
-            Key = (VirtualKey)args.NewValue,
-            Modifiers = VirtualKeyModifiers.Menu
-        });
+        public static void SetCtrl(UIElement target, VirtualKey value) => target.SetValue(CtrlProperty, value);
 
+        public static DependencyProperty CtrlProperty { get; } =
+            DependencyProperty.RegisterAttached("Ctrl", typeof(VirtualKey), typeof(Accelerator), new PropertyMetadata(VirtualKey.None, CtrlPropertyChanged));
 
-        public static readonly DependencyProperty ShiftProperty =
-            DependencyProperty.RegisterAttached("Shift",
-                typeof(VirtualKey),
-                typeof(Accelerator),
-                new PropertyMetadata(false, UpdateShift));
+        private static void CtrlPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args) =>
+            (sender as UIElement).KeyboardAccelerators.Add(new()
+            {
+                Key = (VirtualKey)args.NewValue,
+                Modifiers = VirtualKeyModifiers.Control
+            });
 
-        public static VirtualKey GetShift(FrameworkElement target) => (VirtualKey)target.GetValue(AltProperty);
+        #endregion
 
-        public static void SetShift(FrameworkElement target, VirtualKey value) => target.SetValue(AltProperty, value);
+        #region Alt Property
 
-        private static void UpdateShift(DependencyObject sender, DependencyPropertyChangedEventArgs args) => (sender as FrameworkElement).KeyboardAccelerators.Add(new()
-        {
-            Key = (VirtualKey)args.NewValue,
-            Modifiers = VirtualKeyModifiers.Shift
-        });
+        public static VirtualKey GetAlt(UIElement target) => (VirtualKey)target.GetValue(AltProperty);
 
+        public static void SetAlt(UIElement target, VirtualKey value) => target.SetValue(AltProperty, value);
+
+        public static DependencyProperty AltProperty { get; } =
+            DependencyProperty.RegisterAttached("Alt", typeof(VirtualKey), typeof(Accelerator), new PropertyMetadata(VirtualKey.None, AltPropertyChanged));
+
+        private static void AltPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args) =>
+            (sender as UIElement).KeyboardAccelerators.Add(new()
+            {
+                Key = (VirtualKey)args.NewValue,
+                Modifiers = VirtualKeyModifiers.Menu
+            });
+
+        #endregion
+
+        #region Shift Property
+
+        public static VirtualKey GetShift(UIElement target) => (VirtualKey)target.GetValue(ShiftProperty);
+
+        public static void SetShift(UIElement target, VirtualKey value) => target.SetValue(ShiftProperty, value);
+
+        public static DependencyProperty ShiftProperty { get; } =
+            DependencyProperty.RegisterAttached("Shift", typeof(VirtualKey), typeof(Accelerator), new PropertyMetadata(VirtualKey.None, ShiftPropertyChanged));
+
+        private static void ShiftPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args) =>
+            (sender as UIElement).KeyboardAccelerators.Add(new()
+            {
+                Key = (VirtualKey)args.NewValue,
+                Modifiers = VirtualKeyModifiers.Shift
+            });
+
+        #endregion
+
+        #region OEM
 
         /// <summary>Creates keyboard accelerators that use OEM <see cref="VirtualKey"/> codes.</summary>
         /// <param name="element">The <see cref="UIElement"/> to listen to keyboards events from.</param>
@@ -73,5 +89,7 @@ namespace Fluentver.Controls
                     invoked();
             };
         }
+
+        #endregion
     }
 }
