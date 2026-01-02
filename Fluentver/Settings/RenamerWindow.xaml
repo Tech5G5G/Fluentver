@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<controls:SizeWindow
+<controls:WindowEx
     x:Class="Fluentver.Settings.RenamerWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,7 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Fluentver.Controls"
     mc:Ignorable="d"
-    Width="480" Height="270" IsDialogWindow="True">
+    Width="480" Height="270"
+    IsDialogWindow="True">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -57,4 +58,4 @@
             </Button>
         </Grid>
     </Grid>
-</controls:SizeWindow>
+</controls:WindowEx>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<controls:SizeWindow
+<controls:WindowEx
     x:Class="Fluentver.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -11,8 +11,10 @@
     xmlns:sett="using:Fluentver.Settings"
     xmlns:controls="using:Fluentver.Controls"
     mc:Ignorable="d"
-    Title="Fluver" Width="480" Height="578" DoubleClickToMaximize="False" SizeToContent="Height">
-    <StackPanel>
+    Title="Fluver"
+    Width="480" Height="578"
+    DoubleClickToMaximize="False" SizeToContent="Height">
+    
     <StackPanel Background="Transparent" PointerPressed="Content_PointerPressed">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -46,20 +48,20 @@
                 <SelectorBar x:Name="bar" SelectionChanged="Bar_SelectionChanged" HorizontalAlignment="Center">
                     <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE946;}" x:Uid="About"
                                      controls:Accelerator.Key="Number1"
-                                 controls:Accelerator.Ctrl="Number1" />
+                                     controls:Accelerator.Ctrl="Number1" />
                     <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE7F4;}" x:Uid="PC"
                                      controls:Accelerator.Key="Number2"
-                                 controls:Accelerator.Ctrl="Number2" />
+                                     controls:Accelerator.Ctrl="Number2" />
                     <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE716;}" x:Uid="Users"
                                      controls:Accelerator.Key="Number3"
-                                 controls:Accelerator.Ctrl="Number3" />
+                                     controls:Accelerator.Ctrl="Number3" />
                     <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xEDA2;}" x:Uid="Storage"
                                      controls:Accelerator.Key="Number4"
-                                 controls:Accelerator.Ctrl="Number4" />
+                                     controls:Accelerator.Ctrl="Number4" />
                     <SelectorBarItem x:Name="wipItem" Visibility="Collapsed"
-                                 Icon="{ui:FontIcon Glyph=&#xF1AD;}" x:Uid="WIP"
+                                     Icon="{ui:FontIcon Glyph=&#xF1AD;}" x:Uid="WIP"
                                      controls:Accelerator.Key="Number5"
-                                 controls:Accelerator.Ctrl="Number5" />
+                                     controls:Accelerator.Ctrl="Number5" />
                 </SelectorBar>
             </ScrollViewer>
             <Frame x:Name="ContentFrame" />
@@ -92,4 +94,4 @@
         </StackPanel>
         <sett:SettingsPage x:Name="settingsPage" Visibility="Collapsed" />
     </StackPanel>
-</controls:SizeWindow>
+</controls:WindowEx>

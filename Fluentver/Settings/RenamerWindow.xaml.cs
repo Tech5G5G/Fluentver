@@ -3,7 +3,7 @@
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RenamerWindow : SizeWindow
+    public sealed partial class RenamerWindow : WindowEx
     {
         public RenamerWindow()
         {
@@ -22,6 +22,7 @@
             };
 
             name.Header = string.Format(StringsHelper.GetString("CurrentName"), SystemHelper.SystemName);
+            WindowHelper.ActivateWindow(this.GetWindowHandle());
         }
 
         private void Name_TextChanged(object sender, TextChangedEventArgs args)
