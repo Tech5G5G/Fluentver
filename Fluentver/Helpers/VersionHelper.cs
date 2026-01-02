@@ -45,7 +45,7 @@ namespace Fluentver.Helpers
 
         #region Windows Insider
 
-        /// <summary>Get a <see cref="bool"/> indicating whether the system is enrolled in WIP (Windows Insider Program).</summary>
+        /// <summary>Gets a <see cref="bool"/> indicating whether the system is enrolled in WIP (Windows Insider Program).</summary>
         public static bool IsWindowsInsider => HKLM.OpenSubKey(Applicability) is RegistryKey key &&
             key.GetValue("IsBuildFlightingEnabled") is int enabled &&
             enabled == 1;
