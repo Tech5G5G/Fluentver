@@ -78,7 +78,7 @@
 
         private void EnableBarScroller(bool enable, Pointer pointer)
         {
-            if (pointer.PointerDeviceType == Microsoft.UI.Input.PointerDeviceType.Mouse || !enable)
+            if (pointer.PointerDeviceType == PointerDeviceType.Mouse || !enable)
             {
                 barScroller.Padding = enable ? new(0, 0, 0, 8) : new();
                 barScroller.HorizontalScrollBarVisibility = enable ? ScrollBarVisibility.Visible : ScrollBarVisibility.Hidden;
@@ -126,6 +126,15 @@
                 settingsIcon.FontSize = 14;
                 settingsIcon.Glyph = "\uE713";
                 ToolTipService.SetToolTip(settingsButton, StringsHelper.GetString("SettingsButton.ToolTipService.ToolTip"));
+            }
+        }
+
+        private void Content_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (e.GetCurrentPoint(sender as UIElement) is PointerPoint { Properties: PointerPointProperties properties } &&
+                (properties.IsXButton1Pressed || properties.IsXButton2Pressed)) //Check if XButton pressed
+            {
+                SelectedIndex = Math.Clamp(SelectedIndex + (properties.IsXButton1Pressed ? -1 : 1), 0, bar.Items.Count);
             }
         }
     }

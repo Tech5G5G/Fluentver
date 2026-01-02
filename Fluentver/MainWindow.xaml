@@ -13,6 +13,7 @@
     mc:Ignorable="d"
     Title="Fluver" Width="480" Height="578" DoubleClickToMaximize="False" SizeToContent="Height">
     <StackPanel>
+    <StackPanel Background="Transparent" PointerPressed="Content_PointerPressed">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
