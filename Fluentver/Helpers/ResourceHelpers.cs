@@ -138,9 +138,9 @@ public static class GPUHelper
         }
     }
 
-    private static readonly List<PerformanceCounter> gpuCounters = GetGPUCounters();
+    private static readonly List<PerformanceCounter> gpuCounters;
 
-    private static List<PerformanceCounter> GetGPUCounters()
+    static GPUHelper()
     {
         var list = new List<PerformanceCounter>();
         try
@@ -221,7 +221,7 @@ public static class GPUHelper
         }
         catch { }
 
-        return list;
+        gpuCounters = list;
     }
 
     private static int GetPhysIndexFromInstance(string instance)
