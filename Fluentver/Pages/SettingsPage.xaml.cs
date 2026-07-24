@@ -1,7 +1,7 @@
 ﻿using Windows.Globalization;
 using Microsoft.Windows.AppLifecycle;
 
-namespace Fluver.Settings
+namespace Fluver.Pages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -10,16 +10,16 @@ namespace Fluver.Settings
     {
         private readonly string currentLanguage = ApplicationLanguages.PrimaryLanguageOverride;
 
-        private readonly static Dictionary<string, int> languages = new()
-        {
-            { string.Empty, 0 },
-            { "en-US", 1 },
-            { "de", 2 },
-            { "el", 3 },
-            { "pl", 4 },
-            { "ru", 5 },
-            { "zh-Hans-CN", 6 }
-        };
+        private readonly static List<string> languages =
+        [
+            string.Empty,
+            "en-US",
+            "de",
+            "el",
+            "pl",
+            "ru",
+            "zh-Hans-CN"
+        ];
 
         public SettingsPage()
         {
@@ -34,10 +34,10 @@ namespace Fluver.Settings
 
         private void InitializeLanguage()
         {
-            language.SelectedIndex = languages.TryGetValue(currentLanguage, out int index) ? index : 0;
+            language.SelectedIndex = Math.Max(languages.IndexOf(currentLanguage), 0);
             language.SelectionChanged += (s, e) =>
             {
-                string language = ApplicationLanguages.PrimaryLanguageOverride = languages.First(x => x.Value == this.language.SelectedIndex).Key;
+                string language = ApplicationLanguages.PrimaryLanguageOverride = languages[this.language.SelectedIndex];
                 bool isRestartRequired = language != currentLanguage;
 
                 language = language == string.Empty ? ApplicationLanguages.Languages[0] : language;
@@ -62,7 +62,7 @@ namespace Fluver.Settings
         {
             if (VersionHelper.IsWindowsInsider)
                 wipItem.Visibility = Visibility.Visible;
-            else if (SettingValues.StartupPage == Pages.Insider)
+            else if (SettingValues.StartupPage == Settings.Pages.Insider)
                 startupPage.SelectedIndex = 0;
         }
 

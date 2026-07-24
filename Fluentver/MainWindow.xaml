@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:comm="using:CommunityToolkit.WinUI.Controls"
-    xmlns:sett="using:Fluver.Settings"
+    xmlns:pages="using:Fluver.Pages"
     xmlns:controls="using:Fluver.Controls"
     mc:Ignorable="d"
     Title="Fluver"
@@ -92,6 +92,6 @@
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
         </StackPanel>
-        <sett:SettingsPage x:Name="settingsPage" Visibility="Collapsed" />
+        <pages:SettingsPage x:Name="settingsPage" Visibility="Collapsed" />
     </StackPanel>
 </controls:WindowEx>
