@@ -1,4 +1,4 @@
-namespace Fluver.Controls
+namespace Fluver.UI.Controls
 {
     public sealed partial class GlyphButton : UserControl
     {

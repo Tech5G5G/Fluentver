@@ -7,9 +7,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
-    xmlns:controls="using:Fluver.Controls"
-    NavigationCacheMode="Required"
-    mc:Ignorable="d">
+    xmlns:controls="using:Fluver.UI.Controls"
+    mc:Ignorable="d"
+    NavigationCacheMode="Required">
     <controls:InfoPage.ToolbarButtons>
         <controls:GlyphButton x:Uid="Activation" Glyph="&#xEB95;" ProcessName="ms-settings:activation" />
         <controls:GlyphButton x:Uid="WinUpdate" Glyph="&#xE895;" ProcessName="ms-settings:windowsupdate" />

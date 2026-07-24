@@ -54,16 +54,15 @@
     <None Remove="Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
     <None Remove="Assets\Square71x71Logo.scale-200.png" />
     <None Remove="Assets\Windows-Logos.ttf" />
-    <None Remove="Controls\GlyphButton.xaml" />
-    <None Remove="Controls\StorageExpander.xaml" />
-    <None Remove="Controls\Styles.xaml" />
-    <None Remove="Controls\UserEntry.xaml" />
-    <None Remove="Pages\Insider.xaml" />
+    <None Remove="Themes\CustomStyles.xaml" />
+    <None Remove="UI\Controls\GlyphButton.xaml" />
+    <None Remove="UI\Controls\StorageExpander.xaml" />
+    <None Remove="UI\Controls\UserEntry.xaml" />
+    <None Remove="Pages\MainPage.xaml" />
     <None Remove="Settings\RenamerWindow.xaml" />
     <None Remove="Settings\SettingsPage.xaml" />
+    <None Remove="Themes\Generic.xaml" />
     <None Remove="Users.xaml" />
-    <None Remove="Pages\PC.xaml" />
-    <None Remove="Pages\Storage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -103,17 +102,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\Insider.xaml">
+    <Page Update="Themes\CustomStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Controls\StorageExpander.xaml">
+    <Page Update="Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Controls\Styles.xaml">
+    <Page Update="Pages\InsiderPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -124,11 +123,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Settings\SettingsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Controls\UserEntry.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -152,11 +146,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Page Update="Controls\GlyphButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
 
   <!--
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution
@@ -170,5 +159,10 @@
     <PRIResource Update="Strings\en-US\Resources.resw">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

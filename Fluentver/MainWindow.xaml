@@ -9,7 +9,7 @@
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:comm="using:CommunityToolkit.WinUI.Controls"
     xmlns:pages="using:Fluver.Pages"
-    xmlns:controls="using:Fluver.Controls"
+    xmlns:controls="using:Fluver.UI.Controls"
     mc:Ignorable="d"
     Title="Fluver"
     Width="480" Height="578"

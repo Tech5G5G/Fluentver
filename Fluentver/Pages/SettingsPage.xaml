@@ -9,7 +9,8 @@
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:help="using:Fluver.Helpers"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    NavigationCacheMode="Required">
 
     <StackPanel Spacing="4" Padding="8,0,8,17">
         <controls:SettingsExpander x:Name="languageExpander" HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}" x:Uid="Language" IsExpanded="True" Margin="0,0,0,-4">

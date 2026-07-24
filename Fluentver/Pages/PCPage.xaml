@@ -8,9 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:help="using:Fluver.Helpers"
-    xmlns:controls="using:Fluver.Controls"
-    NavigationCacheMode="Required"
-    mc:Ignorable="d">
+    xmlns:controls="using:Fluver.UI.Controls"
+    mc:Ignorable="d"
+    NavigationCacheMode="Required">
     <controls:InfoPage.ToolbarButtons>
         <controls:GlyphButton x:Uid="RenamePC" Glyph="&#xE8AC;" Click="RenamePCButton_Click" />
         <controls:GlyphButton x:Uid="TaskMgr" Glyph="&#xE9D9;" ProcessName="taskmgr" />

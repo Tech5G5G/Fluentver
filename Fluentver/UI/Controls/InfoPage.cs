@@ -1,6 +1,6 @@
 ﻿using System.Collections.Specialized;
 
-namespace Fluver.Controls
+namespace Fluver.UI.Controls
 {
     [Microsoft.UI.Xaml.Markup.ContentProperty(Name = nameof(Children))]
     public partial class InfoPage : Page
@@ -28,8 +28,7 @@ namespace Fluver.Controls
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        var expander = e.NewItems[0] as Expander;
-                        if (expander.Header is not string key)
+                        if (e.NewItems[0] is not Expander { Header: string key } expander)
                             return;
 
                         expander.IsExpanded = TryGetExpanderExpanded(key, ExpanderStates, () => UpdateExpanderExpanded(key, true, ExpanderStates));
