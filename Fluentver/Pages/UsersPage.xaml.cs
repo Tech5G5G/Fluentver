@@ -3,11 +3,11 @@ namespace Fluver.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Users : InfoPage
+    public sealed partial class UsersPage : InfoPage
     {
         ObservableCollection<UserEntry> users = [];
 
-        public Users()
+        public UsersPage()
         {
             this.InitializeComponent();
             GetUsers();
