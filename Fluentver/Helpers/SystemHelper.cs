@@ -12,8 +12,8 @@ namespace Fluver.Helpers
         public const string HKLM = @"HKEY_LOCAL_MACHINE\";
         public const string HKCU = @"HKEY_CURRENT_USER\";
 
-        private static readonly Regex regex = new(@"[/:*?<>| " + "\"]");
-        private static readonly EasClientDeviceInformation easInfo = new();
+        private static readonly Regex s_regex = new(@"[/:*?<>| " + "\"]");
+        private static readonly EasClientDeviceInformation s_easInfo = new();
 
         /// <summary>The name of the system.</summary>
         public static string SystemName
@@ -66,13 +66,13 @@ namespace Fluver.Helpers
             {
                 < 1 => NetBIOSNameCheckResult.BelowMinLength,
                 > 15 => NetBIOSNameCheckResult.ExceedsMaxLength,
-                _ => regex.IsMatch(name) || name.Contains('\\') ? NetBIOSNameCheckResult.InvalidCharacter : NetBIOSNameCheckResult.Valid
+                _ => s_regex.IsMatch(name) || name.Contains('\\') ? NetBIOSNameCheckResult.InvalidCharacter : NetBIOSNameCheckResult.Valid
             };
             return result == NetBIOSNameCheckResult.Valid;
         }
 
         /// <summary>Gets the product name of the system.</summary>
-        public static string SystemProductName => easInfo.SystemProductName;
+        public static string SystemProductName => s_easInfo.SystemProductName;
 
         /// <summary>Gets a <see cref="Brush"/> representing the curent user's wallpaper.</summary>
         public static Brush UserWallpaperBrush

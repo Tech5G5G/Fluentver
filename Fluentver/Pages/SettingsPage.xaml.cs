@@ -9,9 +9,9 @@ namespace Fluver.Pages
 {
     public sealed partial class SettingsPage : Microsoft.UI.Xaml.Controls.Page
     {
-        private readonly string currentLanguage = ApplicationLanguages.PrimaryLanguageOverride;
+        private static readonly string s_currentLanguage = ApplicationLanguages.PrimaryLanguageOverride;
 
-        private readonly static List<string> languages =
+        private static readonly List<string> s_languages =
         [
             string.Empty,
             "en-US",
@@ -35,11 +35,11 @@ namespace Fluver.Pages
 
         private void InitializeLanguage()
         {
-            language.SelectedIndex = Math.Max(languages.IndexOf(currentLanguage), 0);
+            language.SelectedIndex = Math.Max(s_languages.IndexOf(s_currentLanguage), 0);
             language.SelectionChanged += (s, e) =>
             {
-                string language = ApplicationLanguages.PrimaryLanguageOverride = languages[this.language.SelectedIndex];
-                bool isRestartRequired = language != currentLanguage;
+                string language = ApplicationLanguages.PrimaryLanguageOverride = s_languages[this.language.SelectedIndex];
+                bool isRestartRequired = language != s_currentLanguage;
 
                 language = language == string.Empty ? ApplicationLanguages.Languages[0] : language;
                 restartAlert.IsOpen = isRestartRequired;

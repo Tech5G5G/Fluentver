@@ -8,7 +8,7 @@ namespace Fluver.UI.Controls
 {
     public sealed partial class StorageExpander : Expander
     {
-        public DriveInfo DriveInfo { get; private set; }
+        public DriveInfo DriveInfo { get; }
 
         public StorageExpander(DriveInfo info)
         {

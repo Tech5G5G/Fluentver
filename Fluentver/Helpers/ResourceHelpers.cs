@@ -27,7 +27,7 @@ public static class CPUHelper
 /// <summary>Gets GPU statistics.</summary>
 public static class GPUHelper
 {
-    private static readonly string[] VirtualHints = new[]
+    private static readonly string[] s_virtualHints = new[]
     {
         "virtual",
         "microsoft basic",
@@ -65,7 +65,7 @@ public static class GPUHelper
                 var physical = candidates
                     .Where(c => c.Pnp.Contains("PCI\\", StringComparison.OrdinalIgnoreCase))
                     .Where(c =>
-                        !VirtualHints.Any(h =>
+                        !s_virtualHints.Any(h =>
                             c.Name.Contains(h, StringComparison.OrdinalIgnoreCase)
                             || c.Compatibility.Contains(h, StringComparison.OrdinalIgnoreCase)
                         )
@@ -282,7 +282,7 @@ public sealed class RAMHelper
         public ulong ullAvailVirtual;
         public ulong ullAvailExtendedVirtual;
 
-        public MEMORYSTATUSEX() => dwLength = (uint)Marshal.SizeOf(typeof(MEMORYSTATUSEX));
+        public MEMORYSTATUSEX() => dwLength = (uint)Marshal.SizeOf<MEMORYSTATUSEX>();
     }
 
     private static bool TryCreateMemoryStatus(out MEMORYSTATUSEX status)
@@ -295,20 +295,20 @@ public sealed class RAMHelper
 
     #endregion
 
-    const int BytesInGigabyte = 1024 * 1024 * 1024;
+    private const int BytesInGigabyte = 1024 * 1024 * 1024;
 
-    readonly MEMORYSTATUSEX status;
+    private readonly MEMORYSTATUSEX _status;
 
     /// <summary>Constructs a new instance of the <see cref="RAMHelper"/> class.</summary>
-    public RAMHelper() => TryCreateMemoryStatus(out status);
+    public RAMHelper() => TryCreateMemoryStatus(out _status);
 
     /// <summary>Gets the total amount of RAM the system has.</summary>
     /// <value>The amount of RAM installed in the system in gigabytes.</value>
-    public float TotalRAM => (float)status.ullTotalPhys / BytesInGigabyte;
+    public float TotalRAM => (float)_status.ullTotalPhys / BytesInGigabyte;
 
     /// <summary>Gets the amount of RAM that is being used.</summary>
     /// <value>The amount of RAM being used by the system in gigabytes.</value>
-    public float UsedRAM => (status.ullTotalPhys - status.ullAvailPhys) / BytesInGigabyte;
+    public float UsedRAM => (_status.ullTotalPhys - _status.ullAvailPhys) / BytesInGigabyte;
 
     /// <summary>Gets the percentage of RAM that is being used.</summary>
     /// <value>The percentage of RAM being used by the system.</value>

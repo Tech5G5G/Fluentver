@@ -97,7 +97,7 @@ namespace Fluver
 
         private void CloseWindow(object sender, RoutedEventArgs e) => Close();
 
-        int previousIndex;
+        private int _previousIndex;
         private void Bar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs e)
         {
             sender.SelectedItem.StartBringIntoView();
@@ -116,9 +116,9 @@ namespace Fluver
                 this,
                 new SlideNavigationTransitionInfo
                 {
-                    Effect = previousIndex - currentIndex > 0 ? SlideNavigationTransitionEffect.FromLeft : SlideNavigationTransitionEffect.FromRight
+                    Effect = _previousIndex - currentIndex > 0 ? SlideNavigationTransitionEffect.FromLeft : SlideNavigationTransitionEffect.FromRight
                 });
-            previousIndex = currentIndex;
+            _previousIndex = currentIndex;
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)

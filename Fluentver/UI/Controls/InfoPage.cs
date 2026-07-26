@@ -17,11 +17,11 @@ namespace Fluver.UI.Controls
         public Setting<ApplicationDataCompositeValue> ExpanderStates { get; set; } = SettingValues.ExpanderStates;
 
         public ObservableCollection<Expander> Children { get; } = [];
-        readonly StackPanel content;
+        private readonly StackPanel _content;
 
         public InfoPage()
         {
-            Content = content = new()
+            Content = _content = new()
             {
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalAlignment = VerticalAlignment.Top,
@@ -43,13 +43,13 @@ namespace Fluver.UI.Controls
                         expander.Expanding += (s, e) => UpdateExpanderExpanded(key, true, ExpanderStates);
                         expander.Collapsed += (s, e) => UpdateExpanderExpanded(key, false, ExpanderStates);
 
-                        content.Children.Add(expander);
+                        _content.Children.Add(expander);
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        content.Children.Remove(e.OldItems[0] as Expander);
+                        _content.Children.Remove(e.OldItems[0] as Expander);
                         break;
                     case NotifyCollectionChangedAction.Reset:
-                        content.Children.Clear();
+                        _content.Children.Clear();
                         break;
                 }
             };

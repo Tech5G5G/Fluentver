@@ -8,7 +8,7 @@ namespace Fluver.Pages
 {
     public sealed partial class UsersPage : InfoPage
     {
-        ObservableCollection<UserEntry> users = [];
+        private readonly ObservableCollection<UserEntry> _users = [];
 
         public UsersPage()
         {
@@ -28,14 +28,14 @@ namespace Fluver.Pages
                 userAccountName.Text = currentUser.GetEmailAddress();
 
                 foreach (var user in users)
-                    this.users.Add(new()
+                    _users.Add(new()
                     {
                         ProfilePicture = user.GetPicture(),
                         DisplayName = user.GetBestDisplayName(),
                         AccountName = user.GetEmailAddress()
                     });
 
-                if (!this.users.Any())
+                if (!_users.Any())
                 {
                     usersList.Visibility = Visibility.Collapsed;
                     otherUsersLabel.Visibility = Visibility.Visible;

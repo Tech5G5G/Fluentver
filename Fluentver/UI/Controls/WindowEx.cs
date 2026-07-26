@@ -31,38 +31,38 @@ public partial class WindowEx : Window
 
     public double Width
     {
-        get => manager.Width;
-        set => manager.Width = value;
+        get => _manager.Width;
+        set => _manager.Width = value;
     }
 
     public double MinWidth
     {
-        get => manager.MinWidth;
-        set => manager.MinWidth = value;
+        get => _manager.MinWidth;
+        set => _manager.MinWidth = value;
     }
 
     public double MaxWidth
     {
-        get => manager.MaxWidth;
-        set => manager.MaxWidth = value;
+        get => _manager.MaxWidth;
+        set => _manager.MaxWidth = value;
     }
 
     public double Height
     {
-        get => manager.Height;
-        set => manager.Height = value;
+        get => _manager.Height;
+        set => _manager.Height = value;
     }
 
     public double MinHeight
     {
-        get => manager.MinHeight;
-        set => manager.MinHeight = value;
+        get => _manager.MinHeight;
+        set => _manager.MinHeight = value;
     }
 
     public double MaxHeight
     {
-        get => manager.MaxHeight;
-        set => manager.MaxHeight = value;
+        get => _manager.MaxHeight;
+        set => _manager.MaxHeight = value;
     }
 
     #endregion
@@ -91,10 +91,10 @@ public partial class WindowEx : Window
         if (AppWindow is not null && base.Content is FrameworkElement element)
         {
             if (SizeToContent.HasFlag(Dimensions.Width))
-                manager.Width = element.ActualWidth;
+                _manager.Width = element.ActualWidth;
 
             if (SizeToContent.HasFlag(Dimensions.Height))
-                manager.Height = element.ActualHeight;
+                _manager.Height = element.ActualHeight;
         }
     }
 
@@ -108,14 +108,14 @@ public partial class WindowEx : Window
 
     #endregion
 
-    private readonly WindowManager manager;
+    private readonly WindowManager _manager;
 
     public WindowEx()
     {
-        manager = WindowManager.Get(this);
+        _manager = WindowManager.Get(this);
 
-        manager.PositionChanged += (s, e) => PositionChanged?.Invoke(this, e);
-        manager.WindowMessageReceived += (s, e) =>
+        _manager.PositionChanged += (s, e) => PositionChanged?.Invoke(this, e);
+        _manager.WindowMessageReceived += (s, e) =>
         {
             switch (e.Message.MessageId)
             {

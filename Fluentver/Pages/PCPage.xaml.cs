@@ -13,16 +13,16 @@ namespace Fluver.Pages
 {
     public sealed partial class PCPage : InfoPage
     {
-        readonly string GB = StringsHelper.GetString("Gigabytes");
+        private static readonly string s_gbStr = StringsHelper.GetString("Gigabytes");
 
-        readonly DispatcherTimer timer = new() { Interval = TimeSpan.FromSeconds(1) };
+        private readonly DispatcherTimer _timer = new() { Interval = TimeSpan.FromSeconds(1) };
 
         public PCPage()
         {
             this.InitializeComponent();
 
-            Loaded += (s, e) => timer.Start();
-            Unloaded += (s, e) => timer.Stop();
+            Loaded += (s, e) => _timer.Start();
+            Unloaded += (s, e) => _timer.Stop();
 
             SetPCInfo();
             SetPCUsage(true);
@@ -50,7 +50,7 @@ namespace Fluver.Pages
             {
                 cpu.Text = await Task.Run(() => CPUHelper.CPUName);
                 gpu.Text = await Task.Run(() => GPUHelper.GPUName);
-                ram.Text = $"{Math.Ceiling(ramHelper.TotalRAM)} {GB}";
+                ram.Text = $"{Math.Ceiling(ramHelper.TotalRAM)} {s_gbStr}";
 
                 cpuUsageLabel.LosingFocus += TextDisplay_LosingFocus;
                 gpuUsageLabel.LosingFocus += TextDisplay_LosingFocus;
@@ -59,21 +59,21 @@ namespace Fluver.Pages
                 loadingIndicator.Visibility = Visibility.Collapsed;
                 specsGrid.Visibility = Visibility.Visible;
 
-                timer.Tick += (s, e) => SetPCUsage();
+                _timer.Tick += (s, e) => SetPCUsage();
             }
 
             cpuUsageLabel.SetTextFriendly($"{cpuUsage.Value = await Task.Run(() => CPUHelper.CPUUsage):N0}%");
             gpuUsageLabel.SetTextFriendly($"{gpuUsage.Value = await Task.Run(() => GPUHelper.GPUUsage):N0}%");
 
             ramUsage.Value = ramHelper.UsedRAMPercent;
-            ramUsageLabel.SetTextFriendly($"{ramHelper.UsedRAM:N0} {GB}");
+            ramUsageLabel.SetTextFriendly($"{ramHelper.UsedRAM:N0} {s_gbStr}");
         }
 
         private void SetAwakeTime(bool hookTimer = false)
         {
             if (hookTimer)
             {
-                timer.Tick += (s, e) => SetAwakeTime();
+                _timer.Tick += (s, e) => SetAwakeTime();
                 timeAwake.LosingFocus += TextDisplay_LosingFocus;
             }
 

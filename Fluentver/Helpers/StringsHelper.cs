@@ -5,17 +5,17 @@ namespace Fluver.Helpers
 {
     public static class StringsHelper
     {
-        readonly static ResourceLoader loader = new();
-        readonly static ResourceManager manager = new();
+        private static readonly ResourceLoader s_loader = new();
+        private static readonly ResourceManager s_manager = new();
 
-        public static string GetString(string id) => loader.GetString(id.Replace('.', '/'));
+        public static string GetString(string id) => s_loader.GetString(id.Replace('.', '/'));
 
         public static string GetString(string id, string language)
         {
-            var context = manager.CreateResourceContext();
+            var context = s_manager.CreateResourceContext();
             context.QualifierValues["Language"] = language;
 
-            var map = manager.MainResourceMap.GetSubtree("Resources");
+            var map = s_manager.MainResourceMap.GetSubtree("Resources");
             return map.GetValue(id.Replace('.', '/'), context).ValueAsString;
         }
     }

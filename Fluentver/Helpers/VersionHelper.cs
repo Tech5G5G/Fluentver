@@ -11,7 +11,7 @@ namespace Fluver.Helpers
         public const string CurrentVersion = SystemHelper.HKLM + @"SOFTWARE\Microsoft\Windows NT\CurrentVersion";
         public const string Applicability = @"SOFTWARE\Microsoft\WindowsSelfHost\Applicability";
 
-        static readonly RegistryKey HKLM = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Default);
+        private static readonly RegistryKey HKLM = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Default);
 
         #endregion
 
