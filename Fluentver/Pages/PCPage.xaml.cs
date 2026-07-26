@@ -11,9 +11,6 @@ using WinUIEx;
 
 namespace Fluver.Pages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PCPage : InfoPage
     {
         readonly string GB = StringsHelper.GetString("Gigabytes");
@@ -98,7 +95,7 @@ namespace Fluver.Pages
 
         private void TextDisplay_LosingFocus(UIElement sender, LosingFocusEventArgs args)
         {
-            if (sender is TextBlock text && args.NewFocusedElement is not Popup) //Reset text selection if focus isn't lost to a popup
+            if (sender is TextBlock text && args.NewFocusedElement is not Popup) // Reset text selection if focus isn't lost to a popup
                 text.Select(text.ContentStart, text.ContentStart);
         }
 

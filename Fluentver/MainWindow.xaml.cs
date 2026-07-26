@@ -13,9 +13,6 @@ using Fluver.UI.Controls;
 
 namespace Fluver
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainWindow : WindowEx
     {
         public int SelectedIndex
@@ -126,7 +123,7 @@ namespace Fluver
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            if (mainContent.Visibility == Visibility.Visible) //Show settings page
+            if (mainContent.Visibility == Visibility.Visible) // Show settings page
             {
                 mainContent.Visibility = Visibility.Collapsed;
                 settingsPage.Visibility = Visibility.Visible;
@@ -135,7 +132,7 @@ namespace Fluver
                 settingsIcon.Glyph = "\uE72B";
                 ToolTipService.SetToolTip(settingsButton, StringsHelper.GetString("SettingsButtonBackTooltip"));
             }
-            else //Restore main content
+            else // Restore main content
             {
                 mainContent.Visibility = Visibility.Visible;
                 settingsPage.Visibility = Visibility.Collapsed;

@@ -119,13 +119,13 @@ public partial class WindowEx : Window
         {
             switch (e.Message.MessageId)
             {
-                case 0x00A3 when !DoubleClickToMaximize: //WM_NCLBUTTONDBLCLK
+                case 0x00A3 when !DoubleClickToMaximize: // WM_NCLBUTTONDBLCLK
                     e.Handled = true;
                     break;
-                case 0x007E: //WM_DISPLAYCHANGE
+                case 0x007E: // WM_DISPLAYCHANGE
                     ResolutionChanged?.Invoke(this, null);
                     break;
-                case 0x219 when e.Message.WParam == 0x7: //WM_DEVICECHANGE, DBT_DEVNODES_CHANGED
+                case 0x219 when e.Message.WParam == 0x7: // WM_DEVICECHANGE, DBT_DEVNODES_CHANGED
                     DeviceChanged?.Invoke(this, e.Message.LParam);
                     break;
             }

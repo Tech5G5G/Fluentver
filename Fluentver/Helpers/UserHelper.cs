@@ -57,7 +57,7 @@ namespace Fluver.Helpers
             {
                 using PrincipalSearcher searcher = new(new UserPrincipal(new(ContextType.Machine)));
                 users = await Task.Run(() => searcher.FindAll()
-                    .Where(i => !i.Sid.Value.StartsWith(SIDStart) || i.Sid.Value[^3] != BuiltInEnd) //Filter out built-in accounts
+                    .Where(i => !i.Sid.Value.StartsWith(SIDStart) || i.Sid.Value[^3] != BuiltInEnd) // Filter out built-in accounts
                     .Cast<UserPrincipal>()
                     .ToDictionary(i => i.Sid));
             }

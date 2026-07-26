@@ -5,9 +5,6 @@ using Fluver.UI.Controls;
 
 namespace Fluver.Pages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class StoragePage : InfoPage
     {
         public StoragePage()
@@ -34,18 +31,18 @@ namespace Fluver.Pages
             foreach (var expander in Children.Except(expanders).ToArray())
                 Children.Remove(expander);
 
-            //Refactored:
-            //var currentDrives = AssignerHelper.TryAssign(DriveInfo.GetDrives, () => []);
-            //var currentDriveNames = currentDrives.Select(d => d.GetBestDisplayName());
-            //var currentChildrenNames = Children.Select(c => c.Header.ToString());
+            // Refactored:
+            // var currentDrives = AssignerHelper.TryAssign(DriveInfo.GetDrives, () => []);
+            // var currentDriveNames = currentDrives.Select(d => d.GetBestDisplayName());
+            // var currentChildrenNames = Children.Select(c => c.Header.ToString());
 
-            //var drivesToAdd = currentDrives.Where(d => d.IsReady && !currentChildrenNames.Contains(d.GetBestDisplayName()));
-            //foreach (var d in drivesToAdd)
+            // var drivesToAdd = currentDrives.Where(d => d.IsReady && !currentChildrenNames.Contains(d.GetBestDisplayName()));
+            // foreach (var d in drivesToAdd)
             //    Children.Add(new StorageExpander(d));
 
-            //var childrenToRemove = Children.Where(c => !currentDriveNames.Contains(c.Header.ToString()));
-            //foreach (var child in childrenToRemove.ToArray())
-            //    Children.Remove(child);
+            // var childrenToRemove = Children.Where(c => !currentDriveNames.Contains(c.Header.ToString()));
+            // foreach (var child in childrenToRemove.ToArray())
+            //     Children.Remove(child);
         }
     }
 }
