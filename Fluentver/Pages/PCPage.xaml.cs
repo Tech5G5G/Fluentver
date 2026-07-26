@@ -32,14 +32,14 @@ namespace Fluver.Pages
 
         private void SetPCInfo()
         {
-            pcName.Text = SystemHelper.SystemName;
-            backgroundRect.Fill = SystemHelper.UserWallpaperBrush;
+            PcNameText.Text = SystemHelper.SystemName;
+            BackgroundRectangle.Fill = SystemHelper.UserWallpaperBrush;
 
             string name = SystemHelper.SystemProductName;
-            productName.Text = name == "System Product Name" ? StringsHelper.GetString("Unknown") : name;
+            ProductNameText.Text = name == "System Product Name" ? StringsHelper.GetString("Unknown") : name;
 
             var architecture = RuntimeInformation.OSArchitecture;
-            osType.Text = AssignerHelper.TryAssign(() => StringsHelper.GetString(architecture.ToString()), architecture.ToString);
+            ArchitectureText.Text = AssignerHelper.TryAssign(() => StringsHelper.GetString(architecture.ToString()), architecture.ToString);
         }
 
         private async void SetPCUsage(bool hookTimer = false)
@@ -48,25 +48,25 @@ namespace Fluver.Pages
 
             if (hookTimer)
             {
-                cpu.Text = await Task.Run(() => CPUHelper.CPUName);
-                gpu.Text = await Task.Run(() => GPUHelper.GPUName);
-                ram.Text = $"{Math.Ceiling(ramHelper.TotalRAM)} {s_gbStr}";
+                CpuText.Text = await Task.Run(() => CPUHelper.CPUName);
+                GpuText.Text = await Task.Run(() => GPUHelper.GPUName);
+                RamText.Text = $"{Math.Ceiling(ramHelper.TotalRAM)} {s_gbStr}";
 
-                cpuUsageLabel.LosingFocus += TextDisplay_LosingFocus;
-                gpuUsageLabel.LosingFocus += TextDisplay_LosingFocus;
-                ramUsageLabel.LosingFocus += TextDisplay_LosingFocus;
+                CpuUsageText.LosingFocus += TextDisplay_LosingFocus;
+                GpuUsageText.LosingFocus += TextDisplay_LosingFocus;
+                RamUsageText.LosingFocus += TextDisplay_LosingFocus;
 
-                loadingIndicator.Visibility = Visibility.Collapsed;
-                specsGrid.Visibility = Visibility.Visible;
+                LoadingRing.Visibility = Visibility.Collapsed;
+                SpecsGrid.Visibility = Visibility.Visible;
 
                 _timer.Tick += (s, e) => SetPCUsage();
             }
 
-            cpuUsageLabel.SetTextFriendly($"{cpuUsage.Value = await Task.Run(() => CPUHelper.CPUUsage):N0}%");
-            gpuUsageLabel.SetTextFriendly($"{gpuUsage.Value = await Task.Run(() => GPUHelper.GPUUsage):N0}%");
+            CpuUsageText.SetTextFriendly($"{CpuUsageBar.Value = await Task.Run(() => CPUHelper.CPUUsage):N0}%");
+            GpuUsageText.SetTextFriendly($"{GpuUsageBar.Value = await Task.Run(() => GPUHelper.GPUUsage):N0}%");
 
-            ramUsage.Value = ramHelper.UsedRAMPercent;
-            ramUsageLabel.SetTextFriendly($"{ramHelper.UsedRAM:N0} {s_gbStr}");
+            RamUsageBar.Value = ramHelper.UsedRAMPercent;
+            RamUsageText.SetTextFriendly($"{ramHelper.UsedRAM:N0} {s_gbStr}");
         }
 
         private void SetAwakeTime(bool hookTimer = false)
@@ -74,10 +74,10 @@ namespace Fluver.Pages
             if (hookTimer)
             {
                 _timer.Tick += (s, e) => SetAwakeTime();
-                timeAwake.LosingFocus += TextDisplay_LosingFocus;
+                TimeAwakeText.LosingFocus += TextDisplay_LosingFocus;
             }
 
-            timeAwake.SetTextFriendly(TimeSpan.FromMilliseconds(Environment.TickCount64).ToString(@"dd\:hh\:mm\:ss"));
+            TimeAwakeText.SetTextFriendly(TimeSpan.FromMilliseconds(Environment.TickCount64).ToString(@"dd\:hh\:mm\:ss"));
         }
 
         private void ApplyDisplayResolution(bool hookEvents = false)
@@ -89,8 +89,8 @@ namespace Fluver.Pages
             }
 
             var size = DisplayArea.GetFromWindowId(App.MainWindow.AppWindow.Id, DisplayAreaFallback.Primary).OuterBounds;
-            backgroundRect.Width = size.Width;
-            backgroundRect.Height = size.Height;
+            BackgroundRectangle.Width = size.Width;
+            BackgroundRectangle.Height = size.Height;
         }
 
         private void TextDisplay_LosingFocus(UIElement sender, LosingFocusEventArgs e)

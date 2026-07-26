@@ -20,28 +20,28 @@ namespace Fluver.UI.Controls
         {
             Header = info.GetBestDisplayName();
 
-            ring.Maximum = info.TotalSize;
-            ring.Value = info.GetTotalUsedSpace();
-            icon.Glyph = driveIconDictionary.TryGetValue(info.DriveType, out string glyph) ? glyph : driveIconDictionary[DriveType.Fixed];
+            Ring.Maximum = info.TotalSize;
+            Ring.Value = info.GetTotalUsedSpace();
+            Icon.Glyph = driveIconDictionary.TryGetValue(info.DriveType, out string glyph) ? glyph : driveIconDictionary[DriveType.Fixed];
 
             long freeSpace = info.TotalFreeSpace;
             long totalSpace = info.TotalSize;
             float percent = (float)freeSpace / totalSpace;
 
-            this.freeSpace.Text = info.GetFreeSpaceUnit().FormatValue(freeSpace);
-            this.totalSpace.Text = info.GetTotalSpaceUnit().FormatValue(totalSpace);
+            FreeSpaceText.Text = info.GetFreeSpaceUnit().FormatValue(freeSpace);
+            TotalSpaceText.Text = info.GetTotalSpaceUnit().FormatValue(totalSpace);
 
             if (percent < 0.01)
-                ring.Style = criticallyLowSpaceRingStyle;
+                Ring.Style = CriticallyLowSpaceRingStyle;
             else if (percent < 0.05)
-                ring.Style = lowSpaceRingStyle;
+                Ring.Style = LowSpaceRingStyle;
 
                 string name = info.RootDirectory.FullName;
-            mountPoint.Content = name;
-            mountPoint.Click += (s, e) => Process.Start(new ProcessStartInfo(name) { UseShellExecute = true });
+            MountPointLink.Content = name;
+            MountPointLink.Click += (s, e) => Process.Start(new ProcessStartInfo(name) { UseShellExecute = true });
 
-            type.Text = StringsHelper.GetString(info.DriveType.ToString());
-            format.Text = info.DriveFormat;
+            TypeText.Text = StringsHelper.GetString(info.DriveType.ToString());
+            FormatText.Text = info.DriveFormat;
         }
 
         private readonly static ReadOnlyDictionary<DriveType, string> driveIconDictionary = new(new Dictionary<DriveType, string>

@@ -37,7 +37,7 @@
 
             <Border CornerRadius="6" BorderThickness="6" BorderBrush="Black" Grid.RowSpan="4">
                 <Viewbox Stretch="Uniform" Height="80">
-                    <Rectangle x:Name="backgroundRect" />
+                    <Rectangle x:Name="BackgroundRectangle" />
                 </Viewbox>
             </Border>
 
@@ -46,15 +46,15 @@
             <TextBlock x:Uid="Architecture" Style="{ThemeResource AnimatedBodyTextBlockStyle}" Grid.Column="1" Grid.Row="2" />
             <TextBlock x:Uid="TimeAwake" Style="{ThemeResource AnimatedBodyTextBlockStyle}" Grid.Column="1" Grid.Row="3" />
 
-            <TextBlock x:Name="pcName" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="0" />
-            <TextBlock x:Name="productName" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="1" />
-            <TextBlock x:Name="osType" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="2" />
-            <TextBlock x:Name="timeAwake" Text="00:00:00:00" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="3" />
+            <TextBlock x:Name="PcNameText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="0" />
+            <TextBlock x:Name="ProductNameText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="1" />
+            <TextBlock x:Name="ArchitectureText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="2" />
+            <TextBlock x:Name="TimeAwakeText" Text="00:00:00:00" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="3" />
         </Grid>
     </Expander>
     <Expander x:Uid="Specs" IsExpanded="True" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" Padding="12">
         <Grid>
-            <Grid x:Name="specsGrid" ColumnSpacing="12" RowSpacing="4" Visibility="Collapsed">
+            <Grid x:Name="SpecsGrid" ColumnSpacing="12" RowSpacing="4" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -69,21 +69,21 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock x:Uid="CPU" />
-                <TextBlock x:Name="cpu" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" />
-                <TextBlock x:Name="cpuUsageLabel" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" HorizontalAlignment="Right" Grid.Column="2" />
-                <ProgressBar x:Name="cpuUsage" Maximum="100" HorizontalAlignment="Stretch" Margin="0,0,0,4" Grid.ColumnSpan="3" Grid.Row="1" />
+                <TextBlock x:Name="CpuText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" />
+                <TextBlock x:Name="CpuUsageText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" HorizontalAlignment="Right" Grid.Column="2" />
+                <ProgressBar x:Name="CpuUsageBar" Maximum="100" HorizontalAlignment="Stretch" Margin="0,0,0,4" Grid.ColumnSpan="3" Grid.Row="1" />
 
                 <TextBlock x:Uid="GPU" Grid.Row="2" />
-                <TextBlock x:Name="gpu" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="2" />
-                <TextBlock x:Name="gpuUsageLabel" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="2" />
-                <ProgressBar x:Name="gpuUsage" Maximum="100" HorizontalAlignment="Stretch" Margin="0,0,0,4" Grid.ColumnSpan="3" Grid.Row="3" />
+                <TextBlock x:Name="GpuText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="2" />
+                <TextBlock x:Name="GpuUsageText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="2" />
+                <ProgressBar x:Name="GpuUsageBar" Maximum="100" HorizontalAlignment="Stretch" Margin="0,0,0,4" Grid.ColumnSpan="3" Grid.Row="3" />
 
                 <TextBlock Text="{help:StringResource Id=Ram}" Grid.Row="4" />
-                <TextBlock x:Name="ram" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="4" />
-                <TextBlock x:Name="ramUsageLabel" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="4" />
-                <ProgressBar x:Name="ramUsage" Maximum="100" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Grid.Row="6" />
+                <TextBlock x:Name="RamText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="4" />
+                <TextBlock x:Name="RamUsageText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="4" />
+                <ProgressBar x:Name="RamUsageBar" Maximum="100" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Grid.Row="6" />
             </Grid>
-            <ProgressRing x:Name="loadingIndicator" Height="20" Width="20" VerticalAlignment="Center" />
+            <ProgressRing x:Name="LoadingRing" Height="20" Width="20" VerticalAlignment="Center" />
         </Grid>
     </Expander>
 </controls:InfoPage>

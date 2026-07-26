@@ -14,11 +14,11 @@ namespace Fluver.Pages
 
         private void SetVersionInfo()
         {
-            branch.Text = VersionHelper.BuildBranch;
+            BranchText.Text = VersionHelper.BuildBranch;
 
             var channel = VersionHelper.Channel;
-            this.channel.Text = StringsHelper.GetString(channel.ToString());
-            notesLink.NavigateUri = new($"https://aka.ms/{channel}latest");
+            ChannelText.Text = StringsHelper.GetString(channel.ToString());
+            NotesLink.NavigateUri = new($"https://aka.ms/{channel}latest");
 
             Task.Run(async () =>
             {
@@ -26,9 +26,9 @@ namespace Fluver.Pages
                 string email = user.GetEmailAddress();
                 DispatcherQueue.TryEnqueue(() =>
                 {
-                    account.Text = string.IsNullOrWhiteSpace(email) ? user.GetBestDisplayName() : email;
-                    account.Visibility = Visibility.Visible;
-                    accountLoading.Visibility = Visibility.Collapsed;
+                    AccountText.Text = string.IsNullOrWhiteSpace(email) ? user.GetBestDisplayName() : email;
+                    AccountText.Visibility = Visibility.Visible;
+                    AccountLoadingRing.Visibility = Visibility.Collapsed;
                 });
             });
         }

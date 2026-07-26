@@ -26,19 +26,19 @@
             </Grid.RowDefinitions>
 
             <TextBlock x:Uid="Channel" />
-            <TextBlock x:Name="channel" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" />
+            <TextBlock x:Name="ChannelText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" />
 
             <TextBlock x:Uid="Branch" Grid.Row="1" />
-            <TextBlock x:Name="branch" Text="ni_release" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="1" />
+            <TextBlock x:Name="BranchText" Text="ni_release" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="1" />
 
             <TextBlock x:Uid="Account" Grid.Row="2" />
-            <ProgressRing x:Name="accountLoading" HorizontalAlignment="Left" VerticalAlignment="Center" Height="10" Width="10" Grid.Column="1" Grid.Row="2" />
-            <TextBlock x:Name="account" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Visibility="Collapsed" Grid.Column="1" Grid.Row="2" />
+            <ProgressRing x:Name="AccountLoadingRing" HorizontalAlignment="Left" VerticalAlignment="Center" Height="10" Width="10" Grid.Column="1" Grid.Row="2" />
+            <TextBlock x:Name="AccountText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Visibility="Collapsed" Grid.Column="1" Grid.Row="2" />
         </Grid>
     </Expander>
     <Expander x:Uid="Links" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="6">
         <StackPanel Spacing="4">
-            <HyperlinkButton x:Name="notesLink" x:Uid="Notes" />
+            <HyperlinkButton x:Name="NotesLink" x:Uid="Notes" />
             <HyperlinkButton x:Uid="Feedback" Click="FeedbackButton_Click" />
             <HyperlinkButton x:Uid="FlightHub" NavigateUri="https://aka.ms/flighthub" />
             <HyperlinkButton x:Uid="LeaveProgram" NavigateUri="https://insider.windows.com/leave-program" />

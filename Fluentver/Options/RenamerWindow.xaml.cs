@@ -21,14 +21,14 @@ namespace Fluver.Options
                 SettingValues.Backdrop.ValueChanged -= Backdrop_ValueChanged;
             };
 
-            SetTitleBar(titleBar);
+            SetTitleBar(TitleBar);
             ExtendsContentIntoTitleBar = true;
             Title = StringsHelper.GetString("RenamePC.Text");
 
             SystemBackdrop = SettingValues.Backdrop.Value.ToSystemBackdrop();
             SettingValues.Backdrop.ValueChanged += Backdrop_ValueChanged;
 
-            name.Header = string.Format(StringsHelper.GetString("CurrentName"), SystemHelper.SystemName);
+            NameBox.Header = string.Format(StringsHelper.GetString("CurrentName"), SystemHelper.SystemName);
             WindowHelper.ActivateWindow(this.GetWindowHandle());
         }
 
@@ -39,8 +39,8 @@ namespace Fluver.Options
 
         private void Name_TextChanged(object sender, TextChangedEventArgs e)
         {
-            nextButton.IsEnabled = SystemHelper.CheckNetBIOSName(name.Text, out var result);
-            error.Text = result switch
+            NextButton.IsEnabled = SystemHelper.CheckNetBIOSName(NameBox.Text, out var result);
+            ErrorText.Text = result switch
             {
                 NetBIOSNameCheckResult.ExceedsMaxLength => StringsHelper.GetString("NameTooLong"),
                 NetBIOSNameCheckResult.InvalidCharacter => StringsHelper.GetString("NameInvaildCharacters"),
@@ -52,31 +52,31 @@ namespace Fluver.Options
 
         private async void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (finishingScreen.Visibility == Visibility.Visible)
+            if (FinishingScreen.Visibility == Visibility.Visible)
             {
                 Close();
                 return;
             }
 
-            finishingScreen.Visibility = Visibility.Visible;
-            renamingScreen.Visibility = Visibility.Collapsed;
+            FinishingScreen.Visibility = Visibility.Visible;
+            RenamingScreen.Visibility = Visibility.Collapsed;
 
-            nextButton.Content = StringsHelper.GetString("Finish");
-            nextButton.IsEnabled = cancelButton.IsEnabled = false;
+            NextButton.Content = StringsHelper.GetString("Finish");
+            NextButton.IsEnabled = CancelButton.IsEnabled = false;
 
-            bool renamed = await SystemHelper.RenameSystem(name.Text);
+            bool renamed = await SystemHelper.RenameSystem(NameBox.Text);
 
-            loadingIndicator.Visibility = Visibility.Collapsed;
-            closingText.Visibility = Visibility.Visible;
+            LoadingRing.Visibility = Visibility.Collapsed;
+            ClosingText.Visibility = Visibility.Visible;
 
-            cancelButton.IsEnabled = !(nextButton.IsEnabled = renamed);
+            CancelButton.IsEnabled = !(NextButton.IsEnabled = renamed);
             if (!renamed)
-                closingText.Text = StringsHelper.GetString("ErrorPowerShell");
+                ClosingText.Text = StringsHelper.GetString("ErrorPowerShell");
         }
 
         private void Name_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (nextButton.IsEnabled && e.Key == Windows.System.VirtualKey.Enter)
+            if (NextButton.IsEnabled && e.Key == Windows.System.VirtualKey.Enter)
                 NextButton_Click(sender, e);
         }
     }

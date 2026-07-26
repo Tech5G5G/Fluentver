@@ -22,8 +22,8 @@
                 <ColumnDefinition Width="46" />
                 <ColumnDefinition Width="46" />
             </Grid.ColumnDefinitions>
-            <TitleBar x:Name="titleBar" Title="Fluver" HorizontalAlignment="Stretch" Height="31" />
-            <Button x:Name="settingsButton" x:Uid="SettingsButton"
+            <TitleBar x:Name="TitleBar" Title="Fluver" HorizontalAlignment="Stretch" Height="31" />
+            <Button x:Name="SettingsButton" x:Uid="SettingsButton"
                     CornerRadius="0" BorderThickness="0" Background="Transparent"
                     Width="46" Height="31" Grid.Column="1"
                     ToolTipService.Placement="Bottom"
@@ -39,13 +39,13 @@
                 </Button.Resources>
             </Button>
         </Grid>
-        <StackPanel x:Name="mainContent">
+        <StackPanel x:Name="MainContent">
             <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <FontIcon x:Name="windowsLogo" FontFamily="{StaticResource WindowsLogos}" Glyph="&#xE911;" FontSize="40" />
-                <TextBlock x:Name="windowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />
+                <FontIcon x:Name="WindowsIcon" FontFamily="{StaticResource WindowsLogos}" Glyph="&#xE911;" FontSize="40" />
+                <TextBlock x:Name="WindowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />
             </StackPanel>
-            <ScrollViewer x:Name="barScroller" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
-                <SelectorBar x:Name="bar" SelectionChanged="Bar_SelectionChanged" HorizontalAlignment="Center">
+            <ScrollViewer x:Name="BarView" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
+                <SelectorBar x:Name="Bar" SelectionChanged="Bar_SelectionChanged" HorizontalAlignment="Center">
                     <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xE946;}" x:Uid="About"
                                      controls:Accelerator.Key="Number1"
                                      controls:Accelerator.Ctrl="Number1" />
@@ -58,7 +58,7 @@
                     <SelectorBarItem Icon="{ui:FontIcon Glyph=&#xEDA2;}" x:Uid="Storage"
                                      controls:Accelerator.Key="Number4"
                                      controls:Accelerator.Ctrl="Number4" />
-                    <SelectorBarItem x:Name="wipItem" Visibility="Collapsed"
+                    <SelectorBarItem x:Name="WipBarItem" Visibility="Collapsed"
                                      Icon="{ui:FontIcon Glyph=&#xF1AD;}" x:Uid="WIP"
                                      controls:Accelerator.Key="Number5"
                                      controls:Accelerator.Ctrl="Number5" />
@@ -66,7 +66,7 @@
             </ScrollViewer>
             <Frame x:Name="ContentFrame" />
             <Grid Padding="8,8,8,17">
-                <ItemsControl x:Name="toolbar" HorizontalAlignment="Left" ItemsSource="{x:Bind ToolbarButtons}">
+                <ItemsControl x:Name="ToolBar" HorizontalAlignment="Left" ItemsSource="{x:Bind ToolbarButtons}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <comm:WrapPanel Orientation="Horizontal" HorizontalSpacing="8" VerticalSpacing="8">
@@ -92,6 +92,6 @@
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
         </StackPanel>
-        <pages:SettingsPage x:Name="settingsPage" Visibility="Collapsed" />
+        <pages:SettingsPage x:Name="SettingsPage" Visibility="Collapsed" />
     </StackPanel>
 </controls:WindowEx>

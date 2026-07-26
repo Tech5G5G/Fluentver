@@ -26,8 +26,8 @@ namespace Fluver.Pages
         {
             InitializeComponent();
 
-            InitializeComboBox(startupPage, SettingValues.StartupPage);
-            InitializeComboBox(backdrop, SettingValues.Backdrop);
+            InitializeComboBox(StartupPageBox, SettingValues.StartupPage);
+            InitializeComboBox(BackdropBox, SettingValues.Backdrop);
 
             InitializeLanguage();
             DetermineWIPItemsVisibility();
@@ -35,36 +35,36 @@ namespace Fluver.Pages
 
         private void InitializeLanguage()
         {
-            language.SelectedIndex = Math.Max(s_languages.IndexOf(s_currentLanguage), 0);
-            language.SelectionChanged += (s, e) =>
+            LanguageBox.SelectedIndex = Math.Max(s_languages.IndexOf(s_currentLanguage), 0);
+            LanguageBox.SelectionChanged += (s, e) =>
             {
-                string language = ApplicationLanguages.PrimaryLanguageOverride = s_languages[this.language.SelectedIndex];
+                string language = ApplicationLanguages.PrimaryLanguageOverride = s_languages[LanguageBox.SelectedIndex];
                 bool isRestartRequired = language != s_currentLanguage;
 
                 language = language == string.Empty ? ApplicationLanguages.Languages[0] : language;
-                restartAlert.IsOpen = isRestartRequired;
-                languageExpander.Margin = isRestartRequired ? new() : new(0, 0, 0, -4);
+                RestartBar.IsOpen = isRestartRequired;
+                LanguageExpander.Margin = isRestartRequired ? new() : new(0, 0, 0, -4);
 
                 if (isRestartRequired)
                 {
-                    restartAlert.Title = StringsHelper.GetString("RestartAlert.Title", language);
-                    restartAlert.Message = StringsHelper.GetString("RestartAlert.Message", language);
-                    restartAlert.ActionButton.Content = StringsHelper.GetString("RestartButton.Content", language);
+                    RestartBar.Title = StringsHelper.GetString("RestartAlert.Title", language);
+                    RestartBar.Message = StringsHelper.GetString("RestartAlert.Message", language);
+                    RestartBar.ActionButton.Content = StringsHelper.GetString("RestartButton.Content", language);
                 }
 
-                translatorButton.Content = StringsHelper.GetString("TranslationAuthor.Content", language);
-                translatorButton.NavigateUri = new(StringsHelper.GetString("TranslationAuthorURL", language));
+                TranslatorLink.Content = StringsHelper.GetString("TranslationAuthor.Content", language);
+                TranslatorLink.NavigateUri = new(StringsHelper.GetString("TranslationAuthorURL", language));
             };
 
-            translatorButton.NavigateUri = new(StringsHelper.GetString("TranslationAuthorURL"));
+           TranslatorLink.NavigateUri = new(StringsHelper.GetString("TranslationAuthorURL"));
         }
 
         private void DetermineWIPItemsVisibility()
         {
             if (VersionHelper.IsWindowsInsider)
-                wipItem.Visibility = Visibility.Visible;
+                WipBoxItem.Visibility = Visibility.Visible;
             else if (SettingValues.StartupPage.Value == Options.Page.Insider)
-                startupPage.SelectedIndex = 0;
+                StartupPageBox.SelectedIndex = 0;
         }
 
         private static void InitializeComboBox<T>(ComboBox box, EnumSetting<T> setting) where T : Enum

@@ -22,11 +22,11 @@
             <TextBlock x:Uid="RenamePC" Style="{ThemeResource TitleTextBlockStyle}" />
         </Grid>
         <StackPanel x:Name="RenamingScreen" Spacing="12" Padding="24,0,24,24" Grid.Row="1">
-            <TextBox x:Name="Name" x:Uid="NameBox" Width="200" HorizontalAlignment="Left" KeyDown="Name_KeyDown" TextChanged="Name_TextChanged" />
-            <TextBlock x:Name="Error" Foreground="{ThemeResource SystemErrorTextColor}" />
+            <TextBox x:Name="NameBox" x:Uid="NameBox" Width="200" HorizontalAlignment="Left" KeyDown="Name_KeyDown" TextChanged="Name_TextChanged" />
+            <TextBlock x:Name="ErrorText" Foreground="{ThemeResource SystemErrorTextColor}" />
         </StackPanel>
         <Grid x:Name="FinishingScreen" Padding="24,0,24,24" Grid.Row="1" Visibility="Collapsed">
-            <ProgressRing x:Name="LoadingIndicator" Width="40" Height="40" />
+            <ProgressRing x:Name="LoadingRing" Width="40" Height="40" />
             <TextBlock x:Name="ClosingText" x:Uid="PCRenamed" Visibility="Collapsed" />
         </Grid>
         <Grid Padding="16,0"

@@ -17,8 +17,8 @@ namespace Fluver
     {
         public int SelectedIndex
         {
-            get => bar.GetSelectedIndex();
-            set => bar.SetSelectedIndex(value);
+            get => Bar.GetSelectedIndex();
+            set => Bar.SetSelectedIndex(value);
         }
 
         public ObservableCollection<GlyphButton> ToolbarButtons { get; } = [];
@@ -28,7 +28,7 @@ namespace Fluver
             InitializeComponent();
             App.MainWindow = this;
 
-            SetTitleBar(titleBar);
+            SetTitleBar(TitleBar);
             ExtendsContentIntoTitleBar = true;
             AppWindow.SetIcon("Assets/Fluver.ico");
 
@@ -38,8 +38,8 @@ namespace Fluver
             SystemBackdrop = SettingValues.Backdrop.Value.ToSystemBackdrop();
             SettingValues.Backdrop.ValueChanged += (s, e) => SystemBackdrop = e.ToSystemBackdrop();
 
-            WindowHelper.SetAppTheme(titleBar.ActualTheme);
-            titleBar.ActualThemeChanged += (s, e) => WindowHelper.SetAppTheme(s.ActualTheme);
+            WindowHelper.SetAppTheme(TitleBar.ActualTheme);
+            TitleBar.ActualThemeChanged += (s, e) => WindowHelper.SetAppTheme(s.ActualTheme);
 
             Closed += (s, e) => App.RenamerWindow?.Close();
             MinWidth = MaxWidth = 480;
@@ -57,14 +57,14 @@ namespace Fluver
         {
             if (VersionHelper.IsWindows11)
             {
-                windowsLogo.Glyph = "\xE911";
-                windowsVersionText.Text = "Windows 11";
+                WindowsIcon.Glyph = "\xE911";
+                WindowsVersionText.Text = "Windows 11";
             }
             else
             {
-                windowsLogo.Glyph = "\xE910";
-                windowsVersionText.Text = "Windows 10";
-                windowsVersionText.FontWeight = Microsoft.UI.Text.FontWeights.Normal;
+                WindowsIcon.Glyph = "\xE910";
+                WindowsVersionText.Text = "Windows 10";
+                WindowsVersionText.FontWeight = Microsoft.UI.Text.FontWeights.Normal;
             }
         }
 
@@ -72,16 +72,16 @@ namespace Fluver
         {
             SelectedIndex = (int)SettingValues.StartupPage.Value;
             if (VersionHelper.IsWindowsInsider)
-                wipItem.Visibility = Visibility.Visible;
-            bar.Loaded += (s, e) =>
+                WipBarItem.Visibility = Visibility.Visible;
+            Bar.Loaded += (s, e) =>
             {
-                if (bar.ActualWidth >= 464)
+                if (Bar.ActualWidth >= 464)
                 {
-                    barScroller.HorizontalScrollMode = ScrollMode.Enabled;
-                    barScroller.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                    BarView.HorizontalScrollMode = ScrollMode.Enabled;
+                    BarView.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
 
-                    barScroller.PointerEntered += (s, e) => EnableBarScroller(true, e.Pointer);
-                    barScroller.PointerExited += (s, e) => EnableBarScroller(false, e.Pointer);
+                    BarView.PointerEntered += (s, e) => EnableBarScroller(true, e.Pointer);
+                    BarView.PointerExited += (s, e) => EnableBarScroller(false, e.Pointer);
                 }
             };
         }
@@ -90,8 +90,8 @@ namespace Fluver
         {
             if (pointer.PointerDeviceType == PointerDeviceType.Mouse || !enable)
             {
-                barScroller.Padding = enable ? new(0, 0, 0, 8) : new();
-                barScroller.HorizontalScrollBarVisibility = enable ? ScrollBarVisibility.Visible : ScrollBarVisibility.Hidden;
+                BarView.Padding = enable ? new(0, 0, 0, 8) : new();
+                BarView.HorizontalScrollBarVisibility = enable ? ScrollBarVisibility.Visible : ScrollBarVisibility.Hidden;
             }
         }
 
@@ -123,23 +123,23 @@ namespace Fluver
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            if (mainContent.Visibility == Visibility.Visible) // Show settings page
+            if (MainContent.Visibility == Visibility.Visible) // Show settings page
             {
-                mainContent.Visibility = Visibility.Collapsed;
-                settingsPage.Visibility = Visibility.Visible;
+                MainContent.Visibility = Visibility.Collapsed;
+                SettingsPage.Visibility = Visibility.Visible;
 
                 settingsIcon.FontSize = 12;
                 settingsIcon.Glyph = "\uE72B";
-                ToolTipService.SetToolTip(settingsButton, StringsHelper.GetString("SettingsButtonBackTooltip"));
+                ToolTipService.SetToolTip(SettingsButton, StringsHelper.GetString("SettingsButtonBackTooltip"));
             }
             else // Restore main content
             {
-                mainContent.Visibility = Visibility.Visible;
-                settingsPage.Visibility = Visibility.Collapsed;
+                MainContent.Visibility = Visibility.Visible;
+                SettingsPage.Visibility = Visibility.Collapsed;
 
                 settingsIcon.FontSize = 14;
                 settingsIcon.Glyph = "\uE713";
-                ToolTipService.SetToolTip(settingsButton, StringsHelper.GetString("SettingsButton.ToolTipService.ToolTip"));
+                ToolTipService.SetToolTip(SettingsButton, StringsHelper.GetString("SettingsButton.ToolTipService.ToolTip"));
             }
         }
 

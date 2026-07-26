@@ -28,23 +28,23 @@
             </Grid.RowDefinitions>
 
             <TextBlock x:Uid="Edition" />
-            <TextBlock x:Name="editionText" Text="Windows" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" />
+            <TextBlock x:Name="EditionText" Text="Windows" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" />
 
             <TextBlock x:Uid="VersionLabel" Grid.Row="1" />
-            <TextBlock x:Name="versionText" Text="XXHX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="1" />
+            <TextBlock x:Name="VersionText" Text="XXHX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="1" />
 
             <TextBlock x:Uid="Build" Grid.Row="2" />
-            <TextBlock x:Name="buildText" Text="XXXXX.XXXX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="2" />
+            <TextBlock x:Name="BuildText" Text="XXXXX.XXXX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="2" />
         </Grid>
     </Expander>
     <Expander x:Uid="Legal" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12">
         <StackPanel Spacing="8">
             <RichTextBlock TextWrapping="WrapWholeWords">
                 <Paragraph>
-                    <Run x:Name="trademark" />
+                    <Run x:Name="TrademarkText" />
                 </Paragraph>
                 <Paragraph Margin="0,12,0,0">
-                    <Run x:Name="copyright" />
+                    <Run x:Name="CopyrightText" />
                 </Paragraph>
                 <Paragraph Margin="0,12,0,0">
                     <Run x:Uid="Licensed" />
@@ -55,7 +55,7 @@
                 </Paragraph>
             </RichTextBlock>
             <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
-                <HyperlinkButton x:Name="username" Padding="0" Click="Navigate_UsersPage">
+                <HyperlinkButton x:Name="UsernameLink" Padding="0" Click="Navigate_UsersPage">
                     <HyperlinkButton.ContextFlyout>
                         <CommandBarFlyout Placement="RightEdgeAlignedTop">
                             <CommandBarFlyout.SecondaryCommands>
@@ -65,7 +65,7 @@
                         </CommandBarFlyout>
                     </HyperlinkButton.ContextFlyout>
                 </HyperlinkButton>
-                <TextBlock x:Name="orgName" IsTextSelectionEnabled="True" />
+                <TextBlock x:Name="OrgText" IsTextSelectionEnabled="True" />
             </StackPanel>
         </StackPanel>
     </Expander>

@@ -17,19 +17,19 @@ namespace Fluver.Pages
 
         private void SetNames()
         {
-            username.Content = VersionHelper.RegisteredOwner;
-            orgName.Text = VersionHelper.RegisteredOrganization;
-            if (string.IsNullOrWhiteSpace(orgName.Text)) orgName.Visibility = Visibility.Collapsed;
+            UsernameLink.Content = VersionHelper.RegisteredOwner;
+            OrgText.Text = VersionHelper.RegisteredOrganization;
+            if (string.IsNullOrWhiteSpace(OrgText.Text)) OrgText.Visibility = Visibility.Collapsed;
         }
 
         private void SetWindowsInformation()
         {
-            editionText.Text = $"{(VersionHelper.IsWindows11 ? "Windows 11" : "Windows 10")} {VersionHelper.Edition}";
-            versionText.Text = VersionHelper.VersionDisplayName;
-            buildText.Text = $"{VersionHelper.Build}.{VersionHelper.Revision}";
+            EditionText.Text = $"{(VersionHelper.IsWindows11 ? "Windows 11" : "Windows 10")} {VersionHelper.Edition}";
+            VersionText.Text = VersionHelper.VersionDisplayName;
+            BuildText.Text = $"{VersionHelper.Build}.{VersionHelper.Revision}";
 
-            trademark.Text = string.Format(StringsHelper.GetString("Trademark"), editionText.Text);
-            copyright.Text = string.Format(StringsHelper.GetString("Copyright"), DateTime.Now.Year);
+            TrademarkText.Text = string.Format(StringsHelper.GetString("Trademark"), EditionText.Text);
+            CopyrightText.Text = string.Format(StringsHelper.GetString("Copyright"), DateTime.Now.Year);
         }
 
         private void Navigate_UsersPage(object sender, RoutedEventArgs e) => App.MainWindow.SelectedIndex = 2;
@@ -37,7 +37,7 @@ namespace Fluver.Pages
         private void CopyUsername(object sender, RoutedEventArgs e)
         {
             DataPackage package = new();
-            package.SetText((string)username.Content);
+            package.SetText((string)UsernameLink.Content);
             Clipboard.SetContent(package);
         }
     }

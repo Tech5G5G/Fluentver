@@ -17,7 +17,7 @@
     <Expander x:Uid="YourInfo" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0">
         <StackPanel Orientation="Horizontal">
             <Grid Margin="12">
-                <PersonPicture x:Name="userPicture" Height="50" Width="50" />
+                <PersonPicture x:Name="UserPicture" Height="50" Width="50" />
                 <Button Content="{ui:FontIcon Glyph=&#xE722;}" Foreground="Transparent" Background="Transparent" CornerRadius="25" Height="52" Width="52" Style="{ThemeResource NoTiltButtonStyle}" Click="UserPicture_Click">
                     <Button.Resources>
                         <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#80000000" />
@@ -26,15 +26,15 @@
                 </Button>
             </Grid>
             <StackPanel Spacing="4" Margin="0,12,12,12" VerticalAlignment="Center">
-                <TextBlock x:Name="userDisplayName" IsTextSelectionEnabled="True" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"  />
-                <TextBlock x:Name="userAccountName" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
+                <TextBlock x:Name="DisplayNameText" IsTextSelectionEnabled="True" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"  />
+                <TextBlock x:Name="AccountNameText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
             </StackPanel>
         </StackPanel>
     </Expander>
     <Expander x:Uid="OtherUsers" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="True" Padding="0">
         <Grid>
-            <ListView x:Name="usersList" SelectionMode="None" Margin="-4,0,0,0" MaxHeight="193" ItemsSource="{x:Bind users}" />
-            <TextBlock x:Name="otherUsersLabel" x:Uid="OtherUsersLabel" HorizontalAlignment="Center" Visibility="Collapsed" />
+            <ListView x:Name="UserList" SelectionMode="None" Margin="-4,0,0,0" MaxHeight="193" ItemsSource="{x:Bind _users}" />
+            <TextBlock x:Name="OtherUsersText" x:Uid="OtherUsersLabel" HorizontalAlignment="Center" Visibility="Collapsed" />
         </Grid>
     </Expander>
 </controls:InfoPage>

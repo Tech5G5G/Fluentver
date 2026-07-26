@@ -13,8 +13,8 @@
     NavigationCacheMode="Required">
 
     <StackPanel Spacing="4" Padding="8,0,8,17">
-        <controls:SettingsExpander x:Name="languageExpander" HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}" x:Uid="Language" IsExpanded="True" Margin="0,0,0,-4">
-            <ComboBox x:Name="language">
+        <controls:SettingsExpander x:Name="LanguageExpander" HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}" x:Uid="Language" IsExpanded="True" Margin="0,0,0,-4">
+            <ComboBox x:Name="LanguageBox">
                 <ComboBoxItem x:Uid="Default" />
                 <ComboBoxItem x:Uid="English" />
                 <ComboBoxItem x:Uid="German" />
@@ -25,11 +25,11 @@
             </ComboBox>
             <controls:SettingsExpander.Items>
                 <controls:SettingsCard x:Uid="Translation">
-                    <HyperlinkButton x:Name="translatorButton" x:Uid="TranslationAuthor" Padding="0" />
+                    <HyperlinkButton x:Name="TranslatorLink" x:Uid="TranslationAuthor" Padding="0" />
                 </controls:SettingsCard>
             </controls:SettingsExpander.Items>
         </controls:SettingsExpander>
-        <InfoBar x:Name="restartAlert" x:Uid="RestartAlert" IsClosable="False" BorderBrush="{ThemeResource CardStrokeColorDefault}" BorderThickness="1">
+        <InfoBar x:Name="RestartBar" x:Uid="RestartAlert" IsClosable="False" BorderBrush="{ThemeResource CardStrokeColorDefault}" BorderThickness="1">
             <InfoBar.ActionButton>
                 <Button x:Uid="RestartButton" Click="RestartButton_Click" />
             </InfoBar.ActionButton>
@@ -38,16 +38,16 @@
             </InfoBar.Resources>
         </InfoBar>
         <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE7E8;}" x:Uid="Startup">
-            <ComboBox x:Name="startupPage">
+            <ComboBox x:Name="StartupPageBox">
                 <ComboBoxItem Content="{help:StringResource Id=About.Text}" />
                 <ComboBoxItem Content="{help:StringResource Id=PC.Text}" />
                 <ComboBoxItem Content="{help:StringResource Id=Users.Text}" />
                 <ComboBoxItem Content="{help:StringResource Id=Storage.Text}" />
-                <ComboBoxItem x:Name="wipItem" Content="{help:StringResource Id=WIP.Text}" Visibility="Collapsed" />
+                <ComboBoxItem x:Name="WipBoxItem" Content="{help:StringResource Id=WIP.Text}" Visibility="Collapsed" />
             </ComboBox>
         </controls:SettingsCard>
         <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE727;}" x:Uid="Backdrop">
-            <ComboBox x:Name="backdrop">
+            <ComboBox x:Name="BackdropBox">
                 <ComboBoxItem x:Uid="Mica" />
                 <ComboBoxItem x:Uid="Tabbed" />
                 <ComboBoxItem x:Uid="Acrylic" />

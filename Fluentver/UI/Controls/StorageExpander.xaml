@@ -10,10 +10,10 @@
     HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12">
     <Expander.Resources>
         <ResourceDictionary>
-            <Style x:Name="lowSpaceRingStyle" TargetType="ProgressRing">
+            <Style x:Name="LowSpaceRingStyle" TargetType="ProgressRing">
                 <Setter Property="Foreground" Value="{ThemeResource SystemErrorTextColor}" />
             </Style>
-            <Style x:Name="criticallyLowSpaceRingStyle" TargetType="ProgressRing">
+            <Style x:Name="CriticallyLowSpaceRingStyle" TargetType="ProgressRing">
                 <Setter Property="Foreground" Value="{ThemeResource SystemFillColorCritical}" />
             </Style>
             <ResourceDictionary.ThemeDictionaries>
@@ -41,12 +41,12 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ProgressRing x:Name="ring"
+        <ProgressRing x:Name="Ring"
                       IsIndeterminate="False"
                       Background="{ThemeResource StorageUsageRingBackground}"
                       Width="75" Height="75"
                       Grid.RowSpan="5" />
-        <FontIcon x:Name="icon"
+        <FontIcon x:Name="Icon"
                   HorizontalAlignment="Center" VerticalAlignment="Center"
                   Grid.RowSpan="5" />
 
@@ -56,10 +56,10 @@
         <TextBlock x:Uid="Format" Grid.Column="1" Grid.Row="3" />
         <TextBlock x:Uid="Type" Grid.Column="1" Grid.Row="4" />
 
-        <TextBlock x:Name="freeSpace" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="0" />
-        <TextBlock x:Name="totalSpace" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="1" />
-        <HyperlinkButton x:Name="mountPoint" Padding="0" Grid.Column="2" Grid.Row="2" />
-        <TextBlock x:Name="format" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="3" />
-        <TextBlock x:Name="type" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="4" />
+        <TextBlock x:Name="FreeSpaceText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="0" />
+        <TextBlock x:Name="TotalSpaceText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="1" />
+        <HyperlinkButton x:Name="MountPointLink" Padding="0" Grid.Column="2" Grid.Row="2" />
+        <TextBlock x:Name="FormatText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="3" />
+        <TextBlock x:Name="TypeText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="4" />
     </Grid>
 </Expander>

@@ -23,9 +23,9 @@ namespace Fluver.Pages
 
             DispatcherQueue.TryEnqueue(() =>
             {
-                userPicture.ProfilePicture = currentUser.GetPicture();
-                userPicture.DisplayName = userDisplayName.Text = currentUser.GetBestDisplayName();
-                userAccountName.Text = currentUser.GetEmailAddress();
+                UserPicture.ProfilePicture = currentUser.GetPicture();
+                UserPicture.DisplayName = DisplayNameText.Text = currentUser.GetBestDisplayName();
+                AccountNameText.Text = currentUser.GetEmailAddress();
 
                 foreach (var user in users)
                     _users.Add(new()
@@ -37,8 +37,8 @@ namespace Fluver.Pages
 
                 if (!_users.Any())
                 {
-                    usersList.Visibility = Visibility.Collapsed;
-                    otherUsersLabel.Visibility = Visibility.Visible;
+                    UserList.Visibility = Visibility.Collapsed;
+                    OtherUsersText.Visibility = Visibility.Visible;
                 }
             });
         });
