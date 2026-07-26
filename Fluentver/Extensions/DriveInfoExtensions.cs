@@ -1,4 +1,3 @@
-﻿using System.Collections.ObjectModel;
 using Fluver.Helpers;
 
 namespace Fluver.Extensions;
@@ -35,8 +34,10 @@ public static class DriveInfoExtensions
         return $"{Math.Round((double)value / info.AmountInBytes)} {info.Extension}";
     }
 
-    /// <summary>Contains <see cref="UnitInfo"/>s for <see cref="StorageUnit"/>s.</summary>
-    public static ReadOnlyDictionary<StorageUnit, UnitInfo> UnitDictionary { get; } = new(new Dictionary<StorageUnit, UnitInfo>
+    /// <summary>
+    /// Contains <see cref="UnitInfo"/>s for <see cref="StorageUnit"/>s.
+    /// </summary>
+    public static IReadOnlyDictionary<StorageUnit, UnitInfo> UnitDictionary { get; } = new Dictionary<StorageUnit, UnitInfo>
     {
         { StorageUnit.Bytes, new(StringsHelper.GetString("Bytes"), 1) },
         { StorageUnit.Kilobytes, new(StringsHelper.GetString("Kilobytes"), 1024) },
@@ -45,7 +46,7 @@ public static class DriveInfoExtensions
         { StorageUnit.Terabytes, new(StringsHelper.GetString("Terabytes"), (long)1024 * 1024 * 1024 * 1024) },
         { StorageUnit.Petabytes, new(StringsHelper.GetString("Petabytes"), (long)1024 * 1024 * 1024 * 1024 * 1024) },
         { StorageUnit.Exabytes, new(StringsHelper.GetString("Exabytes"), (long)1024 * 1024 * 1024 * 1024 * 1024 * 1024) },
-    });
+    };
 
     private static StorageUnit GetUnit(long value)
     {
