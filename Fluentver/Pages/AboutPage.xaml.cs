@@ -9,7 +9,7 @@ namespace Fluver.Pages
     {
         public AboutPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             SetNames();
             SetWindowsInformation();

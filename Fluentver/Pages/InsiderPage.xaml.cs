@@ -8,7 +8,7 @@ namespace Fluver.Pages
     {
         public InsiderPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             SetVersionInfo();
         }
 

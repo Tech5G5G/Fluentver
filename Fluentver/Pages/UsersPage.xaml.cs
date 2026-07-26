@@ -12,7 +12,7 @@ namespace Fluver.Pages
 
         public UsersPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             GetUsers();
         }
 

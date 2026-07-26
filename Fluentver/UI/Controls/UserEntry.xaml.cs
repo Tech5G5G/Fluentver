@@ -8,8 +8,8 @@ namespace Fluver.UI.Controls
     {
         public UserEntry()
         {
-            this.InitializeComponent();
-            this.DefaultStyleKey = typeof(UserEntry);
+            InitializeComponent();
+            DefaultStyleKey = typeof(UserEntry);
         }
 
         public ImageSource ProfilePicture

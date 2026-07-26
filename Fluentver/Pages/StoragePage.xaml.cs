@@ -9,7 +9,7 @@ namespace Fluver.Pages
     {
         public StoragePage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             ExpanderStates = SettingValues.DiskExpanderStates;
 
             GetAllDisks(true);

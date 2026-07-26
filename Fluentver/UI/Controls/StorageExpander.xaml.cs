@@ -12,7 +12,7 @@ namespace Fluver.UI.Controls
 
         public StorageExpander(DriveInfo info)
         {
-            this.InitializeComponent();
+            InitializeComponent();
             SetExpanderDetails(DriveInfo = info);
         }
 

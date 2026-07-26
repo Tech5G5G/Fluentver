@@ -19,7 +19,7 @@ namespace Fluver.Pages
 
         public PCPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             Loaded += (s, e) => _timer.Start();
             Unloaded += (s, e) => _timer.Stop();

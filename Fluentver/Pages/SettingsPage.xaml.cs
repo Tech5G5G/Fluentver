@@ -24,7 +24,7 @@ namespace Fluver.Pages
 
         public SettingsPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             InitializeComboBox(startupPage, SettingValues.StartupPage);
             InitializeComboBox(backdrop, SettingValues.Backdrop);

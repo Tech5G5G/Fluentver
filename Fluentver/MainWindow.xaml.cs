@@ -25,7 +25,7 @@ namespace Fluver
 
         public MainWindow()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             App.MainWindow = this;
 
             SetTitleBar(titleBar);

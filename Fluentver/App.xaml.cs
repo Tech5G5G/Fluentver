@@ -14,7 +14,7 @@ namespace Fluver
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>
