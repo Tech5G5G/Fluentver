@@ -16,7 +16,7 @@ public static class ControlExtensions
             bar.SelectedItem = null;
     }
 
-    public static GlyphButton AddClick(this GlyphButton button, RoutedEventHandler handler)
+    public static T AddClick<T>(this T button, RoutedEventHandler handler) where T : ButtonBase
     {
         button.Click += handler;
         return button;
