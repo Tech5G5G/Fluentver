@@ -63,7 +63,7 @@ namespace Fluver.Pages
         {
             if (VersionHelper.IsWindowsInsider)
                 wipItem.Visibility = Visibility.Visible;
-            else if (SettingValues.StartupPage == Settings.Pages.Insider)
+            else if (SettingValues.StartupPage.Value == Options.Page.Insider)
                 startupPage.SelectedIndex = 0;
         }
 

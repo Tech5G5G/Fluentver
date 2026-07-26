@@ -1,31 +1,43 @@
-﻿namespace Fluver.Settings
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Controls;
+using WinUIEx;
+using Fluver.Helpers;
+using Fluver.Extensions;
+
+namespace Fluver.Options
 {
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RenamerWindow : WindowEx
+    public sealed partial class RenamerWindow : UI.Controls.WindowEx
     {
         public RenamerWindow()
         {
-            this.InitializeComponent();
-            Closed += (s, e) => App.RenamerWindow = null;
+            InitializeComponent();
+            Closed += (s, e) =>
+            {
+                App.RenamerWindow = null;
+                SettingValues.Backdrop.ValueChanged -= Backdrop_ValueChanged;
+            };
 
             SetTitleBar(titleBar);
             ExtendsContentIntoTitleBar = true;
             Title = StringsHelper.GetString("RenamePC.Text");
 
             SystemBackdrop = SettingValues.Backdrop.Value.ToSystemBackdrop();
-            SettingValues.Backdrop.ValueChanged += (s, e) =>
-            {
-                if (App.RenamerWindow == this)
-                    SystemBackdrop = e.ToSystemBackdrop();
-            };
+            SettingValues.Backdrop.ValueChanged += Backdrop_ValueChanged;
 
             name.Header = string.Format(StringsHelper.GetString("CurrentName"), SystemHelper.SystemName);
             WindowHelper.ActivateWindow(this.GetWindowHandle());
         }
 
-        private void Name_TextChanged(object sender, TextChangedEventArgs args)
+        private void Backdrop_ValueChanged(object sender, BackdropType e)
+        {
+            SystemBackdrop = e.ToSystemBackdrop();
+        }
+
+        private void Name_TextChanged(object sender, TextChangedEventArgs e)
         {
             nextButton.IsEnabled = SystemHelper.CheckNetBIOSName(name.Text, out var result);
             error.Text = result switch
@@ -36,7 +48,7 @@
             };
         }
 
-        private void Cancel(object sender, RoutedEventArgs args) => Close();
+        private void Cancel(object sender, RoutedEventArgs e) => Close();
 
         private async void NextButton_Click(object sender, RoutedEventArgs e)
         {
