@@ -14,8 +14,8 @@ namespace Fluver.UI
         public static DependencyProperty KeyProperty { get; } =
             DependencyProperty.RegisterAttached("Key", typeof(VirtualKey), typeof(Accelerator), new PropertyMetadata(VirtualKey.None, KeyPropertyChanged));
 
-        private static void KeyPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args) =>
-            (sender as UIElement).KeyboardAccelerators.Add(new() { Key = (VirtualKey)args.NewValue });
+        private static void KeyPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) =>
+            (sender as UIElement).KeyboardAccelerators.Add(new() { Key = (VirtualKey)e.NewValue });
 
         #endregion
 
@@ -28,10 +28,10 @@ namespace Fluver.UI
         public static DependencyProperty CtrlProperty { get; } =
             DependencyProperty.RegisterAttached("Ctrl", typeof(VirtualKey), typeof(Accelerator), new PropertyMetadata(VirtualKey.None, CtrlPropertyChanged));
 
-        private static void CtrlPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args) =>
+        private static void CtrlPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) =>
             (sender as UIElement).KeyboardAccelerators.Add(new()
             {
-                Key = (VirtualKey)args.NewValue,
+                Key = (VirtualKey)e.NewValue,
                 Modifiers = VirtualKeyModifiers.Control
             });
 
@@ -46,10 +46,10 @@ namespace Fluver.UI
         public static DependencyProperty AltProperty { get; } =
             DependencyProperty.RegisterAttached("Alt", typeof(VirtualKey), typeof(Accelerator), new PropertyMetadata(VirtualKey.None, AltPropertyChanged));
 
-        private static void AltPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args) =>
+        private static void AltPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) =>
             (sender as UIElement).KeyboardAccelerators.Add(new()
             {
-                Key = (VirtualKey)args.NewValue,
+                Key = (VirtualKey)e.NewValue,
                 Modifiers = VirtualKeyModifiers.Menu
             });
 
@@ -64,10 +64,10 @@ namespace Fluver.UI
         public static DependencyProperty ShiftProperty { get; } =
             DependencyProperty.RegisterAttached("Shift", typeof(VirtualKey), typeof(Accelerator), new PropertyMetadata(VirtualKey.None, ShiftPropertyChanged));
 
-        private static void ShiftPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args) =>
+        private static void ShiftPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) =>
             (sender as UIElement).KeyboardAccelerators.Add(new()
             {
-                Key = (VirtualKey)args.NewValue,
+                Key = (VirtualKey)e.NewValue,
                 Modifiers = VirtualKeyModifiers.Shift
             });
 

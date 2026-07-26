@@ -93,9 +93,9 @@ namespace Fluver.Pages
             backgroundRect.Height = size.Height;
         }
 
-        private void TextDisplay_LosingFocus(UIElement sender, LosingFocusEventArgs args)
+        private void TextDisplay_LosingFocus(UIElement sender, LosingFocusEventArgs e)
         {
-            if (sender is TextBlock text && args.NewFocusedElement is not Popup) // Reset text selection if focus isn't lost to a popup
+            if (sender is TextBlock text && e.NewFocusedElement is not Popup) // Reset text selection if focus isn't lost to a popup
                 text.Select(text.ContentStart, text.ContentStart);
         }
 

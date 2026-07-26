@@ -95,10 +95,10 @@ namespace Fluver
             }
         }
 
-        private void CloseWindow(object sender, RoutedEventArgs args) => Close();
+        private void CloseWindow(object sender, RoutedEventArgs e) => Close();
 
         int previousIndex;
-        private void Bar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
+        private void Bar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs e)
         {
             sender.SelectedItem.StartBringIntoView();
             AppWindow.Title = sender.SelectedItem.Text;
