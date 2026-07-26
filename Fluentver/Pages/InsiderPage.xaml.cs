@@ -2,7 +2,7 @@
 using Fluver.Helpers;
 using Fluver.UI.Controls;
 
-﻿namespace Fluver.Pages
+namespace Fluver.Pages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

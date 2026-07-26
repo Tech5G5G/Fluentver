@@ -20,7 +20,7 @@ namespace Fluver.Helpers
         }
     }
 
-    public partial class StringResource : MarkupExtension
+    public sealed partial class StringResource : MarkupExtension
     {
         public string Id { get; set; }
 

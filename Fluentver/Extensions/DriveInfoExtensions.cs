@@ -57,7 +57,7 @@ public static class DriveInfoExtensions
 /// <summary>Contains additional information about a <see cref="StorageUnit"/>.</summary>
 /// <param name="Extension">A <see cref="string"/> representation of the units extension.</param>
 /// <param name="AmountInBytes">The amount in bytes the unit takes up, expressed as a <see cref="long"/>.</param>
-public record class UnitInfo(string Extension, long AmountInBytes);
+public sealed record UnitInfo(string Extension, long AmountInBytes);
 
 /// <summary>Various storage units up to exabytes. Use <see cref="DriveInfoExtensions.UnitDictionary"/> to get <see cref="UnitInfo"/>.</summary>
 public enum StorageUnit

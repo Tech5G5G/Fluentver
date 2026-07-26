@@ -263,7 +263,7 @@ public static class GPUHelper
 }
 
 /// <summary>Wrapper for the MemoryStatusEx structure, that contains memory statistics.</summary>
-public class RAMHelper
+public sealed class RAMHelper
 {
     #region PInvoke
 
