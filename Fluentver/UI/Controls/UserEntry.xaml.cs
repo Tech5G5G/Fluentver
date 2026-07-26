@@ -1,3 +1,7 @@
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Controls;
+
 namespace Fluver.UI.Controls
 {
     public sealed partial class UserEntry : UserControl

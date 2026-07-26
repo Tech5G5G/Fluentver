@@ -1,4 +1,7 @@
 ﻿using Windows.ApplicationModel.DataTransfer;
+using Microsoft.UI.Xaml;
+using Fluver.Helpers;
+using Fluver.UI.Controls;
 
 namespace Fluver.Pages
 {

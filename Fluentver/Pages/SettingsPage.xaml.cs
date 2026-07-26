@@ -1,9 +1,13 @@
 ﻿using Windows.Globalization;
 using Microsoft.Windows.AppLifecycle;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Fluver.Helpers;
+using Fluver.Options;
 
 namespace Fluver.Pages
 {
-    /// <summary>
+    public sealed partial class SettingsPage : Microsoft.UI.Xaml.Controls.Page
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class SettingsPage : Page

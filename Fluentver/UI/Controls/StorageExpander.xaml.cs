@@ -1,4 +1,10 @@
-﻿namespace Fluver.UI.Controls
+﻿using System.Diagnostics;
+using System.Collections.ObjectModel;
+using Microsoft.UI.Xaml.Controls;
+using Fluver.Helpers;
+using Fluver.Extensions;
+
+namespace Fluver.UI.Controls
 {
     public sealed partial class StorageExpander : Expander
     {
@@ -40,10 +46,10 @@
 
         private readonly static ReadOnlyDictionary<DriveType, string> driveIconDictionary = new(new Dictionary<DriveType, string>
         {
-            {DriveType.Removable, "\uE88E"},
-            {DriveType.Network, "\uE968"},
-            {DriveType.CDRom, "\uE958"},
-            {DriveType.Fixed, "\uEDA2"}
+            { DriveType.Removable, "\uE88E" },
+            { DriveType.Network, "\uE968" },
+            { DriveType.CDRom, "\uE958" },
+            { DriveType.Fixed, "\uEDA2" }
         });
     }
 }

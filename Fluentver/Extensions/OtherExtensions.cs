@@ -1,10 +1,12 @@
-﻿using Microsoft.UI.Composition.SystemBackdrops;
+﻿using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Composition.SystemBackdrops;
+using Fluver.Options;
 
 namespace Fluver.Extensions
 {
     public static class OtherExtensions
     {
-        public static Microsoft.UI.Xaml.Media.SystemBackdrop ToSystemBackdrop(this BackdropType backdrop) => backdrop switch
+        public static SystemBackdrop ToSystemBackdrop(this BackdropType backdrop) => backdrop switch
         {
             BackdropType.Tabbed => new MicaBackdrop { Kind = MicaKind.BaseAlt },
             BackdropType.Acrylic => new DesktopAcrylicBackdrop(),

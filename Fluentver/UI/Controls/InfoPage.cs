@@ -1,9 +1,16 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using Windows.Storage;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml.Media.Animation;
+using Fluver.Options;
 
 namespace Fluver.UI.Controls
 {
     [Microsoft.UI.Xaml.Markup.ContentProperty(Name = nameof(Children))]
-    public partial class InfoPage : Page
+    public partial class InfoPage : Microsoft.UI.Xaml.Controls.Page
     {
         public IList<GlyphButton> ToolbarButtons { get; } = [];
 

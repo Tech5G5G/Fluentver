@@ -1,4 +1,7 @@
-﻿namespace Fluver
+﻿using Microsoft.UI.Xaml;
+using Fluver.Options;
+
+namespace Fluver
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

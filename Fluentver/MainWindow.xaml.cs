@@ -1,4 +1,17 @@
-﻿namespace Fluver
+﻿using System.Collections.ObjectModel;
+using Microsoft.UI.Input;
+using Microsoft.UI.Windowing;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Animation;
+using Fluver.Pages;
+using Fluver.Options;
+using Fluver.Helpers;
+using Fluver.Extensions;
+using Fluver.UI.Controls;
+
+namespace Fluver
 {
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
@@ -97,11 +110,11 @@
             ContentFrame.Navigate(
                 currentIndex switch
                 {
-                    1 => typeof(PC),
-                    2 => typeof(Users),
-                    3 => typeof(Storage),
-                    4 => typeof(Insider),
-                    _ => typeof(About)
+                    1 => typeof(PCPage),
+                    2 => typeof(UsersPage),
+                    3 => typeof(StoragePage),
+                    4 => typeof(InsiderPage),
+                    _ => typeof(AboutPage)
                 },
                 this,
                 new SlideNavigationTransitionInfo

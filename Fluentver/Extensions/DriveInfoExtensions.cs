@@ -1,4 +1,7 @@
-﻿namespace Fluver.Extensions;
+﻿using System.Collections.ObjectModel;
+using Fluver.Helpers;
+
+namespace Fluver.Extensions;
 
 public static class DriveInfoExtensions
 {
@@ -35,13 +38,13 @@ public static class DriveInfoExtensions
     /// <summary>Contains <see cref="UnitInfo"/>s for <see cref="StorageUnit"/>s.</summary>
     public static ReadOnlyDictionary<StorageUnit, UnitInfo> UnitDictionary { get; } = new(new Dictionary<StorageUnit, UnitInfo>
     {
-        {StorageUnit.Bytes, new(StringsHelper.GetString("Bytes"), 1)},
-        {StorageUnit.Kilobytes, new(StringsHelper.GetString("Kilobytes"), 1024)},
-        {StorageUnit.Megabytes, new(StringsHelper.GetString("Megabytes"), 1024 * 1024)},
-        {StorageUnit.Gigabytes, new(StringsHelper.GetString("Gigabytes"), 1024 * 1024 * 1024)},
-        {StorageUnit.Terabytes, new(StringsHelper.GetString("Terabytes"), (long)1024 * 1024 * 1024 * 1024)},
-        {StorageUnit.Petabytes, new(StringsHelper.GetString("Petabytes"), (long)1024 * 1024 * 1024 * 1024 * 1024)},
-        {StorageUnit.Exabytes, new(StringsHelper.GetString("Exabytes"), (long)1024 * 1024 * 1024 * 1024 * 1024 * 1024)},
+        { StorageUnit.Bytes, new(StringsHelper.GetString("Bytes"), 1) },
+        { StorageUnit.Kilobytes, new(StringsHelper.GetString("Kilobytes"), 1024) },
+        { StorageUnit.Megabytes, new(StringsHelper.GetString("Megabytes"), 1024 * 1024) },
+        { StorageUnit.Gigabytes, new(StringsHelper.GetString("Gigabytes"), 1024 * 1024 * 1024) },
+        { StorageUnit.Terabytes, new(StringsHelper.GetString("Terabytes"), (long)1024 * 1024 * 1024 * 1024) },
+        { StorageUnit.Petabytes, new(StringsHelper.GetString("Petabytes"), (long)1024 * 1024 * 1024 * 1024 * 1024) },
+        { StorageUnit.Exabytes, new(StringsHelper.GetString("Exabytes"), (long)1024 * 1024 * 1024 * 1024 * 1024 * 1024) },
     });
 
     private static StorageUnit GetUnit(long value)

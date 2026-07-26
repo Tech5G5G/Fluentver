@@ -1,6 +1,7 @@
 ﻿using System.Security.Principal;
 using System.DirectoryServices.AccountManagement;
 using Microsoft.Win32;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace Fluver.Helpers
 {

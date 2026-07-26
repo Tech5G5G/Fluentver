@@ -18,6 +18,7 @@ public static class AssignerHelper
             return default;
         }
     }
+
     /// <summary>Tries to return <paramref name="operation"/>.</summary>
     /// <typeparam name="T">The type of the operation to return.</typeparam>
     /// <param name="operation">The operation to try and execute.</param>
@@ -34,6 +35,7 @@ public static class AssignerHelper
             return altOperation.Invoke();
         }
     }
+
     /// <summary>Tries to return <paramref name="operation"/>, but catches <typeparamref name="E"/> if thrown.</summary>
     /// <typeparam name="T">The type of the operation to return.</typeparam>
     /// <typeparam name="E">The <see cref="Exception"/> to catch when executing <paramref name="operation"/>.</typeparam>
@@ -67,6 +69,7 @@ public static class AssignerHelper
             return default;
         }
     }
+
     /// <summary>Tries to return <paramref name="operation"/>.</summary>
     /// <typeparam name="T">The type of the operation to return.</typeparam>
     /// <param name="operation">The operation to try and execute.</param>
@@ -83,6 +86,7 @@ public static class AssignerHelper
             return await altOperation.Invoke();
         }
     }
+
     /// <summary>Tries to return <paramref name="operation"/>, but catches <typeparamref name="E"/> if thrown.</summary>
     /// <typeparam name="T">The type of the operation to return.</typeparam>
     /// <typeparam name="E">The <see cref="Exception"/> to catch when executing <paramref name="operation"/>.</typeparam>

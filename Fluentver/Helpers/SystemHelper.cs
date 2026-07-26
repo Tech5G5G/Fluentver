@@ -1,6 +1,9 @@
-﻿using Microsoft.Win32;
+﻿using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Windows.Security.ExchangeActiveSyncProvisioning;
+using Microsoft.Win32;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace Fluver.Helpers
 {

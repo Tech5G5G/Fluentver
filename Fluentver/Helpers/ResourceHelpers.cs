@@ -1,4 +1,5 @@
 using System.Management;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace Fluver.Helpers;
