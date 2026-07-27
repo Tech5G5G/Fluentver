@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<controls:ViewModelPage
+    x:Class="Fluver.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Fluver.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:Fluver.UI"
+    xmlns:ui2="using:CommunityToolkit.WinUI"
+    xmlns:controls="using:Fluver.UI.Controls"
+    xmlns:controls2="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d"
+    NavigationCacheMode="Required">
+
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <FontIcon x:Name="WindowsIcon" FontFamily="{StaticResource WindowsLogos}" Glyph="&#xE911;" FontSize="40" />
+            <TextBlock x:Name="WindowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />
+        </StackPanel>
+        <ScrollViewer x:Name="BarView" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
+            <SelectorBar x:Name="Bar" SelectionChanged="Bar_SelectionChanged" HorizontalAlignment="Center">
+                <SelectorBarItem Icon="{ui2:FontIcon Glyph=&#xE946;}" x:Uid="About"
+                                 ui:Accelerator.Key="Number1"
+                                 ui:Accelerator.Ctrl="Number1" />
+                <SelectorBarItem Icon="{ui2:FontIcon Glyph=&#xE7F4;}" x:Uid="PC"
+                                 ui:Accelerator.Key="Number2"
+                                 ui:Accelerator.Ctrl="Number2" />
+                <SelectorBarItem Icon="{ui2:FontIcon Glyph=&#xE716;}" x:Uid="Users"
+                                 ui:Accelerator.Key="Number3"
+                                 ui:Accelerator.Ctrl="Number3" />
+                <SelectorBarItem Icon="{ui2:FontIcon Glyph=&#xEDA2;}" x:Uid="Storage"
+                                 ui:Accelerator.Key="Number4"
+                                 ui:Accelerator.Ctrl="Number4" />
+                <SelectorBarItem x:Name="WipBarItem" Visibility="Collapsed"
+                                 Icon="{ui2:FontIcon Glyph=&#xF1AD;}" x:Uid="WIP"
+                                 ui:Accelerator.Key="Number5"
+                                 ui:Accelerator.Ctrl="Number5" />
+            </SelectorBar>
+        </ScrollViewer>
+        <Frame x:Name="ContentFrame" />
+        <Grid Padding="8,8,8,17">
+            <ItemsControl x:Name="ToolBar" HorizontalAlignment="Left" ItemsSource="{x:Bind ToolbarButtons}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <controls2:WrapPanel Orientation="Horizontal" HorizontalSpacing="8" VerticalSpacing="8">
+                            <controls2:WrapPanel.ChildrenTransitions>
+                                <TransitionCollection>
+                                    <EntranceThemeTransition />
+                                </TransitionCollection>
+                            </controls2:WrapPanel.ChildrenTransitions>
+                        </controls2:WrapPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <Button x:Uid="Exit" Click="CloseWindow" HorizontalAlignment="Right" VerticalAlignment="Bottom" KeyboardAcceleratorPlacementMode="Hidden" Style="{ThemeResource AccentButtonStyle}">
+                <Button.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="Enter" />
+                    <KeyboardAccelerator Key="Escape" />
+                </Button.KeyboardAccelerators>
+            </Button>
+        </Grid>
+        <StackPanel.ChildrenTransitions>
+            <TransitionCollection>
+                <RepositionThemeTransition IsStaggeringEnabled="False" />
+            </TransitionCollection>
+        </StackPanel.ChildrenTransitions>
+    </StackPanel>
+</controls:ViewModelPage>
