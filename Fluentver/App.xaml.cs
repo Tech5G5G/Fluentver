@@ -20,6 +20,8 @@ namespace Fluver
 
         private readonly ServiceProvider _provider;
 
+        private readonly IWindowManager _manager;
+
         public App()
         {
             InitializeComponent();
@@ -27,12 +29,15 @@ namespace Fluver
             ServiceCollection services = new();
             InitializeServices(services);
             _provider = services.BuildServiceProvider();
+
+            _manager = _provider.GetRequiredService<IWindowManager>();
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            MainWindow = new();
-            MainWindow.Activate();
+            MainWindow window = new(_provider.GetRequiredService<MainWindowViewModel>());
+            _manager.AddWindow(window);
+            window.Activate();
 
 #if !DEBUG
             UnhandledException += (s, e) =>
