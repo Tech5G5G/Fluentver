@@ -11,13 +11,13 @@ namespace Fluver.UI.Controls
             DefaultStyleKey = typeof(GlyphButton);
         }
 
-        public static DependencyProperty GlyphSourceProperty { get; } =
-            DependencyProperty.Register(nameof(GlyphSource), typeof(IconSource), typeof(GlyphButton), new PropertyMetadata(defaultValue: null));
-
         public IconSource GlyphSource
         {
             get => (IconSource)GetValue(GlyphSourceProperty);
             set => SetValue(GlyphSourceProperty, value);
         }
+
+        public static DependencyProperty GlyphSourceProperty { get; } =
+            DependencyProperty.Register(nameof(GlyphSource), typeof(IconSource), typeof(GlyphButton), new PropertyMetadata(defaultValue: null));
     }
 }

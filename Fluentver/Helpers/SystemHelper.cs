@@ -15,7 +15,9 @@ namespace Fluver.Helpers
         private static readonly Regex s_regex = new(@"[/:*?<>| " + "\"]");
         private static readonly EasClientDeviceInformation s_easInfo = new();
 
-        /// <summary>The name of the system.</summary>
+        /// <summary>
+        /// Gets the name of the system.
+        /// </summary>
         public static string SystemName
         {
             get
@@ -25,8 +27,10 @@ namespace Fluver.Helpers
             }
         }
 
-        /// <summary>Sets the name of the system using PowerShell, asynchronously.</summary>
-        /// <param name="name">The new name for the system. This should be checked using <see cref="CheckNetBIOSName(string, out NetBIOSNameCheckResult)"/> beforehand.</param>
+        /// <summary>
+        /// Renames the system using PowerShell, asynchronously.
+        /// </summary>
+        /// <param name="name">The new name for the system. This should be checked using <see cref="CheckNetBosName(string, out NetBiosNameCheckResult)"/> beforehand.</param>
         /// <returns>A <see cref="bool"/> indicating whether the system was renamed.</returns>
         public static async Task<bool> RenameSystem(string name)
         {
@@ -56,7 +60,9 @@ namespace Fluver.Helpers
             return true;
         }
 
-        /// <summary>Determines whether <paramref name="name"/> is a properly formatted NetBIOS name.</summary>
+        /// <summary>
+        /// Determines whether <paramref name="name"/> is a properly formatted NetBIOS name.
+        /// </summary>
         /// <param name="name">The name to check.</param>
         /// <param name="result">A <see cref="NetBIOSNameCheckResult"/>, containing more information about the result.</param>
         /// <returns>A <see cref="bool"/> indicating whether <paramref name="name"/> is properly formatted.</returns>
@@ -71,10 +77,14 @@ namespace Fluver.Helpers
             return result == NetBIOSNameCheckResult.Valid;
         }
 
-        /// <summary>Gets the product name of the system.</summary>
+        /// <summary>
+        /// Gets the product name of the system.
+        /// </summary>
         public static string SystemProductName => s_easInfo.SystemProductName;
 
-        /// <summary>Gets a <see cref="Brush"/> representing the curent user's wallpaper.</summary>
+        /// <summary>
+        /// Gets a <see cref="Brush"/> representing the curent user's wallpaper.
+        /// </summary>
         public static Brush UserWallpaperBrush
         {
             get
@@ -91,6 +101,7 @@ namespace Fluver.Helpers
                             break;
                         return new ImageBrush { ImageSource = new BitmapImage { UriSource = new(wallpaper) }, Stretch = Stretch.UniformToFill };
                 }
+
                 return new ImageBrush { ImageSource = new BitmapImage { UriSource = new($@"C:\Users\{Environment.UserName}\AppData\Roaming\Microsoft\Windows\Themes\TranscodedWallpaper") }, Stretch = Stretch.UniformToFill };
             }
         }

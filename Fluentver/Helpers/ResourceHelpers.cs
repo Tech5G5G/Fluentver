@@ -4,43 +4,38 @@ using System.Runtime.InteropServices;
 
 namespace Fluver.Helpers;
 
-/// <summary>Gets CPU statistics.</summary>
+/// <summary>
+/// Gets CPU statistics.
+/// </summary>
 public static class CPUHelper
 {
-    /// <summary>Gets the name of the CPU.</summary>
-    /// <value>The name of the CPU.</value>
-    public static string CPUName =>
+    /// <summary>
+    /// Gets the name of the CPU.
+    /// </summary>
+    public static string CPUName { get; } =
         new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Processor")
             .Get()
             .Cast<ManagementObject>()
             .Select(i => (string)i["Name"])
             .FirstOrDefault(string.Empty);
 
-    /// <summary>Gets the CPU usage.</summary>
-    /// <value>The percent of the CPU used.</value>
-    public static float CPUUsage => utility.NextValue();
+    /// <summary>
+    /// Gets the percentage of the CPU currently being utilized.
+    /// </summary>
+    public static float CPUUsage => s_utility.NextValue();
 
-    private static readonly PerformanceCounter utility =
+    private static readonly PerformanceCounter s_utility =
         new("Processor Information", "% Processor Utility", "_Total");
 }
 
-/// <summary>Gets GPU statistics.</summary>
+/// <summary>
+/// Gets GPU statistics.
+/// </summary>
 public static class GPUHelper
 {
-    private static readonly string[] s_virtualHints = new[]
-    {
-        "virtual",
-        "microsoft basic",
-        "remote",
-        "vmware",
-        "parallels",
-        "remote display",
-        "meta",
-        "oculus",
-    };
-
-    /// <summary>Gets the name of the GPU.</summary>
-    /// <value>The name of the GPU.</value>
+    /// <summary>
+    /// Gets the name of the GPU.
+    /// </summary>
     public static string GPUName
     {
         get
@@ -101,8 +96,9 @@ public static class GPUHelper
         }
     }
 
-    /// <summary>Gets the GPU usage.</summary>
-    /// <returns>The percent of the GPU used.</returns>
+    /// <summary>
+    /// Gets the percentage of the GPU currently being utilized.
+    /// </summary>
     public static float GPUUsage
     {
         get
@@ -110,8 +106,9 @@ public static class GPUHelper
             float sum = 0f;
             var toRemove = new List<PerformanceCounter>();
             lock (gpuCounters)
+            lock (s_gpuCounters)
             {
-                foreach (var counter in gpuCounters)
+                foreach (var counter in s_gpuCounters)
                 {
                     // NextValue is a method; wrap call in lambda for AssignerHelper
                     sum += AssignerHelper.TryAssign(
@@ -128,7 +125,7 @@ public static class GPUHelper
                 {
                     try
                     {
-                        gpuCounters.Remove(c);
+                        s_gpuCounters.Remove(c);
                         c.Dispose();
                     }
                     catch { }
@@ -139,7 +136,19 @@ public static class GPUHelper
         }
     }
 
-    private static readonly List<PerformanceCounter> gpuCounters;
+    private static readonly string[] s_virtualHints = new[]
+    {
+        "virtual",
+        "microsoft basic",
+        "remote",
+        "vmware",
+        "parallels",
+        "remote display",
+        "meta",
+        "oculus",
+    };
+
+    private static readonly List<PerformanceCounter> s_gpuCounters;
 
     static GPUHelper()
     {
@@ -222,7 +231,7 @@ public static class GPUHelper
         }
         catch { }
 
-        gpuCounters = list;
+        s_gpuCounters = list;
     }
 
     private static int GetPhysIndexFromInstance(string instance)
@@ -262,7 +271,9 @@ public static class GPUHelper
     }
 }
 
-/// <summary>Wrapper for the MemoryStatusEx structure, that contains memory statistics.</summary>
+/// <summary>
+/// Wrapper for the MEMORYSTATUSEX structure, which contains memory statistics.
+/// </summary>
 public sealed class RAMHelper
 {
     #region PInvoke
@@ -299,18 +310,22 @@ public sealed class RAMHelper
 
     private readonly MEMORYSTATUSEX _status;
 
-    /// <summary>Constructs a new instance of the <see cref="RAMHelper"/> class.</summary>
-    public RAMHelper() => TryCreateMemoryStatus(out _status);
+    /// <summary>
+    /// Constructs a new instance of the <see cref="RAMHelper"/> class.
+    /// </summary>
 
-    /// <summary>Gets the total amount of RAM the system has.</summary>
-    /// <value>The amount of RAM installed in the system in gigabytes.</value>
+    /// <summary>
+    /// Gets the total amount of RAM the system has installed.
+    /// </summary>
     public float TotalRAM => (float)_status.ullTotalPhys / BytesInGigabyte;
 
-    /// <summary>Gets the amount of RAM that is being used.</summary>
-    /// <value>The amount of RAM being used by the system in gigabytes.</value>
+    /// <summary>
+    /// Gets the amount of RAM that is currently being utilized in gigabytes.
+    /// </summary>
     public float UsedRAM => (_status.ullTotalPhys - _status.ullAvailPhys) / BytesInGigabyte;
 
-    /// <summary>Gets the percentage of RAM that is being used.</summary>
-    /// <value>The percentage of RAM being used by the system.</value>
+    /// <summary>
+    /// Gets the percentage of RAM that is currently being utilized.
+    /// </summary>
     public float UsedRAMPercent => UsedRAM / TotalRAM * 100;
 }
