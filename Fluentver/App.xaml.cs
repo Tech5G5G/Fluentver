@@ -8,8 +8,6 @@ namespace Fluver
 {
     public sealed partial class App : Application
     {
-        public static MainWindow MainWindow { get; set; }
-
         public static RenamerWindow RenamerWindow { get; set; }
 
         public static new App Current => (App)Application.Current;
@@ -56,6 +54,13 @@ namespace Fluver
 
         private static void InitializeServices(ServiceCollection services)
         {
+            services.AddSingleton<IMainPageNavigationService, MainPageNavigationService>()
+                    .AddSingleton<IMainWindowNavigationService, MainWindowNavigationService>();
+
+            services.AddSingleton<IWindowManager, WindowManager>();
+
+            services.AddTransient<MainPageViewModel>()
+                    .AddTransient<MainWindowViewModel>();
         }
     }
 }
