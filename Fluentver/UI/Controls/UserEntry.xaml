@@ -12,7 +12,7 @@
         <PersonPicture ProfilePicture="{x:Bind ProfilePicture}" DisplayName="{x:Bind DisplayName}" Height="40" Width="40" />
         <StackPanel VerticalAlignment="Center">
             <TextBlock Text="{x:Bind DisplayName}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" IsTextSelectionEnabled="True" />
-            <TextBlock Text="{x:Bind AccountName}" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" />
+            <TextBlock Text="{x:Bind AccountName}" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" />
         </StackPanel>
     </StackPanel>
 </UserControl>

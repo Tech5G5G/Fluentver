@@ -56,10 +56,10 @@
         <TextBlock x:Uid="Format" Grid.Column="1" Grid.Row="3" />
         <TextBlock x:Uid="Type" Grid.Column="1" Grid.Row="4" />
 
-        <TextBlock x:Name="FreeSpaceText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="0" />
-        <TextBlock x:Name="TotalSpaceText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="1" />
+        <TextBlock x:Name="FreeSpaceText" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="2" Grid.Row="0" />
+        <TextBlock x:Name="TotalSpaceText" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="2" Grid.Row="1" />
         <HyperlinkButton x:Name="MountPointLink" Padding="0" Grid.Column="2" Grid.Row="2" />
-        <TextBlock x:Name="FormatText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="3" />
-        <TextBlock x:Name="TypeText" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="2" Grid.Row="4" />
+        <TextBlock x:Name="FormatText" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="2" Grid.Row="3" />
+        <TextBlock x:Name="TypeText" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="2" Grid.Row="4" />
     </Grid>
 </Expander>
