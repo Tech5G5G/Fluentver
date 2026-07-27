@@ -30,7 +30,7 @@ namespace Fluver.Helpers
         /// <summary>
         /// Renames the system using PowerShell, asynchronously.
         /// </summary>
-        /// <param name="name">The new name for the system. This should be checked using <see cref="CheckNetBosName(string, out NetBiosNameCheckResult)"/> beforehand.</param>
+        /// <param name="name">The new name for the system. This should be checked using <see cref="CheckNetBiosName(string, out NetBiosNameCheckResult)"/> beforehand.</param>
         /// <returns>A <see cref="bool"/> indicating whether the system was renamed.</returns>
         public static async Task<bool> RenameSystem(string name)
         {
@@ -64,17 +64,17 @@ namespace Fluver.Helpers
         /// Determines whether <paramref name="name"/> is a properly formatted NetBIOS name.
         /// </summary>
         /// <param name="name">The name to check.</param>
-        /// <param name="result">A <see cref="NetBIOSNameCheckResult"/>, containing more information about the result.</param>
+        /// <param name="result">A <see cref="NetBiosNameCheckResult"/>, containing more information about the result.</param>
         /// <returns>A <see cref="bool"/> indicating whether <paramref name="name"/> is properly formatted.</returns>
-        public static bool CheckNetBIOSName(string name, out NetBIOSNameCheckResult result)
+        public static bool CheckNetBiosName(string name, out NetBiosNameCheckResult result)
         {
             result = name.Length switch
             {
-                < 1 => NetBIOSNameCheckResult.BelowMinLength,
-                > 15 => NetBIOSNameCheckResult.ExceedsMaxLength,
-                _ => s_regex.IsMatch(name) || name.Contains('\\') ? NetBIOSNameCheckResult.InvalidCharacter : NetBIOSNameCheckResult.Valid
+                < 1 => NetBiosNameCheckResult.BelowMinLength,
+                > 15 => NetBiosNameCheckResult.ExceedsMaxLength,
+                _ => s_regex.IsMatch(name) || name.Contains('\\') ? NetBiosNameCheckResult.InvalidCharacter : NetBiosNameCheckResult.Valid
             };
-            return result == NetBIOSNameCheckResult.Valid;
+            return result == NetBiosNameCheckResult.Valid;
         }
 
         /// <summary>
@@ -96,9 +96,7 @@ namespace Fluver.Helpers
                         byte[] rgb = [.. ((string)Registry.GetValue(HKCU + "Control Panel\\Colors", "Background", "0 0 0")).Split(' ').Select(i => byte.TryParse(i, out byte result) ? result : (byte)0)];
                         return new SolidColorBrush(Windows.UI.Color.FromArgb(0xFF, rgb[0], rgb[1], rgb[2]));
 
-                    case BackgroundType.Picture:
-                        if (Registry.GetValue(HKCU + "Control Panel\\Desktop", "WallPaper", string.Empty) is not string wallpaper || string.IsNullOrWhiteSpace(wallpaper))
-                            break;
+                    case BackgroundType.Picture when Registry.GetValue(HKCU + "Control Panel\\Desktop", "WallPaper", string.Empty) is string wallpaper && !string.IsNullOrWhiteSpace(wallpaper):
                         return new ImageBrush { ImageSource = new BitmapImage { UriSource = new(wallpaper) }, Stretch = Stretch.UniformToFill };
                 }
 
@@ -115,7 +113,7 @@ namespace Fluver.Helpers
         }
     }
 
-    public enum NetBIOSNameCheckResult
+    public enum NetBiosNameCheckResult
     {
         Valid,
         BelowMinLength,

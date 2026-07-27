@@ -5,7 +5,7 @@ using WinUIEx;
 using Fluver.Helpers;
 using Fluver.Extensions;
 
-namespace Fluver.Options
+namespace Fluver.Windows
 {
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
@@ -39,11 +39,11 @@ namespace Fluver.Options
 
         private void Name_TextChanged(object sender, TextChangedEventArgs e)
         {
-            NextButton.IsEnabled = SystemHelper.CheckNetBIOSName(NameBox.Text, out var result);
+            NextButton.IsEnabled = SystemHelper.CheckNetBiosName(NameBox.Text, out var result);
             ErrorText.Text = result switch
             {
-                NetBIOSNameCheckResult.ExceedsMaxLength => StringsHelper.GetString("NameTooLong"),
-                NetBIOSNameCheckResult.InvalidCharacter => StringsHelper.GetString("NameInvaildCharacters"),
+                NetBiosNameCheckResult.ExceedsMaxLength => StringsHelper.GetString("NameTooLong"),
+                NetBiosNameCheckResult.InvalidCharacter => StringsHelper.GetString("NameInvaildCharacters"),
                 _ => string.Empty
             };
         }
@@ -76,7 +76,7 @@ namespace Fluver.Options
             if (!renamed)
             {
                 ClosingText.Text = StringsHelper.GetString("ErrorPowerShell");
-        }
+            }
         }
 
         private void Name_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -84,7 +84,7 @@ namespace Fluver.Options
             if (NextButton.IsEnabled && e.Key == Windows.System.VirtualKey.Enter)
             {
                 NextButton_Click(sender, e);
+            }
         }
     }
-}
 }
