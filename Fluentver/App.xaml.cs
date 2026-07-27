@@ -1,5 +1,8 @@
-﻿using Microsoft.UI.Xaml;
-using Fluver.Options;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
+using Fluver.Windows;
+using Fluver.Navigation;
+using Fluver.ViewModels;
 
 namespace Fluver
 {
@@ -9,9 +12,21 @@ namespace Fluver
 
         public static RenamerWindow RenamerWindow { get; set; }
 
+        public static new App Current => (App)Application.Current;
+
+        public static IServiceProvider Services => Current.ServiceProvider;
+
+        public IServiceProvider ServiceProvider => _provider;
+
+        private readonly ServiceProvider _provider;
+
         public App()
         {
             InitializeComponent();
+
+            ServiceCollection services = new();
+            InitializeServices(services);
+            _provider = services.BuildServiceProvider();
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
@@ -32,6 +47,10 @@ namespace Fluver
                 Microsoft.Windows.AppNotifications.AppNotificationManager.Default.Show(notification);
             };
 #endif
+        }
+
+        private static void InitializeServices(ServiceCollection services)
+        {
         }
     }
 }
