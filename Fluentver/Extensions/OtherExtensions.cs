@@ -2,11 +2,13 @@
 using Microsoft.UI.Composition.SystemBackdrops;
 using Fluver.Options;
 
-namespace Fluver.Extensions
+namespace Fluver.Extensions;
+
+public static class OtherExtensions
 {
-    public static class OtherExtensions
+    public static SystemBackdrop ToSystemBackdrop(this BackdropType backdrop)
     {
-        public static SystemBackdrop ToSystemBackdrop(this BackdropType backdrop) => backdrop switch
+        return backdrop switch
         {
             BackdropType.Tabbed => new MicaBackdrop { Kind = MicaKind.BaseAlt },
             BackdropType.Acrylic => new DesktopAcrylicBackdrop(),

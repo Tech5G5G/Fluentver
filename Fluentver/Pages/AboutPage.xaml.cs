@@ -19,7 +19,10 @@ namespace Fluver.Pages
         {
             UsernameLink.Content = VersionHelper.RegisteredOwner;
             OrgText.Text = VersionHelper.RegisteredOrganization;
-            if (string.IsNullOrWhiteSpace(OrgText.Text)) OrgText.Visibility = Visibility.Collapsed;
+            if (string.IsNullOrWhiteSpace(OrgText.Text))
+            {
+                OrgText.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void SetWindowsInformation()
@@ -32,7 +35,10 @@ namespace Fluver.Pages
             CopyrightText.Text = string.Format(StringsHelper.GetString("Copyright"), DateTime.Now.Year);
         }
 
-        private void Navigate_UsersPage(object sender, RoutedEventArgs e) => App.MainWindow.SelectedIndex = 2;
+        private void Navigate_UsersPage(object sender, RoutedEventArgs e)
+        {
+            App.MainWindow.SelectedIndex = 2;
+        }
 
         private void CopyUsername(object sender, RoutedEventArgs e)
         {

@@ -12,18 +12,21 @@ public partial class WindowEx : Window
 
     public bool IsDialogWindow
     {
-        get => !AppWindow.IsShownInSwitchers && !DoubleClickToMaximize && AppWindow.OwnerWindowId.Value < 0 && AppWindow.Presenter is OverlappedPresenter
-        {
-            IsResizable: false,
-            IsMaximizable: false,
-            IsMinimizable: false,
-            IsAlwaysOnTop: true
-        };
+        get => !AppWindow.IsShownInSwitchers && !DoubleClickToMaximize && AppWindow.OwnerWindowId.Value < 0 &&
+            AppWindow.Presenter is OverlappedPresenter
+            {
+                IsResizable: false,
+                IsMaximizable: false,
+                IsMinimizable: false,
+                IsAlwaysOnTop: true
+            };
         set
         {
             AppWindow.IsShownInSwitchers = DoubleClickToMaximize = !value;
             if (AppWindow.Presenter is OverlappedPresenter presenter)
+            {
                 presenter.IsResizable = presenter.IsMaximizable = presenter.IsMinimizable = !(presenter.IsAlwaysOnTop = value);
+            }
         }
     }
 
@@ -77,24 +80,34 @@ public partial class WindowEx : Window
         set
         {
             if (base.Content is FrameworkElement prevElement)
+            {
                 prevElement.LayoutUpdated -= Content_LayoutUpdated;
+            }
 
             base.Content = value;
 
             if (value is FrameworkElement element)
+            {
                 element.LayoutUpdated += Content_LayoutUpdated;
+            }
         }
     }
 
     private void Content_LayoutUpdated(object sender, object e)
     {
-        if (AppWindow is not null && base.Content is FrameworkElement element)
+        if (AppWindow is null || base.Content is not FrameworkElement element)
         {
-            if (SizeToContent.HasFlag(Dimensions.Width))
-                _manager.Width = element.ActualWidth;
+            return;
+        }
 
-            if (SizeToContent.HasFlag(Dimensions.Height))
-                _manager.Height = element.ActualHeight;
+        if (SizeToContent.HasFlag(Dimensions.Width))
+        {
+            _manager.Width = element.ActualWidth;
+        }
+
+        if (SizeToContent.HasFlag(Dimensions.Height))
+        {
+            _manager.Height = element.ActualHeight;
         }
     }
 
@@ -122,9 +135,11 @@ public partial class WindowEx : Window
                 case 0x00A3 when !DoubleClickToMaximize: // WM_NCLBUTTONDBLCLK
                     e.Handled = true;
                     break;
+
                 case 0x007E: // WM_DISPLAYCHANGE
                     ResolutionChanged?.Invoke(this, null);
                     break;
+
                 case 0x219 when e.Message.WParam == 0x7: // WM_DEVICECHANGE, DBT_DEVNODES_CHANGED
                     DeviceChanged?.Invoke(this, e.Message.LParam);
                     break;

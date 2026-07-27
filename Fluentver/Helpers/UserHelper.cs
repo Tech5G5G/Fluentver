@@ -22,8 +22,11 @@ namespace Fluver.Helpers
         static UserHelper()
         {
             using var hkUsers = RegistryKey.OpenBaseKey(RegistryHive.Users, RegistryView.Default);
-            s_personalEmails = hkUsers.OpenSubKey(StoredIdentities).GetSubKeyNames()
-                .ToDictionary(email => hkUsers.OpenSubKey($"{StoredIdentities}\\{email}").GetSubKeyNames().FirstOrDefault(string.Empty));
+            s_personalEmails = hkUsers.OpenSubKey(StoredIdentities)
+                                      .GetSubKeyNames()
+                                      .ToDictionary(email => hkUsers.OpenSubKey($"{StoredIdentities}\\{email}")
+                                                                    .GetSubKeyNames()
+                                                                    .FirstOrDefault(string.Empty));
         }
 
         /// <summary>
@@ -63,9 +66,9 @@ namespace Fluver.Helpers
             {
                 using PrincipalSearcher searcher = new(new UserPrincipal(new(ContextType.Machine)));
                 s_users = await Task.Run(() => searcher.FindAll()
-                    .Where(i => !i.Sid.Value.StartsWith(SIDStart) || i.Sid.Value[^3] != BuiltInEnd) // Filter out built-in accounts
-                    .Cast<UserPrincipal>()
-                    .ToDictionary(i => i.Sid));
+                                                       .Where(i => !i.Sid.Value.StartsWith(SIDStart) || i.Sid.Value[^3] != BuiltInEnd) // Filter out built-in accounts
+                                                       .Cast<UserPrincipal>()
+                                                       .ToDictionary(i => i.Sid));
             }
         }
 
@@ -85,13 +88,19 @@ namespace Fluver.Helpers
         /// </summary>
         /// <param name="user">The <see cref="UserPrincipal"/> to look the email address up of.</param>
         /// <returns>The email address of <paramref name="user"/>.</returns>
-        public static string GetEmailAddress(this UserPrincipal user) => s_personalEmails.TryGetValue(user.Sid.Value, out string email) ? email : user.EmailAddress;
+        public static string GetEmailAddress(this UserPrincipal user)
+        {
+            return s_personalEmails.TryGetValue(user.Sid.Value, out string email) ? email : user.EmailAddress;
+        }
 
         /// <summary>
         /// Finds the best name of <paramref name="user"/> to display.
         /// </summary>
         /// <param name="user">The <see cref="UserPrincipal"/> to find the best name of.</param>
         /// <returns>If it passes <see cref="string.IsNullOrWhiteSpace(string?)"/>, <see cref="Principal.DisplayName"/>. Otherwise, <see cref="Principal.Name"/></returns>
-        public static string GetBestDisplayName(this UserPrincipal user) => string.IsNullOrWhiteSpace(user.DisplayName) ? user.Name : user.DisplayName;
+        public static string GetBestDisplayName(this UserPrincipal user)
+        {
+            return string.IsNullOrWhiteSpace(user.DisplayName) ? user.Name : user.DisplayName;
+        }
     }
 }

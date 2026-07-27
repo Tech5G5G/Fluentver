@@ -293,7 +293,10 @@ public sealed class RAMHelper
         public ulong ullAvailVirtual;
         public ulong ullAvailExtendedVirtual;
 
-        public MEMORYSTATUSEX() => dwLength = (uint)Marshal.SizeOf<MEMORYSTATUSEX>();
+        public MEMORYSTATUSEX()
+        {
+            dwLength = (uint)Marshal.SizeOf<MEMORYSTATUSEX>();
+        }
     }
 
     private static bool TryCreateMemoryStatus(out MEMORYSTATUSEX status)
@@ -313,6 +316,10 @@ public sealed class RAMHelper
     /// <summary>
     /// Constructs a new instance of the <see cref="RAMHelper"/> class.
     /// </summary>
+    public RAMHelper()
+    {
+        TryCreateMemoryStatus(out _status);
+    }
 
     /// <summary>
     /// Gets the total amount of RAM the system has installed.

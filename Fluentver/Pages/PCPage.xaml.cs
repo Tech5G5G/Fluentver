@@ -96,15 +96,21 @@ namespace Fluver.Pages
         private void TextDisplay_LosingFocus(UIElement sender, LosingFocusEventArgs e)
         {
             if (sender is TextBlock text && e.NewFocusedElement is not Popup) // Reset text selection if focus isn't lost to a popup
+            {
                 text.Select(text.ContentStart, text.ContentStart);
+            }
         }
 
         private void RenamePCButton_Click(object sender, RoutedEventArgs e)
         {
             if (App.RenamerWindow is null)
+            {
                 (App.RenamerWindow = new()).Activate();
+            }
             else
+            {
                 WindowHelper.ActivateWindow(App.RenamerWindow.GetWindowHandle());
+            }
         }
     }
 }

@@ -28,12 +28,14 @@ namespace Fluver.Pages
                 AccountNameText.Text = currentUser.GetEmailAddress();
 
                 foreach (var user in users)
+                {
                     _users.Add(new()
                     {
                         ProfilePicture = user.GetPicture(),
                         DisplayName = user.GetBestDisplayName(),
                         AccountName = user.GetEmailAddress()
                     });
+                }
 
                 if (!_users.Any())
                 {
@@ -43,6 +45,9 @@ namespace Fluver.Pages
             });
         });
 
-        private void UserPicture_Click(object sender, RoutedEventArgs e) => Process.Start(new ProcessStartInfo("ms-settings:yourinfo") { UseShellExecute = true });
+        private void UserPicture_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("ms-settings:yourinfo") { UseShellExecute = true });
+        }
     }
 }

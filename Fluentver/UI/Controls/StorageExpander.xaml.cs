@@ -39,11 +39,15 @@ namespace Fluver.UI.Controls
             TotalSpaceText.Text = info.GetTotalSpaceUnit().FormatValue(totalSpace);
 
             if (percent < 0.01)
+            {
                 Ring.Style = CriticallyLowSpaceRingStyle;
+            }
             else if (percent < 0.05)
+            {
                 Ring.Style = LowSpaceRingStyle;
+            }
 
-                string name = info.RootDirectory.FullName;
+            string name = info.RootDirectory.FullName;
             MountPointLink.Content = name;
             MountPointLink.Click += (s, e) => Process.Start(new ProcessStartInfo(name) { UseShellExecute = true });
 

@@ -6,14 +6,14 @@ namespace Fluver.Extensions;
 
 public static class ControlExtensions
 {
-    public static int GetSelectedIndex(this SelectorBar bar) => bar.Items.IndexOf(bar.SelectedItem);
+    public static int GetSelectedIndex(this SelectorBar bar)
+    {
+        return bar.Items.IndexOf(bar.SelectedItem);
+    }
 
     public static void SetSelectedIndex(this SelectorBar bar, int index)
     {
-        if (index >= 0 && index < bar.Items.Count)
-            bar.SelectedItem = bar.Items[index];
-        else
-            bar.SelectedItem = null;
+        bar.SelectedItem = index >= 0 && index < bar.Items.Count ? bar.Items[index] : null;
     }
 
     public static T AddClick<T>(this T button, RoutedEventHandler handler) where T : ButtonBase
@@ -30,6 +30,8 @@ public static class ControlExtensions
     public static void SetTextFriendly(this TextBlock block, string text)
     {
         if (string.IsNullOrEmpty(block.SelectedText))
+        {
             block.Text = text;
+        }
     }
 }

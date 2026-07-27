@@ -48,7 +48,10 @@ namespace Fluver.Options
             };
         }
 
-        private void Cancel(object sender, RoutedEventArgs e) => Close();
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
         private async void NextButton_Click(object sender, RoutedEventArgs e)
         {
@@ -71,13 +74,17 @@ namespace Fluver.Options
 
             CancelButton.IsEnabled = !(NextButton.IsEnabled = renamed);
             if (!renamed)
+            {
                 ClosingText.Text = StringsHelper.GetString("ErrorPowerShell");
+        }
         }
 
         private void Name_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (NextButton.IsEnabled && e.Key == Windows.System.VirtualKey.Enter)
+            {
                 NextButton_Click(sender, e);
         }
     }
+}
 }

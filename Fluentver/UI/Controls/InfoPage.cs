@@ -36,7 +36,9 @@ namespace Fluver.UI.Controls
                 {
                     case NotifyCollectionChangedAction.Add:
                         if (e.NewItems[0] is not Expander { Header: string key } expander)
+                        {
                             return;
+                        }
 
                         expander.IsExpanded = TryGetExpanderExpanded(key, ExpanderStates, () => UpdateExpanderExpanded(key, true, ExpanderStates));
 
@@ -45,9 +47,11 @@ namespace Fluver.UI.Controls
 
                         _content.Children.Add(expander);
                         break;
+
                     case NotifyCollectionChangedAction.Remove:
                         _content.Children.Remove(e.OldItems[0] as Expander);
                         break;
+
                     case NotifyCollectionChangedAction.Reset:
                         _content.Children.Clear();
                         break;
@@ -65,7 +69,9 @@ namespace Fluver.UI.Controls
         private static bool TryGetExpanderExpanded(string key, Setting<ApplicationDataCompositeValue> setting, Action defaultUsed)
         {
             if (setting.Value.TryGetValue(key, out object value) && value is bool t)
+            {
                 return t;
+            }
             else
             {
                 defaultUsed();
@@ -81,7 +87,9 @@ namespace Fluver.UI.Controls
             {
                 mw.ToolbarButtons.Clear();
                 foreach (var button in ToolbarButtons)
+                {
                     mw.ToolbarButtons.Add(button);
+                }
             }
         }
     }

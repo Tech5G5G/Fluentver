@@ -32,8 +32,10 @@ namespace Fluver
             ExtendsContentIntoTitleBar = true;
             AppWindow.SetIcon("Assets/Fluver.ico");
 
-            var presenter = AppWindow.Presenter as OverlappedPresenter;
+            if (AppWindow.Presenter is OverlappedPresenter presenter)
+            {
             presenter.IsMaximizable = presenter.IsMinimizable = presenter.IsResizable = false;
+            }
 
             SystemBackdrop = SettingValues.Backdrop.Value.ToSystemBackdrop();
             SettingValues.Backdrop.ValueChanged += (s, e) => SystemBackdrop = e.ToSystemBackdrop();
@@ -72,7 +74,9 @@ namespace Fluver
         {
             SelectedIndex = (int)SettingValues.StartupPage.Value;
             if (VersionHelper.IsWindowsInsider)
+            {
                 WipBarItem.Visibility = Visibility.Visible;
+            }
             Bar.Loaded += (s, e) =>
             {
                 if (Bar.ActualWidth >= 464)
@@ -95,7 +99,10 @@ namespace Fluver
             }
         }
 
-        private void CloseWindow(object sender, RoutedEventArgs e) => Close();
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
         private int _previousIndex;
         private void Bar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs e)
@@ -113,7 +120,7 @@ namespace Fluver
                     4 => typeof(InsiderPage),
                     _ => typeof(AboutPage)
                 },
-                this,
+                parameter: this,
                 new SlideNavigationTransitionInfo
                 {
                     Effect = _previousIndex - currentIndex > 0 ? SlideNavigationTransitionEffect.FromLeft : SlideNavigationTransitionEffect.FromRight

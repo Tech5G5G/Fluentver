@@ -1,4 +1,4 @@
-using Fluver.Helpers;
+﻿using Fluver.Helpers;
 
 namespace Fluver.Extensions;
 
@@ -9,28 +9,40 @@ public static class DriveInfoExtensions
     /// </summary>
     /// <param name="drive">The <see cref="DriveInfo"/> to get the total used space of.</param>
     /// <returns>The total used space available on a drive, in bytes.</returns>
-    public static long GetTotalUsedSpace(this DriveInfo drive) => drive.TotalSize - drive.TotalFreeSpace;
+    public static long GetTotalUsedSpace(this DriveInfo drive)
+    {
+        return drive.TotalSize - drive.TotalFreeSpace;
+    }
 
     /// <summary>
     /// Gets the best name to be display in UI.
     /// </summary>
     /// <param name="drive">The <see cref="DriveInfo"/> to get the best name of.</param>
     /// <returns>If it passes <see cref="string.IsNullOrWhiteSpace(string?)"/>, <see cref="DriveInfo.VolumeLabel"/>. Otherwise, <see cref="DriveInfo.Name"/>.</returns>
-    public static string GetBestDisplayName(this DriveInfo drive) => string.IsNullOrWhiteSpace(drive.VolumeLabel) ? drive.Name.Replace(":\\", ":") : drive.VolumeLabel;
+    public static string GetBestDisplayName(this DriveInfo drive)
+    {
+        return string.IsNullOrWhiteSpace(drive.VolumeLabel) ? drive.Name.Replace(":\\", ":") : drive.VolumeLabel;
+    }
 
     /// <summary>
     /// Gets the <see cref="StorageUnit"/> of <see cref="DriveInfo.TotalFreeSpace"/>.
     /// </summary>
     /// <param name="drive">The <see cref="DriveInfo"/> to get the <see cref="StorageUnit"/> of.</param>
     /// <returns>The <see cref="StorageUnit"/> of <see cref="DriveInfo.TotalFreeSpace"/>.</returns>
-    public static StorageUnit GetFreeSpaceUnit(this DriveInfo drive) => GetUnit(drive.TotalFreeSpace);
+    public static StorageUnit GetFreeSpaceUnit(this DriveInfo drive)
+    {
+        return GetUnit(drive.TotalFreeSpace);
+    }
 
     /// <summary>
     /// Gets the <see cref="StorageUnit"/> of <see cref="DriveInfo.TotalSize"/>.
     /// </summary>
     /// <param name="drive">The <see cref="DriveInfo"/> to get the <see cref="StorageUnit"/> of.</param>
     /// <returns>The <see cref="StorageUnit"/> of <see cref="DriveInfo.TotalSize"/>.</returns>
-    public static StorageUnit GetTotalSpaceUnit(this DriveInfo drive) => GetUnit(drive.TotalSize);
+    public static StorageUnit GetTotalSpaceUnit(this DriveInfo drive)
+    {
+        return GetUnit(drive.TotalSize);
+    }
 
     /// <summary>
     /// Formats <paramref name="value"/>, a value in bytes, to a value of <paramref name="unit"/>.

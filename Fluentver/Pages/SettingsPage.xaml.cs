@@ -62,9 +62,13 @@ namespace Fluver.Pages
         private void DetermineWIPItemsVisibility()
         {
             if (VersionHelper.IsWindowsInsider)
+            {
                 WipBoxItem.Visibility = Visibility.Visible;
+            }
             else if (SettingValues.StartupPage.Value == Options.Page.Insider)
+            {
                 StartupPageBox.SelectedIndex = 0;
+            }
         }
 
         private static void InitializeComboBox<T>(ComboBox box, EnumSetting<T> setting) where T : Enum
@@ -74,10 +78,15 @@ namespace Fluver.Pages
             {
                 var value = (T)(object)box.SelectedIndex;
                 if (setting.Value.CompareTo(value) != 0)
+                {
                     setting.Value = value;
+                }
             };
         }
 
-        private void RestartButton_Click(object sender, RoutedEventArgs e) => AppInstance.Restart(string.Empty);
+        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            AppInstance.Restart(string.Empty);
+        }
     }
 }

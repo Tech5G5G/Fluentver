@@ -15,8 +15,14 @@ namespace Fluver.Helpers
 
         #endregion
 
-        public static void SetAppTheme(ElementTheme theme) => _ = SetPreferredAppMode(theme);
+        public static void SetAppTheme(ElementTheme theme)
+        {
+            _ = SetPreferredAppMode(theme);
+        }
 
-        public static void ActivateWindow(IntPtr hWnd) => SetForegroundWindow(hWnd);
+        public static void ActivateWindow(IntPtr hWnd)
+        {
+            SetForegroundWindow(hWnd);
+        }
     }
 }

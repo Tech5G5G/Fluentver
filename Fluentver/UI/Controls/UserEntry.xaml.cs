@@ -9,31 +9,33 @@ namespace Fluver.UI.Controls
         public UserEntry()
         {
             InitializeComponent();
-            DefaultStyleKey = typeof(UserEntry);
         }
 
         public ImageSource ProfilePicture
         {
-            get { return (ImageSource)GetValue(ProfilePictureProperty); }
-            set { SetValue(ProfilePictureProperty, value); }
+            get => (ImageSource)GetValue(ProfilePictureProperty);
+            set => SetValue(ProfilePictureProperty, value);
         }
 
-        public static readonly DependencyProperty ProfilePictureProperty = DependencyProperty.Register("ProfilePicture", typeof(ImageSource), typeof(UserEntry), new PropertyMetadata(null));
+        public static DependencyProperty ProfilePictureProperty { get; } =
+            DependencyProperty.Register("ProfilePicture", typeof(ImageSource), typeof(UserEntry), new PropertyMetadata(defaultValue: null));
 
         public string DisplayName
         {
-            get { return (string)GetValue(DisplayNameProperty); }
-            set { SetValue(DisplayNameProperty, value); }
+            get => (string)GetValue(DisplayNameProperty);
+            set => SetValue(DisplayNameProperty, value);
         }
 
-        public static readonly DependencyProperty DisplayNameProperty = DependencyProperty.Register("DisplayName", typeof(string), typeof(UserEntry), new PropertyMetadata(string.Empty));
+        public static DependencyProperty DisplayNameProperty { get; } =
+            DependencyProperty.Register("DisplayName", typeof(string), typeof(UserEntry), new PropertyMetadata(defaultValue: string.Empty));
 
         public string AccountName
         {
-            get { return (string)GetValue(AccountNameProperty); }
-            set { SetValue(AccountNameProperty, value); }
+            get => (string)GetValue(AccountNameProperty);
+            set => SetValue(AccountNameProperty, value);
         }
 
-        public static readonly DependencyProperty AccountNameProperty = DependencyProperty.Register("AccountName", typeof(string), typeof(UserEntry), new PropertyMetadata(string.Empty));
+        public static DependencyProperty AccountNameProperty { get; } =
+            DependencyProperty.Register("AccountName", typeof(string), typeof(UserEntry), new PropertyMetadata(defaultValue: string.Empty));
     }
 }

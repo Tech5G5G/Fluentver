@@ -79,8 +79,10 @@ namespace Fluver.Helpers
         /// Gets the <see cref="UserPrincipal"/> that enrolled the system in WIP.
         /// </summary>
         /// <returns>The <see cref="UserPrincipal"/> that enrolled the system, asynchronously.</returns>
-        public static Task<UserPrincipal> GetWIPAccountAsync() =>
-            UserHelper.GetUserFromSIDAsync(new((string)Registry.GetValue(SystemHelper.HKLM + Applicability, "FlightingOwnerSID", string.Empty)));
+        public static Task<UserPrincipal> GetWIPAccountAsync()
+        {
+            return UserHelper.GetUserFromSIDAsync(new((string)Registry.GetValue(SystemHelper.HKLM + Applicability, "FlightingOwnerSID", string.Empty)));
+        }
 
         #endregion
     }

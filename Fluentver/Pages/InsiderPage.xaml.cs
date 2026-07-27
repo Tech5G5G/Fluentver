@@ -33,6 +33,9 @@ namespace Fluver.Pages
             });
         }
 
-        private async void FeedbackButton_Click(object sender, RoutedEventArgs e) => await Windows.System.Launcher.LaunchUriAsync(new("feedback-hub:"));
+        private void FeedbackButton_Click(object sender, RoutedEventArgs e)
+        {
+            _ = Windows.System.Launcher.LaunchUriAsync(new("feedback-hub:"));
+        }
     }
 }

@@ -8,7 +8,10 @@ namespace Fluver.Helpers
         private static readonly ResourceLoader s_loader = new();
         private static readonly ResourceManager s_manager = new();
 
-        public static string GetString(string id) => s_loader.GetString(id.Replace('.', '/'));
+        public static string GetString(string id)
+        {
+            return s_loader.GetString(id.Replace('.', '/'));
+        }
 
         public static string GetString(string id, string language)
         {
@@ -24,6 +27,9 @@ namespace Fluver.Helpers
     {
         public string Id { get; set; }
 
-        protected override object ProvideValue() => StringsHelper.GetString(Id);
+        protected override object ProvideValue()
+        {
+            return StringsHelper.GetString(Id);
+        }
     }
 }
