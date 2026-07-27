@@ -5,7 +5,7 @@ using Microsoft.UI.Xaml.Controls;
 using Fluver.Helpers;
 using Fluver.Options;
 
-namespace Fluver.Pages
+namespace Fluver.Views
 {
     public sealed partial class SettingsPage : Microsoft.UI.Xaml.Controls.Page
     {

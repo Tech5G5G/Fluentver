@@ -2,7 +2,7 @@
 using Fluver.Helpers;
 using Fluver.UI.Controls;
 
-namespace Fluver.Pages
+namespace Fluver.Views
 {
     public sealed partial class InsiderPage : InfoPage
     {

@@ -9,7 +9,7 @@ using Fluver.Extensions;
 using Fluver.UI.Controls;
 using WinUIEx;
 
-namespace Fluver.Pages
+namespace Fluver.Views
 {
     public sealed partial class PCPage : InfoPage
     {

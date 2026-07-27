@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <controls:InfoPage
-    x:Class="Fluver.Pages.AboutPage"
+    x:Class="Fluver.Views.AboutPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Fluver.Pages"
+    xmlns:local="using:Fluver.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:controls="using:Fluver.UI.Controls"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
-    <controls:InfoPage.ToolbarButtons>
+    <!--<controls:InfoPage.ToolbarButtons>
         <controls:GlyphButton x:Uid="Activation" Glyph="&#xEB95;" ProcessName="ms-settings:activation" />
         <controls:GlyphButton x:Uid="WinUpdate" Glyph="&#xE895;" ProcessName="ms-settings:windowsupdate" />
-    </controls:InfoPage.ToolbarButtons>
+    </controls:InfoPage.ToolbarButtons>-->
 
     <Expander x:Uid="WinSpecs" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12">
         <Grid ColumnSpacing="12" RowSpacing="4">
@@ -28,13 +28,13 @@
             </Grid.RowDefinitions>
 
             <TextBlock x:Uid="Edition" />
-            <TextBlock x:Name="EditionText" Text="Windows" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" />
+            <TextBlock x:Name="EditionText" Text="Windows" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="1" />
 
             <TextBlock x:Uid="VersionLabel" Grid.Row="1" />
-            <TextBlock x:Name="VersionText" Text="XXHX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="1" />
+            <TextBlock x:Name="VersionText" Text="XXHX" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="1" Grid.Row="1" />
 
             <TextBlock x:Uid="Build" Grid.Row="2" />
-            <TextBlock x:Name="BuildText" Text="XXXXX.XXXX" Style="{ThemeResource SecondaryDisplayTextBlockStyle}" Grid.Column="1" Grid.Row="2" />
+            <TextBlock x:Name="BuildText" Text="XXXXX.XXXX" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="1" Grid.Row="2" />
         </Grid>
     </Expander>
     <Expander x:Uid="Legal" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12">
