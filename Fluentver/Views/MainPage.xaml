@@ -74,7 +74,10 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button x:Uid="Exit" Click="CloseWindow" HorizontalAlignment="Right" VerticalAlignment="Bottom" KeyboardAcceleratorPlacementMode="Hidden" Style="{ThemeResource AccentButtonStyle}">
+            <Button x:Uid="Exit" Command="{x:Bind ViewModel.ExitCommand}"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    KeyboardAcceleratorPlacementMode="Hidden"
+                    Style="{ThemeResource AccentButtonStyle}">
                 <Button.KeyboardAccelerators>
                     <KeyboardAccelerator Key="Enter" />
                     <KeyboardAccelerator Key="Escape" />

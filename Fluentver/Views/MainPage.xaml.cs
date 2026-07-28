@@ -1,15 +1,13 @@
-using System.Collections.ObjectModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Input;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Fluver.Helpers;
 using Fluver.Options;
 using Fluver.Extensions;
-using Fluver.UI.Controls;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Input;
 using Fluver.ViewModels;
+using Fluver.UI.Controls;
 
 namespace Fluver.Views
 {
@@ -19,39 +17,32 @@ namespace Fluver.Views
 
         protected override PageViewModel PageViewModel => ViewModel;
 
-        public int SelectedIndex
-        {
-            get => Bar.GetSelectedIndex();
-            set => Bar.SetSelectedIndex(value);
-        }
-
-        public ObservableCollection<GlyphButton> ToolbarButtons { get; } = [];
-
         public MainPage()
         {
             InitializeComponent();
 
             SetupBar();
+            ViewModel.InitializeFrame(ContentFrame);
         }
 
         private void SetupBar()
         {
-            SelectedIndex = (int)SettingValues.StartupPage.Value;
+            // SelectedIndex = (int)SettingValues.StartupPage.Value;
             if (VersionHelper.IsWindowsInsider)
             {
-                WipBarItem.Visibility = Visibility.Visible;
+                // WipBarItem.Visibility = Visibility.Visible;
             }
-            Bar.Loaded += (s, e) =>
-            {
-                if (Bar.ActualWidth >= 464)
-                {
-                    BarView.HorizontalScrollMode = ScrollMode.Enabled;
-                    BarView.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-
-                    BarView.PointerEntered += (s, e) => EnableBarScroller(true, e.Pointer);
-                    BarView.PointerExited += (s, e) => EnableBarScroller(false, e.Pointer);
-                }
-            };
+            // Bar.Loaded += (s, e) =>
+            // {
+            //     if (Bar.ActualWidth >= 464)
+            //     {
+            //         BarView.HorizontalScrollMode = ScrollMode.Enabled;
+            //         BarView.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            // 
+            //         BarView.PointerEntered += (s, e) => EnableBarScroller(true, e.Pointer);
+            //         BarView.PointerExited += (s, e) => EnableBarScroller(false, e.Pointer);
+            //     }
+            // };
         }
 
         private void EnableBarScroller(bool enable, Pointer pointer)
