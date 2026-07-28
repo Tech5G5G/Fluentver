@@ -19,24 +19,36 @@
             <TextBlock x:Name="WindowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />
         </StackPanel>
         <ScrollViewer x:Name="BarView" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
-            <SelectorBar x:Name="Bar" SelectionChanged="Bar_SelectionChanged" HorizontalAlignment="Center">
-                <SelectorBarItem Icon="{ui2:FontIcon Glyph=&#xE946;}" x:Uid="About"
-                                 ui:Accelerator.Key="Number1"
-                                 ui:Accelerator.Ctrl="Number1" />
-                <SelectorBarItem Icon="{ui2:FontIcon Glyph=&#xE7F4;}" x:Uid="PC"
-                                 ui:Accelerator.Key="Number2"
-                                 ui:Accelerator.Ctrl="Number2" />
-                <SelectorBarItem Icon="{ui2:FontIcon Glyph=&#xE716;}" x:Uid="Users"
-                                 ui:Accelerator.Key="Number3"
-                                 ui:Accelerator.Ctrl="Number3" />
-                <SelectorBarItem Icon="{ui2:FontIcon Glyph=&#xEDA2;}" x:Uid="Storage"
-                                 ui:Accelerator.Key="Number4"
-                                 ui:Accelerator.Ctrl="Number4" />
-                <SelectorBarItem x:Name="WipBarItem" Visibility="Collapsed"
-                                 Icon="{ui2:FontIcon Glyph=&#xF1AD;}" x:Uid="WIP"
-                                 ui:Accelerator.Key="Number5"
-                                 ui:Accelerator.Ctrl="Number5" />
-            </SelectorBar>
+            <NavigationView x:Name="Bar" SelectedItem="{x:Bind ConvertPageToItem(ViewModel.SelectedPage), BindBack=ConvertItemToPage, Mode=TwoWay}"
+                            IsSettingsVisible="False" IsBackButtonVisible="Collapsed" PaneDisplayMode="Top"
+                            HorizontalAlignment="Center">
+                <NavigationView.MenuItems>
+                    <NavigationViewItem x:Uid="About" Icon="{ui2:FontIcon Glyph=&#xE946;}"
+                                        ui:Accelerator.Key="Number1" ui:Accelerator.Ctrl="Number1"
+                                        Style="{StaticResource CompactNavigationViewItemStyle}" />
+
+                    <NavigationViewItem x:Uid="PC" Icon="{ui2:FontIcon Glyph=&#xE7F4;}"
+                                        ui:Accelerator.Key="Number2" ui:Accelerator.Ctrl="Number2"
+                                        Style="{StaticResource CompactNavigationViewItemStyle}" />
+
+                    <NavigationViewItem x:Uid="Users" Icon="{ui2:FontIcon Glyph=&#xE716;}"
+                                        ui:Accelerator.Key="Number3" ui:Accelerator.Ctrl="Number3"
+                                        Style="{StaticResource CompactNavigationViewItemStyle}" />
+
+                    <NavigationViewItem x:Uid="Storage" Icon="{ui2:FontIcon Glyph=&#xEDA2;}"
+                                        ui:Accelerator.Key="Number4" ui:Accelerator.Ctrl="Number4"
+                                        Style="{StaticResource CompactNavigationViewItemStyle}" />
+
+                    <NavigationViewItem x:Uid="WIP" Icon="{ui2:FontIcon Glyph=&#xF1AD;}"
+                                        ui:Accelerator.Key="Number5" ui:Accelerator.Ctrl="Number5"
+                                        Style="{StaticResource CompactNavigationViewItemStyle}" />
+                </NavigationView.MenuItems>
+                <NavigationView.Resources>
+                    <x:Double x:Key="NavigationViewTopPaneHeight">40</x:Double>
+                    <x:Double x:Key="TopNavigationViewPaneCustomContentMinWidth">0</x:Double>
+                    <Thickness x:Key="TopNavigationViewContentGridBorderThickness">0</Thickness>
+                </NavigationView.Resources>
+            </NavigationView>
         </ScrollViewer>
         <Frame x:Name="ContentFrame" />
         <Grid Padding="8,8,8,17">

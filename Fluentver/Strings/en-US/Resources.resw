@@ -117,20 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About.Text" xml:space="preserve">
+  <data name="About.Content" xml:space="preserve">
     <value>About</value>
   </data>
   <data name="About.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Windows specs and legal</value>
+    <value>Windows specifications and legal</value>
   </data>
   <data name="Exit.Content" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="PC.Text" xml:space="preserve">
+  <data name="PC.Content" xml:space="preserve">
     <value>Your PC</value>
   </data>
   <data name="PC.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Your PC's info and specs</value>
+    <value>Your PC's information and specifications</value>
   </data>
   <data name="SettingsButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>Settings</value>
@@ -138,19 +138,19 @@
   <data name="SettingsButtonBackTooltip" xml:space="preserve">
     <value>Back</value>
   </data>
-  <data name="Storage.Text" xml:space="preserve">
+  <data name="Storage.Content" xml:space="preserve">
     <value>Storage</value>
   </data>
   <data name="Storage.ToolTipService.ToolTip" xml:space="preserve">
     <value>A list of your disks</value>
   </data>
-  <data name="Users.Text" xml:space="preserve">
+  <data name="Users.Content" xml:space="preserve">
     <value>Users</value>
   </data>
   <data name="Users.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Your info and other users</value>
+    <value>Your information and other users</value>
   </data>
-  <data name="WIP.Text" xml:space="preserve">
+  <data name="WIP.Content" xml:space="preserve">
     <value>Insider</value>
   </data>
   <data name="WIP.ToolTipService.ToolTip" xml:space="preserve">

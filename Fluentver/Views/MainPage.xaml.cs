@@ -103,5 +103,18 @@ namespace Fluver.Views
                 });
             _previousIndex = currentIndex;
         }
+
+        private FluverPage ConvertItemToPage(object item)
+        {
+            // TODO: Can this be fixed?
+            var page = (FluverPage)Bar.MenuItems.IndexOf(item);
+            ViewModel.SelectedPage = page; // Manually set fsr
+            return page;
+        }
+
+        private object ConvertPageToItem(FluverPage page)
+        {
+            return Bar.MenuItems[(int)page];
+        }
     }
 }
