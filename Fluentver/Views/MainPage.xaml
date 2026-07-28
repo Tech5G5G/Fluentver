@@ -10,14 +10,23 @@
     xmlns:ui2="using:CommunityToolkit.WinUI"
     xmlns:controls="using:Fluver.UI.Controls"
     xmlns:controls2="using:CommunityToolkit.WinUI.Controls"
+    xmlns:is11="http://schemas.microsoft.com/winfx/2006/xaml/presentation?ui:WindowsVersionCondition(11)"
+    xmlns:is10="http://schemas.microsoft.com/winfx/2006/xaml/presentation?ui:WindowsVersionCondition(10)"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
 
     <StackPanel>
         <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <FontIcon x:Name="WindowsIcon" FontFamily="{StaticResource WindowsLogos}" Glyph="&#xE911;" FontSize="40" />
-            <TextBlock x:Name="WindowsVersionText" Text="Windows" FontSize="40" Style="{ThemeResource TitleTextBlockStyle}" />
+            <FontIcon x:Name="WindowsIcon"
+                      is11:Glyph="&#xE911;" is10:Glyph="&#xE910;"
+                      FontFamily="{StaticResource WindowsLogos}" FontSize="40" />
+            
+            <TextBlock x:Name="WindowsVersionText"
+                       is11:Text="Windows 11" is10:Text="Windows 10"
+                       is10:FontWeight="Normal" FontSize="40"
+                       Style="{ThemeResource TitleTextBlockStyle}" />
         </StackPanel>
+
         <ScrollViewer x:Name="BarView" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
             <NavigationView x:Name="Bar" SelectedItem="{x:Bind ConvertPageToItem(ViewModel.SelectedPage), BindBack=ConvertItemToPage, Mode=TwoWay}"
                             IsSettingsVisible="False" IsBackButtonVisible="Collapsed" PaneDisplayMode="Top"

@@ -31,24 +31,7 @@ namespace Fluver.Views
         {
             InitializeComponent();
 
-            SetWindowsDisplay();
             SetupBar();
-        }
-
-        // TODO: Replace with IXamlCondition?
-        private void SetWindowsDisplay()
-        {
-            if (VersionHelper.IsWindows11)
-            {
-                WindowsIcon.Glyph = "\xE911";
-                WindowsVersionText.Text = "Windows 11";
-            }
-            else
-            {
-                WindowsIcon.Glyph = "\xE910";
-                WindowsVersionText.Text = "Windows 10";
-                WindowsVersionText.FontWeight = Microsoft.UI.Text.FontWeights.Normal;
-            }
         }
 
         private void SetupBar()
