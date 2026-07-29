@@ -1,24 +1,19 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace Fluver.Navigation;
 
 public interface INavigationService<T> where T : Enum
 {
-    T Page { get; }
+    T CurrentPage { get; }
 
-    void Navigate(T page, object parameter = null, Transition transition = Transition.None);
+    event NavigatedEventHandler Navigated;
 
-    // void GoBack();
+    void Navigate(T page);
+    void Navigate(T page, object parameter);
+
+    void GoBack();
+    void GoForward();
 
     void SetFrame(Frame frame);
-}
-
-public enum Transition
-{
-    SlideFromBottom,
-    SlideFromLeft,
-    SlideFromRight,
-    Entrance,
-    Suppress,
-    None
 }

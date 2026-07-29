@@ -1,50 +1,59 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Media.Animation;
 
 namespace Fluver.Navigation;
 
 public abstract class NavigationService<T> : INavigationService<T> where T : Enum
 {
-    public abstract T Page { get; }
+    public abstract T CurrentPage { get; }
+
+    public event NavigatedEventHandler Navigated;
 
     protected abstract IReadOnlyDictionary<T, Type> PageTypes { get; }
 
     protected Frame Frame => _frame;
     private Frame _frame;
 
-    public void Navigate(T page, object parameter = null, Transition transition = Transition.None)
+    protected virtual NavigationTransitionInfo DetermineTransition(T oldPage, T newPage)
     {
-        if (transition == Transition.None)
-        {
-            _frame.Navigate(PageTypes[page], parameter);
-        }
-        else
+        return new EntranceNavigationTransitionInfo();
+    }
+
+    public void Navigate(T page)
+    {
+        Navigate(page, parameter: null);
+    }
+
+    public virtual void Navigate(T page, object parameter)
+    {
+        var currentPage = CurrentPage;
+
+        // Avoid repeated navigation to the same page
+        if (!page.Equals(currentPage))
         {
             _frame.Navigate(
                 PageTypes[page],
                 parameter,
-                transition switch
-                {
-                    Transition.Entrance => new EntranceNavigationTransitionInfo(),
-
-                    Transition.SlideFromLeft or Transition.SlideFromRight or Transition.SlideFromBottom =>
-                        new SlideNavigationTransitionInfo
-                        {
-                            Effect = (SlideNavigationTransitionEffect)transition
-                        },
-
-                    _ => new SuppressNavigationTransitionInfo()
-                });
+                DetermineTransition(currentPage, page));
         }
     }
 
-    // public void GoBack()
-    // {
-    //     if (_frame.CanGoBack)
-    //     {
-    //         _frame.GoBack();
-    //     }
-    // }
+    public virtual void GoBack()
+    {
+        if (_frame.CanGoBack)
+        {
+            _frame.GoBack();
+        }
+    }
+
+    public virtual void GoForward()
+    {
+        if (_frame.CanGoForward)
+        {
+            _frame.GoForward();
+        }
+    }
 
     public void SetFrame(Frame frame)
     {
@@ -54,5 +63,11 @@ public abstract class NavigationService<T> : INavigationService<T> where T : Enu
         }
 
         _frame = frame;
+        _frame.Navigated += OnNavigated;
+
+        void OnNavigated(object sender, NavigationEventArgs e)
+        {
+            Navigated?.Invoke(sender, e);
+        }
     }
 }
