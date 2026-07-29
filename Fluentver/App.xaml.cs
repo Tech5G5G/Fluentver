@@ -58,6 +58,7 @@ namespace Fluver
                     .AddSingleton<IMainWindowNavigationService, MainWindowNavigationService>();
 
             services.AddSingleton<IWindowManager, WindowManager>();
+                    .AddSingleton<ISettingsService, SettingsService>();
 
             services.AddTransient<MainPageViewModel>()
                     .AddTransient<MainWindowViewModel>();
