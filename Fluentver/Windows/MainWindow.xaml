@@ -8,14 +8,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:Fluver.UI"
     xmlns:ui2="using:CommunityToolkit.WinUI"
-    xmlns:pages="using:Fluver.Pages"
     xmlns:controls="using:Fluver.UI.Controls"
     xmlns:controls2="using:CommunityToolkit.WinUI.Controls"
-    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     mc:Ignorable="d"
     Title="Fluver"
     Width="480" Height="578"
-    DoubleClickToMaximize="False" SizeToContent="Height">
+    MinWidth="480" MaxWidth="480"
+    DoubleClickToMaximize="False"
+    Activated="OnActivated" Closed="OnClosed">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -23,41 +23,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="46" />
-                <ColumnDefinition Width="46" />
-            </Grid.ColumnDefinitions>
-            <TitleBar x:Name="TitleBar" Title="Fluver" HorizontalAlignment="Stretch" Height="31" />
-            <Button x:Name="SettingsButton" x:Uid="SettingsButton"
-                    CornerRadius="0" BorderThickness="0" Background="Transparent"
-                    Width="46" Height="31" Grid.Column="1"
-                    ToolTipService.Placement="Bottom"
-                    Click="SettingsButton_Click"
-                    Loaded="SettingsButton_Loaded" Unloaded="SettingsButton_Unloaded">
-                <AnimatedIcon x:Name="SettingsIcon" Width="16" Height="16">
-                    <animatedvisuals:AnimatedSettingsVisualSource />
-
-                    <AnimatedIcon.FallbackIconSource>
-                        <FontIconSource Glyph="&#xE713;" FontSize="14" />
-                    </AnimatedIcon.FallbackIconSource>
-                </AnimatedIcon>
-
-                <!--<FontIcon x:Name="SettingsIcon" Glyph="&#xE713;" FontSize="14" />-->
-
-                <Button.Resources>
-                    <Style x:Key="FontIconTitleBarStyle" TargetType="FontIcon">
-                        <Setter Property="Foreground" Value="{ThemeResource TitleBarCaptionButtonForegroundColor}" />
-                    </Style>
-                    <Style x:Key="FontIconTitleBarInactiveStyle" TargetType="FontIcon">
-                        <Setter Property="Foreground" Value="{ThemeResource TitleBarCaptionButtonInactiveForegroundColor}" />
-                    </Style>
-                </Button.Resources>
-            </Button>
-        </Grid>
+        <controls:FluverTitleBar x:Name="TitleBar" SettingsButtonClick="OnSettingsButtonClick" />
 
         <Frame x:Name="ContentFrame" Grid.Row="1" />
-        <!--<pages:SettingsPage x:Name="SettingsPage" Visibility="Collapsed" />-->
     </Grid>
 </controls:WindowEx>

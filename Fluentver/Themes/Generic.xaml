@@ -8,4 +8,19 @@
         <ResourceDictionary Source="/Themes/GlyphButton.xaml" />
         <ResourceDictionary Source="/Themes/MemorizingExpander.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Default">
+            <Color x:Key="TitleBarCaptionButtonForegroundColor">#FFFFFF</Color>
+            <Color x:Key="TitleBarCaptionButtonInactiveForegroundColor">#717171</Color>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Light">
+            <Color x:Key="TitleBarCaptionButtonForegroundColor">#191919</Color>
+            <Color x:Key="TitleBarCaptionButtonInactiveForegroundColor">#9B9B9B</Color>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="HighContrast">
+            <StaticResource x:Key="TitleBarCaptionButtonForegroundColor" ResourceKey="TextFillColorPrimary" />
+            <StaticResource x:Key="TitleBarCaptionButtonInactiveForegroundColor" ResourceKey="TextFillColorTertiary" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>
