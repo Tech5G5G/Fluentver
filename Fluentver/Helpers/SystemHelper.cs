@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Text.RegularExpressions;
+using Windows.UI;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Microsoft.Win32;
 using Microsoft.UI.Xaml.Media;
@@ -94,7 +95,7 @@ namespace Fluver.Helpers
                 {
                     case BackgroundType.SolidColor:
                         byte[] rgb = [.. ((string)Registry.GetValue(HKCU + "Control Panel\\Colors", "Background", "0 0 0")).Split(' ').Select(i => byte.TryParse(i, out byte result) ? result : (byte)0)];
-                        return new SolidColorBrush(Windows.UI.Color.FromArgb(0xFF, rgb[0], rgb[1], rgb[2]));
+                        return new SolidColorBrush(Color.FromArgb(0xFF, rgb[0], rgb[1], rgb[2]));
 
                     case BackgroundType.Picture when Registry.GetValue(HKCU + "Control Panel\\Desktop", "WallPaper", string.Empty) is string wallpaper && !string.IsNullOrWhiteSpace(wallpaper):
                         return new ImageBrush { ImageSource = new BitmapImage { UriSource = new(wallpaper) }, Stretch = Stretch.UniformToFill };
