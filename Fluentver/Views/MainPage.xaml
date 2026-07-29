@@ -12,6 +12,7 @@
     xmlns:controls2="using:CommunityToolkit.WinUI.Controls"
     xmlns:is11="http://schemas.microsoft.com/winfx/2006/xaml/presentation?ui:WindowsVersionCondition(11)"
     xmlns:is10="http://schemas.microsoft.com/winfx/2006/xaml/presentation?ui:WindowsVersionCondition(10)"
+    xmlns:isInsider="http://schemas.microsoft.com/winfx/2006/xaml/presentation?ui:WindowsVersionCondition(Insider)"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
 
@@ -48,7 +49,7 @@
                                         ui:Accelerator.Key="Number4" ui:Accelerator.Ctrl="Number4"
                                         Style="{StaticResource CompactNavigationViewItemStyle}" />
 
-                    <NavigationViewItem x:Uid="WIP" Icon="{ui2:FontIcon Glyph=&#xF1AD;}"
+                    <isInsider:NavigationViewItem x:Uid="WIP" Icon="{ui2:FontIcon Glyph=&#xF1AD;}"
                                         ui:Accelerator.Key="Number5" ui:Accelerator.Ctrl="Number5"
                                         Style="{StaticResource CompactNavigationViewItemStyle}" />
                 </NavigationView.MenuItems>
