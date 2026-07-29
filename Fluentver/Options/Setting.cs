@@ -3,7 +3,7 @@ using Windows.Storage;
 
 namespace Fluver.Options;
 
-public partial class Setting<T>(string key, Func<T> defaultFactory) : INotifyPropertyChanged
+public partial class Setting<T>(string key, T defaultValue) : ISetting<T>
 {
     private static readonly ApplicationDataContainer s_store = ApplicationData.Current.LocalSettings;
 
@@ -22,7 +22,6 @@ public partial class Setting<T>(string key, Func<T> defaultFactory) : INotifyPro
             }
             else
             {
-                var defaultValue = defaultFactory();
                 s_store.Values[key] = Serialize(defaultValue);
                 return defaultValue;
             }
@@ -51,7 +50,7 @@ public partial class Setting<T>(string key, Func<T> defaultFactory) : INotifyPro
     #endregion
 }
 
-public sealed partial class EnumSetting<T>(string key, Func<T> defaultFactory) : Setting<T>(key, defaultFactory) where T : Enum
+public sealed partial class EnumSetting<T>(string key, T defaultValue) : Setting<T>(key, defaultValue) where T : Enum
 {
     protected override object Serialize(T value)
     {
