@@ -10,6 +10,9 @@ public sealed partial class WindowManager : IWindowManager
     public IReadOnlyList<Window> Windows => _windows;
     private readonly List<Window> _windows = [];
 
+    public event EventHandler<Window> WindowCreated;
+    public event EventHandler<Window> WindowClosed;
+
     public T CreateWindow<T>() where T : Window, new()
     {
         T window = new();
@@ -27,6 +30,8 @@ public sealed partial class WindowManager : IWindowManager
             _mainWindow = mainWindow;
         }
 
+        WindowCreated?.Invoke(sender: this, window);
+
         void OnClosed(object sender, WindowEventArgs e)
         {
             if (!e.Handled && sender is Window window)
@@ -38,6 +43,8 @@ public sealed partial class WindowManager : IWindowManager
                 {
                     _mainWindow = null;
                 }
+
+                WindowClosed?.Invoke(sender: this, window);
             }
         }
     }

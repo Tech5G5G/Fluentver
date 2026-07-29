@@ -4,9 +4,12 @@ namespace Fluver.Windows;
 
 public interface IWindowManager
 {
-    public MainWindow MainWindow { get; }
+    MainWindow MainWindow { get; }
 
-    public IReadOnlyList<Window> Windows { get; }
+    IReadOnlyList<Window> Windows { get; }
+
+    event EventHandler<Window> WindowCreated;
+    event EventHandler<Window> WindowClosed;
 
     T CreateWindow<T>() where T : Window, new();
 
