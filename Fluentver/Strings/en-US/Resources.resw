@@ -274,7 +274,7 @@
     <value>Other users</value>
   </data>
   <data name="YourInfo.Header" xml:space="preserve">
-    <value>Your info</value>
+    <value>Your information</value>
   </data>
   <data name="OtherUsersLabel.Text" xml:space="preserve">
     <value>No other users found.</value>
