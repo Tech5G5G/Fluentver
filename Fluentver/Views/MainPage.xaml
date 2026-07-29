@@ -21,17 +21,23 @@
             <FontIcon x:Name="WindowsIcon"
                       is11:Glyph="&#xE911;" is10:Glyph="&#xE910;"
                       FontFamily="{StaticResource WindowsLogos}" FontSize="40" />
-            
+
             <TextBlock x:Name="WindowsVersionText"
                        is11:Text="Windows 11" is10:Text="Windows 10"
                        is10:FontWeight="Normal" FontSize="40"
                        Style="{ThemeResource TitleTextBlockStyle}" />
         </StackPanel>
 
-        <ScrollViewer x:Name="BarView" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
+        <ScrollViewer x:Name="BarViewer"
+                      HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
+                      HorizontalAlignment="Center" Width="468"
+                      Style="{StaticResource PaddedScrollViewerStyle}"
+                      Loaded="OnBarViewerLoaded">
             <NavigationView x:Name="Bar" SelectedItem="{x:Bind ConvertPageToItem(ViewModel.SelectedPage), BindBack=ConvertItemToPage, Mode=TwoWay}"
                             IsSettingsVisible="False" IsBackButtonVisible="Collapsed" PaneDisplayMode="Top"
-                            HorizontalAlignment="Center">
+                            HorizontalAlignment="Center" Margin="4,2,4,4"
+                            SelectionChanged="OnBarSelectionChanged">
                 <NavigationView.MenuItems>
                     <NavigationViewItem x:Uid="About" Icon="{ui2:FontIcon Glyph=&#xE946;}"
                                         ui:Accelerator.Key="Number1" ui:Accelerator.Ctrl="Number1"
@@ -50,8 +56,8 @@
                                         Style="{StaticResource CompactNavigationViewItemStyle}" />
 
                     <isInsider:NavigationViewItem x:Uid="WIP" Icon="{ui2:FontIcon Glyph=&#xF1AD;}"
-                                        ui:Accelerator.Key="Number5" ui:Accelerator.Ctrl="Number5"
-                                        Style="{StaticResource CompactNavigationViewItemStyle}" />
+                                                  ui:Accelerator.Key="Number5" ui:Accelerator.Ctrl="Number5"
+                                                  Style="{StaticResource CompactNavigationViewItemStyle}" />
                 </NavigationView.MenuItems>
                 <NavigationView.Resources>
                     <x:Double x:Key="NavigationViewTopPaneHeight">40</x:Double>
@@ -61,8 +67,8 @@
             </NavigationView>
         </ScrollViewer>
         <Frame x:Name="ContentFrame" />
-        <Grid Padding="8,8,8,17">
-            <ItemsControl x:Name="ToolBar" HorizontalAlignment="Left" ItemsSource="{x:Bind ToolbarButtons}">
+        <Grid Padding="8">
+            <ItemsControl x:Name="ToolBar" HorizontalAlignment="Left" ItemsSource="{x:Bind ViewModel.ToolBarItems, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <controls2:WrapPanel Orientation="Horizontal" HorizontalSpacing="8" VerticalSpacing="8">

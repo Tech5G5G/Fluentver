@@ -1,11 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Input;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Animation;
-using Fluver.Helpers;
 using Fluver.Options;
-using Fluver.Extensions;
 using Fluver.ViewModels;
 using Fluver.UI.Controls;
 
@@ -17,70 +15,67 @@ namespace Fluver.Views
 
         protected override PageViewModel PageViewModel => ViewModel;
 
+        private const int MaxBarViewerWidth = 468;
+
         public MainPage()
         {
             InitializeComponent();
-
-            SetupBar();
             ViewModel.InitializeFrame(ContentFrame);
         }
 
-        private void SetupBar()
+        private void OnBarViewerLoaded(object sender, RoutedEventArgs e)
         {
-            // SelectedIndex = (int)SettingValues.StartupPage.Value;
-            if (VersionHelper.IsWindowsInsider)
-            {
-                // WipBarItem.Visibility = Visibility.Visible;
-            }
-            // Bar.Loaded += (s, e) =>
-            // {
-            //     if (Bar.ActualWidth >= 464)
-            //     {
-            //         BarView.HorizontalScrollMode = ScrollMode.Enabled;
-            //         BarView.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            // 
-            //         BarView.PointerEntered += (s, e) => EnableBarScroller(true, e.Pointer);
-            //         BarView.PointerExited += (s, e) => EnableBarScroller(false, e.Pointer);
-            //     }
-            // };
-        }
+            BarViewer.Loaded -= OnBarViewerLoaded;
 
-        private void EnableBarScroller(bool enable, Pointer pointer)
-        {
-            if (pointer.PointerDeviceType == PointerDeviceType.Mouse || !enable)
+            if (BarViewer.ExtentWidth <= MaxBarViewerWidth)
             {
-                BarView.Padding = enable ? new(0, 0, 0, 8) : new();
-                BarView.HorizontalScrollBarVisibility = enable ? ScrollBarVisibility.Visible : ScrollBarVisibility.Hidden;
+                BarViewer.HorizontalScrollMode = ScrollMode.Disabled;
+                BarViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+            }
+            else
+            {
+                BarViewer.Width = double.NaN;
+                BarViewer.HorizontalAlignment = HorizontalAlignment.Stretch;
+
+                BarViewer.PointerEntered += OnBarViewerPointerEntered;
+                BarViewer.PointerExited += OnBarViewerPointerExited;
             }
         }
 
-        private int _previousIndex;
-        private void Bar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs e)
+        private void OnBarViewerPointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            sender.SelectedItem.StartBringIntoView();
-            ViewModel.UpdateWindowTitle(sender.SelectedItem.Text);
-            int currentIndex = sender.GetSelectedIndex();
+            ShowBarViewerScrollBar(show: true, e.Pointer.PointerDeviceType);
+        }
 
-            ContentFrame.Navigate(
-                currentIndex switch
+        private void OnBarViewerPointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            ShowBarViewerScrollBar(show: false, e.Pointer.PointerDeviceType);
+        }
+
+        private void ShowBarViewerScrollBar(bool show, PointerDeviceType pointerType)
+        {
+            if (pointerType == PointerDeviceType.Mouse || !show)
+            {
+                BarViewer.Padding = show ? new(left: 0, top: 0, right: 0, bottom: 6) : default;
+                BarViewer.HorizontalScrollBarVisibility = show ? ScrollBarVisibility.Visible : ScrollBarVisibility.Hidden;
+            }
+        }
+
+        private void OnBarSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)
+        {
+            if (e.SelectedItemContainer is NavigationViewItem { Content: string title } item)
+            {
+                item.StartBringIntoView(options: new()
                 {
-                    1 => typeof(PCPage),
-                    2 => typeof(UsersPage),
-                    3 => typeof(StoragePage),
-                    4 => typeof(InsiderPage),
-                    _ => typeof(AboutPage)
-                },
-                parameter: this,
-                new SlideNavigationTransitionInfo
-                {
-                    Effect = _previousIndex - currentIndex > 0 ? SlideNavigationTransitionEffect.FromLeft : SlideNavigationTransitionEffect.FromRight
+                    AnimationDesired = true,
+                    TargetRect = new(x: -8, y: 0, width: item.ActualWidth + 8, height: item.ActualHeight)
                 });
-            _previousIndex = currentIndex;
+                ViewModel.UpdateWindowTitle(title);
+            }
         }
 
         private FluverPage ConvertItemToPage(object item)
         {
-            // TODO: Can this be fixed?
             var page = (FluverPage)Bar.MenuItems.IndexOf(item);
             ViewModel.SelectedPage = page; // Manually set fsr
             return page;

@@ -51,19 +51,19 @@ public sealed partial class MainPageViewModel : PageViewModel
     {
         if (!_updatingUi)
         {
-            _navigation.Navigate(value, transition: _navigation.CurrentPage - value > 0 ? Transition.SlideFromLeft : Transition.SlideFromRight);
+            _navigation.Navigate(value);
         }
     }
 
     public void InitializeFrame(Frame frame)
     {
         _navigation.SetFrame(frame);
-        _navigation.Navigate(_settings.StartupPage.Value, transition: Transition.Suppress);
+        _navigation.Navigate(_settings.StartupPage.Value);
     }
 
     public void UpdateWindowTitle(string title)
     {
-        _manager.MainWindow.Title = title;
+        _manager.MainWindow.Title = title + "| Fluver";
     }
 
     [RelayCommand]
