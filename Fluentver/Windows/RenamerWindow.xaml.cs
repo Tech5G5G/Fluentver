@@ -1,9 +1,11 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Windowing;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Controls;
 using WinUIEx;
 using Fluver.Helpers;
-using Fluver.Extensions;
+using Fluver.ViewModels;
+using Fluver.System.Interop;
 
 namespace Fluver.Windows
 {
@@ -12,29 +14,27 @@ namespace Fluver.Windows
     /// </summary>
     public sealed partial class RenamerWindow : UI.Controls.WindowEx
     {
-        public RenamerWindow()
+        public RenamerWindowViewModel ViewModel { get; }
+
+        public RenamerWindow(RenamerWindowViewModel viewModel, Window parentWindow)
         {
             InitializeComponent();
-            Closed += (s, e) =>
-            {
-                App.RenamerWindow = null;
-                SettingValues.Backdrop.ValueChanged -= Backdrop_ValueChanged;
-            };
 
             SetTitleBar(TitleBar);
             ExtendsContentIntoTitleBar = true;
             Title = StringsHelper.GetString("RenamePC.Text");
 
             SystemBackdrop = SettingValues.Backdrop.Value.ToSystemBackdrop();
-            SettingValues.Backdrop.ValueChanged += Backdrop_ValueChanged;
+            PInvoke.SetWindowLong(this.GetWindowHandle(), PInvoke.GWL_HWNDPARENT, parentWindow.GetWindowHandle());
+
+            if (AppWindow.Presenter is OverlappedPresenter presenter)
+            {
+                presenter.IsModal = true;
+            }
 
             NameBox.Header = string.Format(StringsHelper.GetString("CurrentName"), SystemHelper.SystemName);
-            WindowHelper.ActivateWindow(this.GetWindowHandle());
-        }
 
-        private void Backdrop_ValueChanged(object sender, BackdropType e)
-        {
-            SystemBackdrop = e.ToSystemBackdrop();
+            (ViewModel = viewModel).AddToWindowManager(renamerWindow: this);
         }
 
         private void Name_TextChanged(object sender, TextChangedEventArgs e)

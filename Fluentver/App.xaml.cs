@@ -9,8 +9,6 @@ namespace Fluver
 {
     public sealed partial class App : Application
     {
-        public static RenamerWindow RenamerWindow { get; set; }
-
         public static new App Current => (App)Application.Current;
 
         public static IServiceProvider Services => Current.ServiceProvider;
@@ -57,7 +55,8 @@ namespace Fluver
                     .AddSingleton<ISettingsService, SettingsService>();
 
             services.AddTransient<MainPageViewModel>()
-                    .AddTransient<MainWindowViewModel>();
+                    .AddTransient<MainWindowViewModel>()
+                    .AddTransient<RenamerWindowViewModel>();
         }
     }
 }
