@@ -17,7 +17,7 @@
     DoubleClickToMaximize="False"
     Activated="OnActivated" Closed="OnClosed">
 
-    <Grid>
+    <Grid Background="Transparent" VerticalAlignment="Top" SizeChanged="OnSizeChanged" PointerPressed="OnPointerPressed">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

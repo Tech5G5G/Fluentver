@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
+using Fluver.Options;
 using Fluver.Windows;
 using Fluver.Navigation;
 using Fluver.ViewModels;
@@ -18,8 +19,6 @@ namespace Fluver
 
         private readonly ServiceProvider _provider;
 
-        private readonly IWindowManager _manager;
-
         public App()
         {
             InitializeComponent();
@@ -27,15 +26,11 @@ namespace Fluver
             ServiceCollection services = new();
             InitializeServices(services);
             _provider = services.BuildServiceProvider();
-
-            _manager = _provider.GetRequiredService<IWindowManager>();
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            MainWindow window = new(_provider.GetRequiredService<MainWindowViewModel>());
-            _manager.AddWindow(window);
-            window.Activate();
+            new MainWindow(_provider.GetRequiredService<MainWindowViewModel>()).Activate();
 
 #if !DEBUG
             UnhandledException += (s, e) =>
@@ -57,7 +52,8 @@ namespace Fluver
             services.AddSingleton<IMainPageNavigationService, MainPageNavigationService>()
                     .AddSingleton<IMainWindowNavigationService, MainWindowNavigationService>();
 
-            services.AddSingleton<IWindowManager, WindowManager>();
+            services.AddSingleton<IWindowManager, WindowManager>()
+                    .AddSingleton<IBackdropManager, BackdropManager>()
                     .AddSingleton<ISettingsService, SettingsService>();
 
             services.AddTransient<MainPageViewModel>()
