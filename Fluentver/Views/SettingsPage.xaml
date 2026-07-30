@@ -6,14 +6,14 @@
     xmlns:local="using:Fluver.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="using:CommunityToolkit.WinUI"
-    xmlns:help="using:Fluver.Helpers"
+    xmlns:ui="using:Fluver.UI"
+    xmlns:ui2="using:CommunityToolkit.WinUI"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
 
     <StackPanel Spacing="4" Padding="8,0,8,17">
-        <controls:SettingsExpander x:Name="LanguageExpander" HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}" x:Uid="Language" IsExpanded="True" Margin="0,0,0,-4">
+        <controls:SettingsExpander x:Name="LanguageExpander" HeaderIcon="{ui2:FontIcon Glyph=&#xF2B7;}" x:Uid="Language" IsExpanded="True" Margin="0,0,0,-4">
             <ComboBox x:Name="LanguageBox">
                 <ComboBoxItem x:Uid="Default" />
                 <ComboBoxItem x:Uid="English" />
@@ -38,15 +38,17 @@
             </InfoBar.Resources>
         </InfoBar>
         <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE7E8;}" x:Uid="Startup">
+        <controls:SettingsCard HeaderIcon="{ui2:FontIcon Glyph=&#xE7E8;}" x:Uid="Startup">
             <ComboBox x:Name="StartupPageBox">
-                <ComboBoxItem Content="{help:StringResource Id=About.Text}" />
-                <ComboBoxItem Content="{help:StringResource Id=PC.Text}" />
-                <ComboBoxItem Content="{help:StringResource Id=Users.Text}" />
-                <ComboBoxItem Content="{help:StringResource Id=Storage.Text}" />
-                <ComboBoxItem x:Name="WipBoxItem" Content="{help:StringResource Id=WIP.Text}" Visibility="Collapsed" />
+                <ComboBoxItem Content="{ui:StringResource Id=About.Content}" />
+                <ComboBoxItem Content="{ui:StringResource Id=PC.Content}" />
+                <ComboBoxItem Content="{ui:StringResource Id=Users.Content}" />
+                <ComboBoxItem Content="{ui:StringResource Id=Storage.Content}" />
+                <ComboBoxItem x:Name="WipBoxItem" Content="{ui:StringResource Id=WIP.Content}" Visibility="Collapsed" />
             </ComboBox>
         </controls:SettingsCard>
         <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE727;}" x:Uid="Backdrop">
+        <controls:SettingsCard HeaderIcon="{ui2:FontIcon Glyph=&#xE727;}" x:Uid="Backdrop">
             <ComboBox x:Name="BackdropBox">
                 <ComboBoxItem x:Uid="Mica" />
                 <ComboBoxItem x:Uid="Tabbed" />
@@ -54,6 +56,7 @@
             </ComboBox>
         </controls:SettingsCard>
         <controls:SettingsExpander HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/SettingsLogo.png}" Header="Fluver" Description="{help:StringResource Id=Version}">
+        <controls:SettingsExpander HeaderIcon="{ui2:BitmapIcon Source=ms-appx:///Assets/SettingsLogo.png}" Header="Fluver" Description="{ui:StringResource Id=Version}">
             <controls:SettingsExpander.Items>
                 <controls:SettingsCard>
                     <HyperlinkButton x:Uid="New" NavigateUri="https://github.com/Tech5G5G/Fluentver/releases/tag/v1.1.5" />
