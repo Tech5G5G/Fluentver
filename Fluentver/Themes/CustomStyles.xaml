@@ -6,6 +6,20 @@
         <XamlControlsResources Source="/Themes/CompactNavigationViewItem.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <Style x:Key="FluverViewRootPanelStyle" TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Spacing" Value="8" />
+        <Setter Property="Padding" Value="8,0" />
+        <Setter Property="ChildrenTransitions">
+            <Setter.Value>
+                <TransitionCollection>
+                    <RepositionThemeTransition IsStaggeringEnabled="False" />
+                </TransitionCollection>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="SecondaryInfoBodyTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
         <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
         <Setter Property="IsTextSelectionEnabled" Value="True" />
@@ -64,7 +78,7 @@
                                         </Storyboard>
                                     </VisualTransition>
                                     <VisualTransition From="MouseIndicatorFull" To="NoIndicator">
-                                    <Storyboard>
+                                        <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalScrollBar" Storyboard.TargetProperty="IndicatorMode">
                                                 <DiscreteObjectKeyFrame KeyTime="{ThemeResource ScrollViewerSeparatorContractDelay}">
                                                     <DiscreteObjectKeyFrame.Value>
@@ -78,7 +92,7 @@
                                                         <ScrollingIndicatorMode>None</ScrollingIndicatorMode>
                                                     </DiscreteObjectKeyFrame.Value>
                                                 </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
+                                            </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualTransition>
                                     <VisualTransition From="MouseIndicatorFull" To="MouseIndicator">
@@ -89,18 +103,18 @@
                                                         <ScrollingIndicatorMode>MouseIndicator</ScrollingIndicatorMode>
                                                     </DiscreteObjectKeyFrame.Value>
                                                 </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
+                                            </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalScrollBar" Storyboard.TargetProperty="IndicatorMode">
                                                 <DiscreteObjectKeyFrame KeyTime="{ThemeResource ScrollViewerSeparatorContractDelay}">
                                                     <DiscreteObjectKeyFrame.Value>
                                                         <ScrollingIndicatorMode>MouseIndicator</ScrollingIndicatorMode>
                                                     </DiscreteObjectKeyFrame.Value>
                                                 </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
                                     </VisualTransition>
                                     <VisualTransition From="TouchIndicator" To="NoIndicator">
-                                    <Storyboard>
+                                        <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalScrollBar" Storyboard.TargetProperty="IndicatorMode">
                                                 <DiscreteObjectKeyFrame KeyTime="0:0:0.5">
                                                     <DiscreteObjectKeyFrame.Value>
@@ -114,7 +128,7 @@
                                                         <ScrollingIndicatorMode>None</ScrollingIndicatorMode>
                                                     </DiscreteObjectKeyFrame.Value>
                                                 </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
+                                            </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>
