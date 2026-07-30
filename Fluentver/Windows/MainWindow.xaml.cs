@@ -42,30 +42,6 @@ namespace Fluver.Windows
             // TODO: Animate using DoubleAnimation + DependencyProperties for Width + Height?
         }
 
-        private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
-        {
-            TitleBar.IsBackButtonVisible = !TitleBar.IsBackButtonVisible;
-
-            // if (MainContent.Visibility == Visibility.Visible) // Show settings page
-            // {
-            //     MainContent.Visibility = Visibility.Collapsed;
-            //     SettingsPage.Visibility = Visibility.Visible;
-            // 
-            //     SettingsIcon.FontSize = 12;
-            //     SettingsIcon.Glyph = "\uE72B";
-            //     ToolTipService.SetToolTip(SettingsButton, StringsHelper.GetString("SettingsButtonBackTooltip"));
-            // }
-            // else // Restore main content
-            // {
-            //     MainContent.Visibility = Visibility.Visible;
-            //     SettingsPage.Visibility = Visibility.Collapsed;
-            // 
-            //     SettingsIcon.FontSize = 14;
-            //     SettingsIcon.Glyph = "\uE713";
-            //     ToolTipService.SetToolTip(SettingsButton, StringsHelper.GetString("SettingsButton.ToolTipService.ToolTip"));
-            // }
-        }
-
         private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
         {
             if (e.GetCurrentPoint(sender as UIElement) is { Properties: { } properties } &&

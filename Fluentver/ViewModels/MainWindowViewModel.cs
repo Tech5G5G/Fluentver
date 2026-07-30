@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Fluver.Windows;
 using Fluver.Navigation;
@@ -14,6 +15,9 @@ public sealed partial class MainWindowViewModel(
 #pragma warning restore CS9113 // Parameter is unread.
     : ObservableObject
 {
+    [ObservableProperty]
+    public partial bool IsSettingsOpen { get; set; }
+
     public MainWindowViewModel InitializeWindowManager(MainWindow mainWindow)
     {
         manager.AddWindow(mainWindow);
@@ -44,7 +48,17 @@ public sealed partial class MainWindowViewModel(
         else
         {
             // TODO: Navigate thru settings.
+
+            if (isXButton1Pressed)
+            {
+                IsSettingsOpen = false;
+            }
         }
+    }
+
+    partial void OnIsSettingsOpenChanged(bool value)
+    {
+        windowNavigation.Navigate(value ? MainWindowPage.SettingsPage : MainWindowPage.MainPage);
     }
 
     public void OnClosed()
@@ -54,5 +68,11 @@ public sealed partial class MainWindowViewModel(
         {
             windows[i].Close();
         }
+    }
+
+    [RelayCommand]
+    public void Settings()
+    {
+        IsSettingsOpen = !IsSettingsOpen;
     }
 }

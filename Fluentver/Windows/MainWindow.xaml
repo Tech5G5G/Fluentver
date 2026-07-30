@@ -23,7 +23,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <controls:FluverTitleBar x:Name="TitleBar" SettingsButtonClick="OnSettingsButtonClick" />
+        <controls:FluverTitleBar x:Name="TitleBar"
+                                 IsBackButtonVisible="{x:Bind ViewModel.IsSettingsOpen, Mode=OneWay}"
+                                 SettingsCommand="{x:Bind ViewModel.SettingsCommand}" />
 
         <Frame x:Name="ContentFrame" Grid.Row="1" />
     </Grid>
