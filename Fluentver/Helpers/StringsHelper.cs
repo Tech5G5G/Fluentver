@@ -1,35 +1,23 @@
-﻿using Microsoft.UI.Xaml.Markup;
-using Microsoft.Windows.ApplicationModel.Resources;
+﻿using Microsoft.Windows.ApplicationModel.Resources;
 
-namespace Fluver.Helpers
+namespace Fluver.Helpers;
+
+public static class StringsHelper
 {
-    public static class StringsHelper
+    private static readonly ResourceLoader s_loader = new();
+    private static readonly ResourceManager s_manager = new();
+
+    public static string GetString(string id)
     {
-        private static readonly ResourceLoader s_loader = new();
-        private static readonly ResourceManager s_manager = new();
-
-        public static string GetString(string id)
-        {
-            return s_loader.GetString(id.Replace('.', '/'));
-        }
-
-        public static string GetString(string id, string language)
-        {
-            var context = s_manager.CreateResourceContext();
-            context.QualifierValues["Language"] = language;
-
-            var map = s_manager.MainResourceMap.GetSubtree("Resources");
-            return map.GetValue(id.Replace('.', '/'), context).ValueAsString;
-        }
+        return s_loader.GetString(id.Replace('.', '/'));
     }
 
-    public sealed partial class StringResource : MarkupExtension
+    public static string GetString(string id, string language)
     {
-        public string Id { get; set; }
+        var context = s_manager.CreateResourceContext();
+        context.QualifierValues["Language"] = language;
 
-        protected override object ProvideValue()
-        {
-            return StringsHelper.GetString(Id);
-        }
+        var map = s_manager.MainResourceMap.GetSubtree("Resources");
+        return map.GetValue(id.Replace('.', '/'), context).ValueAsString;
     }
 }
