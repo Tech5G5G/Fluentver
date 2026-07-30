@@ -31,7 +31,7 @@
         <ScrollViewer x:Name="BarViewer"
                       HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden"
                       VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
-                      HorizontalAlignment="Center" Width="468"
+                      HorizontalAlignment="Center" Width="474"
                       Style="{StaticResource PaddedScrollViewerStyle}"
                       Loaded="OnBarViewerLoaded">
             <NavigationView x:Name="Bar" SelectedItem="{x:Bind ConvertPageToItem(ViewModel.SelectedPage), BindBack=ConvertItemToPage, Mode=TwoWay}"

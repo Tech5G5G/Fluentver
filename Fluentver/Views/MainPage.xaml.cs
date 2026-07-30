@@ -15,7 +15,7 @@ namespace Fluver.Views
 
         protected override PageViewModel PageViewModel => ViewModel;
 
-        private const int MaxBarViewerWidth = 468;
+        private const int MaxBarViewerWidth = 474;
 
         public MainPage()
         {
