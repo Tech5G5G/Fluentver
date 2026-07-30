@@ -6,6 +6,7 @@
     xmlns:local="using:Fluver.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:Fluver.UI"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     mc:Ignorable="d">
     <UserControl.Resources>
@@ -37,8 +38,10 @@
                         <StateTrigger IsActive="{x:Bind IsBackButtonVisible, Mode=OneWay}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="SettingsButton.(ToolTipService.ToolTip)" Value="{ui:StringResource Id=SettingsButtonBackTooltip}" />
                         <Setter Target="SettingsIcon.Source" Value="{StaticResource BackVisualSource}" />
                         <Setter Target="FallbackSettingsIcon.Glyph" Value="&#xE72B;" />
+                        <Setter Target="FallbackSettingsIcon.FontSize" Value="12" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
