@@ -50,15 +50,14 @@
             <ColumnDefinition Width="46" />
         </Grid.ColumnDefinitions>
 
-        <TitleBar x:Name="TitleBar" Title="Fluver" HorizontalAlignment="Stretch" Height="32" />
+        <TitleBar x:Name="TitleBar" Title="Fluver" HorizontalAlignment="Stretch" Height="31" />
 
         <Button x:Name="SettingsButton" x:Uid="SettingsButton"
                 CornerRadius="0" BorderThickness="0" Background="Transparent"
-                Width="46" Height="32" Grid.Column="1"
+                Width="46" Height="31" Grid.Column="1"
                 ToolTipService.Placement="Bottom"
                 Click="OnSettingsButtonClick"
                 Loaded="OnSettingsButtonLoaded" Unloaded="OnSettingsButtonUnloaded">
-
             <AnimatedIcon x:Name="SettingsIcon"
                           Source="{StaticResource SettingsVisualSource}"
                           Foreground="{ThemeResource TitleBarCaptionButtonForegroundColor}"
