@@ -63,7 +63,7 @@ public sealed partial class MainPageViewModel : PageViewModel
 
     public void UpdateWindowTitle(string title)
     {
-        _manager.MainWindow.Title = title + "| Fluver";
+       _manager.MainWindow.Title = title + " - Fluver";
     }
 
     [RelayCommand]
