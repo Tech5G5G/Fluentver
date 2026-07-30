@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Windowing;
+﻿using Windows.System;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Controls;
@@ -81,7 +82,7 @@ namespace Fluver.Windows
 
         private void Name_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (NextButton.IsEnabled && e.Key == Windows.System.VirtualKey.Enter)
+            if (NextButton.IsEnabled && e.Key == VirtualKey.Enter)
             {
                 NextButton_Click(sender, e);
             }
