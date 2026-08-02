@@ -4,6 +4,7 @@ using Fluver.Options;
 using Fluver.Windows;
 using Fluver.Navigation;
 using Fluver.ViewModels;
+using Fluver.Globalization;
 
 namespace Fluver
 {
@@ -52,7 +53,8 @@ namespace Fluver
 
             services.AddSingleton<IWindowManager, WindowManager>()
                     .AddSingleton<IBackdropManager, BackdropManager>()
-                    .AddSingleton<ISettingsService, SettingsService>();
+                    .AddSingleton<ISettingsService, SettingsService>()
+                    .AddSingleton<ILanguageService, LanguageService>();
 
             services.AddTransient<MainPageViewModel>()
                     .AddTransient<MainWindowViewModel>()
