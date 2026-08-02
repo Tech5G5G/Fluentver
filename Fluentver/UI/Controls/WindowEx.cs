@@ -1,4 +1,5 @@
-﻿using Windows.Foundation;
+﻿using Windows.Graphics;
+using Windows.Foundation;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using WinUIEx;
@@ -116,7 +117,7 @@ public partial class WindowEx : Window
     #region Events
 
     public event TypedEventHandler<WindowEx, object> ResolutionChanged;
-    public event TypedEventHandler<WindowEx, Windows.Graphics.PointInt32> PositionChanged;
+    public event TypedEventHandler<WindowEx, PointInt32> PositionChanged;
     public event TypedEventHandler<WindowEx, nint> DeviceChanged;
 
     #endregion
@@ -130,21 +131,36 @@ public partial class WindowEx : Window
         _manager.PositionChanged += (s, e) => PositionChanged?.Invoke(this, e);
         _manager.WindowMessageReceived += (s, e) =>
         {
-            switch (e.Message.MessageId)
+            var message = e.Message;
+            var handled = false;
+
+            var result = Procedure(message.Hwnd, message.MessageId, message.WParam, message.LParam, ref handled);
+
+            if (e.Handled = handled)
             {
-                case 0x00A3 when !DoubleClickToMaximize: // WM_NCLBUTTONDBLCLK
-                    e.Handled = true;
-                    break;
-
-                case 0x007E: // WM_DISPLAYCHANGE
-                    ResolutionChanged?.Invoke(this, null);
-                    break;
-
-                case 0x219 when e.Message.WParam == 0x7: // WM_DEVICECHANGE, DBT_DEVNODES_CHANGED
-                    DeviceChanged?.Invoke(this, e.Message.LParam);
-                    break;
+                e.Result = result;
             }
         };
+    }
+
+    protected virtual nint Procedure(nint hWnd, uint uMsg, nuint wParam, nint lParam, ref bool handled)
+    {
+        switch (uMsg)
+        {
+            case 0x00A3 when !DoubleClickToMaximize: // WM_NCLBUTTONDBLCLK
+                handled = true;
+                break;
+
+            case 0x007E: // WM_DISPLAYCHANGE
+                ResolutionChanged?.Invoke(this, null);
+                break;
+
+            case 0x219 when wParam == 0x7: // WM_DEVICECHANGE, DBT_DEVNODES_CHANGED
+                DeviceChanged?.Invoke(this, lParam);
+                break;
+        }
+
+        return nint.Zero;
     }
 }
 
