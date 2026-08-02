@@ -10,6 +10,8 @@ public abstract class NavigationService<T> : INavigationService<T> where T : Enu
 
     public event NavigatedEventHandler Navigated;
 
+    protected abstract T None { get; }
+
     protected abstract IReadOnlyDictionary<T, Type> PageTypes { get; }
 
     protected Frame Frame => _frame;
@@ -30,7 +32,16 @@ public abstract class NavigationService<T> : INavigationService<T> where T : Enu
         var currentPage = CurrentPage;
 
         // Avoid repeated navigation to the same page
-        if (!page.Equals(currentPage))
+        if (page.Equals(currentPage))
+        {
+            return;
+        }
+
+        if (page.Equals(None))
+        {
+            _frame.Content = null;
+        }
+        else
         {
             _frame.Navigate(
                 PageTypes[page],

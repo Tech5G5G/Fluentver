@@ -13,6 +13,8 @@ public sealed class MainWindowNavigationService : NavigationService<MainWindowPa
         _ => MainWindowPage.None
     };
 
+    protected override MainWindowPage None => MainWindowPage.None;
+
     protected override IReadOnlyDictionary<MainWindowPage, Type> PageTypes { get; } = new Dictionary<MainWindowPage, Type>
     {
         { MainWindowPage.MainPage, typeof(MainPage) },

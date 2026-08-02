@@ -18,6 +18,8 @@ public sealed class MainPageNavigationService : NavigationService<FluverPage>, I
         _ => FluverPage.None
     };
 
+    protected override FluverPage None => FluverPage.None;
+
     protected override IReadOnlyDictionary<FluverPage, Type> PageTypes { get; } = new Dictionary<FluverPage, Type>
     {
         { FluverPage.AboutPage, typeof(AboutPage) },
