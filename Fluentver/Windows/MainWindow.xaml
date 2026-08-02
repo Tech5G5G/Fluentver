@@ -25,7 +25,7 @@
 
         <controls:FluverTitleBar x:Name="TitleBar"
                                  IsBackButtonVisible="{x:Bind ViewModel.IsSettingsOpen, Mode=OneWay}"
-                                 SettingsCommand="{x:Bind ViewModel.SettingsCommand}" />
+                                 SettingsCommand="{x:Bind ViewModel.ToggleSettingsCommand}" />
 
         <Frame x:Name="ContentFrame" Grid.Row="1" />
     </Grid>

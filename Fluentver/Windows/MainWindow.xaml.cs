@@ -1,13 +1,17 @@
 ﻿using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
+using Fluver.Helpers;
 using Fluver.ViewModels;
-using Fluver.UI.Controls;
+using Fluver.System.Interop;
+using WinUIEx;
 
 namespace Fluver.Windows
 {
-    public sealed partial class MainWindow : WindowEx
+    public sealed partial class MainWindow : UI.Controls.WindowEx
     {
+        private const nuint IDM_SETTINGS = 0x0001;
+
         public MainWindowViewModel ViewModel { get; }
 
         public MainWindow(MainWindowViewModel viewModel)
@@ -23,8 +27,26 @@ namespace Fluver.Windows
                 presenter.IsMaximizable = presenter.IsMinimizable = presenter.IsResizable = false;
             }
 
+            var menu = PInvoke.GetSystemMenu(this.GetWindowHandle(), bRevert: false);
+            PInvoke.InsertMenu(menu, PInvoke.SC_CLOSE, PInvoke.MF_BYCOMMAND | PInvoke.MF_STRING, IDM_SETTINGS, StringsHelper.GetString("SettingsButton.ToolTipService.ToolTip"));
+            PInvoke.InsertMenu(menu, PInvoke.SC_CLOSE, PInvoke.MF_BYCOMMAND | PInvoke.MF_SEPARATOR, uIDNewItem: 0);
+
             (ViewModel = viewModel).InitializeWindowManager(mainWindow: this)
                                    .InitializeFrame(ContentFrame);
+        }
+
+        protected override nint Procedure(nint hWnd, uint uMsg, nuint wParam, nint lParam, ref bool handled)
+        {
+            if (uMsg == 0x0112 && // WM_SYSCOMMAND
+                wParam == IDM_SETTINGS)
+            {
+                ViewModel.Settings();
+
+                handled = true;
+                return nint.Zero;
+            }
+
+            return base.Procedure(hWnd, uMsg, wParam, lParam, ref handled);
         }
 
         private void OnActivated(object sender, WindowActivatedEventArgs e)

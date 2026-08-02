@@ -70,8 +70,13 @@ public sealed partial class MainWindowViewModel(
         }
     }
 
-    [RelayCommand]
     public void Settings()
+    {
+        IsSettingsOpen = true;
+    }
+
+    [RelayCommand]
+    public void ToggleSettings()
     {
         IsSettingsOpen = !IsSettingsOpen;
     }
