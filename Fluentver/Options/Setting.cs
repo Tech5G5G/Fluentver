@@ -50,7 +50,7 @@ public partial class Setting<T>(string key, T defaultValue) : ISetting<T>
     #endregion
 }
 
-public sealed partial class EnumSetting<T>(string key, T defaultValue) : Setting<T>(key, defaultValue) where T : Enum
+public sealed partial class EnumSetting<T>(string key, T defaultValue) : Setting<T>(key, defaultValue) where T : struct, Enum
 {
     protected override object Serialize(T value)
     {
