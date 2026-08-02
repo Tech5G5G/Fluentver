@@ -409,7 +409,7 @@
     <value>Przekaż opinię</value>
   </data>
   <data name="FlightHub.Content" xml:space="preserve">
-    <value>Centrum testowe</value>
+    <value>Flight Hub</value>
   </data>
   <data name="LeaveProgram.Content" xml:space="preserve">
     <value>Opuść program</value>

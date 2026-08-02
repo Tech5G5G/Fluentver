@@ -409,7 +409,7 @@
     <value>Give feedback</value>
   </data>
   <data name="FlightHub.Content" xml:space="preserve">
-    <value>Flight hub</value>
+    <value>Flight Hub</value>
   </data>
   <data name="LeaveProgram.Content" xml:space="preserve">
     <value>Leave the program</value>
