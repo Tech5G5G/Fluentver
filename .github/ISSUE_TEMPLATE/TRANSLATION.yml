@@ -5,14 +5,18 @@ labels: ["translation"]
 assignees:
   - tech5g5g
 body:
+  - type: markdown
+    attributes:
+      value: "### Thank you for taking the time to translate Fluver!"
   - type: checkboxes
     attributes:
-      label: >
-        Thank you for taking the time to translate Fluver!
-        Before requesting your language, please make sure the following is correct:
+      label: "Before requesting your language, please make sure the following is correct:"
       options:
         - label: This is not a duplicate of another request
           required: true
+  - type: markdown
+    attributes:
+      value: "Alternatively, you may [open a pull request](https://github.com/Tech5G5G/Fluentver/pulls) to add your translated RESW."
   - type: input
     attributes:
       label: Language
