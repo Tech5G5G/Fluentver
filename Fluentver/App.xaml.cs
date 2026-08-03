@@ -25,6 +25,9 @@ namespace Fluver
             ServiceCollection services = new();
             InitializeServices(services);
             _provider = services.BuildServiceProvider();
+
+            // Make sure culture info is set properly
+            _provider.GetRequiredService<ILanguageService>();
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)

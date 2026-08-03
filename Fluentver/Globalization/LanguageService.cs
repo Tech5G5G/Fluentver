@@ -1,4 +1,5 @@
-﻿using Windows.Globalization;
+﻿using System.Globalization;
+using Windows.Globalization;
 
 namespace Fluver.Globalization;
 
@@ -13,4 +14,13 @@ public sealed class LanguageService : ILanguageService
     }
 
     public IReadOnlyList<string> Languages => ApplicationLanguages.Languages;
+
+    public LanguageService()
+    {
+        if (AppliedLanguage != string.Empty)
+        {
+            CultureInfo.CurrentCulture = CultureInfo.CurrentUICulture =
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.DefaultThreadCurrentUICulture = new(AppliedLanguage);
+        }
+    }
 }
