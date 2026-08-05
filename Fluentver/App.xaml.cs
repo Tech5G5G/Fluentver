@@ -1,14 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Windows.AppLifecycle;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Fluver.Options;
 using Fluver.Windows;
 using Fluver.Navigation;
 using Fluver.ViewModels;
 using Fluver.Globalization;
+using Fluver.ApplicationModel;
 
 namespace Fluver
 {
-    public sealed partial class App : Application
+    public sealed partial class App : Application, IAppLifetime, IDisposable
     {
         public static new App Current => (App)Application.Current;
 
@@ -21,18 +24,20 @@ namespace Fluver
         public App()
         {
             InitializeComponent();
+            DispatcherQueue.GetForCurrentThread().ShutdownStarting += OnShutdownStarting;
 
             ServiceCollection services = new();
             InitializeServices(services);
             _provider = services.BuildServiceProvider();
 
             // Make sure culture info is set properly
-            _provider.GetRequiredService<ILanguageService>();
+            _provider.GetRequiredService<ICultureService>();
         }
 
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        private void OnShutdownStarting(DispatcherQueue sender, DispatcherQueueShutdownStartingEventArgs e)
         {
-            new MainWindow(_provider.GetRequiredService<MainWindowViewModel>()).Activate();
+            ((IDisposable)this).Dispose();
+        }
 
 #if !DEBUG
             UnhandledException += (s, e) =>
@@ -49,12 +54,15 @@ namespace Fluver
 #endif
         }
 
-        private static void InitializeServices(ServiceCollection services)
+        private void InitializeServices(ServiceCollection services)
         {
             services.AddSingleton<IMainPageNavigationService, MainPageNavigationService>()
                     .AddSingleton<IMainWindowNavigationService, MainWindowNavigationService>();
 
+            services.AddSingleton<IAppLifetime>(this);
+
             services.AddSingleton<IWindowManager, WindowManager>()
+                    .AddSingleton<ICultureService, CultureService>()
                     .AddSingleton<IBackdropManager, BackdropManager>()
                     .AddSingleton<ISettingsService, SettingsService>()
                     .AddSingleton<IPackageInformation, PackageInformation>();
@@ -62,6 +70,22 @@ namespace Fluver
             services.AddTransient<MainPageViewModel>()
                     .AddTransient<MainWindowViewModel>()
                     .AddTransient<RenamerWindowViewModel>();
+        }
+
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        {
+            new MainWindow(_provider.GetRequiredService<MainWindowViewModel>()).Activate();
+        }
+
+        public void Restart()
+        {
+            ((IDisposable)this).Dispose();
+            AppInstance.Restart(arguments: string.Empty);
+        }
+
+        void IDisposable.Dispose()
+        {
+            _provider.Dispose();
         }
     }
 }
