@@ -57,7 +57,7 @@ namespace Fluver
             services.AddSingleton<IWindowManager, WindowManager>()
                     .AddSingleton<IBackdropManager, BackdropManager>()
                     .AddSingleton<ISettingsService, SettingsService>()
-                    .AddSingleton<ILanguageService, LanguageService>();
+                    .AddSingleton<IPackageInformation, PackageInformation>();
 
             services.AddTransient<MainPageViewModel>()
                     .AddTransient<MainWindowViewModel>()
