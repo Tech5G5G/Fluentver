@@ -5,7 +5,7 @@
     xmlns:controls="using:Fluver.UI.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Themes/CustomStyles.xaml" />
-        <ResourceDictionary Source="/Themes/GlyphButton.xaml" />
+        <ResourceDictionary Source="/Themes/IconButton.xaml" />
         <ResourceDictionary Source="/Themes/MemorizingExpander.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
