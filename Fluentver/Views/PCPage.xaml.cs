@@ -13,7 +13,7 @@ namespace Fluver.Views
 {
     public sealed partial class PCPage : InfoPage
     {
-        private static readonly string s_gbStr = StringsHelper.GetString("Gigabytes");
+        private static readonly string s_gbStr = Text.Gigabytes;
 
         private readonly DispatcherTimer _timer = new() { Interval = TimeSpan.FromSeconds(1) };
 
@@ -36,10 +36,10 @@ namespace Fluver.Views
             BackgroundRectangle.Fill = SystemHelper.UserWallpaperBrush;
 
             string name = SystemHelper.SystemProductName;
-            ProductNameText.Text = name == "System Product Name" ? StringsHelper.GetString("Unknown") : name;
+            ProductNameText.Text = name == "System Product Name" ? Text.Unknown : name;
 
             var architecture = RuntimeInformation.OSArchitecture;
-            ArchitectureText.Text = AssignerHelper.TryAssign(() => StringsHelper.GetString(architecture.ToString()), architecture.ToString);
+            ArchitectureText.Text = AssignerHelper.TryAssign(() => Text.GetString(architecture.ToString()), architecture.ToString);
         }
 
         private async void SetPCUsage(bool hookTimer = false)

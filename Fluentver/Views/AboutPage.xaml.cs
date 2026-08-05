@@ -31,7 +31,7 @@ namespace Fluver.Views
             VersionText.Text = VersionHelper.VersionDisplayName;
             BuildText.Text = $"{VersionHelper.Build}.{VersionHelper.Revision}";
 
-            TrademarkText.Text = string.Format(StringsHelper.GetString("Trademark"), EditionText.Text);
+            TrademarkText.Text = Text.Trademark(EditionText.Text);
             CopyrightText.Text = string.Format(StringsHelper.GetString("Copyright"), DateTime.Now.Year);
         }
 

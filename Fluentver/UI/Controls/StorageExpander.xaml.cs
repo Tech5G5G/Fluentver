@@ -51,7 +51,7 @@ namespace Fluver.UI.Controls
             MountPointLink.Content = name;
             MountPointLink.Click += (s, e) => Process.Start(new ProcessStartInfo(name) { UseShellExecute = true });
 
-            TypeText.Text = StringsHelper.GetString(info.DriveType.ToString());
+            TypeText.Text = Text.GetString(info.DriveType.ToString());
             FormatText.Text = info.DriveFormat;
         }
     }

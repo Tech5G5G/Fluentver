@@ -23,7 +23,7 @@ namespace Fluver.Windows
 
             SetTitleBar(TitleBar);
             ExtendsContentIntoTitleBar = true;
-            Title = StringsHelper.GetString("RenamePC.Text");
+            Title = Text.GetString("RenamePC.Text");
 
             SystemBackdrop = SettingValues.Backdrop.Value.ToSystemBackdrop();
             PInvoke.SetWindowLong(this.GetWindowHandle(), PInvoke.GWL_HWNDPARENT, parentWindow.GetWindowHandle());
@@ -33,7 +33,7 @@ namespace Fluver.Windows
                 presenter.IsModal = true;
             }
 
-            NameBox.Header = string.Format(StringsHelper.GetString("CurrentName"), SystemHelper.SystemName);
+            NameBox.Header = string.Format(Text.CurrentName, SystemHelper.SystemName);
 
             (ViewModel = viewModel).AddToWindowManager(renamerWindow: this);
         }
@@ -43,8 +43,8 @@ namespace Fluver.Windows
             NextButton.IsEnabled = SystemHelper.CheckNetBiosName(NameBox.Text, out var result);
             ErrorText.Text = result switch
             {
-                NetBiosNameCheckResult.ExceedsMaxLength => StringsHelper.GetString("NameTooLong"),
-                NetBiosNameCheckResult.InvalidCharacter => StringsHelper.GetString("NameInvaildCharacters"),
+                NetBiosNameCheckResult.ExceedsMaxLength => Text.NameTooLong,
+                NetBiosNameCheckResult.InvalidCharacter => Text.NameInvaildCharacters,
                 _ => string.Empty
             };
         }
@@ -65,7 +65,7 @@ namespace Fluver.Windows
             FinishingScreen.Visibility = Visibility.Visible;
             RenamingScreen.Visibility = Visibility.Collapsed;
 
-            NextButton.Content = StringsHelper.GetString("Finish");
+            NextButton.Content = Text.Finish;
             NextButton.IsEnabled = CancelButton.IsEnabled = false;
 
             bool renamed = await SystemHelper.RenameSystem(NameBox.Text);
@@ -76,7 +76,7 @@ namespace Fluver.Windows
             CancelButton.IsEnabled = !(NextButton.IsEnabled = renamed);
             if (!renamed)
             {
-                ClosingText.Text = StringsHelper.GetString("ErrorPowerShell");
+                ClosingText.Text = Text.ErrorPowerShell;
             }
         }
 
