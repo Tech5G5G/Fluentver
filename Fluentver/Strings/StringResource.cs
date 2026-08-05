@@ -1,15 +1,14 @@
-﻿using Fluver.Helpers;
-using Microsoft.UI.Xaml.Markup;
+﻿using Microsoft.UI.Xaml.Markup;
 
-namespace Fluver.UI;
+namespace Fluver.Strings;
 
 [MarkupExtensionReturnType(ReturnType = typeof(string))]
 public sealed partial class StringResource : MarkupExtension
 {
-    public string Id { get; set; }
+    public string Key { get; set; }
 
     protected override object ProvideValue()
     {
-        return StringsHelper.GetString(Id);
+        return Text.GetString(Key);
     }
 }
