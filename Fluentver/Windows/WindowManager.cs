@@ -4,37 +4,37 @@ namespace Fluver.Windows;
 
 public sealed partial class WindowManager : IWindowManager
 {
-    public MainWindow MainWindow => _mainWindow;
-    private MainWindow _mainWindow;
+    public IWindow MainWindow => _mainWindow;
+    private IWindow _mainWindow;
 
-    public IReadOnlyList<Window> Windows => _windows;
-    private readonly List<Window> _windows = [];
+    public IReadOnlyList<IWindow> Windows => _windows;
+    private readonly List<IWindow> _windows = [];
 
-    public event EventHandler<Window> WindowCreated;
-    public event EventHandler<Window> WindowClosed;
+    public event EventHandler<IWindow> WindowCreated;
+    public event EventHandler<IWindow> WindowClosed;
 
-    public T CreateWindow<T>() where T : Window, new()
+    public T CreateWindow<T>() where T : IWindow, new()
     {
         T window = new();
         AddWindow(window);
         return window;
     }
 
-    public void AddWindow<T>(T window) where T : Window
+    public void AddWindow(IWindow window)
     {
         _windows.Add(window);
         window.Closed += OnClosed;
 
-        if (window is MainWindow mainWindow)
+        if (window is MainWindow)
         {
-            _mainWindow = mainWindow;
+            _mainWindow = window;
         }
 
         WindowCreated?.Invoke(sender: this, window);
 
         void OnClosed(object sender, WindowEventArgs e)
         {
-            if (!e.Handled && sender is Window window)
+            if (!e.Handled && sender is IWindow window)
             {
                 _windows.Remove(window);
                 window.Closed -= OnClosed;

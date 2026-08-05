@@ -1,6 +1,4 @@
-﻿using Microsoft.UI.Xaml;
-
-namespace Fluver.Windows;
+﻿namespace Fluver.Windows;
 
 public interface IBackdropManager
 {

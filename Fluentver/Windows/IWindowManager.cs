@@ -1,17 +1,15 @@
-﻿using Microsoft.UI.Xaml;
-
-namespace Fluver.Windows;
+﻿namespace Fluver.Windows;
 
 public interface IWindowManager
 {
-    MainWindow MainWindow { get; }
+    IWindow MainWindow { get; }
 
-    IReadOnlyList<Window> Windows { get; }
+    IReadOnlyList<IWindow> Windows { get; }
 
-    event EventHandler<Window> WindowCreated;
-    event EventHandler<Window> WindowClosed;
+    event EventHandler<IWindow> WindowCreated;
+    event EventHandler<IWindow> WindowClosed;
 
-    T CreateWindow<T>() where T : Window, new();
+    T CreateWindow<T>() where T : IWindow, new();
 
-    void AddWindow<T>(T window) where T : Window;
+    void AddWindow(IWindow window);
 }

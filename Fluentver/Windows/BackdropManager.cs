@@ -1,6 +1,5 @@
 ﻿using Windows.UI.ViewManagement;
 using Microsoft.UI.Composition.SystemBackdrops;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Fluver.Options;
 using Fluver.System.Interop;
@@ -46,7 +45,7 @@ public sealed class BackdropManager : IBackdropManager
         UpdateWindows();
     }
 
-    private void OnWindowOpened(object sender, Window e)
+    private void OnWindowOpened(object sender, IWindow e)
     {
         e.SystemBackdrop = CreateBackdrop(_currentBackdrop);
     }
