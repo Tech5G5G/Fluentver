@@ -28,11 +28,11 @@
 
   <Resources>
     <Resource Language="en-US"/>
-	<Resource Language="de-DE"/>
-	<Resource Language="el-GR"/>
-	<Resource Language="pl-PL"/>
-	<Resource Language="ru-RU"/>
-	<Resource Language="zh-CN"/>
+    <Resource Language="de-DE"/>
+    <Resource Language="el-GR"/>
+    <Resource Language="pl-PL"/>
+    <Resource Language="ru-RU"/>
+    <Resource Language="zh-CN"/>
   </Resources>
 
   <Applications>
@@ -41,7 +41,7 @@
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
         DisplayName="Fluver"
-        Description="Fluver"
+        Description="ms-resource:Description"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
@@ -59,9 +59,9 @@
             Category="windows.appExecutionAlias"
             Executable="fluver.exe"
             EntryPoint="Windows.FullTrustApplication">
-            <uap5:AppExecutionAlias>
-                <uap5:ExecutionAlias Alias="fluver.exe" />
-            </uap5:AppExecutionAlias>
+          <uap5:AppExecutionAlias>
+            <uap5:ExecutionAlias Alias="fluver.exe" />
+          </uap5:AppExecutionAlias>
         </uap5:Extension>
       </Extensions>
     </Application>

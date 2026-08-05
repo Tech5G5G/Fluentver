@@ -469,4 +469,7 @@
   <data name="German.Content" xml:space="preserve">
     <value>German (Deutsch)</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>A modern version of Winver</value>
+  </data>
 </root>
