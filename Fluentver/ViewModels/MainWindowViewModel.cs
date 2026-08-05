@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Fluver.Windows;
 using Fluver.Navigation;
+using Fluver.ApplicationModel;
 
 namespace Fluver.ViewModels;
 
@@ -10,11 +11,14 @@ public sealed partial class MainWindowViewModel(
 #pragma warning disable CS9113 // Parameter is unread.
     IWindowManager manager,
     IBackdropManager backdrop,
+    IPackageInformation package,
     IMainPageNavigationService pageNavigation,
     IMainWindowNavigationService windowNavigation)
 #pragma warning restore CS9113 // Parameter is unread.
     : ObservableObject
 {
+    public string DisplayName => package.DisplayName;
+
     [ObservableProperty]
     public partial bool IsSettingsOpen { get; set; }
 

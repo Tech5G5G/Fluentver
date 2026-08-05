@@ -29,8 +29,10 @@ namespace Fluver.Windows
             }
 
             var menu = PInvoke.GetSystemMenu(this.GetWindowHandle(), bRevert: false);
-            PInvoke.InsertMenu(menu, PInvoke.SC_CLOSE, PInvoke.MF_BYCOMMAND | PInvoke.MF_STRING, IDM_SETTINGS, StringsHelper.GetString("SettingsButton.ToolTipService.ToolTip"));
-            PInvoke.InsertMenu(menu, PInvoke.SC_CLOSE, PInvoke.MF_BYCOMMAND | PInvoke.MF_SEPARATOR, uIDNewItem: 0);
+            // The window menu is usually displayed in the OS language, not the language set by Fluver
+            // Attempt to use the OS language for consistency
+            NativeInterop.AddMenuItem(menu, IDM_SETTINGS, Text.GetString("SettingsButton/ToolTipService/ToolTip", viewModel.OSCulture));
+            NativeInterop.AddMenuSeparator(menu);
 
             (ViewModel = viewModel).InitializeWindowManager(mainWindow: this)
                                    .InitializeFrame(ContentFrame);
