@@ -41,7 +41,7 @@
             <RichTextBlock IsTextSelectionEnabled="False" VerticalAlignment="Center">
                 <Paragraph>
                     <Run x:Uid="FluverPowerShell" />
-                    <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/rename-computer" UnderlineStyle="None">
+                    <Hyperlink NavigateUri="https://learn.microsoft.com/powershell/module/microsoft.powershell.management/rename-computer" UnderlineStyle="None">
                         <Run Text="PowerShell." />
                     </Hyperlink>
                 </Paragraph>

@@ -25,7 +25,6 @@ namespace Fluver.Windows
             ExtendsContentIntoTitleBar = true;
             Title = Text.GetString("RenamePC.Text");
 
-            SystemBackdrop = SettingValues.Backdrop.Value.ToSystemBackdrop();
             PInvoke.SetWindowLong(this.GetWindowHandle(), PInvoke.GWL_HWNDPARENT, parentWindow.GetWindowHandle());
 
             if (AppWindow.Presenter is OverlappedPresenter presenter)

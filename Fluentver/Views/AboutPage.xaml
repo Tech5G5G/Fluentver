@@ -48,7 +48,7 @@
                 </Paragraph>
                 <Paragraph Margin="0,12,0,0">
                     <Run x:Uid="Licensed" />
-                    <Hyperlink NavigateUri="https://www.microsoft.com/en-us/useterms" UnderlineStyle="None">
+                    <Hyperlink NavigateUri="https://www.microsoft.com/useterms#areaheading-uid673824" UnderlineStyle="None">
                         <Run x:Uid="MSSoftwareTerms" />
                     </Hyperlink>
                     <Run x:Uid="To" />
