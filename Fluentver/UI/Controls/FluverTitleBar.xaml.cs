@@ -14,6 +14,15 @@ namespace Fluver.UI.Controls
             InitializeComponent();
         }
 
+        public string Title
+        {
+            get => (string)GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
+        }
+
+        public static DependencyProperty TitleProperty { get; } =
+            DependencyProperty.Register(nameof(Title), typeof(string), typeof(FluverTitleBar), new(defaultValue: string.Empty));
+
         public bool IsSettingsButtonActive
         {
             get => (bool)GetValue(IsSettingsButtonActiveProperty);

@@ -1,8 +1,10 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using System.Globalization;
+using Microsoft.UI.Xaml.Controls;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Fluver.Windows;
 using Fluver.Navigation;
+using Fluver.Globalization;
 using Fluver.ApplicationModel;
 
 namespace Fluver.ViewModels;
@@ -10,6 +12,7 @@ namespace Fluver.ViewModels;
 public sealed partial class MainWindowViewModel(
 #pragma warning disable CS9113 // Parameter is unread.
     IWindowManager manager,
+    ICultureService culture,
     IBackdropManager backdrop,
     IPackageInformation package,
     IMainPageNavigationService pageNavigation,
@@ -18,6 +21,8 @@ public sealed partial class MainWindowViewModel(
     : ObservableObject
 {
     public string DisplayName => package.DisplayName;
+
+    public CultureInfo OSCulture => culture.OSCulture;
 
     [ObservableProperty]
     public partial bool IsSettingsOpen { get; set; }
@@ -40,18 +45,18 @@ public sealed partial class MainWindowViewModel(
     {
         if (windowNavigation.CurrentPage == MainWindowPage.MainPage)
         {
-                pageNavigation.GoBack();
-            }
-            else
-            {
-            IsSettingsOpen = false;
-            }
+            pageNavigation.GoBack();
         }
+        else
+        {
+            IsSettingsOpen = false;
+        }
+    }
 
     public void GoForward()
-        {
+    {
         if (windowNavigation.CurrentPage == MainWindowPage.MainPage)
-            {
+        {
             pageNavigation.GoForward();
         }
     }

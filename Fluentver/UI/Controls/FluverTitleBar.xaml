@@ -53,7 +53,7 @@
             <ColumnDefinition Width="46" />
         </Grid.ColumnDefinitions>
 
-        <TitleBar x:Name="TitleBar" Title="Fluver" HorizontalAlignment="Stretch" Height="31" />
+        <TitleBar x:Name="TitleBar" Title="{x:Bind Title, Mode=OneWay}" HorizontalAlignment="Stretch" Height="31" />
 
         <Button x:Name="SettingsButton" x:Uid="SettingsButton"
                 CornerRadius="0" BorderThickness="0" Background="Transparent"

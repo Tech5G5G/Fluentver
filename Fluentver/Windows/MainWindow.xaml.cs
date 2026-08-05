@@ -2,10 +2,10 @@
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
-using Fluver.Helpers;
+using WinUIEx;
+using Fluver.Strings;
 using Fluver.ViewModels;
 using Fluver.System.Interop;
-using WinUIEx;
 
 namespace Fluver.Windows
 {
@@ -44,8 +44,8 @@ namespace Fluver.Windows
         }
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
-            {
-            }
+        {
+        }
 
         private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
         {
@@ -54,9 +54,9 @@ namespace Fluver.Windows
                 if (properties.IsXButton1Pressed)
                 {
                     ViewModel.GoBack();
-        }
+                }
                 else if (properties.IsXButton2Pressed)
-        {
+                {
                     ViewModel.GoForward();
                 }
             }
@@ -67,11 +67,11 @@ namespace Fluver.Windows
             if (e.KeyStatus.IsMenuKeyDown)
             {
                 if (e.Key == VirtualKey.Left)
-        {
+                {
                     ViewModel.GoBack();
-        }
+                }
                 else if (e.Key == VirtualKey.Right)
-        {
+                {
                     ViewModel.GoForward();
                 }
             }

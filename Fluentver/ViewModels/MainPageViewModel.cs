@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Fluver.Options;
 using Fluver.Windows;
 using Fluver.Navigation;
+using Fluver.ApplicationModel;
 
 namespace Fluver.ViewModels;
 
@@ -19,6 +20,7 @@ public sealed partial class MainPageViewModel : PageViewModel
 
     private readonly IWindowManager _manager;
     private readonly ISettingsService _settings;
+    private readonly IPackageInformation _package;
     private readonly IMainPageNavigationService _navigation;
 
     private bool _updatingUi;
@@ -26,10 +28,12 @@ public sealed partial class MainPageViewModel : PageViewModel
     public MainPageViewModel(
         IWindowManager manager,
         ISettingsService settings,
+        IPackageInformation package,
         IMainPageNavigationService navigation)
     {
         _manager = manager;
         _settings = settings;
+        _package = package;
         _navigation = navigation;
 
         navigation.Navigated += OnNavigated;
@@ -63,7 +67,7 @@ public sealed partial class MainPageViewModel : PageViewModel
 
     public void UpdateWindowTitle(string title)
     {
-       _manager.MainWindow.Title = title + " - Fluver";
+       _manager.MainWindow.Title = $"{title} - {_package.DisplayName}";
     }
 
     [RelayCommand]

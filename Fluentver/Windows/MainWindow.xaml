@@ -11,7 +11,7 @@
     xmlns:controls="using:Fluver.UI.Controls"
     xmlns:controls2="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d"
-    Title="Fluver"
+    Title="{x:Bind ViewModel.DisplayName}"
     Width="480" Height="578"
     MinWidth="480" MaxWidth="480"
     DoubleClickToMaximize="False"
@@ -24,6 +24,7 @@
         </Grid.RowDefinitions>
 
         <controls:FluverTitleBar x:Name="TitleBar"
+                                 Title="{x:Bind ViewModel.DisplayName}"
                                  IsBackButtonVisible="{x:Bind ViewModel.IsSettingsOpen, Mode=OneWay}"
                                  SettingsCommand="{x:Bind ViewModel.ToggleSettingsCommand}" />
 
