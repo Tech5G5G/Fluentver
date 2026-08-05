@@ -2,7 +2,7 @@
 
 namespace Fluver.System.Interop;
 
-internal static partial class PInvoke
+partial class PInvoke
 {
     [LibraryImport("user32.dll")]
     private static partial nint GetWindowLongW(nint hWnd, int nIndex);

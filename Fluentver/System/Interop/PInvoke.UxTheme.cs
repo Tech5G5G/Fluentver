@@ -2,7 +2,7 @@
 
 namespace Fluver.System.Interop;
 
-internal static partial class PInvoke
+partial class PInvoke
 {
     [LibraryImport("uxtheme.dll", EntryPoint = "#135")]
     public static partial int SetPreferredAppMode(PreferredAppMode preferredAppMode);
