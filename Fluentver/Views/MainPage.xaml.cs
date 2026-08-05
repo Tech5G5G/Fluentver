@@ -65,11 +65,7 @@ namespace Fluver.Views
         {
             if (e.SelectedItemContainer is NavigationViewItem { Content: string title } item)
             {
-                item.StartBringIntoView(options: new()
-                {
-                    AnimationDesired = true,
-                    TargetRect = new(x: -8, y: 0, width: item.ActualWidth + 8, height: item.ActualHeight)
-                });
+                item.StartBringIntoView();
                 ViewModel.UpdateWindowTitle(title);
             }
         }
