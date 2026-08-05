@@ -70,16 +70,14 @@ namespace Fluver.Views
             }
         }
 
-        private FluverPage ConvertItemToPage(object item)
-        {
-            var page = (FluverPage)Bar.MenuItems.IndexOf(item);
-            ViewModel.SelectedPage = page; // Manually set fsr
-            return page;
-        }
-
         private object ConvertPageToItem(FluverPage page)
         {
             return Bar.MenuItems[(int)page];
+        }
+
+        private void SetSelectedPage(object item)
+        {
+            ViewModel.SelectedPage = (FluverPage)Bar.MenuItems.IndexOf(item);
         }
     }
 }

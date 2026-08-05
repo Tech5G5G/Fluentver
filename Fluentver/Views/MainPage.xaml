@@ -34,7 +34,7 @@
                       HorizontalAlignment="Center" Width="474"
                       Style="{StaticResource PaddedScrollViewerStyle}"
                       Loaded="OnBarViewerLoaded">
-            <NavigationView x:Name="Bar" SelectedItem="{x:Bind ConvertPageToItem(ViewModel.SelectedPage), BindBack=ConvertItemToPage, Mode=TwoWay}"
+            <NavigationView x:Name="Bar" SelectedItem="{x:Bind ConvertPageToItem(ViewModel.SelectedPage), BindBack=SetSelectedPage, Mode=TwoWay}"
                             IsSettingsVisible="False" IsBackButtonVisible="Collapsed" PaneDisplayMode="Top"
                             HorizontalAlignment="Center" Margin="4,2,4,4"
                             SelectionChanged="OnBarSelectionChanged">
