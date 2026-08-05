@@ -333,8 +333,8 @@
   <data name="Trademark" xml:space="preserve">
     <value>Το λειτουργικό σύστημα {0} και η διεπαφή χρήστη του προστατεύονται από εμπορικά σήματα και άλλα εκκρεμή ή υπάρχοντα δικαιώματα πνευματικής ιδιοκτησίας στις Ηνωμένες Πολιτείες και σε άλλες χώρες/περιοχές.</value>
   </data>
-  <data name="Copyright" xml:space="preserve">
-    <value>© {0} Microsoft Corporation. All rights reserved.</value>
+  <data name="Copyright.Text" xml:space="preserve">
+    <value>© Microsoft Corporation. All rights reserved.</value>
   </data>
   <data name="Licensed.Text" xml:space="preserve">
     <value>Αυτό το προϊόν δίδεται προς τον χρήστη σύμφωνα με τους</value>

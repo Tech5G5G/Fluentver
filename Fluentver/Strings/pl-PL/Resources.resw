@@ -333,8 +333,8 @@
   <data name="Trademark" xml:space="preserve">
     <value>System operacyjny {0} i jego interfejs użytkownika są prawnie chronione przepisami o znakach towarowych oraz przez złożone lub zaakceptowane wnioski o prawną ochronę własności intelektualnej w Stanach Zjednoczonych i innych krajach/regionach.</value>
   </data>
-  <data name="Copyright" xml:space="preserve">
-    <value>© {0} Microsoft Corporation. Wszelkie prawa zastrzeżone.</value>
+  <data name="Copyright.Text" xml:space="preserve">
+    <value>© Microsoft Corporation. Wszelkie prawa zastrzeżone.</value>
   </data>
   <data name="Licensed.Text" xml:space="preserve">
     <value>Licencję na ten produckt zgodnie z</value>

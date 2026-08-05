@@ -334,8 +334,8 @@
     <value>The {0} operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions.</value>
     <comment>#Format[String edition]</comment>
   </data>
-  <data name="Copyright" xml:space="preserve">
-    <value>© {0} Microsoft Corporation. All rights reserved.</value>
+  <data name="Copyright.Text" xml:space="preserve">
+    <value>© Microsoft Corporation. All rights reserved.</value>
   </data>
   <data name="Licensed.Text" xml:space="preserve">
     <value>The product is licensed under the</value>

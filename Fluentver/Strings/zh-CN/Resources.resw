@@ -333,8 +333,8 @@
   <data name="Trademark" xml:space="preserve">
     <value>{0} 操作系统及其用户界面受美国和其他国家/地区的商标法和其他待颁布或已颁布的知识产权法保护。</value>
   </data>
-  <data name="Copyright" xml:space="preserve">
-    <value>© {0} Microsoft Corporation。 保留所有权利。</value>
+  <data name="Copyright.Text" xml:space="preserve">
+    <value>© Microsoft Corporation。 保留所有权利。</value>
   </data>
   <data name="Licensed.Text" xml:space="preserve">
     <value>许可如下用户使用本产品</value>

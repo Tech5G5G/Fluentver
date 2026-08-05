@@ -44,7 +44,7 @@
                     <Run x:Name="TrademarkText" />
                 </Paragraph>
                 <Paragraph Margin="0,12,0,0">
-                    <Run x:Name="CopyrightText" />
+                    <Run x:Uid="Copyright" />
                 </Paragraph>
                 <Paragraph Margin="0,12,0,0">
                     <Run x:Uid="Licensed" />

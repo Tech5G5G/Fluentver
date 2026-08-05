@@ -333,8 +333,8 @@
   <data name="Trademark" xml:space="preserve">
     <value>Das Betriebssystem {0} und die zugehörige Benutzeroberfläche sind durch Marken- und andere rechtsabhängige bzw. bestehende gewerbliche Schutz- und Urheberrechte in den Vereinigten Staaten und anderen Ländern geschützt.</value>
   </data>
-  <data name="Copyright" xml:space="preserve">
-    <value>© {0} Microsoft Corporation. Alle Rechte vorbehalten.</value>
+  <data name="Copyright.Text" xml:space="preserve">
+    <value>© Microsoft Corporation. Alle Rechte vorbehalten.</value>
   </data>
   <data name="Licensed.Text" xml:space="preserve">
     <value>Dieses Produkt ist unter den</value>
