@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  
+
   <!-- Assembly properties -->
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -22,7 +22,12 @@
     <ImplicitUsings>true</ImplicitUsings>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
-  
+
+  <!-- Global usings -->
+  <ItemGroup>
+    <Using Include="Fluver.Strings.Resources" Alias="Text" />
+  </ItemGroup>
+
   <!-- Packaging properties -->
   <PropertyGroup>
     <EnableMsixTooling>true</EnableMsixTooling>
@@ -30,7 +35,6 @@
     <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxPackageDir>C:\Users\ignac\Downloads\</AppxPackageDir>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
@@ -48,13 +52,19 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.2526" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.3.1" />
+
     <PackageReference Include="System.Management" Version="10.0.10" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.10" />
     <PackageReference Include="System.DirectoryServices.AccountManagement" Version="10.0.10" />
+
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
+
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
     <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
+
+    <PackageReference Include="ReswPlus" Version="0.3.1.5" />
+
     <PackageReference Include="WinUIEx" Version="2.9.2" />
   </ItemGroup>
 
@@ -75,4 +85,5 @@
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
+
 </Project>
