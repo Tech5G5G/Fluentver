@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Windowing;
+﻿using Windows.System;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Fluver.Helpers;
@@ -35,6 +36,45 @@ namespace Fluver.Windows
                                    .InitializeFrame(ContentFrame);
         }
 
+        private void OnActivated(object sender, WindowActivatedEventArgs e)
+        {
+            TitleBar.IsSettingsButtonActive = e.WindowActivationState != WindowActivationState.Deactivated;
+        }
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+            {
+            }
+
+        private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (e.GetCurrentPoint(sender as UIElement) is { Properties: { } properties })
+            {
+                if (properties.IsXButton1Pressed)
+                {
+                    ViewModel.GoBack();
+        }
+                else if (properties.IsXButton2Pressed)
+        {
+                    ViewModel.GoForward();
+                }
+            }
+        }
+
+        private void OnKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.KeyStatus.IsMenuKeyDown)
+            {
+                if (e.Key == VirtualKey.Left)
+        {
+                    ViewModel.GoBack();
+        }
+                else if (e.Key == VirtualKey.Right)
+        {
+                    ViewModel.GoForward();
+                }
+            }
+        }
+
         protected override nint Procedure(nint hWnd, uint uMsg, nuint wParam, nint lParam, ref bool handled)
         {
             if (uMsg == 0x0112 && // WM_SYSCOMMAND
@@ -47,30 +87,6 @@ namespace Fluver.Windows
             }
 
             return base.Procedure(hWnd, uMsg, wParam, lParam, ref handled);
-        }
-
-        private void OnActivated(object sender, WindowActivatedEventArgs e)
-        {
-            TitleBar.IsSettingsButtonActive = e.WindowActivationState != WindowActivationState.Deactivated;
-        }
-
-        private void OnClosed(object sender, WindowEventArgs e)
-        {
-            ViewModel.OnClosed();
-        }
-
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            // TODO: Animate using DoubleAnimation + DependencyProperties for Width + Height?
-        }
-
-        private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            if (e.GetCurrentPoint(sender as UIElement) is { Properties: { } properties } &&
-                (properties.IsXButton1Pressed || properties.IsXButton2Pressed)) // Check if either XButton is pressed
-            {
-                ViewModel.OnXButtonPressed(properties.IsXButton1Pressed, properties.IsXButton2Pressed);
-            }
         }
     }
 }

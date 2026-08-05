@@ -32,27 +32,23 @@ public sealed partial class MainWindowViewModel(
         return this;
     }
 
-    public void OnXButtonPressed(bool isXButton1Pressed, bool isXButton2Pressed)
+    public void GoBack()
     {
         if (windowNavigation.CurrentPage == MainWindowPage.MainPage)
         {
-            if (isXButton1Pressed)
-            {
                 pageNavigation.GoBack();
             }
             else
             {
-                pageNavigation.GoForward();
+            IsSettingsOpen = false;
             }
         }
-        else
-        {
-            // TODO: Navigate thru settings.
 
-            if (isXButton1Pressed)
+    public void GoForward()
+        {
+        if (windowNavigation.CurrentPage == MainWindowPage.MainPage)
             {
-                IsSettingsOpen = false;
-            }
+            pageNavigation.GoForward();
         }
     }
 
