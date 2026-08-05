@@ -61,15 +61,6 @@ public sealed partial class MainWindowViewModel(
         windowNavigation.Navigate(value ? MainWindowPage.SettingsPage : MainWindowPage.MainPage);
     }
 
-    public void OnClosed()
-    {
-        var windows = manager.Windows;
-        for (int i = 0; i < windows.Count; ++i)
-        {
-            windows[i].Close();
-        }
-    }
-
     public void Settings()
     {
         IsSettingsOpen = true;
