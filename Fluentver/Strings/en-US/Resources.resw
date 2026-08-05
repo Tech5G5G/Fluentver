@@ -365,7 +365,7 @@
     <value>Copy</value>
   </data>
   <data name="NavigateUsers.Label" xml:space="preserve">
-    <value>Go to users</value>
+    <value>Go to Users</value>
   </data>
   <data name="Activation.Text" xml:space="preserve">
     <value>Activation state</value>
