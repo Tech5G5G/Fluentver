@@ -11,7 +11,7 @@ namespace Fluver.Windows
 {
     public sealed partial class MainWindow : UI.Controls.WindowEx
     {
-        private const nuint IDM_SETTINGS = 0x0001;
+        private const nuint SC_SETTINGS = 0x1000;
 
         public MainWindowViewModel ViewModel { get; }
 
@@ -31,7 +31,7 @@ namespace Fluver.Windows
             var menu = PInvoke.GetSystemMenu(this.GetWindowHandle(), bRevert: false);
             // The window menu is usually displayed in the OS language, not the language set by Fluver
             // Attempt to use the OS language for consistency
-            NativeInterop.AddMenuItem(menu, IDM_SETTINGS, Text.GetString("SettingsButton/ToolTipService/ToolTip", viewModel.OSCulture));
+            NativeInterop.AddMenuItem(menu, SC_SETTINGS, Text.GetString("SettingsButton/ToolTipService/ToolTip", viewModel.OSCulture));
             NativeInterop.AddMenuSeparator(menu);
 
             (ViewModel = viewModel).InitializeWindowManager(mainWindow: this)
@@ -80,7 +80,7 @@ namespace Fluver.Windows
         protected override nint Procedure(nint hWnd, uint uMsg, nuint wParam, nint lParam, ref bool handled)
         {
             if (uMsg == 0x0112 && // WM_SYSCOMMAND
-                wParam == IDM_SETTINGS)
+                (wParam & 0xFFF0) == SC_SETTINGS)
             {
                 ViewModel.Settings();
 
