@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Windows.AppLifecycle;
+using Microsoft.Windows.AppNotifications;
+using Microsoft.Windows.AppNotifications.Builder;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Fluver.Options;
@@ -26,6 +28,10 @@ namespace Fluver
             InitializeComponent();
             DispatcherQueue.GetForCurrentThread().ShutdownStarting += OnShutdownStarting;
 
+#if !DEBUG
+            UnhandledException += OnUnhandledException;
+#endif
+
             ServiceCollection services = new();
             InitializeServices(services);
             _provider = services.BuildServiceProvider();
@@ -39,19 +45,21 @@ namespace Fluver
             ((IDisposable)this).Dispose();
         }
 
-#if !DEBUG
-            UnhandledException += (s, e) =>
+        private void OnUnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
             {
                 e.Handled = true;
-                var notification = new Microsoft.Windows.AppNotifications.Builder.AppNotificationBuilder()
-                    .AddText("An exception was thrown.")
+
+            // TODO: Localize
+           AppNotificationManager.Default.Show(
+               new AppNotificationBuilder().AddText("An exception was thrown.")
                     .AddText($"Type: {e.Exception.GetType()}")
-                    .AddText($"Message: {e.Message}\r\n" +
+                                           .AddText($"Message: {e.Message}{Environment.NewLine}" +
                              $"HResult: {e.Exception.HResult}")
-                    .BuildNotification();
-                Microsoft.Windows.AppNotifications.AppNotificationManager.Default.Show(notification);
-            };
-#endif
+                                           .AddButton(new("File an issue on GitHub")
+                                           {
+                                               InvokeUri = new("https://github.com/Tech5G5G/Fluentver/issues/new?template=BUG-REPORT.yml")
+                                           })
+                                           .BuildNotification());
         }
 
         private void InitializeServices(ServiceCollection services)
