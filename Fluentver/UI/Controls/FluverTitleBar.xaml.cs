@@ -2,6 +2,7 @@ using System.Windows.Input;
 using Windows.System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.AnimatedVisuals;
 
 namespace Fluver.UI.Controls
 {
@@ -93,6 +94,21 @@ namespace Fluver.UI.Controls
         private bool InvertBool(bool value)
         {
             return !value;
+        }
+
+        public void AnimateSettingsButtonIcon()
+        {
+            if (AnimatedIcon.GetState(SettingsIcon) == "Pressed")
+            {
+                return;
+            }
+
+            AnimatedIcon.SetState(SettingsIcon, "Pressed");
+            SettingsIcon.UpdateLayout();
+            AnimatedIcon.SetState(
+                SettingsIcon,
+                // AnimatedSettingsVisualSource looks better transitioning to PointerOver fsr
+                SettingsIcon.Source is AnimatedSettingsVisualSource ? "PointerOver" : "Normal");
         }
     }
 }

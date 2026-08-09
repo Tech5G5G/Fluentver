@@ -35,12 +35,16 @@ namespace Fluver.Windows
             NativeInterop.AddMenuSeparator(menu);
 
             (ViewModel = viewModel).InitializeWindowManager(mainWindow: this)
-                                   .InitializeFrame(ContentFrame);
+                                   .InitializeFrame(ContentFrame)
+                                   .PropertyChanged += OnPropertyChanged;
         }
 
-        private void OnActivated(object sender, WindowActivatedEventArgs e)
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            TitleBar.IsSettingsButtonActive = e.WindowActivationState != WindowActivationState.Deactivated;
+            if (e.PropertyName == nameof(MainWindowViewModel.IsSettingsOpen))
+            {
+                TitleBar.AnimateSettingsButtonIcon();
+        }
         }
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
