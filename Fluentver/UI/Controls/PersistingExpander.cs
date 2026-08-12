@@ -1,11 +1,11 @@
-﻿using Windows.Foundation.Collections;
-using Microsoft.UI.Xaml.Controls;
+﻿using Windows.Storage;
+using Windows.Foundation.Collections;
 using Microsoft.UI.Xaml;
-using Windows.Storage;
+using Microsoft.UI.Xaml.Controls;
 
 namespace Fluver.UI.Controls;
 
-public partial class MemorizingExpander : Expander
+public sealed partial class PersistentExpander : Expander
 {
     private static bool _triedStorage;
     private static IPropertySet Storage
@@ -28,9 +28,9 @@ public partial class MemorizingExpander : Expander
 
     private bool _hookedEvents;
 
-    public MemorizingExpander()
+    public PersistentExpander()
     {
-        DefaultStyleKey = typeof(MemorizingExpander);
+        DefaultStyleKey = typeof(PersistentExpander);
     }
 
     public string Id
@@ -40,12 +40,21 @@ public partial class MemorizingExpander : Expander
     }
 
     public static DependencyProperty IdProperty { get; } =
-        DependencyProperty.Register(nameof(Id), typeof(string), typeof(MemorizingExpander), new(defaultValue: string.Empty, OnIdChanged));
+        DependencyProperty.Register(nameof(Id), typeof(string), typeof(PersistentExpander), new(defaultValue: string.Empty, OnIdChanged));
 
     private static void OnIdChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
     {
-        if (sender is not MemorizingExpander expander || e.NewValue is not string id)
+        if (sender is not PersistentExpander expander)
         {
+            return;
+        }
+
+        if (e.NewValue is not string id || string.IsNullOrWhiteSpace(id))
+        {
+            expander.Expanding -= OnExpanding;
+            expander.Collapsed -= OnCollapsed;
+
+            expander._hookedEvents = false;
             return;
         }
 
@@ -69,11 +78,11 @@ public partial class MemorizingExpander : Expander
     
     private static void OnExpanding(Expander sender, ExpanderExpandingEventArgs e)
     {
-        Storage[(sender as MemorizingExpander).Id] = true;
+        Storage[(sender as PersistentExpander).Id] = true;
     }
 
     private static void OnCollapsed(Expander sender, ExpanderCollapsedEventArgs e)
     {
-        Storage[(sender as MemorizingExpander).Id] = false;
+        Storage[(sender as PersistentExpander).Id] = false;
     }
 }

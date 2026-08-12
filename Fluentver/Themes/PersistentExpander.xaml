@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:Fluver.UI.Controls">
 
-    <Style TargetType="controls:MemorizingExpander" BasedOn="{StaticResource DefaultMemorizingExpanderStyle}" />
-    <Style x:Key="DefaultMemorizingExpanderStyle" TargetType="controls:MemorizingExpander">
+    <Style TargetType="controls:PersistentExpander" BasedOn="{StaticResource DefaultPersistentExpanderStyle}" />
+    <Style x:Key="DefaultPersistentExpanderStyle" TargetType="controls:PersistentExpander">
         <Setter Property="IsExpanded" Value="True" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
