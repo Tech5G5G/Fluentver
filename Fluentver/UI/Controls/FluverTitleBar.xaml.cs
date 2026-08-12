@@ -40,7 +40,16 @@ namespace Fluver.UI.Controls
         }
 
         public static DependencyProperty IsBackButtonVisibleProperty { get; } =
-            DependencyProperty.Register(nameof(IsBackButtonVisible), typeof(bool), typeof(FluverTitleBar), new(defaultValue: false));
+            DependencyProperty.Register(
+                nameof(IsBackButtonVisible),
+                typeof(bool),
+                typeof(FluverTitleBar),
+                new(defaultValue: false, OnIsBackButtonVisibleChanged));
+
+        private static void OnIsBackButtonVisibleChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as FluverTitleBar)?.AnimateSettingsIcon();
+        }
 
         public ICommand SettingsCommand
         {
@@ -59,6 +68,21 @@ namespace Fluver.UI.Controls
 
         public static DependencyProperty SettingsCommandParameterProperty { get; } =
             DependencyProperty.Register(nameof(SettingsCommandParameter), typeof(object), typeof(FluverTitleBar), new(defaultValue: null));
+
+        private void AnimateSettingsIcon()
+        {
+            if (AnimatedIcon.GetState(SettingsIcon) == "Pressed")
+            {
+                return;
+            }
+
+            AnimatedIcon.SetState(SettingsIcon, "Pressed");
+            SettingsIcon.UpdateLayout();
+            AnimatedIcon.SetState(
+                SettingsIcon,
+                // AnimatedSettingsVisualSource looks better transitioning to PointerOver fsr
+                SettingsIcon.Source is AnimatedSettingsVisualSource ? "PointerOver" : "Normal");
+        }
 
         private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
         {
@@ -94,21 +118,6 @@ namespace Fluver.UI.Controls
         private bool InvertBool(bool value)
         {
             return !value;
-        }
-
-        public void AnimateSettingsButtonIcon()
-        {
-            if (AnimatedIcon.GetState(SettingsIcon) == "Pressed")
-            {
-                return;
-            }
-
-            AnimatedIcon.SetState(SettingsIcon, "Pressed");
-            SettingsIcon.UpdateLayout();
-            AnimatedIcon.SetState(
-                SettingsIcon,
-                // AnimatedSettingsVisualSource looks better transitioning to PointerOver fsr
-                SettingsIcon.Source is AnimatedSettingsVisualSource ? "PointerOver" : "Normal");
         }
     }
 }

@@ -34,8 +34,7 @@ namespace Fluver.Windows
             NativeInterop.AddMenuItem(menu, SC_SETTINGS, Text.GetString("SettingsButton/ToolTipService/ToolTip", viewModel.OSCulture));
             NativeInterop.AddMenuSeparator(menu);
 
-            (ViewModel = viewModel).InitializeFrame(ContentFrame)
-                                   .PropertyChanged += OnPropertyChanged;
+            (ViewModel = viewModel).InitializeFrame(ContentFrame);
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)

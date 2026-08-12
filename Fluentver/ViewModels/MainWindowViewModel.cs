@@ -31,12 +31,10 @@ public sealed partial class MainWindowViewModel(
         windowNavigation.Navigate(value ? MainWindowPage.SettingsPage : MainWindowPage.MainPage);
     }
 
-    public MainWindowViewModel InitializeFrame(Frame frame)
+    public void InitializeFrame(Frame frame)
     {
         windowNavigation.SetFrame(frame);
         windowNavigation.Navigate(MainWindowPage.MainPage);
-
-        return this;
     }
 
     public void GoBack()
