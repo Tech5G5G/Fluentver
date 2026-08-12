@@ -34,7 +34,7 @@ namespace Fluver.Windows
 
             NameBox.Header = string.Format(Text.CurrentName, SystemHelper.SystemName);
 
-            (ViewModel = viewModel).AddToWindowManager(renamerWindow: this);
+            ViewModel = viewModel;
         }
 
         private void Name_TextChanged(object sender, TextChangedEventArgs e)

@@ -20,8 +20,9 @@ namespace Fluver
         public static IServiceProvider Services => Current.ServiceProvider;
 
         public IServiceProvider ServiceProvider => _provider;
-
         private readonly ServiceProvider _provider;
+
+        private readonly IWindowManager _manager;
 
         public App()
         {
@@ -38,6 +39,7 @@ namespace Fluver
 
             // Make sure culture info is set properly
             _provider.GetRequiredService<ICultureService>();
+            _manager = _provider.GetRequiredService<IWindowManager>();
         }
 
         private void OnShutdownStarting(DispatcherQueue sender, DispatcherQueueShutdownStartingEventArgs e)
@@ -82,7 +84,7 @@ namespace Fluver
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            new MainWindow(_provider.GetRequiredService<MainWindowViewModel>()).Activate();
+            _manager.CreateWindow(_provider.GetRequiredService<MainWindowViewModel>()).Show();
         }
 
         public void Restart()

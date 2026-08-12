@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Fluver.ViewModels;
 
 namespace Fluver.Windows;
 
@@ -13,10 +13,20 @@ public sealed partial class WindowManager : IWindowManager
     public event EventHandler<IWindow> WindowCreated;
     public event EventHandler<IWindow> WindowClosed;
 
-    public T CreateWindow<T>() where T : IWindow, new()
+    public IWindow CreateWindow(object viewModel)
     {
-        T window = new();
-        AddWindow(window);
+        IWindow window = viewModel switch
+        {
+            MainWindowViewModel main => new MainWindow(main),
+            RenamerWindowViewModel renamer => new RenamerWindow(renamer),
+            _ => null
+        };
+
+        if (window is not null)
+        {
+            AddWindow(window);
+        }
+
         return window;
     }
 
@@ -32,14 +42,14 @@ public sealed partial class WindowManager : IWindowManager
 
         WindowCreated?.Invoke(sender: this, window);
 
-        void OnClosed(object sender, WindowEventArgs e)
+        void OnClosed(object sender, object e)
         {
-            if (!e.Handled && sender is IWindow window)
+            if (sender is IWindow window)
             {
                 _windows.Remove(window);
                 window.Closed -= OnClosed;
 
-                if (_mainWindow == window)
+                if (window == _mainWindow)
                 {
                     _mainWindow = null;
                 }

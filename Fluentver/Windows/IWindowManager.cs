@@ -9,7 +9,6 @@ public interface IWindowManager
     event EventHandler<IWindow> WindowCreated;
     event EventHandler<IWindow> WindowClosed;
 
-    T CreateWindow<T>() where T : IWindow, new();
-
+    IWindow CreateWindow(object viewModel);
     void AddWindow(IWindow window);
 }

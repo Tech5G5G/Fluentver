@@ -11,7 +11,6 @@ namespace Fluver.ViewModels;
 
 public sealed partial class MainWindowViewModel(
 #pragma warning disable CS9113 // Parameter is unread.
-    IWindowManager manager,
     ICultureService culture,
     IBackdropManager backdrop,
     IPackageInformation package,
@@ -27,10 +26,9 @@ public sealed partial class MainWindowViewModel(
     [ObservableProperty]
     public partial bool IsSettingsOpen { get; set; }
 
-    public MainWindowViewModel InitializeWindowManager(MainWindow mainWindow)
+    partial void OnIsSettingsOpenChanged(bool value)
     {
-        manager.AddWindow(mainWindow);
-        return this;
+        windowNavigation.Navigate(value ? MainWindowPage.SettingsPage : MainWindowPage.MainPage);
     }
 
     public MainWindowViewModel InitializeFrame(Frame frame)
@@ -59,11 +57,6 @@ public sealed partial class MainWindowViewModel(
         {
             pageNavigation.GoForward();
         }
-    }
-
-    partial void OnIsSettingsOpenChanged(bool value)
-    {
-        windowNavigation.Navigate(value ? MainWindowPage.SettingsPage : MainWindowPage.MainPage);
     }
 
     public void Settings()
