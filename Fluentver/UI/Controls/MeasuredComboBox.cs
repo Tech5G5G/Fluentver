@@ -4,8 +4,11 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace Fluver.UI.Controls;
 
+[TemplatePart(Name = LayoutRootTemplateName, Type = typeof(Grid))]
 public sealed partial class MeasuredComboBox : ComboBox
 {
+    private const string LayoutRootTemplateName = "LayoutRoot";
+
     private double _rightInset;
 
     public MeasuredComboBox()
@@ -17,7 +20,7 @@ public sealed partial class MeasuredComboBox : ComboBox
     {
         base.OnApplyTemplate();
 
-        if (GetTemplateChild("LayoutRoot") is Grid { ColumnDefinitions: { Count: >= 2 } columns })
+        if (GetTemplateChild(LayoutRootTemplateName) is Grid { ColumnDefinitions: { Count: >= 2 } columns })
         {
             _rightInset = columns.Skip(count: 1).Sum(c => c.Width.Value);
         }
