@@ -15,8 +15,6 @@ namespace Fluver.Views
 
         protected override PageViewModel PageViewModel => ViewModel;
 
-        private const int MaxBarViewerWidth = 474;
-
         public MainPage()
         {
             InitializeComponent();
@@ -25,6 +23,8 @@ namespace Fluver.Views
 
         private void OnBarViewerLoaded(object sender, RoutedEventArgs e)
         {
+            const int MaxBarViewerWidth = 475;
+
             BarViewer.Loaded -= OnBarViewerLoaded;
 
             if (BarViewer.ExtentWidth <= MaxBarViewerWidth)
