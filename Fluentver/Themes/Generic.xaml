@@ -5,9 +5,10 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Themes/CustomStyles.xaml" />
         <ResourceDictionary Source="/Themes/IconButton.xaml" />
+        <ResourceDictionary Source="/Themes/MeasuredComboBox.xaml" />
         <ResourceDictionary Source="/Themes/PersistentExpander.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Default">
             <Color x:Key="TitleBarCaptionButtonForegroundColor">#FFFFFF</Color>
