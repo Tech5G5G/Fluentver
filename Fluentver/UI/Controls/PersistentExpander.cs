@@ -15,7 +15,7 @@ public sealed partial class PersistentExpander : Expander
             if (field is null && !_triedStorage)
             {
                 if (ApplicationData.Current is { LocalSettings: { } settings } &&
-                    settings.CreateContainer("MemorizingExpander.Storage", ApplicationDataCreateDisposition.Always) is { Values: { } values })
+                    settings.CreateContainer("PersistentExpander.Storage", ApplicationDataCreateDisposition.Always) is { Values: { } values })
                 {
                     field = values;
                 }
