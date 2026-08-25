@@ -48,7 +48,17 @@ namespace Fluver.UI.Controls
 
         private static void OnIsBackButtonVisibleChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            (sender as FluverTitleBar)?.AnimateSettingsIcon();
+            if (sender is not FluverTitleBar { SettingsIcon: { } icon } || AnimatedIcon.GetState(icon) == "Pressed")
+            {
+                return;
+            }
+
+            AnimatedIcon.SetState(icon, "Pressed");
+            icon.UpdateLayout();
+            AnimatedIcon.SetState(
+                icon,
+                // AnimatedSettingsVisualSource looks better transitioning to PointerOver fsr
+                icon.Source is AnimatedSettingsVisualSource ? "PointerOver" : "Normal");
         }
 
         public ICommand SettingsCommand
@@ -68,21 +78,6 @@ namespace Fluver.UI.Controls
 
         public static DependencyProperty SettingsCommandParameterProperty { get; } =
             DependencyProperty.Register(nameof(SettingsCommandParameter), typeof(object), typeof(FluverTitleBar), new(defaultValue: null));
-
-        private void AnimateSettingsIcon()
-        {
-            if (AnimatedIcon.GetState(SettingsIcon) == "Pressed")
-            {
-                return;
-            }
-
-            AnimatedIcon.SetState(SettingsIcon, "Pressed");
-            SettingsIcon.UpdateLayout();
-            AnimatedIcon.SetState(
-                SettingsIcon,
-                // AnimatedSettingsVisualSource looks better transitioning to PointerOver fsr
-                SettingsIcon.Source is AnimatedSettingsVisualSource ? "PointerOver" : "Normal");
-        }
 
         private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
         {
