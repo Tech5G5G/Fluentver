@@ -1,17 +1,17 @@
 ﻿using Windows.System;
-using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using WinUIEx;
 using Fluver.Strings;
 using Fluver.ViewModels;
+using Fluver.UI.Controls;
 using Fluver.System.Interop;
 
 namespace Fluver.Windows
 {
-    public sealed partial class MainWindow : UI.Controls.WindowEx
+    public sealed partial class MainWindow : FluverWindow
     {
-        private const nuint SC_SETTINGS = 0x1000;
+        private const ushort SettingsId = 0x1000;
 
         public MainWindowViewModel ViewModel { get; }
 
@@ -19,27 +19,25 @@ namespace Fluver.Windows
         {
             InitializeComponent();
 
-            SetTitleBar(TitleBar.FindName("TitleBar") as UIElement);
-            ExtendsContentIntoTitleBar = true;
-            AppWindow.SetIcon("Assets/Fluver.ico");
+            Header.OverlapsContent = true;
+            Header.DragElement = TitleBar.FindName("DragRegion") as UIElement;
 
-            if (AppWindow.Presenter is OverlappedPresenter presenter)
-            {
-                presenter.IsMaximizable = presenter.IsMinimizable = presenter.IsResizable = false;
-            }
-
-            var menu = PInvoke.GetSystemMenu(this.GetWindowHandle(), bRevert: false);
             // The window menu is usually displayed in the OS language, not the language set by Fluver
             // Attempt to use the OS language for consistency
-            NativeInterop.AddMenuItem(menu, SC_SETTINGS, Text.GetString("SettingsButton/ToolTipService/ToolTip", viewModel.OSCulture));
-            NativeInterop.AddMenuSeparator(menu);
+            Menu.AddMenuItem(SettingsId, Text.GetString("SettingsButton/ToolTipService/ToolTip", viewModel.OSCulture))
+                .AddMenuSeparator()
+                .ItemInvoked += OnMenuItemInvoked;
 
             (ViewModel = viewModel).InitializeFrame(ContentFrame);
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnMenuItemInvoked(object sender, WindowMenuItemInvokedEventArgs e)
         {
-            if (e.PropertyName == nameof(MainWindowViewModel.IsSettingsOpen))
+            if (e.ItemId == SettingsId)
+            {
+                e.Handled = true;
+                ViewModel.Settings();
+            }
             {
                 TitleBar.AnimateSettingsButtonIcon();
         }
@@ -77,20 +75,6 @@ namespace Fluver.Windows
                     ViewModel.GoForward();
                 }
             }
-        }
-
-        protected override nint Procedure(nint hWnd, uint uMsg, nuint wParam, nint lParam, ref bool handled)
-        {
-            if (uMsg == 0x0112 && // WM_SYSCOMMAND
-                (wParam & 0xFFF0) == SC_SETTINGS)
-            {
-                ViewModel.Settings();
-
-                handled = true;
-                return nint.Zero;
-            }
-
-            return base.Procedure(hWnd, uMsg, wParam, lParam, ref handled);
         }
     }
 }

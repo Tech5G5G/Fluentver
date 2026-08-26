@@ -3,19 +3,19 @@
     x:Class="Fluver.Windows.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Fluver"
+    xmlns:local="using:Fluver.Windows"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:Fluver.UI"
-    xmlns:ui2="using:CommunityToolkit.WinUI"
     xmlns:controls="using:Fluver.UI.Controls"
-    xmlns:controls2="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d"
+    PersistenceId="Fluver.MainWindow"
+    Icon="Assets/Fluver.ico"
     Title="{x:Bind ViewModel.DisplayName}"
-    Width="480" Height="578"
-    MinWidth="480" MaxWidth="480"
-    DoubleClickToMaximize="False"
-    Activated="OnActivated">
+    ClientWidth="467" ClientHeight="564"
+    MinClientWidth="467" MaxClientWidth="467"
+    IsResizable="False" IsMinimizable="False" IsMaximizable="False"
+    VerticalAlignment="Top">
 
     <Grid Background="Transparent" VerticalAlignment="Top" SizeChanged="OnSizeChanged" PointerPressed="OnPointerPressed" KeyDown="OnKeyDown">
         <Grid.RowDefinitions>
@@ -26,8 +26,9 @@
         <controls:FluverTitleBar x:Name="TitleBar"
                                  Title="{x:Bind ViewModel.DisplayName}"
                                  IsBackButtonVisible="{x:Bind ViewModel.IsSettingsOpen, Mode=OneWay}"
+                                 IsSettingsButtonActive="{x:Bind IsActive, Mode=OneWay}"
                                  SettingsCommand="{x:Bind ViewModel.ToggleSettingsCommand}" />
 
         <Frame x:Name="ContentFrame" Grid.Row="1" />
     </Grid>
-</controls:WindowEx>
+</controls:FluverWindow>
