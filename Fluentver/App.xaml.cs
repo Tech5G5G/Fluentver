@@ -100,6 +100,9 @@ namespace Fluver
 
         void IDisposable.Dispose()
         {
+            // Manually close if not already to save size + position
+            _manager.MainWindow?.Close();
+
             _provider.Dispose();
         }
     }
