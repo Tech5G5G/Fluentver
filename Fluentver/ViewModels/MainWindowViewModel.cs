@@ -2,7 +2,7 @@
 using Microsoft.UI.Xaml.Controls;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Fluver.Windows;
+using Fluver.UI;
 using Fluver.Navigation;
 using Fluver.Globalization;
 using Fluver.ApplicationModel;
@@ -10,15 +10,15 @@ using Fluver.ApplicationModel;
 namespace Fluver.ViewModels;
 
 public sealed partial class MainWindowViewModel(
-#pragma warning disable CS9113 // Parameter is unread.
     ICultureService culture,
-    IBackdropManager backdrop,
     IPackageInformation package,
+    IUISettingsService uiSettings,
     IMainPageNavigationService pageNavigation,
     IMainWindowNavigationService windowNavigation)
-#pragma warning restore CS9113 // Parameter is unread.
     : ObservableObject
 {
+    public bool AreAnimationsEnabled => uiSettings.AnimationsEnabled;
+
     public string DisplayName => package.DisplayName;
 
     public CultureInfo OSCulture => culture.OSCulture;
