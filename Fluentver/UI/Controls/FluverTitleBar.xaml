@@ -24,6 +24,7 @@
                         <StateTrigger IsActive="{x:Bind InvertBool(IsSettingsButtonActive), Mode=OneWay}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="TitleText.Foreground" Value="{ThemeResource TitleBarCaptionButtonInactiveForegroundColor}" />
                         <Setter Target="SettingsIcon.Foreground" Value="{ThemeResource TitleBarCaptionButtonInactiveForegroundColor}" />
                         <Setter Target="FallbackSettingsIcon.Foreground" Value="{ThemeResource TitleBarCaptionButtonInactiveForegroundColor}" />
                     </VisualState.Setters>
@@ -53,7 +54,9 @@
             <ColumnDefinition Width="46" />
         </Grid.ColumnDefinitions>
 
-        <TitleBar x:Name="TitleBar" Title="{x:Bind Title, Mode=OneWay}" HorizontalAlignment="Stretch" Height="31" />
+        <Border x:Name="DragRegion" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="14,0,0,0" Grid.Column="1">
+            <TextBlock x:Name="TitleText" Text="{x:Bind Title}" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" />
+        </Border>
 
         <Button x:Name="SettingsButton" x:Uid="SettingsButton"
                 CornerRadius="0" BorderThickness="0" Background="Transparent"
