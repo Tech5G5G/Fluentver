@@ -79,9 +79,11 @@ namespace Fluver.Windows
             return base.Procedure(hWnd, uMsg, wParam, lParam, ref handled);
         }
 
-        private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
+        protected override void OnPointerPressed(PointerRoutedEventArgs e)
         {
-            if (e.GetCurrentPoint(sender as UIElement) is { Properties: { } properties })
+            base.OnPointerPressed(e);
+
+            if (e.GetCurrentPoint(relativeTo: this) is { Properties: { } properties })
             {
                 if (properties.IsXButton1Pressed)
                 {
@@ -94,15 +96,17 @@ namespace Fluver.Windows
             }
         }
 
-        private void OnKeyDown(object sender, KeyRoutedEventArgs e)
+        protected override void OnProcessKeyboardAccelerators(ProcessKeyboardAcceleratorEventArgs args)
         {
-            if (e.KeyStatus.IsMenuKeyDown)
+            base.OnProcessKeyboardAccelerators(args);
+
+            if (args.Modifiers == VirtualKeyModifiers.Menu)
             {
-                if (e.Key == VirtualKey.Left)
+                if (args.Key == VirtualKey.Left)
                 {
                     ViewModel.GoBack();
                 }
-                else if (e.Key == VirtualKey.Right)
+                else if (args.Key == VirtualKey.Right)
                 {
                     ViewModel.GoForward();
                 }
