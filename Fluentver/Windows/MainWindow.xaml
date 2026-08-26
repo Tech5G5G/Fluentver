@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<controls:WindowEx
+<controls:FluverWindow
+    x:Name="Window"
     x:Class="Fluver.Windows.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -16,19 +17,22 @@
     MinClientWidth="467" MaxClientWidth="467"
     IsResizable="False" IsMinimizable="False" IsMaximizable="False"
     VerticalAlignment="Top">
+    <controls:FluverWindow.Resources>
+        <Storyboard x:Name="ClientHeightStoryboard" Completed="OnStoryboardCompleted">
+            <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="Window" Storyboard.TargetProperty="ClientHeight">
+                <DiscreteDoubleKeyFrame x:Name="ClientHeightInitialKeyFrame" KeyTime="0" />
+                <SplineDoubleKeyFrame x:Name="ClientHeightFinalKeyFrame" KeyTime="0:0:0.333" KeySpline="0.0, 0.0, 0.0, 1.0" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </controls:FluverWindow.Resources>
 
-    <Grid Background="Transparent" VerticalAlignment="Top" SizeChanged="OnSizeChanged" PointerPressed="OnPointerPressed" KeyDown="OnKeyDown">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
+    <StackPanel Orientation="Vertical" Background="Transparent" VerticalAlignment="Top" SizeChanged="OnSizeChanged">
         <controls:FluverTitleBar x:Name="TitleBar"
                                  Title="{x:Bind ViewModel.DisplayName}"
                                  IsBackButtonVisible="{x:Bind ViewModel.IsSettingsOpen, Mode=OneWay}"
                                  IsSettingsButtonActive="{x:Bind IsActive, Mode=OneWay}"
                                  SettingsCommand="{x:Bind ViewModel.ToggleSettingsCommand}" />
 
-        <Frame x:Name="ContentFrame" Grid.Row="1" />
-    </Grid>
+        <Frame x:Name="ContentFrame" />
+    </StackPanel>
 </controls:FluverWindow>

@@ -1,7 +1,7 @@
 ﻿using Windows.System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
-using WinUIEx;
+using Microsoft.UI.Xaml.Media.Animation;
 using Fluver.Strings;
 using Fluver.ViewModels;
 using Fluver.UI.Controls;
@@ -38,13 +38,45 @@ namespace Fluver.Windows
                 e.Handled = true;
                 ViewModel.Settings();
             }
+            else if (e.ItemId == PInvoke.SC_MOVE && ClientHeightStoryboard.GetCurrentState() == ClockState.Active)
             {
-                TitleBar.AnimateSettingsButtonIcon();
+                e.Handled = true;
         }
         }
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
+            DesktopBridge.SizeToParent = false;
+            double oldHeight = ClientHeight, newHeight = e.NewSize.Height;
+
+            if (newHeight > oldHeight)
+            {
+                DesktopBridge.Resize(ClientWidth, newHeight);
+            }
+
+            // Cancel any moving modal loops
+            PInvoke.SendMessage(Handle, PInvoke.WM_CANCELMODE, wParam: nuint.Zero, lParam: nint.Zero);
+
+            ClientHeightInitialKeyFrame.Value = oldHeight;
+            ClientHeightFinalKeyFrame.Value = newHeight;
+            ClientHeightStoryboard.Begin();
+        }
+
+        private void OnStoryboardCompleted(object sender, object e)
+        {
+            DesktopBridge.Resize(ClientWidth, ClientHeightFinalKeyFrame.Value)
+                         .SizeToParent = true;
+        }
+
+        protected override nint Procedure(nint hWnd, uint uMsg, nuint wParam, nint lParam, ref bool handled)
+        {
+            if (uMsg == PInvoke.WM_DPICHANGED && ClientHeightStoryboard.GetCurrentState() == ClockState.Active)
+            {
+                DesktopBridge.SizeToParent = true;
+                ClientHeightStoryboard.SkipToFill();
+            }
+
+            return base.Procedure(hWnd, uMsg, wParam, lParam, ref handled);
         }
 
         private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
