@@ -1,20 +1,18 @@
-﻿using Windows.Foundation;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Media;
+﻿using Microsoft.UI.Xaml.Media;
 
 namespace Fluver.Windows;
 
 public interface IWindow
 {
     string Title { get; set; }
-    bool Visible { get; }
+    bool IsActive { get; }
+    IWindow Owner { get; set; }
+
     SystemBackdrop SystemBackdrop { get; set; }
 
-    event TypedEventHandler<object, WindowVisibilityChangedEventArgs> VisibilityChanged;
+    event EventHandler Opened;
+    event EventHandler Closed;
 
-    event TypedEventHandler<object, WindowActivatedEventArgs> Activated;
-    event TypedEventHandler<object, WindowEventArgs> Closed;
-
-    void Activate();
+    void Show();
     void Close();
 }
