@@ -7,15 +7,18 @@
     xmlns:local="using:Fluver.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:Fluver.UI"
     xmlns:strings="using:Fluver.Strings"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
+    xmlns:is11="http://schemas.microsoft.com/winfx/2006/xaml/presentation?ui:WindowsVersionCondition(11)"
+    xmlns:is10="http://schemas.microsoft.com/winfx/2006/xaml/presentation?ui:WindowsVersionCondition(10)"
     mc:Ignorable="d">
     <UserControl.Resources>
         <animatedvisuals:AnimatedSettingsVisualSource x:Key="SettingsVisualSource" />
         <animatedvisuals:AnimatedBackVisualSource x:Key="BackVisualSource" />
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Height="{x:Bind DimensionProvider.Height}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="WindowActivated" />
@@ -50,9 +53,10 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{x:Bind DoubleToGridLength(DimensionProvider.LeftInset)}" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="46" />
+            <ColumnDefinition Width="{x:Bind DoubleToGridLength(DimensionProvider.RightInset)}" />
         </Grid.ColumnDefinitions>
 
         <Border x:Name="DragRegion" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="14,0,0,0" Grid.Column="1">
@@ -61,8 +65,9 @@
 
         <Button x:Name="SettingsButton" x:Uid="SettingsButton"
                 CornerRadius="0" BorderThickness="0" Background="Transparent"
-                Width="46" Height="31" Grid.Column="1"
-                ToolTipService.Placement="Bottom"
+                Width="46" VerticalAlignment="Stretch"
+                is11:FocusVisualMargin="0,1,0,0" is10:FocusVisualMargin="0"
+                Grid.Column="2" ToolTipService.Placement="Bottom"
                 Click="OnSettingsButtonClick"
                 Loaded="OnSettingsButtonLoaded" Unloaded="OnSettingsButtonUnloaded">
             <AnimatedIcon x:Name="SettingsIcon"

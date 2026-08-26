@@ -24,6 +24,15 @@ namespace Fluver.UI.Controls
         public static DependencyProperty TitleProperty { get; } =
             DependencyProperty.Register(nameof(Title), typeof(string), typeof(FluverTitleBar), new(defaultValue: string.Empty));
 
+        public WindowHeader DimensionProvider
+        {
+            get => (WindowHeader)GetValue(DimensionProviderProperty);
+            set => SetValue(DimensionProviderProperty, value);
+        }
+
+        public static DependencyProperty DimensionProviderProperty { get; } =
+            DependencyProperty.Register(nameof(DimensionProvider), typeof(WindowHeader), typeof(FluverTitleBar), new(defaultValue: null));
+
         public bool IsSettingsButtonActive
         {
             get => (bool)GetValue(IsSettingsButtonActiveProperty);
@@ -113,6 +122,11 @@ namespace Fluver.UI.Controls
         private bool InvertBool(bool value)
         {
             return !value;
+        }
+
+        private GridLength DoubleToGridLength(double value)
+        {
+            return new(value);
         }
     }
 }

@@ -29,6 +29,7 @@
     <StackPanel Orientation="Vertical" Background="Transparent" VerticalAlignment="Top" SizeChanged="OnSizeChanged">
         <controls:FluverTitleBar x:Name="TitleBar"
                                  Title="{x:Bind ViewModel.DisplayName}"
+                                 DimensionProvider="{x:Bind Header}"
                                  IsSettingsOpen="{x:Bind ViewModel.IsSettingsOpen, Mode=OneWay}"
                                  IsSettingsButtonActive="{x:Bind IsActive, Mode=OneWay}"
                                  SettingsCommand="{x:Bind ViewModel.ToggleSettingsCommand}" />
