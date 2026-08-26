@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<controls:WindowEx
+<controls:FluverWindow
     x:Class="Fluver.Windows.RenamerWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,8 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Fluver.UI.Controls"
     mc:Ignorable="d"
-    Width="480" Height="270"
-    IsDialogWindow="True">
+    Icon="Assets/Fluver.ico"
+    ClientWidth="480" ClientHeight="270"
+    IsShownInSwitchers="False" IsResizable="False" IsMinimizable="False" IsMaximizable="False" IsModal="True">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -58,4 +59,4 @@
             </Button>
         </Grid>
     </Grid>
-</controls:WindowEx>
+</controls:FluverWindow>

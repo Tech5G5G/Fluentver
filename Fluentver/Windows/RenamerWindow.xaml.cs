@@ -1,38 +1,26 @@
 ﻿using Windows.System;
-using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Controls;
-using WinUIEx;
 using Fluver.Helpers;
 using Fluver.ViewModels;
-using Fluver.System.Interop;
+using Fluver.UI.Controls;
 
 namespace Fluver.Windows
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class RenamerWindow : UI.Controls.WindowEx
+    public sealed partial class RenamerWindow : FluverWindow
     {
         public RenamerWindowViewModel ViewModel { get; }
 
-        public RenamerWindow(RenamerWindowViewModel viewModel, Window parentWindow)
+        public RenamerWindow(RenamerWindowViewModel viewModel)
         {
             InitializeComponent();
 
-            SetTitleBar(TitleBar);
-            ExtendsContentIntoTitleBar = true;
-            Title = Text.GetString("RenamePC.Text");
+            Title = Text.GetString("RenamePC/Text");
+            NameBox.Header = Text.CurrentName(SystemHelper.SystemName);
 
-            PInvoke.SetWindowLong(this.GetWindowHandle(), PInvoke.GWL_HWNDPARENT, parentWindow.GetWindowHandle());
-
-            if (AppWindow.Presenter is OverlappedPresenter presenter)
-            {
-                presenter.IsModal = true;
-            }
-
-            NameBox.Header = string.Format(Text.CurrentName, SystemHelper.SystemName);
+            Header.OverlapsContent = true;
+            Header.DragElement = TitleBar;
 
             ViewModel = viewModel;
         }
