@@ -4,6 +4,7 @@ using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
+using Fluver.UI;
 using Fluver.Options;
 using Fluver.Windows;
 using Fluver.Navigation;
@@ -37,8 +38,11 @@ namespace Fluver
             InitializeServices(services);
             _provider = services.BuildServiceProvider();
 
-            // Make sure culture info is set properly
-            _provider.GetRequiredService<ICultureService>();
+            // Initialize required singleton services
+            _provider.GetRequiredService<ICultureService>(); // Updates current culture info
+            _provider.GetRequiredService<IBackdropManager>(); // Updates window backdrops
+            _provider.GetRequiredService<IUISettingsService>(); // Updates preferred app mode (system menu theme)
+
             _manager = _provider.GetRequiredService<IWindowManager>();
         }
 
