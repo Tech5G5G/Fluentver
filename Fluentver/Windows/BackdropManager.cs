@@ -1,6 +1,6 @@
-﻿using Windows.UI.ViewManagement;
-using Microsoft.UI.Composition.SystemBackdrops;
+﻿using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Xaml.Media;
+using Fluver.UI;
 using Fluver.Options;
 using Fluver.System.Interop;
 
@@ -10,20 +10,21 @@ public sealed class BackdropManager : IBackdropManager
 {
     private readonly IWindowManager _manager;
     private readonly ISettingsService _settings;
-
-    private readonly UISettings _uiSettings = new();
+    private readonly IUISettingsService _uiSettings;
 
     private BackdropType _currentBackdrop;
 
     public BackdropManager(
         IWindowManager manager,
-        ISettingsService settings)
+        ISettingsService settings,
+        IUISettingsService uiSettings)
     {
         _manager = manager;
         _settings = settings;
+        _uiSettings = uiSettings;
 
-        OnColorValuesChanged(_uiSettings, e: null);
-        _uiSettings.ColorValuesChanged += OnColorValuesChanged;
+        OnColorValuesChanged(uiSettings, EventArgs.Empty);
+        uiSettings.ColorValuesChanged += OnColorValuesChanged;
 
         _currentBackdrop = settings.Backdrop.Value;
         settings.Backdrop.ValueChanged += OnValueChanged;
@@ -32,10 +33,9 @@ public sealed class BackdropManager : IBackdropManager
         UpdateWindows();
     }
 
-    private void OnColorValuesChanged(UISettings sender, object e)
+    private void OnColorValuesChanged(object sender, EventArgs e)
     {
-        _ = PInvoke.SetPreferredAppMode(sender.GetColorValue(UIColorType.Background) is { R: 0x00, G: 0x00, B: 0x00 }
-            ? PreferredAppMode.ForceDark : PreferredAppMode.ForceLight);
+        _ = PInvoke.SetPreferredAppMode((sender as IUISettingsService).DarkModeEnabled ? PreferredAppMode.ForceDark : PreferredAppMode.ForceLight);
         PInvoke.FlushMenuThemes();
     }
 
