@@ -33,20 +33,20 @@ namespace Fluver.UI.Controls
         public static DependencyProperty IsSettingsButtonActiveProperty { get; } =
             DependencyProperty.Register(nameof(IsSettingsButtonActive), typeof(bool), typeof(FluverTitleBar), new(defaultValue: true));
 
-        public bool IsBackButtonVisible
+        public bool IsSettingsOpen
         {
-            get => (bool)GetValue(IsBackButtonVisibleProperty);
-            set => SetValue(IsBackButtonVisibleProperty, value);
+            get => (bool)GetValue(IsSettingsOpenProperty);
+            set => SetValue(IsSettingsOpenProperty, value);
         }
 
-        public static DependencyProperty IsBackButtonVisibleProperty { get; } =
+        public static DependencyProperty IsSettingsOpenProperty { get; } =
             DependencyProperty.Register(
-                nameof(IsBackButtonVisible),
+                nameof(IsSettingsOpen),
                 typeof(bool),
                 typeof(FluverTitleBar),
-                new(defaultValue: false, OnIsBackButtonVisibleChanged));
+                new(defaultValue: false, OnIsSettingsOpenChanged));
 
-        private static void OnIsBackButtonVisibleChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void OnIsSettingsOpenChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             if (sender is not FluverTitleBar { SettingsIcon: { } icon } || AnimatedIcon.GetState(icon) == "Pressed")
             {
