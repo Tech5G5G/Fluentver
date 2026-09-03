@@ -78,7 +78,6 @@ namespace Fluver
             services.AddSingleton<IWindowManager, WindowManager>()
                     .AddSingleton<ICultureService, CultureService>()
                     .AddSingleton<IBackdropManager, BackdropManager>()
-                    .AddSingleton<ISettingsService, SettingsService>()
                     .AddSingleton<IUISettingsService, UISettingsService>()
                     .AddSingleton<IPackageInformation, PackageInformation>();
 
