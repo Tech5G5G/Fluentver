@@ -23,6 +23,10 @@ partial class PInvoke
     public static partial bool EnableWindow(nint hWnd, [MarshalAs(UnmanagedType.Bool)] bool bEnable);
 
     [LibraryImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static partial bool ShowWindow(nint hWnd, int nCmdShow);
+
+    [LibraryImport("user32.dll")]
     public static partial nint SetActiveWindow(nint hWnd);
 
     [LibraryImport("user32.dll")]
@@ -76,6 +80,8 @@ partial class PInvoke
 
     public const uint SIZE_MINIMIZED = 1,
                       SIZE_MAXSHOW = 3;
+
+    public const int SW_HIDE = 0;
 
     public const uint SWP_NOSIZE = 0x0001,
                       SWP_NOMOVE = 0x0002,

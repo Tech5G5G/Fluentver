@@ -210,14 +210,20 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
                 }
                 break;
 
-            case WM_CLOSE
-            when IsModal && Owner is { _hWnd: { } hWndParent }:
+            case WM_CLOSE:
+                {
+                    // Hide here to stop content from disappearing
+                    // during close animation - we're already closing anyway
+                    ShowWindow(hWnd, SW_HIDE);
+
+                    if (IsModal && Owner is { _hWnd: { } hWndParent })
                 {
                     EnableWindow(hWndParent, bEnable: true);
                     if (IsActive)
                     {
                         SetActiveWindow(hWndParent);
                     }
+                }
                 }
                 break;
 
