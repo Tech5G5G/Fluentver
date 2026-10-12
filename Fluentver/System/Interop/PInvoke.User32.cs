@@ -4,6 +4,9 @@ namespace Fluver.System.Interop;
 
 partial class PInvoke
 {
+    [LibraryImport("user32.dll")]
+    public static partial void PostQuitMessage(int nExitCode);
+
     [LibraryImport("user32.dll", EntryPoint = "FindWindowExW", StringMarshalling = StringMarshalling.Utf16)]
     public static partial nint FindWindowEx(
         [Optional] nint hWndParent,

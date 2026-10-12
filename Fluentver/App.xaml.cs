@@ -4,7 +4,7 @@ using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
-using Fluver.UI;
+using Fluver.Helpers;
 using Fluver.Options;
 using Fluver.Windows;
 using Fluver.Navigation;
@@ -26,10 +26,15 @@ namespace Fluver
 
         private readonly IWindowManager _manager;
 
+        private bool _restart;
+
         public App()
         {
             InitializeComponent();
-            DispatcherQueue.GetForCurrentThread().ShutdownStarting += OnShutdownStarting;
+
+            var queue = DispatcherQueue.GetForCurrentThread();
+            queue.ShutdownStarting += OnShutdownStarting;
+            queue.ShutdownCompleted += OnShutdownCompleted;
 
 #if !DEBUG
             UnhandledException += OnUnhandledException;
@@ -53,6 +58,14 @@ namespace Fluver
         private void OnShutdownStarting(DispatcherQueue sender, DispatcherQueueShutdownStartingEventArgs e)
         {
             ((IDisposable)this).Dispose();
+        }
+
+        private void OnShutdownCompleted(DispatcherQueue sender, object e)
+        {
+            if (_restart)
+            {
+                AppInstance.Restart(arguments: string.Empty);
+            }
         }
 
         private void OnUnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -79,7 +92,7 @@ namespace Fluver
 
             services.AddSingleton<IApplicationLifetime>(this);
 
-            services.AddSingleton<IWindowManager, WindowManager>()
+            services.AddSingleton<IWindowManager, FluverWindowManager>()
                     .AddSingleton<ICultureService, CultureService>()
                     .AddSingleton<IBackdropManager, BackdropManager>()
                     .AddSingleton<IUISettingsService, UISettingsService>()
@@ -97,15 +110,28 @@ namespace Fluver
 
         public void Restart()
         {
-            ((IDisposable)this).Dispose();
-            AppInstance.Restart(arguments: string.Empty);
+            _restart = true;
+            Exit();
+        }
+
+        public new void Exit()
+        {
+            var windows = _manager.Windows;
+            for (int i = 0; i < windows.Count; ++i)
+            {
+                windows[i].Close();
+            }
+
+            PInvoke.PostQuitMessage(nExitCode: 0);
+        }
+
+        void IApplicationLifetime.Exit()
+        {
+            Exit();
         }
 
         void IDisposable.Dispose()
         {
-            // Manually close if not already to save size + position
-            _manager.MainWindow?.Close();
-
             _provider.Dispose();
         }
     }
