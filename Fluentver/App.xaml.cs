@@ -14,7 +14,7 @@ using Fluver.ApplicationModel;
 
 namespace Fluver
 {
-    public sealed partial class App : Application, IAppLifetime, IDisposable
+    public sealed partial class App : Application, IApplicationLifetime, IDisposable
     {
         public static new App Current => (App)Application.Current;
 
@@ -73,7 +73,7 @@ namespace Fluver
             services.AddSingleton<IMainPageNavigationService, MainPageNavigationService>()
                     .AddSingleton<IMainWindowNavigationService, MainWindowNavigationService>();
 
-            services.AddSingleton<IAppLifetime>(this);
+            services.AddSingleton<IApplicationLifetime>(this);
 
             services.AddSingleton<IWindowManager, WindowManager>()
                     .AddSingleton<ICultureService, CultureService>()

@@ -1,6 +1,6 @@
 ﻿namespace Fluver.ApplicationModel;
 
-public interface IAppLifetime
+public interface IApplicationLifetime
 {
     void Restart();
     void Exit();
