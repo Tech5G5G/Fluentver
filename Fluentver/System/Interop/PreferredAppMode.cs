@@ -2,6 +2,9 @@
 
 internal enum PreferredAppMode
 {
-    ForceDark = 2,
-    ForceLight = 3
+    Default,
+    AllowDark,
+    ForceDark,
+    ForceLight,
+    Max
 }

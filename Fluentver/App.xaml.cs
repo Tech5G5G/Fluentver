@@ -11,6 +11,7 @@ using Fluver.Navigation;
 using Fluver.ViewModels;
 using Fluver.Globalization;
 using Fluver.ApplicationModel;
+using Fluver.System.Interop;
 
 namespace Fluver
 {
@@ -33,6 +34,9 @@ namespace Fluver
 #if !DEBUG
             UnhandledException += OnUnhandledException;
 #endif
+
+            _ = PInvoke.SetPreferredAppMode(PreferredAppMode.AllowDark);
+            PInvoke.FlushMenuThemes();
 
             ServiceCollection services = new();
             InitializeServices(services);
