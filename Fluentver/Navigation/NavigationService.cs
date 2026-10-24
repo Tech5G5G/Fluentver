@@ -32,21 +32,16 @@ public abstract class NavigationService<T> : INavigationService<T> where T : str
         var currentPage = CurrentPage;
 
         // Avoid repeated navigation to the same page
-        if (page.Equals(currentPage))
+        if (!EqualityComparer<T>.Default.Equals(page, currentPage))
         {
-            return;
-        }
-
-        if (page.Equals(None))
-        {
-            _frame.Content = null;
-        }
-        else
-        {
-            _frame.Navigate(
-                PageTypes[page],
-                parameter,
-                DetermineTransition(currentPage, page));
+            if (EqualityComparer<T>.Default.Equals(page, None))
+            {
+                _frame.Content = null;
+            }
+            else if (PageTypes.TryGetValue(page, out var type))
+            {
+                _frame.Navigate(type, parameter, DetermineTransition(currentPage, page));
+            }
         }
     }
 
