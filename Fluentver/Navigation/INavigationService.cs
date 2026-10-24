@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml.Navigation;
 
 namespace Fluver.Navigation;
 
-public interface INavigationService<T> where T : Enum
+public interface INavigationService<T> where T : struct, Enum
 {
     T CurrentPage { get; }
 

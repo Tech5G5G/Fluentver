@@ -4,7 +4,7 @@ using Microsoft.UI.Xaml.Media.Animation;
 
 namespace Fluver.Navigation;
 
-public abstract class NavigationService<T> : INavigationService<T> where T : Enum
+public abstract class NavigationService<T> : INavigationService<T> where T : struct, Enum
 {
     public abstract T CurrentPage { get; }
 
