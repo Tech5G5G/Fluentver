@@ -1,59 +1,70 @@
 ﻿using System.ComponentModel;
 using Windows.Storage;
+using Windows.Foundation.Collections;
 
 namespace Fluver.Options;
 
-public partial class Setting<T>(string key, T defaultValue) : ISetting<T>
+public sealed partial class Setting<T>(string key, T defaultValue, Func<T, T> coercer = null) : ISetting<T>
 {
-    private static readonly ApplicationDataContainer s_store = ApplicationData.Current.LocalSettings;
-
-    public event EventHandler<T> ValueChanged;
-
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    public event PropertyChangedEventHandler PropertyChanged;
+    private static readonly bool s_isEnum = typeof(T).IsEnum;
 
     public T Value
     {
         get
         {
-            if (s_store.Values.TryGetValue(key, out object value))
+            T coercedValue;
+
+            if (LocalSettings.Values.TryGetValue(key, out object obj))
             {
-                return Deserialize(value);
+                var value = (T)obj;
+                SetValue(value, coercedValue = Coerce(value));
             }
             else
             {
-                s_store.Values[key] = Serialize(defaultValue);
-                return defaultValue;
+                SetValue(coercedValue = Coerce(defaultValue));
             }
+
+            return coercedValue;
         }
         set
         {
-            s_store.Values[key] = Serialize(value);
-
-            ValueChanged?.Invoke(sender: this, e: value);
-            PropertyChanged?.Invoke(sender: this, e: new(nameof(Value)));
+            var coercedValue = Coerce(value);
+            if (SetValue(oldValue: Value, newValue: coercedValue))
+            {
+                ValueChanged?.Invoke(sender: this, e: coercedValue);
+                PropertyChanged?.Invoke(sender: this, e: new(propertyName: nameof(Value)));
+            }
         }
     }
 
-    #region Converters
+    public event EventHandler<T> ValueChanged;
+    public event PropertyChangedEventHandler PropertyChanged;
 
-    protected virtual object Serialize(T value)
+    private T Coerce(T value)
     {
-        return value;
+        return coercer is null ? value : coercer(value);
     }
 
-    protected virtual T Deserialize(object obj)
+    private bool SetValue(T oldValue, T newValue)
     {
-        return (T)obj;
+        if (!EqualityComparer<T>.Default.Equals(oldValue, newValue))
+        {
+            SetValue(newValue);
+            return true;
+        }
+
+        return false;
     }
 
-    #endregion
+    private void SetValue(T value)
+    {
+        LocalSettings.Values[key] = s_isEnum ? Convert.ToInt32(value) : value;
+    }
 }
 
-public sealed partial class EnumSetting<T>(string key, T defaultValue) : Setting<T>(key, defaultValue) where T : struct, Enum
+file static class LocalSettings
 {
-    protected override object Serialize(T value)
-    {
-        return (int)(object)value;
-    }
+    public static IPropertySet Values => s_store.Values;
+
+    private static readonly ApplicationDataContainer s_store = ApplicationData.Current.LocalSettings;
 }
