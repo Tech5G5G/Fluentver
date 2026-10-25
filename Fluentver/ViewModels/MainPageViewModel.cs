@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using CommunityToolkit.Mvvm.Input;
@@ -74,7 +75,10 @@ public sealed partial class MainPageViewModel : PageViewModel, IDisposable
 
     public void UpdateWindowTitle(string title)
     {
-       _manager.MainWindow.Title = $"{title} - {_package.DisplayName}";
+        // TODO: Set to '{SettingsPageName} - Settings - Fluver' when in settings
+        // Move responsibility to MainWindowViewModel
+        // Make (attached) property for FluverView/page that stores name
+        _manager.MainWindow.Title = $"{title} - {_package.DisplayName}";
     }
 
     [RelayCommand]
