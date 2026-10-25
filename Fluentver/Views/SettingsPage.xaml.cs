@@ -1,92 +1,54 @@
-﻿using Windows.Globalization;
-using Microsoft.Windows.AppLifecycle;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml.Controls;
-using Fluver.Helpers;
 using Fluver.Options;
+using Fluver.Strings;
+using Fluver.ViewModels;
+using Fluver.UI.Controls;
 
 namespace Fluver.Views
 {
-    public sealed partial class SettingsPage : Microsoft.UI.Xaml.Controls.Page
+    public sealed partial class SettingsPage : ViewModelPage
     {
-        private static readonly string s_currentLanguage = ApplicationLanguages.PrimaryLanguageOverride;
+        public SettingsPageViewModel ViewModel { get; } = App.Services.GetRequiredService<SettingsPageViewModel>();
 
-        private static readonly List<string> s_languages =
-        [
-            string.Empty,
-            "en-US",
-            "de",
-            "el",
-            "pl",
-            "ru",
-            "zh-Hans-CN"
-        ];
+        protected override PageViewModel PageViewModel => ViewModel;
 
         public SettingsPage()
         {
             InitializeComponent();
-
-            InitializeComboBox(StartupPageBox, SettingValues.StartupPage);
-            InitializeComboBox(BackdropBox, SettingValues.Backdrop);
-
-            InitializeLanguage();
-            DetermineWIPItemsVisibility();
+            TranslatorLink.NavigateUri = new(Text.TranslationAuthorURL);
         }
 
-        private void InitializeLanguage()
+        private void OnLanguageSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LanguageBox.SelectedIndex = Math.Max(s_languages.IndexOf(s_currentLanguage), 0);
-            LanguageBox.SelectionChanged += (s, e) =>
-            {
-                string language = ApplicationLanguages.PrimaryLanguageOverride = s_languages[LanguageBox.SelectedIndex];
-                bool isRestartRequired = language != s_currentLanguage;
+            var culture = ViewModel.EvaluatedRequestedCulture;
 
-                language = language == string.Empty ? ApplicationLanguages.Languages[0] : language;
-                RestartBar.IsOpen = isRestartRequired;
-                LanguageExpander.Margin = isRestartRequired ? new() : new(0, 0, 0, -4);
+            TranslatorLink.Content = Text.GetString("TranslatorLink/Content", culture);
+            TranslatorLink.NavigateUri = new(Text.GetString(nameof(Text.TranslationAuthorURL), culture));
 
-                if (isRestartRequired)
-                {
-                    RestartBar.Title = StringsHelper.GetString("RestartAlert.Title", language);
-                    RestartBar.Message = StringsHelper.GetString("RestartAlert.Message", language);
-                    RestartBar.ActionButton.Content = StringsHelper.GetString("RestartButton.Content", language);
-                }
-
-                TranslatorLink.Content = StringsHelper.GetString("TranslationAuthor.Content", language);
-                TranslatorLink.NavigateUri = new(StringsHelper.GetString("TranslationAuthorURL", language));
-            };
-
-           TranslatorLink.NavigateUri = new(StringsHelper.GetString("TranslationAuthorURL"));
+            RestartBar.Title = Text.GetString("RestartBar/Title", culture);
+            RestartBar.Message = Text.GetString("RestartBar/Message", culture);
+            RestartBar.ActionButton.Content = Text.GetString("RestartButton/Content", culture);
         }
 
-        private void DetermineWIPItemsVisibility()
+        private int FluverPageToIndex(FluverPage page)
         {
-            if (VersionHelper.IsWindowsInsider)
-            {
-                WipBoxItem.Visibility = Visibility.Visible;
-            }
-            else if (SettingValues.StartupPage.Value == Options.Page.Insider)
-            {
-                StartupPageBox.SelectedIndex = 0;
-            }
+            return (int)page + 1;
         }
 
-        private static void InitializeComboBox<T>(ComboBox box, EnumSetting<T> setting) where T : Enum
+        private void SetStartupPageSetting(int index)
         {
-            box.SelectedIndex = (int)(object)setting.Value;
-            box.SelectionChanged += (s, e) =>
-            {
-                var value = (T)(object)box.SelectedIndex;
-                if (setting.Value.CompareTo(value) != 0)
-                {
-                    setting.Value = value;
-                }
-            };
+            ViewModel.StartupPageSetting.Value = (FluverPage)(index - 1);
         }
 
-        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        private int BackdropTypeToIndex(BackdropType backdrop)
         {
-            AppInstance.Restart(string.Empty);
+            return (int)backdrop;
+        }
+
+        private void SetBackdropSetting(int index)
+        {
+            ViewModel.BackdropSetting.Value = (BackdropType)index;
         }
     }
 }

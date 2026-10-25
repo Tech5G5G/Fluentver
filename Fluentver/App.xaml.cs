@@ -112,6 +112,7 @@ namespace Fluver
 
             services.AddTransient<MainPageViewModel>()
                     .AddTransient<MainWindowViewModel>()
+                    .AddTransient<SettingsPageViewModel>()
                     .AddTransient<RenamerWindowViewModel>();
         }
 

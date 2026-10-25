@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Page
+<controls:ViewModelPage
     x:Class="Fluver.Views.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,71 +8,115 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:Fluver.UI"
     xmlns:ui2="using:CommunityToolkit.WinUI"
-    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:data="using:Fluver.UI.Data"
+    xmlns:strings="using:Fluver.Strings"
+    xmlns:controls="using:Fluver.UI.Controls"
+    xmlns:controls2="using:CommunityToolkit.WinUI.Controls"
+    xmlns:globalization="using:System.Globalization"
+    xmlns:isInsider="http://schemas.microsoft.com/winfx/2006/xaml/presentation?ui:WindowsVersionCondition(Insider)"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
+    <controls:ViewModelPage.Resources>
+        <data:CultureInfoTemplateSelector x:Key="CultureInfoTemplateSelector"
+                                          DefaultCultureTemplate="{StaticResource CultureInfoDataTemplate}"
+                                          InvariantCultureTemplate="{StaticResource InvariantCultureInfoDataTemplate}"
+                                          CurrentUICultureTemplate="{StaticResource CurrentUICultureInfoDataTemplate}" />
 
-    <StackPanel Spacing="4" Padding="8,0,8,17">
-        <controls:SettingsExpander x:Name="LanguageExpander" HeaderIcon="{ui2:FontIcon Glyph=&#xF2B7;}" x:Uid="Language" IsExpanded="True" Margin="0,0,0,-4">
-            <ComboBox x:Name="LanguageBox">
-                <ComboBoxItem x:Uid="Default" />
-                <ComboBoxItem x:Uid="English" />
-                <ComboBoxItem x:Uid="German" />
-                <ComboBoxItem x:Uid="Greek" />
-                <ComboBoxItem x:Uid="Polish" />
-                <ComboBoxItem x:Uid="Russian" />
-                <ComboBoxItem x:Uid="SimplifiedChinese" />
-            </ComboBox>
-            <controls:SettingsExpander.Items>
-                <controls:SettingsCard x:Uid="Translation">
-                    <HyperlinkButton x:Name="TranslatorLink" x:Uid="TranslationAuthor" Padding="0" />
-                </controls:SettingsCard>
-            </controls:SettingsExpander.Items>
-        </controls:SettingsExpander>
-        <InfoBar x:Name="RestartBar" x:Uid="RestartAlert" IsClosable="False" BorderBrush="{ThemeResource CardStrokeColorDefault}" BorderThickness="1">
+        <data:CultureInfoFormatter x:Key="NativeCultureInfoFormatter" />
+        <data:CultureInfoFormatter x:Key="LocalizedCultureInfoFormatter" UseNativeName="False"/>
+
+        <DataTemplate x:Key="CultureInfoDataTemplate" x:DataType="globalization:CultureInfo">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{x:Bind Converter={StaticResource NativeCultureInfoFormatter}}" />
+                <TextBlock Text="{x:Bind Converter={StaticResource LocalizedCultureInfoFormatter}}"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           Style="{StaticResource CaptionTextBlockStyle}" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="InvariantCultureInfoDataTemplate" x:DataType="globalization:CultureInfo">
+            <TextBlock x:Uid="Default" />
+        </DataTemplate>
+        <DataTemplate x:Key="CurrentUICultureInfoDataTemplate" x:DataType="globalization:CultureInfo">
+            <TextBlock Text="{x:Bind Converter={StaticResource NativeCultureInfoFormatter}}" />
+        </DataTemplate>
+    </controls:ViewModelPage.Resources>
+
+    <StackPanel Spacing="4" Padding="8,0,8,8" Style="{StaticResource FluverViewRootPanelStyle}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="RestartUnnecessary" />
+
+                <VisualState x:Name="RestartNeeded">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{x:Bind ViewModel.IsRestartNeeded, Mode=OneWay}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LanguageExpander.Margin" Value="0" />
+                        <Setter Target="RestartBar.IsOpen" Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <controls2:SettingsExpander x:Name="LanguageExpander" x:Uid="Language"
+                                    HeaderIcon="{ui2:FontIcon Glyph=&#xF2B7;}" IsExpanded="True" Margin="0,0,0,-4">
+            <controls2:SettingsExpander.Items>
+                <controls2:SettingsCard x:Uid="Translation">
+                    <HyperlinkButton x:Name="TranslatorLink" x:Uid="TranslatorLink" Padding="0" />
+                </controls2:SettingsCard>
+            </controls2:SettingsExpander.Items>
+
+            <controls:MeasuredComboBox ItemsSource="{x:Bind ViewModel.SupportedCultures}"
+                                       ItemTemplateSelector="{StaticResource CultureInfoTemplateSelector}"
+                                       SelectedItem="{x:Bind ViewModel.RequestedCulture, Mode=TwoWay}"
+                                       SelectionChanged="OnLanguageSelectionChanged" />
+        </controls2:SettingsExpander>
+
+        <InfoBar x:Name="RestartBar" x:Uid="RestartBar"
+                 IsClosable="False" BorderBrush="{ThemeResource CardStrokeColorDefault}" BorderThickness="1">
             <InfoBar.ActionButton>
-                <Button x:Uid="RestartButton" Click="RestartButton_Click" />
+                <Button x:Uid="RestartButton" Command="{x:Bind ViewModel.RestartCommand}" />
             </InfoBar.ActionButton>
             <InfoBar.Resources>
                 <SolidColorBrush x:Key="InfoBarInformationalSeverityBackgroundBrush" Color="{ThemeResource CardBackgroundFillColorDefault}" />
             </InfoBar.Resources>
         </InfoBar>
-        <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE7E8;}" x:Uid="Startup">
-        <controls:SettingsCard HeaderIcon="{ui2:FontIcon Glyph=&#xE7E8;}" x:Uid="Startup">
-            <ComboBox x:Name="StartupPageBox">
-                <ComboBoxItem Content="{ui:StringResource Id=About.Content}" />
-                <ComboBoxItem Content="{ui:StringResource Id=PC.Content}" />
-                <ComboBoxItem Content="{ui:StringResource Id=Users.Content}" />
-                <ComboBoxItem Content="{ui:StringResource Id=Storage.Content}" />
-                <ComboBoxItem x:Name="WipBoxItem" Content="{ui:StringResource Id=WIP.Content}" Visibility="Collapsed" />
+
+        <controls2:SettingsCard HeaderIcon="{ui2:FontIcon Glyph=&#xE7E8;}" x:Uid="Startup">
+            <ComboBox SelectedIndex="{x:Bind FluverPageToIndex(ViewModel.StartupPageSetting.Value), BindBack=SetStartupPageSetting, Mode=TwoWay}">
+                <ComboBoxItem x:Uid="PreviousPage" />
+                <ComboBoxItem Content="{strings:StringResource Key=About/Content}" />
+                <ComboBoxItem Content="{strings:StringResource Key=PC/Content}" />
+                <ComboBoxItem Content="{strings:StringResource Key=Users/Content}" />
+                <ComboBoxItem Content="{strings:StringResource Key=Storage/Content}" />
+                <isInsider:ComboBoxItem Content="{strings:StringResource Key=WIP/Content}" />
             </ComboBox>
-        </controls:SettingsCard>
-        <controls:SettingsCard HeaderIcon="{ui:FontIcon Glyph=&#xE727;}" x:Uid="Backdrop">
-        <controls:SettingsCard HeaderIcon="{ui2:FontIcon Glyph=&#xE727;}" x:Uid="Backdrop">
-            <ComboBox x:Name="BackdropBox">
+        </controls2:SettingsCard>
+
+        <controls2:SettingsCard HeaderIcon="{ui2:FontIcon Glyph=&#xE727;}" x:Uid="Backdrop">
+            <ComboBox SelectedIndex="{x:Bind BackdropTypeToIndex(ViewModel.BackdropSetting.Value), BindBack=SetBackdropSetting, Mode=TwoWay}">
                 <ComboBoxItem x:Uid="Mica" />
                 <ComboBoxItem x:Uid="Tabbed" />
                 <ComboBoxItem x:Uid="Acrylic" />
             </ComboBox>
-        </controls:SettingsCard>
-        <controls:SettingsExpander HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/SettingsLogo.png}" Header="Fluver" Description="{help:StringResource Id=Version}">
-        <controls:SettingsExpander HeaderIcon="{ui2:BitmapIcon Source=ms-appx:///Assets/SettingsLogo.png}" Header="Fluver" Description="{ui:StringResource Id=Version}">
-            <controls:SettingsExpander.Items>
-                <controls:SettingsCard>
-                    <HyperlinkButton x:Uid="New" NavigateUri="https://github.com/Tech5G5G/Fluentver/releases/tag/v1.1.5" />
-                </controls:SettingsCard>
-                <controls:SettingsCard>
+        </controls2:SettingsCard>
+
+        <controls2:SettingsExpander HeaderIcon="{ui2:BitmapIcon Source=ms-appx:///Assets/SettingsLogo.png}"
+                                    Header="{x:Bind ViewModel.DisplayName}"
+                                    Description="{x:Bind strings:Resources.Version(ViewModel.Version)}">
+            <controls2:SettingsExpander.Items>
+                <controls2:SettingsCard>
+                    <HyperlinkButton x:Uid="New" NavigateUri="{x:Bind ViewModel.LatestReleaseUri}" />
+                </controls2:SettingsCard>
+
+                <controls2:SettingsCard>
                     <HyperlinkButton x:Uid="GitHub" NavigateUri="https://github.com/Tech5G5G/Fluentver" />
-                </controls:SettingsCard>
-                <controls:SettingsCard>
+                </controls2:SettingsCard>
+
+                <controls2:SettingsCard>
                     <HyperlinkButton x:Uid="MIT" NavigateUri="https://raw.githubusercontent.com/Tech5G5G/Fluentver/refs/heads/master/LICENSE" />
-                </controls:SettingsCard>
-            </controls:SettingsExpander.Items>
-        </controls:SettingsExpander>
-        <StackPanel.ChildrenTransitions>
-            <TransitionCollection>
-                <RepositionThemeTransition IsStaggeringEnabled="False" />
-            </TransitionCollection>
-        </StackPanel.ChildrenTransitions>
+                </controls2:SettingsCard>
+            </controls2:SettingsExpander.Items>
+        </controls2:SettingsExpander>
     </StackPanel>
-</Page>
+</controls:ViewModelPage>
