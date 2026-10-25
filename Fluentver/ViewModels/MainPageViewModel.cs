@@ -7,10 +7,11 @@ using Fluver.Options;
 using Fluver.Windows;
 using Fluver.Navigation;
 using Fluver.ApplicationModel;
+using Fluver.UI.Controls;
 
 namespace Fluver.ViewModels;
 
-public sealed partial class MainPageViewModel : PageViewModel
+public sealed partial class MainPageViewModel : PageViewModel, IDisposable
 {
     [ObservableProperty]
     public partial FluverPage SelectedPage { get; set; }
@@ -19,22 +20,26 @@ public sealed partial class MainPageViewModel : PageViewModel
     public partial ICollection ToolBarItems { get; set; }
 
     private readonly IWindowManager _manager;
-    private readonly ISettingsService _settings;
     private readonly IPackageInformation _package;
     private readonly IMainPageNavigationService _navigation;
+
+    private readonly ISetting<FluverPage> _startupPage;
+    private readonly ISetting<FluverPage> _persistedPage;
 
     private bool _updatingUi;
 
     public MainPageViewModel(
         IWindowManager manager,
-        ISettingsService settings,
         IPackageInformation package,
-        IMainPageNavigationService navigation)
+        IMainPageNavigationService navigation,
+        [FromKeyedServices(FluverSetting.StartupPage)] ISetting<FluverPage> startupPage,
+        [FromKeyedServices(FluverSetting.PersistedPage)] ISetting<FluverPage> persistedPage)
     {
         _manager = manager;
-        _settings = settings;
         _package = package;
         _navigation = navigation;
+        _startupPage = startupPage;
+        _persistedPage = persistedPage;
 
         navigation.Navigated += OnNavigated;
     }
@@ -62,7 +67,9 @@ public sealed partial class MainPageViewModel : PageViewModel
     public void InitializeFrame(Frame frame)
     {
         _navigation.SetFrame(frame);
-        _navigation.Navigate(_settings.StartupPage.Value);
+
+        var page = _startupPage.Value;
+        _navigation.Navigate(page == FluverPage.Previous ? _persistedPage.Value : page);
     }
 
     public void UpdateWindowTitle(string title)
@@ -74,5 +81,10 @@ public sealed partial class MainPageViewModel : PageViewModel
     public void Exit()
     {
         _manager.MainWindow.Close();
+    }
+
+    void IDisposable.Dispose()
+    {
+        _persistedPage.Value = _navigation.CurrentPage;
     }
 }

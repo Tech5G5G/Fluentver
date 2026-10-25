@@ -2,6 +2,7 @@
 
 public enum FluverPage
 {
+    Previous = -1,
     AboutPage,
     PCPage,
     UsersPage,
