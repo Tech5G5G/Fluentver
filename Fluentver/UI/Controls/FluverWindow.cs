@@ -36,7 +36,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
     #region Properties
 
     public nint Handle => _hWnd;
-    private readonly nint _hWnd;
+    private nint _hWnd;
 
     public Matrix TransformToDevice => new(_dpiScaleX, 0.0, 0.0, _dpiScaleY, 0.0, 0.0);
     public Matrix TransformFromDevice => new(1.0 / _dpiScaleX, 0.0, 0.0, 1.0 / _dpiScaleY, 0.0, 0.0);
@@ -184,6 +184,8 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
                     s_windows.Remove(item: this);
                     Closed?.Invoke(sender: this, EventArgs.Empty);
+
+                    _hWnd = nint.Zero;
                 }
                 break;
 
