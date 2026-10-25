@@ -66,20 +66,20 @@ namespace Fluver
         }
 
         private void OnUnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
-            {
-                e.Handled = true;
+        {
+            e.Handled = true;
 
             // TODO: Localize
-           AppNotificationManager.Default.Show(
-               new AppNotificationBuilder().AddText("An exception was thrown.")
-                    .AddText($"Type: {e.Exception.GetType()}")
-                                           .AddText($"Message: {e.Message}{Environment.NewLine}" +
-                             $"HResult: {e.Exception.HResult}")
-                                           .AddButton(new("File an issue on GitHub")
-                                           {
-                                               InvokeUri = new("https://github.com/Tech5G5G/Fluentver/issues/new?template=BUG-REPORT.yml")
-                                           })
-                                           .BuildNotification());
+            AppNotificationManager.Default.Show(
+                new AppNotificationBuilder().AddText("An exception was thrown.")
+                                            .AddText($"Type: {e.Exception.GetType()}")
+                                            .AddText($"Message: {e.Message}{Environment.NewLine}" +
+                                                     $"HResult: {e.Exception.HResult}")
+                                            .AddButton(new("File an issue on GitHub")
+                                            {
+                                                InvokeUri = new("https://github.com/Tech5G5G/Fluentver/issues/new?template=BUG-REPORT.yml")
+                                            })
+                                            .BuildNotification());
         }
 
         private void InitializeServices(ServiceCollection services)
@@ -100,7 +100,6 @@ namespace Fluver
             services.AddSingleton<IWindowManager, FluverWindowManager>()
                     .AddSingleton<ICultureService, CultureService>()
                     .AddSingleton<IBackdropManager, BackdropManager>()
-                    .AddSingleton<IUISettingsService, UISettingsService>()
                     .AddSingleton<IPackageInformation, PackageInformation>();
 
             services.AddSingleton<IMainPageNavigationService, MainPageNavigationService>()
