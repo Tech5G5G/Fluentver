@@ -41,9 +41,6 @@ namespace Fluver
             UnhandledException += OnUnhandledException;
 #endif
 
-            _ = PInvoke.SetPreferredAppMode(PreferredAppMode.AllowDark);
-            PInvoke.FlushMenuThemes();
-
             ServiceCollection services = new();
             InitializeServices(services);
             _provider = services.BuildServiceProvider();

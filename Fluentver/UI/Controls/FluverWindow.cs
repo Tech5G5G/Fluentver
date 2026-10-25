@@ -20,6 +20,9 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
     static FluverWindow()
     {
+        _ = SetPreferredAppMode(PreferredAppMode.AllowDark);
+        FlushMenuThemes();
+
         var list = (ITaskbarList)new TaskbarList();
         if (list.HrInit() == S_OK)
         {
