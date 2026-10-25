@@ -16,6 +16,9 @@ namespace Fluver.UI.Controls;
 
 public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBackdrop, Windows.IWindow
 {
+    public static IReadOnlyList<FluverWindow> Windows => s_windows;
+    private static readonly List<FluverWindow> s_windows = [];
+
     private static readonly ITaskbarList s_list;
 
     static FluverWindow()
@@ -125,6 +128,8 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
         _disposed = false;
         Resize(ClientWidth, ClientHeight);
 
+        s_windows.Add(item: this);
+
         _showing = true;
         _window.Activate();
         _showing = false;
@@ -177,6 +182,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
                     _header.Dispose();
                     _manager.Dispose();
 
+                    s_windows.Remove(item: this);
                     Closed?.Invoke(sender: this, EventArgs.Empty);
                 }
                 break;
