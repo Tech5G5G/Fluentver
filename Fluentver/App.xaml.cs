@@ -51,7 +51,6 @@ namespace Fluver
             // Initialize required singleton services
             _provider.GetRequiredService<ICultureService>(); // Updates current culture info
             _provider.GetRequiredService<IBackdropManager>(); // Updates window backdrops
-            _provider.GetRequiredService<IUISettingsService>(); // Updates preferred app mode (system menu theme)
 
             _manager = _provider.GetRequiredService<IWindowManager>();
         }
