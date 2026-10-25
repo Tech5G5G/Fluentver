@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml;
 using Fluver.Helpers;
 using Fluver.Options;
 using Fluver.Windows;
+using Fluver.Extensions;
 using Fluver.Navigation;
 using Fluver.ViewModels;
 using Fluver.Globalization;
@@ -87,16 +88,27 @@ namespace Fluver
 
         private void InitializeServices(ServiceCollection services)
         {
-            services.AddSingleton<IMainPageNavigationService, MainPageNavigationService>()
-                    .AddSingleton<IMainWindowNavigationService, MainWindowNavigationService>();
-
             services.AddSingleton<IApplicationLifetime>(this);
+
+            services.AddFluverSetting(
+                        FluverSetting.StartupPage,
+                        defaultValue: FluverPage.Previous,
+                        p => p == FluverPage.InsiderPage && !VersionHelper.IsWindowsInsider ? FluverPage.AboutPage : p)
+                    .AddFluverSetting(
+                        FluverSetting.PersistedPage,
+                        defaultValue: FluverPage.AboutPage,
+                        p => p < FluverPage.AboutPage || p > (VersionHelper.IsWindowsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage)
+                            ? FluverPage.AboutPage : p)
+                    .AddFluverSetting(FluverSetting.Backdrop, defaultValue: BackdropType.Mica);
 
             services.AddSingleton<IWindowManager, FluverWindowManager>()
                     .AddSingleton<ICultureService, CultureService>()
                     .AddSingleton<IBackdropManager, BackdropManager>()
                     .AddSingleton<IUISettingsService, UISettingsService>()
                     .AddSingleton<IPackageInformation, PackageInformation>();
+
+            services.AddSingleton<IMainPageNavigationService, MainPageNavigationService>()
+                    .AddSingleton<IMainWindowNavigationService, MainWindowNavigationService>();
 
             services.AddTransient<MainPageViewModel>()
                     .AddTransient<MainWindowViewModel>()
