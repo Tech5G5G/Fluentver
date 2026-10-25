@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Composition.SystemBackdrops;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Xaml.Media;
 using Fluver.Options;
 
@@ -7,22 +8,22 @@ namespace Fluver.Windows;
 public sealed class BackdropManager : IBackdropManager
 {
     private readonly IWindowManager _manager;
-    private readonly ISettingsService _settings;
+    private readonly ISetting<BackdropType> _backdrop;
 
     private BackdropType _currentBackdrop;
 
     public BackdropManager(
         IWindowManager manager,
-        ISettingsService settings)
+        [FromKeyedServices(FluverSetting.Backdrop)] ISetting<BackdropType> backdrop)
     {
         _manager = manager;
-        _settings = settings;
+        _backdrop = backdrop;
 
-        _currentBackdrop = settings.Backdrop.Value;
-        settings.Backdrop.ValueChanged += OnBackdropValueChanged;
+        _currentBackdrop = backdrop.Value;
+        backdrop.ValueChanged += OnBackdropValueChanged;
 
-        manager.WindowCreated += OnWindowCreated;
         UpdateWindows();
+        manager.WindowCreated += OnWindowCreated;
     }
 
     private void OnBackdropValueChanged(object sender, BackdropType e)
