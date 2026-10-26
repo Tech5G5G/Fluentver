@@ -19,14 +19,11 @@ public sealed partial class FluverWindowManager : IWindowManager
         {
             MainWindowViewModel main => _mainWindow = new(main),
             RenamerWindowViewModel renamer => new RenamerWindow(renamer),
-            _ => null
+            _ => throw new NotImplementedException("No window associated with view model type. Should probably add a case...")
         };
 
-        if (window is not null)
-        {
-            window.Closed += OnClosed;
-            WindowCreated?.Invoke(sender: this, window);
-        }
+        window.Closed += OnClosed;
+        WindowCreated?.Invoke(sender: this, window);
 
         return window;
 
