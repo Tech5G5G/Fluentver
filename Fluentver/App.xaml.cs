@@ -69,13 +69,11 @@ namespace Fluver
         {
             e.Handled = true;
 
-            // TODO: Localize
             AppNotificationManager.Default.Show(
-                new AppNotificationBuilder().AddText("An exception was thrown.")
-                                            .AddText($"Type: {e.Exception.GetType()}")
-                                            .AddText($"Message: {e.Message}{Environment.NewLine}" +
-                                                     $"HResult: {e.Exception.HResult}")
-                                            .AddButton(new("File an issue on GitHub")
+                new AppNotificationBuilder().AddText(Text.ExceptionThrown)
+                                            .AddText(Text.ExceptionType(e.Exception.GetType().ToString()))
+                                            .AddText(Text.ExceptionMessageResult(e.Message, e.Exception.HResult))
+                                            .AddButton(new(Text.ExceptionFile)
                                             {
                                                 InvokeUri = new("https://github.com/Tech5G5G/Fluentver/issues/new?template=BUG-REPORT.yml")
                                             })

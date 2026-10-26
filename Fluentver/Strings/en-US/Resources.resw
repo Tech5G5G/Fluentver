@@ -473,4 +473,19 @@
   <data name="Description" xml:space="preserve">
     <value>A modern version of Winver</value>
   </data>
+  <data name="ExceptionThrown" xml:space="preserve">
+    <value>An exception was thrown.</value>
+  </data>
+  <data name="ExceptionType" xml:space="preserve">
+    <value>Type: {0}</value>
+    <comment>#Format[String typeName]</comment>
+  </data>
+  <data name="ExceptionMessageResult" xml:space="preserve">
+    <value>Message: {0}
+HResult: 0x{1:X8}</value>
+    <comment>#Format[String message, Int32 hr]</comment>
+  </data>
+  <data name="ExceptionFile" xml:space="preserve">
+    <value>File an issue on GitHub</value>
+  </data>
 </root>
