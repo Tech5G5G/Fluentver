@@ -17,31 +17,45 @@
     mc:Ignorable="d"
     NavigationCacheMode="Required">
     <controls:ViewModelPage.Resources>
-        <data:CultureInfoTemplateSelector x:Key="CultureInfoTemplateSelector"
-                                          DefaultCultureTemplate="{StaticResource CultureInfoDataTemplate}"
-                                          InvariantCultureTemplate="{StaticResource InvariantCultureInfoDataTemplate}"
-                                          CurrentUICultureTemplate="{StaticResource CurrentUICultureInfoDataTemplate}" />
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <Thickness x:Key="RootPanelPadding">8,0,8,8</Thickness>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <Thickness x:Key="RootPanelPadding">8,0,8,8</Thickness>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <Thickness x:Key="RootPanelPadding">8</Thickness>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
 
-        <data:CultureInfoFormatter x:Key="NativeCultureInfoFormatter" />
-        <data:CultureInfoFormatter x:Key="LocalizedCultureInfoFormatter" UseNativeName="False"/>
+            <data:CultureInfoTemplateSelector x:Key="CultureInfoTemplateSelector"
+                                              DefaultCultureTemplate="{StaticResource CultureInfoDataTemplate}"
+                                              InvariantCultureTemplate="{StaticResource InvariantCultureInfoDataTemplate}"
+                                              CurrentUICultureTemplate="{StaticResource CurrentUICultureInfoDataTemplate}" />
 
-        <DataTemplate x:Key="CultureInfoDataTemplate" x:DataType="globalization:CultureInfo">
-            <StackPanel Orientation="Vertical">
+            <data:CultureInfoFormatter x:Key="NativeCultureInfoFormatter" />
+            <data:CultureInfoFormatter x:Key="LocalizedCultureInfoFormatter" UseNativeName="False"/>
+
+            <DataTemplate x:Key="CultureInfoDataTemplate" x:DataType="globalization:CultureInfo">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{x:Bind Converter={StaticResource NativeCultureInfoFormatter}}" />
+                    <TextBlock Text="{x:Bind Converter={StaticResource LocalizedCultureInfoFormatter}}"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Style="{StaticResource CaptionTextBlockStyle}" />
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="InvariantCultureInfoDataTemplate" x:DataType="globalization:CultureInfo">
+                <TextBlock x:Uid="Default" />
+            </DataTemplate>
+            <DataTemplate x:Key="CurrentUICultureInfoDataTemplate" x:DataType="globalization:CultureInfo">
                 <TextBlock Text="{x:Bind Converter={StaticResource NativeCultureInfoFormatter}}" />
-                <TextBlock Text="{x:Bind Converter={StaticResource LocalizedCultureInfoFormatter}}"
-                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                           Style="{StaticResource CaptionTextBlockStyle}" />
-            </StackPanel>
-        </DataTemplate>
-        <DataTemplate x:Key="InvariantCultureInfoDataTemplate" x:DataType="globalization:CultureInfo">
-            <TextBlock x:Uid="Default" />
-        </DataTemplate>
-        <DataTemplate x:Key="CurrentUICultureInfoDataTemplate" x:DataType="globalization:CultureInfo">
-            <TextBlock Text="{x:Bind Converter={StaticResource NativeCultureInfoFormatter}}" />
-        </DataTemplate>
+            </DataTemplate>
+        </ResourceDictionary>
     </controls:ViewModelPage.Resources>
 
-    <StackPanel Spacing="4" Padding="8,0,8,8" Style="{StaticResource FluverViewRootPanelStyle}">
+    <StackPanel Spacing="4" Padding="{ThemeResource RootPanelPadding}" Style="{StaticResource FluverViewRootPanelStyle}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="RestartUnnecessary" />
