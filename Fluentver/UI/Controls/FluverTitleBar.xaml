@@ -14,8 +14,64 @@
     xmlns:is10="http://schemas.microsoft.com/winfx/2006/xaml/presentation?ui:WindowsVersionCondition(10)"
     mc:Ignorable="d">
     <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <x:String x:Key="ChromeCloseGlyph">&#xE8BB;</x:String>
+
+                    <Thickness x:Key="CaptionButtonMargin">0</Thickness>
+                    <StaticResource x:Key="CaptionButtonForeground" ResourceKey="SystemControlForegroundBaseHighBrush" />
+                    <StaticResource x:Key="CaptionButtonInactiveForeground" ResourceKey="TextFillColorDisabledBrush" />
+
+                    <StaticResource x:Key="ButtonBackground" ResourceKey="ControlFillColorTransparentBrush" />
+                    <StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="SubtleFillColorSecondary" />
+                    <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="SubtleFillColorTertiary" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <x:String x:Key="ChromeCloseGlyph">&#xE8BB;</x:String>
+
+                    <Thickness x:Key="CaptionButtonMargin">0</Thickness>
+                    <StaticResource x:Key="CaptionButtonForeground" ResourceKey="SystemControlForegroundBaseHighBrush" />
+                    <StaticResource x:Key="CaptionButtonInactiveForeground" ResourceKey="TextFillColorDisabledBrush" />
+
+                    <StaticResource x:Key="ButtonBackground" ResourceKey="ControlFillColorTransparentBrush" />
+                    <StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="SubtleFillColorSecondary" />
+                    <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="SubtleFillColorTertiary" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <x:String x:Key="ChromeCloseGlyph">&#xEF2C;</x:String>
+
+                    <Thickness x:Key="CaptionButtonMargin">1,1,0,1</Thickness>
+                    <StaticResource x:Key="CaptionButtonForeground" ResourceKey="ButtonForegroundThemeBrush" />
+                    <StaticResource x:Key="CaptionButtonInactiveForeground" ResourceKey="ButtonForegroundThemeBrush" />
+
+                    <StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="SystemControlHighlightAccentBrush" />
+                    <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="SystemControlHighlightAccentBrush" />
+                    <StaticResource x:Key="ButtonForegroundPointerOver" ResourceKey="SystemControlHighlightAltAccentBrush" />
+                    <StaticResource x:Key="ButtonForegroundPressed" ResourceKey="SystemControlHighlightAltAccentBrush" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <Color x:Key="CloseButtonBackgroundColor">#C42B1C</Color>
+            <Color x:Key="CloseButtonTransparentBackgroundColor">#00C42B1C</Color>
+            <Color x:Key="CloseButtonForegroundColor">White</Color>
+
         <animatedvisuals:AnimatedSettingsVisualSource x:Key="SettingsVisualSource" />
         <animatedvisuals:AnimatedBackVisualSource x:Key="BackVisualSource" />
+
+            <Style x:Key="CaptionButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                <Setter Property="Foreground" Value="{ThemeResource CaptionButtonForeground}" />
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Margin" Value="{ThemeResource CaptionButtonMargin}" />
+                <Setter Property="Width" Value="46" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="FocusVisualMargin" Value="0" />
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="ToolTipService.Placement" Value="Bottom" />
+            </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid Height="{x:Bind DimensionProvider.Height}">
@@ -53,24 +109,23 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{x:Bind DoubleToGridLength(DimensionProvider.LeftInset)}" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="{x:Bind DoubleToGridLength(DimensionProvider.RightInset)}" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
         <Border x:Name="DragRegion" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="14,0,0,0" Grid.Column="1">
             <TextBlock x:Name="TitleText" Text="{x:Bind Title}" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" />
         </Border>
 
-        <Button x:Name="SettingsButton" x:Uid="SettingsButton"
-                CornerRadius="0" BorderThickness="0" Background="Transparent"
-                Width="46" VerticalAlignment="Stretch"
-                is11:FocusVisualMargin="0,1,0,0" is10:FocusVisualMargin="0"
-                Grid.Column="2" ToolTipService.Placement="Bottom"
+        <Button x:Name="SettingsButton"
+                Style="{StaticResource CaptionButtonStyle}"
+                Grid.Column="1"
                 Click="OnSettingsButtonClick"
                 Loaded="OnSettingsButtonLoaded" Unloaded="OnSettingsButtonUnloaded">
-            <AnimatedIcon x:Name="SettingsIcon"
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="SettingsButtonToolTip" x:Uid="SettingsButtonToolTip" RequestedTheme="{x:Bind Theme}" />
+            </ToolTipService.ToolTip>
                           Source="{StaticResource SettingsVisualSource}"
                           Foreground="{ThemeResource TitleBarCaptionButtonForegroundColor}"
                           Width="16" Height="16">
@@ -80,6 +135,36 @@
                                     Foreground="{ThemeResource TitleBarCaptionButtonForegroundColor}" />
                 </AnimatedIcon.FallbackIconSource>
             </AnimatedIcon>
+        <Button x:Name="CloseButton" Style="{StaticResource CaptionButtonStyle}" Grid.Column="2" Click="OnCloseButtonClick">
+            <Button.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Default">
+                            <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource CloseButtonTransparentBackgroundColor}" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{StaticResource CloseButtonBackgroundColor}" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{StaticResource CloseButtonBackgroundColor}" Opacity="0.9" />
+                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{StaticResource CloseButtonForegroundColor}" />
+                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{StaticResource CloseButtonForegroundColor}" Opacity="0.7" />
+                        </ResourceDictionary>
+                        <ResourceDictionary x:Key="Light">
+                            <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource CloseButtonTransparentBackgroundColor}" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{StaticResource CloseButtonBackgroundColor}" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{StaticResource CloseButtonBackgroundColor}" Opacity="0.9" />
+                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{StaticResource CloseButtonForegroundColor}" />
+                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{StaticResource CloseButtonForegroundColor}" Opacity="0.7" />
+                        </ResourceDictionary>
+                        <ResourceDictionary x:Key="HighContrast" />
+                    </ResourceDictionary.ThemeDictionaries>
+                </ResourceDictionary>
+            </Button.Resources>
+
+            <ToolTipService.ToolTip>
+                <ToolTip x:Uid="CloseButtonToolTip" RequestedTheme="{x:Bind Theme}" />
+            </ToolTipService.ToolTip>
+
+            <Viewbox Width="10" Height="10">
+                <FontIcon Glyph="{ThemeResource ChromeCloseGlyph}" HighContrastAdjustment="None" />
+            </Viewbox>
         </Button>
     </Grid>
 </UserControl>

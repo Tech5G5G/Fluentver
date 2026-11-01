@@ -168,9 +168,9 @@ namespace Fluver.UI.Controls
             }
         }
 
-        private GridLength DoubleToGridLength(double value)
+        private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
-            return new(value);
+            Window?.Close();
         }
     }
 }
