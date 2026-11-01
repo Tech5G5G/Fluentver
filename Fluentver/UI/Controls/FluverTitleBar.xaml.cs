@@ -24,23 +24,32 @@ namespace Fluver.UI.Controls
         public static DependencyProperty TitleProperty { get; } =
             DependencyProperty.Register(nameof(Title), typeof(string), typeof(FluverTitleBar), new(defaultValue: string.Empty));
 
-        public WindowHeader DimensionProvider
+        public FluverWindow Window
         {
-            get => (WindowHeader)GetValue(DimensionProviderProperty);
-            set => SetValue(DimensionProviderProperty, value);
+            get => (FluverWindow)GetValue(WindowProperty);
+            set => SetValue(WindowProperty, value);
         }
 
-        public static DependencyProperty DimensionProviderProperty { get; } =
-            DependencyProperty.Register(nameof(DimensionProvider), typeof(WindowHeader), typeof(FluverTitleBar), new(defaultValue: null));
+        public static DependencyProperty WindowProperty { get; } =
+            DependencyProperty.Register(nameof(Window), typeof(FluverWindow), typeof(FluverTitleBar), new(defaultValue: null, OnWindowChanged));
 
-        public bool IsSettingsButtonActive
+        private static void OnWindowChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            get => (bool)GetValue(IsSettingsButtonActiveProperty);
-            set => SetValue(IsSettingsButtonActiveProperty, value);
+            if (sender is not FluverTitleBar titleBar)
+            {
+                return;
+            }
+
+            if (e.OldValue is FluverWindow oldWindow && oldWindow.Header.DragElement == titleBar.DragRegion)
+        {
+                oldWindow.Header.DragElement = null;
         }
 
-        public static DependencyProperty IsSettingsButtonActiveProperty { get; } =
-            DependencyProperty.Register(nameof(IsSettingsButtonActive), typeof(bool), typeof(FluverTitleBar), new(defaultValue: true));
+            if (e.NewValue is FluverWindow window)
+            {
+                window.Header.DragElement = titleBar.DragRegion;
+            }
+        }
 
         public bool IsSettingsOpen
         {
