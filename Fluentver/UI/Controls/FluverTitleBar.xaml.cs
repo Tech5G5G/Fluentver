@@ -13,7 +13,19 @@ namespace Fluver.UI.Controls
         public FluverTitleBar()
         {
             InitializeComponent();
+
+            Theme = ActualTheme;
+            ActualThemeChanged += OnActualThemeChanged;
         }
+
+        private ElementTheme Theme
+        {
+            get => (ElementTheme)GetValue(ThemeProperty);
+            set => SetValue(ThemeProperty, value);
+        }
+
+        private static DependencyProperty ThemeProperty { get; } =
+            DependencyProperty.Register(nameof(Theme), typeof(ElementTheme), typeof(FluverTitleBar), new(defaultValue: ElementTheme.Default));
 
         public string Title
         {
@@ -96,6 +108,11 @@ namespace Fluver.UI.Controls
 
         public static DependencyProperty SettingsCommandParameterProperty { get; } =
             DependencyProperty.Register(nameof(SettingsCommandParameter), typeof(object), typeof(FluverTitleBar), new(defaultValue: null));
+
+        private void OnActualThemeChanged(FrameworkElement sender, object e)
+        {
+            Theme = ActualTheme;
+        }
 
         private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
         {
