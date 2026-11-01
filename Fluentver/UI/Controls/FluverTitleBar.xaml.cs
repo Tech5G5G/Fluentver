@@ -27,6 +27,15 @@ namespace Fluver.UI.Controls
         private static DependencyProperty ThemeProperty { get; } =
             DependencyProperty.Register(nameof(Theme), typeof(ElementTheme), typeof(FluverTitleBar), new(defaultValue: ElementTheme.Default));
 
+        private bool AnimateIcons
+        {
+            get => (bool)GetValue(AnimateIconsProperty);
+            set => SetValue(AnimateIconsProperty, value);
+        }
+
+        private static DependencyProperty AnimateIconsProperty { get; } =
+            DependencyProperty.Register(nameof(AnimateIcons), typeof(bool), typeof(FluverTitleBar), new(defaultValue: true));
+
         public string Title
         {
             get => (string)GetValue(TitleProperty);
@@ -145,9 +154,18 @@ namespace Fluver.UI.Controls
             SettingsButton.KeyboardAccelerators.Clear();
         }
 
-        private bool InvertBool(bool value)
+        private void OnSettingsIconLoaded(object sender, RoutedEventArgs e)
         {
-            return !value;
+            SettingsIcon.Loaded -= OnSettingsIconLoaded;
+
+            // Detect whether the settings AnimatedIcon displayed its visual source
+            // If not, use the same fallback icon we use for high contrast mode
+            if (VisualTreeHelper.GetChildrenCount(SettingsIcon) == 0 ||
+                VisualTreeHelper.GetChild(SettingsIcon, childIndex: 0) is not Panel rootPanel ||
+                ElementCompositionPreview.GetElementChildVisual(rootPanel) is null)
+        {
+                AnimateIcons = false;
+            }
         }
 
         private GridLength DoubleToGridLength(double value)
