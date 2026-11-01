@@ -5,28 +5,16 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <Platforms>x86;x64;ARM64</Platforms>
+    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
     <RootNamespace>Fluver</RootNamespace>
+  </PropertyGroup>
+
+  <!-- File-based properties -->
+  <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Assets\Fluver.ico</ApplicationIcon>
   </PropertyGroup>
-
-  <!-- Publish properties -->
-  <PropertyGroup>
-    <Platforms>x86;x64;ARM64</Platforms>
-    <PublishProfile>win-$(Platform).pubxml</PublishProfile>
-    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
-  </PropertyGroup>
-
-  <!-- Language configuration -->
-  <PropertyGroup>
-    <ImplicitUsings>true</ImplicitUsings>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <!-- Global usings -->
-  <ItemGroup>
-    <Using Include="Fluver.Strings.Resources" Alias="Text" />
-  </ItemGroup>
 
   <!-- Packaging properties -->
   <PropertyGroup>
@@ -47,6 +35,17 @@
     <UseWinUI>true</UseWinUI>
     <WinUISDKReferences>false</WinUISDKReferences>
   </PropertyGroup>
+
+  <!-- Language configuration -->
+  <PropertyGroup>
+    <ImplicitUsings>true</ImplicitUsings>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <!-- Global usings -->
+  <ItemGroup>
+    <Using Include="Fluver.Strings.Resources" Alias="Text" />
+  </ItemGroup>
 
   <!-- Packages -->
   <ItemGroup>
