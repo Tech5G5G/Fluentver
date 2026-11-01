@@ -1,12 +1,12 @@
-﻿using Microsoft.UI.Xaml;
-using WinUIEx.Messaging;
+﻿using Microsoft.UI.Windowing;
+using Microsoft.UI.Xaml;
 using static Fluver.System.Interop.PInvoke;
 
 namespace Fluver.UI.Controls;
 
 partial class FluverWindow
 {
-    private sealed partial class FluverWindowHeader(FluverWindow window) : WindowHeader, IDisposable
+    private sealed partial class FluverWindowHeader(FluverWindow window) : WindowHeader
     {
         public UIElement InvalidateElement => _element;
         private HeaderInvalidateElement _element;
@@ -16,17 +16,9 @@ partial class FluverWindow
             get;
             set
             {
-                if (_window.IsDestroyed)
+                if (!_window.IsDestroyed)
                 {
-                    return;
-                }
-
-                _window._window.ExtendsContentIntoTitleBar = field = value;
-                UpdateSizes();
-
-                if (value)
-                {
-                    TrySubclass();
+                    _window._window.ExtendsContentIntoTitleBar = field = value;
                 }
             }
         }
@@ -51,44 +43,6 @@ partial class FluverWindow
         }
 
         private readonly FluverWindow _window = window;
-        private WindowMessageMonitor _monitor;
-
-        private void OnWindowMessage(object sender, WindowMessageEventArgs e)
-        {
-            if (e.Message.MessageId == WM_SIZE)
-            {
-                UpdateSizes();
-            }
-        }
-
-        private void TrySubclass()
-        {
-            if (_monitor is not null)
-            {
-                return;
-            }
-
-            var hWnd = FindWindowEx(_window._hWnd, lpszClass: "ReunionWindowingCaptionControls");
-            if (hWnd != nint.Zero)
-            {
-                _monitor = new(hWnd);
-                _monitor.WindowMessageReceived += OnWindowMessage;
-            }
-        }
-
-        private void UpdateSizes()
-        {
-            var titleBar = _window._window.AppWindow?.TitleBar;
-
-            SetValue(HeightProperty, titleBar.Height / _window._dpiScaleY);
-            SetValue(LeftInsetProperty, titleBar.LeftInset / _window._dpiScaleX);
-            SetValue(RightInsetProperty, titleBar.RightInset / _window._dpiScaleX);
-        }
-
-        public void Dispose()
-        {
-            _monitor?.Dispose();
-        }
 
         private sealed partial class HeaderInvalidateElement : FrameworkElement;
     }
@@ -139,21 +93,6 @@ public abstract class WindowHeader : DependencyObject
     public abstract bool OverlapsContent { get; set; }
 
     public abstract UIElement DragElement { get; set; }
-
-    public double Height => (double)GetValue(HeightProperty);
-
-    public static DependencyProperty HeightProperty { get; } =
-        DependencyProperty.Register(nameof(Height), typeof(double), typeof(WindowHeader), new(defaultValue: 0.0));
-
-    public double LeftInset => (double)GetValue(LeftInsetProperty);
-
-    public static DependencyProperty LeftInsetProperty { get; } =
-        DependencyProperty.Register(nameof(LeftInset), typeof(double), typeof(WindowHeader), new(defaultValue: 0.0));
-
-    public double RightInset => (double)GetValue(RightInsetProperty);
-
-    public static DependencyProperty RightInsetProperty { get; } =
-        DependencyProperty.Register(nameof(RightInset), typeof(double), typeof(WindowHeader), new(defaultValue: 0.0));
 }
 
 public abstract class WindowMenu(nint hMenu)

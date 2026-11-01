@@ -188,7 +188,6 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
             case WM_DESTROY:
                 {
                     _disposed = true;
-                    _header.Dispose();
                     _manager.Dispose();
 
                     s_windows.Remove(item: this);
