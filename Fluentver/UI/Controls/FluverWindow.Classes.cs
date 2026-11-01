@@ -23,6 +23,18 @@ partial class FluverWindow
             }
         }
 
+        public override TitleBarHeightOption HeightOption
+        {
+            get;
+            set
+            {
+                if (!_window.IsDestroyed && OverlapsContent && _window._window.AppWindow is { TitleBar: { } titleBar })
+                {
+                    titleBar.PreferredHeightOption = field = value;
+                }
+            }
+        }
+
         public override UIElement DragElement
         {
             get;
@@ -91,6 +103,8 @@ partial class FluverWindow
 public abstract class WindowHeader : DependencyObject
 {
     public abstract bool OverlapsContent { get; set; }
+
+    public abstract TitleBarHeightOption HeightOption { get; set; }
 
     public abstract UIElement DragElement { get; set; }
 }

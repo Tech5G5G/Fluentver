@@ -1,4 +1,5 @@
 ﻿using Windows.System;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Animation;
@@ -20,7 +21,7 @@ namespace Fluver.Windows
             InitializeComponent();
 
             Header.OverlapsContent = true;
-            Header.DragElement = TitleBar.FindName("DragRegion") as UIElement;
+            Header.HeightOption = TitleBarHeightOption.Collapsed;
 
             // The window menu is usually displayed in the OS language, not the language set by Fluver
             // Attempt to use the OS language for consistency
