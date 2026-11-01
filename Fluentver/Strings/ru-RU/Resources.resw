@@ -132,10 +132,10 @@
   <data name="PC.ToolTipService.ToolTip" xml:space="preserve">
     <value>Информация о компьютере и ресурсах</value>
   </data>
-  <data name="SettingsButton.ToolTipService.ToolTip" xml:space="preserve">
+  <data name="SettingsButtonToolTip.Content" xml:space="preserve">
     <value>Настройки</value>
   </data>
-  <data name="SettingsButtonBackTooltip" xml:space="preserve">
+  <data name="SettingsButtonBackToolTip" xml:space="preserve">
     <value>Назад</value>
   </data>
   <data name="Storage.Content" xml:space="preserve">
@@ -156,20 +156,8 @@
   <data name="WIP.ToolTipService.ToolTip" xml:space="preserve">
     <value>Insider information and links</value>
   </data>
-  <data name="Default.Content" xml:space="preserve">
+  <data name="Default.Text" xml:space="preserve">
     <value>По умолчанию</value>
-  </data>
-  <data name="English.Content" xml:space="preserve">
-    <value>English (United States)</value>
-  </data>
-  <data name="Greek.Content" xml:space="preserve">
-    <value>Greek (Ελληνικά)</value>
-  </data>
-  <data name="Polish.Content" xml:space="preserve">
-    <value>Polish (Polski)</value>
-  </data>
-  <data name="Russian.Content" xml:space="preserve">
-    <value>Русский</value>
   </data>
   <data name="Mica.Content" xml:space="preserve">
     <value>Mica</value>
@@ -181,7 +169,7 @@
     <value>Acrylic</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Версия 1.1.5</value>
+    <value>Версия {0}</value>
   </data>
   <data name="New.Content" xml:space="preserve">
     <value>Что нового</value>
@@ -448,25 +436,19 @@
   <data name="ErrorPowerShell" xml:space="preserve">
     <value>Ошика: не возможно запустить PowerShell.</value>
   </data>
-  <data name="RestartAlert.Title" xml:space="preserve">
+  <data name="RestartBar.Title" xml:space="preserve">
     <value>Требуется перезагрузка</value>
   </data>
-  <data name="RestartAlert.Message" xml:space="preserve">
+  <data name="RestartBar.Message" xml:space="preserve">
     <value>Чтобы применить язык требуется перезапуск.</value>
   </data>
   <data name="RestartButton.Content" xml:space="preserve">
     <value>Перезапустить</value>
   </data>
-  <data name="TranslationAuthor.Content" xml:space="preserve">
+  <data name="TranslatorLink.Content" xml:space="preserve">
     <value>Andrew_Sor</value>
   </data>
   <data name="TranslationAuthorURL" xml:space="preserve">
     <value>https://github.com/Andrew-Sor</value>
-  </data>
-  <data name="SimplifiedChinese.Content" xml:space="preserve">
-    <value>Simplified Chinese (简体中文)</value>
-  </data>
-  <data name="German.Content" xml:space="preserve">
-    <value>German (Deutsch)</value>
   </data>
 </root>

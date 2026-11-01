@@ -132,10 +132,10 @@
   <data name="PC.ToolTipService.ToolTip" xml:space="preserve">
     <value>Your PC's information and specifications</value>
   </data>
-  <data name="SettingsButton.ToolTipService.ToolTip" xml:space="preserve">
+  <data name="SettingsButtonToolTip.Content" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="SettingsButtonBackTooltip" xml:space="preserve">
+  <data name="SettingsButtonBackToolTip" xml:space="preserve">
     <value>Back</value>
   </data>
   <data name="Storage.Content" xml:space="preserve">
@@ -156,20 +156,8 @@
   <data name="WIP.ToolTipService.ToolTip" xml:space="preserve">
     <value>Insider information and links</value>
   </data>
-  <data name="Default.Content" xml:space="preserve">
+  <data name="Default.Text" xml:space="preserve">
     <value>Default</value>
-  </data>
-  <data name="English.Content" xml:space="preserve">
-    <value>English (United States)</value>
-  </data>
-  <data name="Greek.Content" xml:space="preserve">
-    <value>Greek (Ελληνικά)</value>
-  </data>
-  <data name="Polish.Content" xml:space="preserve">
-    <value>Polish (Polski)</value>
-  </data>
-  <data name="Russian.Content" xml:space="preserve">
-    <value>Russian (Русский)</value>
   </data>
   <data name="Mica.Content" xml:space="preserve">
     <value>Mica</value>
@@ -181,7 +169,8 @@
     <value>Acrylic</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Version 1.1.5</value>
+    <value>Version {0}</value>
+    <comment>#Format[String version]</comment>
   </data>
   <data name="New.Content" xml:space="preserve">
     <value>What's new</value>
@@ -338,7 +327,7 @@
     <value>© Microsoft Corporation. All rights reserved.</value>
   </data>
   <data name="Licensed.Text" xml:space="preserve">
-    <value>The product is licensed under the</value>
+    <value>This product is licensed under the</value>
   </data>
   <data name="MSSoftwareTerms.Text" xml:space="preserve">
     <value>Microsoft Software License Terms</value>
@@ -435,6 +424,7 @@
   </data>
   <data name="CurrentName" xml:space="preserve">
     <value>Current name: {0}</value>
+    <comment>#Format[String name]</comment>
   </data>
   <data name="NameTooLong" xml:space="preserve">
     <value>Your PC's name cannot be longer than 15 characters.</value>
@@ -449,29 +439,29 @@
   <data name="ErrorPowerShell" xml:space="preserve">
     <value>An error occured: Unable to start PowerShell.</value>
   </data>
-  <data name="RestartAlert.Title" xml:space="preserve">
+  <data name="RestartBar.Title" xml:space="preserve">
     <value>Restart required</value>
   </data>
-  <data name="RestartAlert.Message" xml:space="preserve">
+  <data name="RestartBar.Message" xml:space="preserve">
     <value>A restart is required to apply your language preferences.</value>
   </data>
   <data name="RestartButton.Content" xml:space="preserve">
     <value>Restart</value>
   </data>
-  <data name="TranslationAuthor.Content" xml:space="preserve">
+  <data name="TranslatorLink.Content" xml:space="preserve">
     <value>Tech5G5G</value>
   </data>
   <data name="TranslationAuthorURL" xml:space="preserve">
     <value>https://www.github.com/tech5g5g</value>
   </data>
-  <data name="SimplifiedChinese.Content" xml:space="preserve">
-    <value>Simplified Chinese (简体中文)</value>
-  </data>
-  <data name="German.Content" xml:space="preserve">
-    <value>German (Deutsch)</value>
+  <data name="PreviousPage.Content" xml:space="preserve">
+    <value>Previous page</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>A modern version of Winver</value>
+  </data>
+  <data name="CloseButtonToolTip.Content" xml:space="preserve">
+    <value>Close</value>
   </data>
   <data name="ExceptionThrown" xml:space="preserve">
     <value>An exception was thrown.</value>

@@ -132,10 +132,10 @@
   <data name="PC.ToolTipService.ToolTip" xml:space="preserve">
     <value>PC-Infos und Spezifikationen</value>
   </data>
-  <data name="SettingsButton.ToolTipService.ToolTip" xml:space="preserve">
+  <data name="SettingsButtonToolTip.Content" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
-  <data name="SettingsButtonBackTooltip" xml:space="preserve">
+  <data name="SettingsButtonBackToolTip" xml:space="preserve">
     <value>Zurück</value>
   </data>
   <data name="Storage.Content" xml:space="preserve">
@@ -156,20 +156,8 @@
   <data name="WIP.ToolTipService.ToolTip" xml:space="preserve">
     <value>Insider-Informationen und Links</value>
   </data>
-  <data name="Default.Content" xml:space="preserve">
+  <data name="Default.Text" xml:space="preserve">
     <value>Standart</value>
-  </data>
-  <data name="English.Content" xml:space="preserve">
-    <value>Englisch (Vereinigte Staaten)</value>
-  </data>
-  <data name="Greek.Content" xml:space="preserve">
-    <value>Griechisch (Ελληνικά)</value>
-  </data>
-  <data name="Polish.Content" xml:space="preserve">
-    <value>Polnisch (Polski)</value>
-  </data>
-  <data name="Russian.Content" xml:space="preserve">
-    <value>Russisch (Русский)</value>
   </data>
   <data name="Mica.Content" xml:space="preserve">
     <value>Mica</value>
@@ -181,7 +169,7 @@
     <value>Acrylic</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Version 1.1.5</value>
+    <value>Version {0}</value>
   </data>
   <data name="New.Content" xml:space="preserve">
     <value>Was ist neu?</value>
@@ -448,25 +436,19 @@
   <data name="ErrorPowerShell" xml:space="preserve">
     <value>Ein Fehler ist aufgetreten: PowerShell konnte nicht gestartet werden.</value>
   </data>
-  <data name="RestartAlert.Title" xml:space="preserve">
+  <data name="RestartBar.Title" xml:space="preserve">
     <value>Neustart erforderlich</value>
   </data>
-  <data name="RestartAlert.Message" xml:space="preserve">
+  <data name="RestartBar.Message" xml:space="preserve">
     <value>Ein Neustart ist erforderlich, um die Spracheinstellungen zu übernehmen.</value>
   </data>
   <data name="RestartButton.Content" xml:space="preserve">
     <value>Neustart</value>
   </data>
-  <data name="TranslationAuthor.Content" xml:space="preserve">
+  <data name="TranslatorLink.Content" xml:space="preserve">
     <value>puyomi2k</value>
   </data>
   <data name="TranslationAuthorURL" xml:space="preserve">
     <value>https://www.github.com/puyomi2k</value>
-  </data>
-  <data name="SimplifiedChinese.Content" xml:space="preserve">
-    <value>Chinesisch - vereinfacht (简体中文)</value>
-  </data>
-  <data name="German.Content" xml:space="preserve">
-    <value>Deutsch (Deutschland)</value>
   </data>
 </root>

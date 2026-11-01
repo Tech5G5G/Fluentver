@@ -132,10 +132,10 @@
   <data name="PC.ToolTipService.ToolTip" xml:space="preserve">
     <value>相关信息和规格</value>
   </data>
-  <data name="SettingsButton.ToolTipService.ToolTip" xml:space="preserve">
+  <data name="SettingsButtonToolTip.Content" xml:space="preserve">
     <value>设置</value>
   </data>
-  <data name="SettingsButtonBackTooltip" xml:space="preserve">
+  <data name="SettingsButtonBackToolTip" xml:space="preserve">
     <value>返回</value>
   </data>
   <data name="Storage.Content" xml:space="preserve">
@@ -156,20 +156,8 @@
   <data name="WIP.ToolTipService.ToolTip" xml:space="preserve">
     <value>Insider 信息和链接</value>
   </data>
-  <data name="Default.Content" xml:space="preserve">
+  <data name="Default.Text" xml:space="preserve">
     <value>默认</value>
-  </data>
-  <data name="English.Content" xml:space="preserve">
-    <value>English (United States)</value>
-  </data>
-  <data name="Greek.Content" xml:space="preserve">
-    <value>Greek (Ελληνικά)</value>
-  </data>
-  <data name="Polish.Content" xml:space="preserve">
-    <value>Polish (Polski)</value>
-  </data>
-  <data name="Russian.Content" xml:space="preserve">
-    <value>Russian (Русский)</value>
   </data>
   <data name="Mica.Content" xml:space="preserve">
     <value>云母</value>
@@ -181,7 +169,7 @@
     <value>亚克力</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>版本: 1.1.4</value>
+    <value>版本: {0}</value>
   </data>
   <data name="New.Content" xml:space="preserve">
     <value>新增内容</value>
@@ -448,25 +436,19 @@
   <data name="ErrorPowerShell" xml:space="preserve">
     <value>错误：无法启动Powershell。</value>
   </data>
-  <data name="RestartAlert.Title" xml:space="preserve">
+  <data name="RestartBar.Title" xml:space="preserve">
     <value>需要重启</value>
   </data>
-  <data name="RestartAlert.Message" xml:space="preserve">
+  <data name="RestartBar.Message" xml:space="preserve">
     <value>要使语言设置生效，请重启该程序。</value>
   </data>
   <data name="RestartButton.Content" xml:space="preserve">
     <value>重启</value>
   </data>
-  <data name="TranslationAuthor.Content" xml:space="preserve">
+  <data name="TranslatorLink.Content" xml:space="preserve">
     <value>Eric Zhang</value>
   </data>
   <data name="TranslationAuthorURL" xml:space="preserve">
     <value>https://github.com/EZStudio-M357</value>
-  </data>
-  <data name="SimplifiedChinese.Content" xml:space="preserve">
-    <value>简体中文</value>
-  </data>
-  <data name="German.Content" xml:space="preserve">
-    <value>German (Deutsch)</value>
   </data>
 </root>

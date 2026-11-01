@@ -132,10 +132,10 @@
   <data name="PC.ToolTipService.ToolTip" xml:space="preserve">
     <value>Informacje i specyfikacje komputera</value>
   </data>
-  <data name="SettingsButton.ToolTipService.ToolTip" xml:space="preserve">
+  <data name="SettingsButtonToolTip.Content" xml:space="preserve">
     <value>Ustawienia</value>
   </data>
-  <data name="SettingsButtonBackTooltip" xml:space="preserve">
+  <data name="SettingsButtonBackToolTip" xml:space="preserve">
     <value>Wstecz</value>
   </data>
   <data name="Storage.Content" xml:space="preserve">
@@ -156,20 +156,8 @@
   <data name="WIP.ToolTipService.ToolTip" xml:space="preserve">
     <value>Informacje i linki Insider</value>
   </data>
-  <data name="Default.Content" xml:space="preserve">
+  <data name="Default.Text" xml:space="preserve">
     <value>Domyślny</value>
-  </data>
-  <data name="English.Content" xml:space="preserve">
-    <value>Angielski (English)</value>
-  </data>
-  <data name="Greek.Content" xml:space="preserve">
-    <value>Grecki (Ελληνικά)</value>
-  </data>
-  <data name="Polish.Content" xml:space="preserve">
-    <value>Polski</value>
-  </data>
-  <data name="Russian.Content" xml:space="preserve">
-    <value>Rosyjski (Русский)</value>
   </data>
   <data name="Mica.Content" xml:space="preserve">
     <value>Mika</value>
@@ -181,7 +169,7 @@
     <value>Akryl</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Wersja 1.1.5</value>
+    <value>Wersja {0}</value>
   </data>
   <data name="New.Content" xml:space="preserve">
     <value>Co nowego</value>
@@ -448,25 +436,19 @@
   <data name="ErrorPowerShell" xml:space="preserve">
     <value>Wystąpił błąd: Nie można uruchomić programu PowerShell.</value>
   </data>
-  <data name="RestartAlert.Title" xml:space="preserve">
+  <data name="RestartBar.Title" xml:space="preserve">
     <value>Wymagane ponowne uruchomienie</value>
   </data>
-  <data name="RestartAlert.Message" xml:space="preserve">
+  <data name="RestartBar.Message" xml:space="preserve">
     <value>Aby zastosować preferencje językowe, wymagane jest ponowne uruchomienie.</value>
   </data>
   <data name="RestartButton.Content" xml:space="preserve">
     <value>Uruchom ponownie</value>
   </data>
-  <data name="TranslationAuthor.Content" xml:space="preserve">
+  <data name="TranslatorLink.Content" xml:space="preserve">
     <value>Tech5G5G</value>
   </data>
   <data name="TranslationAuthorURL" xml:space="preserve">
     <value>https://www.github.com/tech5g5g</value>
-  </data>
-  <data name="SimplifiedChinese.Content" xml:space="preserve">
-    <value>Uproszczony chiński (简体中文)</value>
-  </data>
-  <data name="German.Content" xml:space="preserve">
-    <value>Niemiecki (Deutsch)</value>
   </data>
 </root>
