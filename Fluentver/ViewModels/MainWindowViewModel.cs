@@ -2,7 +2,6 @@
 using Microsoft.UI.Xaml.Controls;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Fluver.UI;
 using Fluver.Navigation;
 using Fluver.Globalization;
 using Fluver.ApplicationModel;
