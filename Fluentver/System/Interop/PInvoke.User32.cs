@@ -68,6 +68,8 @@ partial class PInvoke
         nuint uIDNewItem,
         [MarshalAs(UnmanagedType.LPWStr), Optional] string lpNewItem);
 
+    public const double USER_DEFAULT_SCREEN_DPI = 96.0;
+
     public const uint SPI_GETCLIENTAREAANIMATION = 0x1042,
                       SPI_SETCLIENTAREAANIMATION = 0x1043;
 

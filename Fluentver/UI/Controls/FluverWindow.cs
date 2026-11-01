@@ -101,7 +101,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
         _menu = new(hMenu: GetSystemMenu(hWnd, bRevert: false));
         _bridge = new(window: this);
 
-        _dpiScaleX = _dpiScaleY = HwndExtensions.GetDpiForWindow(hWnd) / 96.0;
+        _dpiScaleX = _dpiScaleY = HwndExtensions.GetDpiForWindow(hWnd) / USER_DEFAULT_SCREEN_DPI;
 
         _manager = WindowManager.Get(_window);
         _manager.WindowMessageReceived += OnWindowMessageReceived;
@@ -321,8 +321,8 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
                 {
                     // Update scale factors
                     var dpis = (uint)wParam;
-                    double scaleX = _dpiScaleX = LOWORD(dpis) / 96.0,
-                           scaleY = _dpiScaleY = HIWORD(dpis) / 96.0;
+                    double scaleX = _dpiScaleX = LOWORD(dpis) / USER_DEFAULT_SCREEN_DPI,
+                           scaleY = _dpiScaleY = HIWORD(dpis) / USER_DEFAULT_SCREEN_DPI;
 
                     // Update window size + position
 
