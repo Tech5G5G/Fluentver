@@ -61,7 +61,7 @@ namespace Fluver.Windows
             ClientHeightFinalKeyFrame.Value = newHeight;
             ClientHeightStoryboard.Begin();
 
-            if (!ViewModel.AreAnimationsEnabled)
+            if (!Appearance.AreAnimationsEnabled)
             {
                 ClientHeightStoryboard.SkipToFill();
             }

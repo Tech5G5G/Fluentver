@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 using Windows.Graphics;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Xaml;
@@ -82,6 +83,8 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
     private SizeInt32 _frameSize;
 
+    private bool _updatesAppearance;
+
     private bool _showing;
     private WINDOWPOS _persistedPos;
 
@@ -127,6 +130,12 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
         _disposed = false;
         Resize(ClientWidth, ClientHeight);
+
+        if (_updatesAppearance = s_windows.Count == 0)
+        {
+            UpdateAnimations();
+            UpdateAccentColor();
+        }
 
         s_windows.Add(item: this);
 
@@ -183,6 +192,13 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
                     _manager.Dispose();
 
                     s_windows.Remove(item: this);
+
+                    if (_updatesAppearance)
+                    {
+                        s_windows.FirstOrDefault()?._updatesAppearance = true;
+                        _updatesAppearance = false;
+                    }
+
                     Closed?.Invoke(sender: this, EventArgs.Empty);
 
                     _hWnd = nint.Zero;
@@ -245,9 +261,16 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
                 }
                 break;
 
-            case WM_WINDOWPOSCHANGING when _showing:
+            case WM_SETTINGCHANGE when _updatesAppearance:
                 {
-                    _persistedPos = *(WINDOWPOS*)lParam;
+                    if (wParam == SPI_SETCLIENTAREAANIMATION)
+                    {
+                        UpdateAnimations();
+                    }
+                    else if (Marshal.PtrToStringUni(lParam) == "ImmersiveColorSet")
+                {
+                        UpdateAccentColor();
+                    }
                 }
                 break;
 
@@ -413,7 +436,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
     private static void OnSystemBackdropChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
     {
-        if (sender is FluverWindow { IsDestroyed: not true } window)
+        if (sender is FluverWindow { IsDestroyed: false } window)
         {
             window._window.SystemBackdrop = e.NewValue as SystemBackdrop;
         }
