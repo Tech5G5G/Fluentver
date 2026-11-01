@@ -446,9 +446,9 @@
     <value>Neustart</value>
   </data>
   <data name="TranslatorLink.Content" xml:space="preserve">
-    <value>puyomi2k</value>
+    <value>kujou2k</value>
   </data>
   <data name="TranslationAuthorURL" xml:space="preserve">
-    <value>https://www.github.com/puyomi2k</value>
+    <value>https://github.com/kujou2k</value>
   </data>
 </root>
