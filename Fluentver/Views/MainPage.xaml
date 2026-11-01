@@ -71,7 +71,12 @@
         <Frame x:Name="ContentFrame" />
         
         <Grid Padding="8">
-            <ItemsControl x:Name="ToolBar" HorizontalAlignment="Left" ItemsSource="{x:Bind ViewModel.ToolBarItems, Mode=OneWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <ItemsControl HorizontalAlignment="Left" ItemsSource="{x:Bind ViewModel.ToolBarItems, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <controls2:WrapPanel Orientation="Horizontal" HorizontalSpacing="8" VerticalSpacing="8">
@@ -84,10 +89,12 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
+            
             <Button x:Uid="Exit" Command="{x:Bind ViewModel.ExitCommand}"
-                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    VerticalAlignment="Bottom"
                     KeyboardAcceleratorPlacementMode="Hidden"
-                    Style="{ThemeResource AccentButtonStyle}">
+                    Style="{ThemeResource AccentButtonStyle}"
+                    Grid.Column="1">
                 <Button.KeyboardAccelerators>
                     <KeyboardAccelerator Key="Enter" />
                     <KeyboardAccelerator Key="Escape" />
