@@ -12,6 +12,4 @@ internal struct RECT
 
     public readonly int Width => right - left;
     public readonly int Height => bottom - top;
-
-    public readonly bool IsEmpty => left == 0 && top == 0 && right == 0 && bottom == 0;
 }
