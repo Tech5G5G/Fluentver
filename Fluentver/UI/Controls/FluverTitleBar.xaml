@@ -103,6 +103,18 @@
                         <Setter Target="SettingsIcon.Source" Value="{StaticResource BackVisualSource}" />
                         <Setter Target="FallbackSettingsIcon.Glyph" Value="&#xE72B;" />
                         <Setter Target="FallbackSettingsIcon.FontSize" Value="12" />
+            <VisualStateGroup>
+                <VisualState x:Name="StaticIcons" />
+
+                <VisualState x:Name="AnimatedIcons">
+                    <VisualState.StateTriggers>
+                        <ui:MultiStateTrigger ConditionOne="{x:Bind AnimateIcons}"
+                                              ConditionTwo="{ThemeResource IsHighContrastEnabled}"
+                                              InvertedConditions="Two" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SettingsIcon.Visibility" Value="Visible" />
+                        <Setter Target="FallbackSettingsIconViewbox.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -126,15 +138,21 @@
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="SettingsButtonToolTip" x:Uid="SettingsButtonToolTip" RequestedTheme="{x:Bind Theme}" />
             </ToolTipService.ToolTip>
+
+            <Grid>
+                <AnimatedIcon x:Name="SettingsIcon" x:Load="False"
                           Source="{StaticResource SettingsVisualSource}"
-                          Foreground="{ThemeResource TitleBarCaptionButtonForegroundColor}"
-                          Width="16" Height="16">
-                <AnimatedIcon.FallbackIconSource>
-                    <FontIconSource x:Name="FallbackSettingsIcon"
-                                    Glyph="&#xE713;" FontSize="14"
-                                    Foreground="{ThemeResource TitleBarCaptionButtonForegroundColor}" />
-                </AnimatedIcon.FallbackIconSource>
-            </AnimatedIcon>
+                              Width="16" Height="16"
+                              Visibility="Collapsed"
+                              HighContrastAdjustment="None"
+                              Loaded="OnSettingsIconLoaded" />
+
+                <Viewbox x:Name="FallbackSettingsIconViewbox" Width="14" Height="14">
+                    <FontIcon x:Name="FallbackSettingsIcon" Glyph="{ThemeResource SettingsGlyph}" HighContrastAdjustment="None" />
+                </Viewbox>
+            </Grid>
+        </Button>
+
         <Button x:Name="CloseButton" Style="{StaticResource CaptionButtonStyle}" Grid.Column="2" Click="OnCloseButtonClick">
             <Button.Resources>
                 <ResourceDictionary>
