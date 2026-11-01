@@ -16,6 +16,16 @@
     <ApplicationIcon>Assets\Fluver.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <!-- Publish properties -->
+  <PropertyGroup>
+    <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
+    <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
+    <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
+    <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
+    <SelfContained Condition="'$(Configuration)' == 'Debug'">false</SelfContained>
+    <SelfContained Condition="'$(Configuration)' != 'Debug'">true</SelfContained>
+  </PropertyGroup>
+
   <!-- Packaging properties -->
   <PropertyGroup>
     <EnableMsixTooling>true</EnableMsixTooling>
