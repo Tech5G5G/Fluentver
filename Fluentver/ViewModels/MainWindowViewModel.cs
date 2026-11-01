@@ -12,13 +12,10 @@ namespace Fluver.ViewModels;
 public sealed partial class MainWindowViewModel(
     ICultureService culture,
     IPackageInformation package,
-    IUISettingsService uiSettings,
     IMainPageNavigationService pageNavigation,
     IMainWindowNavigationService windowNavigation)
     : ObservableObject
 {
-    public bool AreAnimationsEnabled => uiSettings.AnimationsEnabled;
-
     public string DisplayName => package.DisplayName;
 
     public CultureInfo OSCulture => culture.OSCulture;
