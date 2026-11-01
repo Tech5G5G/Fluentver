@@ -4,8 +4,9 @@ namespace Fluver.System.Interop;
 
 partial class PInvoke
 {
-    [LibraryImport("user32.dll")]
-    public static partial void PostQuitMessage(int nExitCode);
+    [LibraryImport("user32.dll", EntryPoint = "SystemParametersInfoW", StringMarshalling = StringMarshalling.Utf16)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static partial bool SystemParametersInfo(uint uiAction, uint uiParam, nint pvParam, uint fWinIni);
 
     [LibraryImport("user32.dll", EntryPoint = "FindWindowExW", StringMarshalling = StringMarshalling.Utf16)]
     public static partial nint FindWindowEx(
@@ -13,6 +14,9 @@ partial class PInvoke
         [Optional] nint hWndChildAfter,
         [Optional, MarshalAs(UnmanagedType.LPWStr)] string lpszClass,
         [Optional, MarshalAs(UnmanagedType.LPWStr)] string lpszWindow);
+
+    [LibraryImport("user32.dll")]
+    public static partial void PostQuitMessage(int nExitCode);
 
     [LibraryImport("user32.dll", EntryPoint = "SendMessageW", StringMarshalling = StringMarshalling.Utf16)]
     public static partial nint SendMessage(nint hWnd, uint Msg, nuint wParam, nint lParam);
@@ -64,16 +68,20 @@ partial class PInvoke
         nuint uIDNewItem,
         [MarshalAs(UnmanagedType.LPWStr), Optional] string lpNewItem);
 
+    public const uint SPI_GETCLIENTAREAANIMATION = 0x1042,
+                      SPI_SETCLIENTAREAANIMATION = 0x1043;
+
     public const uint WM_DESTROY = 0x0002,
                       WM_MOVE = 0x0003,
                       WM_SIZE = 0x0005,
                       WM_ACTIVATE = 0x0006,
                       WM_CLOSE = 0x0010,
                       WM_SHOWWINDOW = 0x0018,
-                      WM_WINDOWPOSCHANGING = 0x0046,
-                      WM_WINDOWPOSCHANGED = 0x0047,
+                      WM_SETTINGCHANGE = 0x001A,
                       WM_CANCELMODE = 0x001F,
                       WM_GETMINMAXINFO = 0x0024,
+                      WM_WINDOWPOSCHANGING = 0x0046,
+                      WM_WINDOWPOSCHANGED = 0x0047,
                       WM_NCCALCSIZE = 0x0083,
                       WM_NCLBUTTONDBLCLK = 0x00A3,
                       WM_SYSCOMMAND = 0x0112,
