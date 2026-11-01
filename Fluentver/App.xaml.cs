@@ -6,6 +6,7 @@ using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Fluver.Helpers;
 using Fluver.Options;
+using Fluver.Strings;
 using Fluver.Windows;
 using Fluver.Extensions;
 using Fluver.Navigation;
@@ -25,6 +26,7 @@ namespace Fluver
         public IServiceProvider ServiceProvider => _provider;
         private readonly ServiceProvider _provider;
 
+        private readonly IResources _resources;
         private readonly IWindowManager _manager;
 
         private bool _restart;
@@ -49,6 +51,7 @@ namespace Fluver
             _provider.GetRequiredService<ICultureService>(); // Updates current culture info
             _provider.GetRequiredService<IBackdropManager>(); // Updates window backdrops
 
+            _resources = _provider.GetRequiredService<IResources>();
             _manager = _provider.GetRequiredService<IWindowManager>();
         }
 
@@ -70,10 +73,10 @@ namespace Fluver
             e.Handled = true;
 
             AppNotificationManager.Default.Show(
-                new AppNotificationBuilder().AddText(Text.ExceptionThrown)
-                                            .AddText(Text.ExceptionType(e.Exception.GetType().ToString()))
-                                            .AddText(Text.ExceptionMessageResult(e.Message, e.Exception.HResult))
-                                            .AddButton(new(Text.ExceptionFile)
+                new AppNotificationBuilder().AddText(_resources.ExceptionThrown)
+                                            .AddText(_resources.ExceptionType(e.Exception.GetType().ToString()))
+                                            .AddText(_resources.ExceptionMessageResult(e.Message, e.Exception.HResult))
+                                            .AddButton(new(_resources.ExceptionFile)
                                             {
                                                 InvokeUri = new("https://github.com/Tech5G5G/Fluentver/issues/new?template=BUG-REPORT.yml")
                                             })
@@ -95,7 +98,8 @@ namespace Fluver
                             ? FluverPage.AboutPage : p)
                     .AddFluverSetting(FluverSetting.Backdrop, defaultValue: BackdropType.Mica);
 
-            services.AddSingleton<IWindowManager, FluverWindowManager>()
+            services.AddSingleton<IResources, ResourcesProvider>()
+                    .AddSingleton<IWindowManager, FluverWindowManager>()
                     .AddSingleton<ICultureService, CultureService>()
                     .AddSingleton<IBackdropManager, BackdropManager>()
                     .AddSingleton<IPackageInformation, PackageInformation>();

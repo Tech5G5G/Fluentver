@@ -16,6 +16,18 @@
     <ApplicationIcon>Assets\Fluver.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <!-- Language configuration -->
+  <PropertyGroup>
+    <ImplicitUsings>true</ImplicitUsings>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <!-- WinUI properties -->
+  <PropertyGroup>
+    <UseWinUI>true</UseWinUI>
+    <WinUISDKReferences>false</WinUISDKReferences>
+  </PropertyGroup>
+
   <!-- Publish properties -->
   <PropertyGroup>
     <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
@@ -40,29 +52,12 @@
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
 
-  <!-- WinUI properties -->
-  <PropertyGroup>
-    <UseWinUI>true</UseWinUI>
-    <WinUISDKReferences>false</WinUISDKReferences>
-  </PropertyGroup>
-
-  <!-- Language configuration -->
-  <PropertyGroup>
-    <ImplicitUsings>true</ImplicitUsings>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <!-- Global usings -->
-  <ItemGroup>
-    <Using Include="Fluver.Strings.Resources" Alias="Text" />
-  </ItemGroup>
-
   <!-- Packages -->
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.2526" />
     <PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="2.3.0" />
 
-    <!-- Remove unused WASDK packages -->
+    <!-- Remove unused WASDK transitive dependencies -->
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.3.1" ExcludeAssets="all" />
     <PackageReference Include="Microsoft.Windows.AI.MachineLearning" Version="2.1.74" ExcludeAssets="all" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3719.77" ExcludeAssets="all" />
@@ -77,7 +72,7 @@
     <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
     <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
 
-    <PackageReference Include="ReswPlus" Version="0.3.1.5" />
+    <PackageReference Include="ReswPlus" Version="0.6.1" />
 
     <PackageReference Include="WinUIEx" Version="2.9.2" />
   </ItemGroup>

@@ -16,8 +16,8 @@ namespace Fluver.Windows
         {
             InitializeComponent();
 
-            Title = Text.GetString("RenamePC/Text");
-            NameBox.Header = Text.CurrentName(SystemHelper.SystemName);
+            Title = viewModel.Resources.GetString("RenamePC/Text");
+            NameBox.Header = viewModel.Resources.CurrentName(SystemHelper.SystemName);
 
             Header.OverlapsContent = true;
             Header.DragElement = TitleBar;
@@ -30,8 +30,8 @@ namespace Fluver.Windows
             NextButton.IsEnabled = SystemHelper.CheckNetBiosName(NameBox.Text, out var result);
             ErrorText.Text = result switch
             {
-                NetBiosNameCheckResult.ExceedsMaxLength => Text.NameTooLong,
-                NetBiosNameCheckResult.InvalidCharacter => Text.NameInvaildCharacters,
+                NetBiosNameCheckResult.ExceedsMaxLength => ViewModel.Resources.NameTooLong,
+                NetBiosNameCheckResult.InvalidCharacter => ViewModel.Resources.NameInvaildCharacters,
                 _ => string.Empty
             };
         }
@@ -52,7 +52,7 @@ namespace Fluver.Windows
             FinishingScreen.Visibility = Visibility.Visible;
             RenamingScreen.Visibility = Visibility.Collapsed;
 
-            NextButton.Content = Text.Finish;
+            NextButton.Content = ViewModel.Resources.Finish;
             NextButton.IsEnabled = CancelButton.IsEnabled = false;
 
             bool renamed = await SystemHelper.RenameSystem(NameBox.Text);
@@ -63,7 +63,7 @@ namespace Fluver.Windows
             CancelButton.IsEnabled = !(NextButton.IsEnabled = renamed);
             if (!renamed)
             {
-                ClosingText.Text = Text.ErrorPowerShell;
+                ClosingText.Text = ViewModel.Resources.ErrorPowerShell;
             }
         }
 

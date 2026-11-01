@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml.Controls;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Fluver.Strings;
 using Fluver.Navigation;
 using Fluver.Globalization;
 using Fluver.ApplicationModel;
@@ -9,12 +10,15 @@ using Fluver.ApplicationModel;
 namespace Fluver.ViewModels;
 
 public sealed partial class MainWindowViewModel(
+    IResources resources,
     ICultureService culture,
     IPackageInformation package,
     IMainPageNavigationService pageNavigation,
     IMainWindowNavigationService windowNavigation)
     : ObservableObject
 {
+    public IResources Resources => resources;
+
     public string DisplayName => package.DisplayName;
 
     public CultureInfo OSCulture => culture.OSCulture;

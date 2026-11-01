@@ -1,4 +1,6 @@
-﻿namespace Fluver.Extensions;
+﻿using Fluver.Strings;
+
+namespace Fluver.Extensions;
 
 public static class DriveInfoExtensions
 {
@@ -59,13 +61,13 @@ public static class DriveInfoExtensions
     /// </summary>
     public static IReadOnlyDictionary<StorageUnit, UnitInfo> UnitDictionary { get; } = new Dictionary<StorageUnit, UnitInfo>
     {
-        { StorageUnit.Bytes, new(Text.Bytes, 1) },
-        { StorageUnit.Kilobytes, new(Text.Kilobytes, 1024) },
-        { StorageUnit.Megabytes, new(Text.Megabytes, 1024 * 1024) },
-        { StorageUnit.Gigabytes, new(Text.Gigabytes, 1024 * 1024 * 1024) },
-        { StorageUnit.Terabytes, new(Text.Terabytes, (long)1024 * 1024 * 1024 * 1024) },
-        { StorageUnit.Petabytes, new(Text.Petabytes, (long)1024 * 1024 * 1024 * 1024 * 1024) },
-        { StorageUnit.Exabytes, new(Text.Exabytes, (long)1024 * 1024 * 1024 * 1024 * 1024 * 1024) },
+        { StorageUnit.Bytes, new(Resources.Bytes, 1) },
+        { StorageUnit.Kilobytes, new(Resources.Kilobytes, 1024) },
+        { StorageUnit.Megabytes, new(Resources.Megabytes, 1024 * 1024) },
+        { StorageUnit.Gigabytes, new(Resources.Gigabytes, 1024 * 1024 * 1024) },
+        { StorageUnit.Terabytes, new(Resources.Terabytes, (long)1024 * 1024 * 1024 * 1024) },
+        { StorageUnit.Petabytes, new(Resources.Petabytes, (long)1024 * 1024 * 1024 * 1024 * 1024) },
+        { StorageUnit.Exabytes, new(Resources.Exabytes, (long)1024 * 1024 * 1024 * 1024 * 1024 * 1024) },
     };
 
     private static StorageUnit GetUnit(long value)

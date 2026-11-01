@@ -3,7 +3,7 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Animation;
-using Fluver.Strings;
+using Fluver.Extensions;
 using Fluver.ViewModels;
 using Fluver.UI.Controls;
 using Fluver.System.Interop;
@@ -25,7 +25,7 @@ namespace Fluver.Windows
 
             // The window menu is usually displayed in the OS language, not the language set by Fluver
             // Attempt to use the OS language for consistency
-            Menu.AddMenuItem(SettingsId, Text.GetString("SettingsButton/ToolTipService/ToolTip", viewModel.OSCulture))
+            Menu.AddMenuItem(SettingsId, viewModel.Resources.GetString("SettingsButtonToolTip/Content", viewModel.OSCulture))
                 .AddMenuSeparator()
                 .ItemInvoked += OnMenuItemInvoked;
 

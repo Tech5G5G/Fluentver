@@ -1,20 +1,21 @@
 ﻿using System.Globalization;
 using Microsoft.Windows.ApplicationModel.Resources;
+using Fluver.Strings;
 
-namespace Fluver.Strings;
+namespace Fluver.Extensions;
 
 public static class ResourcesExtensions
 {
     private static readonly ResourceManager s_manager = new();
 
-    extension(Text)
+    extension(IResources resources)
     {
-        public static string GetString(string key, CultureInfo culture)
+        public string GetString(string key, CultureInfo culture)
         {
-            return culture.Equals(CultureInfo.InvariantCulture) ? Text.GetString(key) : GetString(key, culture.Name);
+            return culture.Equals(CultureInfo.InvariantCulture) ? resources.GetString(key) : resources.GetString(key, culture.Name);
         }
 
-        public static string GetString(string key, string language)
+        public string GetString(string key, string language)
         {
             var map = s_manager.MainResourceMap.GetSubtree("Resources");
 

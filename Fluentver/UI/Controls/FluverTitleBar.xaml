@@ -163,7 +163,7 @@
                         <StateTrigger IsActive="{x:Bind IsSettingsOpen}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="SettingsButtonToolTip.Content" Value="{strings:ResourcesExtension Key=SettingsButtonBackToolTip}" />
+                        <Setter Target="SettingsButtonToolTip.Content" Value="{x:Bind strings:Resources.SettingsButtonBackToolTip, Mode=OneTime}" />
 
                         <Setter Target="FallbackSettingsIcon.Glyph" Value="{ThemeResource BackGlyph}" />
                         <Setter Target="FallbackSettingsIconViewbox.Width" Value="12" />

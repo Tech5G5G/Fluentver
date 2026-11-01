@@ -9,7 +9,6 @@
     xmlns:ui="using:Fluver.UI"
     xmlns:ui2="using:CommunityToolkit.WinUI"
     xmlns:data="using:Fluver.UI.Data"
-    xmlns:strings="using:Fluver.Strings"
     xmlns:controls="using:Fluver.UI.Controls"
     xmlns:controls2="using:CommunityToolkit.WinUI.Controls"
     xmlns:globalization="using:System.Globalization"
@@ -99,11 +98,11 @@
         <controls2:SettingsCard HeaderIcon="{ui2:FontIcon Glyph=&#xE7E8;}" x:Uid="Startup">
             <ComboBox SelectedIndex="{x:Bind FluverPageToIndex(ViewModel.StartupPageSetting.Value), BindBack=SetStartupPageSetting, Mode=TwoWay}">
                 <ComboBoxItem x:Uid="PreviousPage" />
-                <ComboBoxItem Content="{strings:StringResource Key=About/Content}" />
-                <ComboBoxItem Content="{strings:StringResource Key=PC/Content}" />
-                <ComboBoxItem Content="{strings:StringResource Key=Users/Content}" />
-                <ComboBoxItem Content="{strings:StringResource Key=Storage/Content}" />
-                <isInsider:ComboBoxItem Content="{strings:StringResource Key=WIP/Content}" />
+                <ComboBoxItem Content="{x:Bind ViewModel.Resources.GetString('About/Content')}" />
+                <ComboBoxItem Content="{x:Bind ViewModel.Resources.GetString('PC/Content')}" />
+                <ComboBoxItem Content="{x:Bind ViewModel.Resources.GetString('Users/Content')}" />
+                <ComboBoxItem Content="{x:Bind ViewModel.Resources.GetString('Storage/Content')}" />
+                <isInsider:ComboBoxItem Content="{x:Bind ViewModel.Resources.GetString('WIP/Content')}" />
             </ComboBox>
         </controls2:SettingsCard>
 
@@ -117,7 +116,7 @@
 
         <controls2:SettingsExpander HeaderIcon="{ui2:BitmapIcon Source=ms-appx:///Assets/SettingsLogo.png}"
                                     Header="{x:Bind ViewModel.DisplayName}"
-                                    Description="{x:Bind strings:Resources.Version(ViewModel.Version)}">
+                                    Description="{x:Bind ViewModel.Resources.Version(ViewModel.Version)}">
             <controls2:SettingsExpander.Items>
                 <controls2:SettingsCard>
                     <HyperlinkButton x:Uid="New" NavigateUri="{x:Bind ViewModel.LatestReleaseUri}" />

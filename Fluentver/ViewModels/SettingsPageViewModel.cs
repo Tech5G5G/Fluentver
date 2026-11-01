@@ -3,19 +3,23 @@ using Microsoft.Extensions.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Fluver.Options;
+using Fluver.Strings;
 using Fluver.Globalization;
 using Fluver.ApplicationModel;
 
 namespace Fluver.ViewModels;
 
 public sealed partial class SettingsPageViewModel(
-    IApplicationLifetime lifetime,
+    IResources resources,
     ICultureService culture,
     IPackageInformation package,
+    IApplicationLifetime lifetime,
     [FromKeyedServices(FluverSetting.Backdrop)] ISetting<BackdropType> backdrop,
     [FromKeyedServices(FluverSetting.StartupPage)] ISetting<FluverPage> startupPage)
     : PageViewModel
 {
+    public IResources Resources => resources;
+
     public CultureInfo RequestedCulture
     {
         get => culture.RequestedCulture;
@@ -26,8 +30,8 @@ public sealed partial class SettingsPageViewModel(
 
     public IReadOnlyCollection<CultureInfo> SupportedCultures => culture.SupportedCultures;
 
-    public ISetting<BackdropType> BackdropSetting { get; } = backdrop;
-    public ISetting<FluverPage> StartupPageSetting { get; } = startupPage;
+    public ISetting<BackdropType> BackdropSetting => backdrop;
+    public ISetting<FluverPage> StartupPageSetting => startupPage;
 
     public string DisplayName => package.DisplayName;
 

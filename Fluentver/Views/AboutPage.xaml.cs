@@ -31,7 +31,7 @@ namespace Fluver.Views
             VersionText.Text = VersionHelper.VersionDisplayName;
             BuildText.Text = $"{VersionHelper.Build}.{VersionHelper.Revision}";
 
-            TrademarkText.Text = Text.Trademark(EditionText.Text);
+            TrademarkText.Text = Strings.Resources.Trademark(EditionText.Text);
         }
 
         private void Navigate_UsersPage(object sender, RoutedEventArgs e)

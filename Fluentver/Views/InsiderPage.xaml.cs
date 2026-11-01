@@ -17,7 +17,7 @@ namespace Fluver.Views
             BranchText.Text = VersionHelper.BuildBranch;
 
             var channel = VersionHelper.Channel;
-            ChannelText.Text = Text.GetString(channel.ToString());
+            ChannelText.Text = Strings.Resources.GetString(channel.ToString());
             NotesLink.NavigateUri = new($"https://aka.ms/{channel}latest");
 
             Task.Run(async () =>

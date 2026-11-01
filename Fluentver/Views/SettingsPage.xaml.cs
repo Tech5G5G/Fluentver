@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml.Controls;
 using Fluver.Options;
-using Fluver.Strings;
+using Fluver.Extensions;
 using Fluver.ViewModels;
 using Fluver.UI.Controls;
 
@@ -16,19 +16,19 @@ namespace Fluver.Views
         public SettingsPage()
         {
             InitializeComponent();
-            TranslatorLink.NavigateUri = new(Text.TranslationAuthorURL);
+            TranslatorLink.NavigateUri = new(ViewModel.Resources.TranslationAuthorURL);
         }
 
         private void OnLanguageSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var culture = ViewModel.EvaluatedRequestedCulture;
 
-            TranslatorLink.Content = Text.GetString("TranslatorLink/Content", culture);
-            TranslatorLink.NavigateUri = new(Text.GetString(nameof(Text.TranslationAuthorURL), culture));
+            TranslatorLink.Content = ViewModel.Resources.GetString("TranslatorLink/Content", culture);
+            TranslatorLink.NavigateUri = new(ViewModel.Resources.GetString(nameof(ViewModel.Resources.TranslationAuthorURL), culture));
 
-            RestartBar.Title = Text.GetString("RestartBar/Title", culture);
-            RestartBar.Message = Text.GetString("RestartBar/Message", culture);
-            RestartBar.ActionButton.Content = Text.GetString("RestartButton/Content", culture);
+            RestartBar.Title = ViewModel.Resources.GetString("RestartBar/Title", culture);
+            RestartBar.Message = ViewModel.Resources.GetString("RestartBar/Message", culture);
+            RestartBar.ActionButton.Content = ViewModel.Resources.GetString("RestartButton/Content", culture);
         }
 
         private int FluverPageToIndex(FluverPage page)
