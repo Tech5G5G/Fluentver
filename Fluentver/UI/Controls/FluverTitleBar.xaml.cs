@@ -136,7 +136,7 @@ namespace Fluver.UI.Controls
             SettingsButton.KeyboardAccelerators.Add(new()
             {
                 Modifiers = VirtualKeyModifiers.Control,
-                Key = (VirtualKey)188 // VK_OEM_COMMA
+                Key = (VirtualKey)0xBC // VK_OEM_COMMA
             });
         }
 
