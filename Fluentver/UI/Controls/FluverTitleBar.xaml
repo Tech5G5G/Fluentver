@@ -11,13 +11,22 @@
     xmlns:strings="using:Fluver.Strings"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     xmlns:is11="http://schemas.microsoft.com/winfx/2006/xaml/presentation?ui:WindowsVersionCondition(11)"
-    xmlns:is10="http://schemas.microsoft.com/winfx/2006/xaml/presentation?ui:WindowsVersionCondition(10)"
     mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
+                    <x:Boolean x:Key="IsHighContrastEnabled">False</x:Boolean>
+
                     <x:String x:Key="ChromeCloseGlyph">&#xE8BB;</x:String>
+                    <x:String x:Key="SettingsGlyph">&#xE713;</x:String>
+                    <x:String x:Key="BackGlyph">&#xE72B;</x:String>
+
+                    <Thickness x:Key="TitleBarPadding">14,0,0,0</Thickness>
+                    <StaticResource x:Key="TitleBarBackground" ResourceKey="ControlFillColorTransparentBrush" />
+                    <StaticResource x:Key="TitleBarInactiveBackground" ResourceKey="ControlFillColorTransparentBrush" />
+                    <StaticResource x:Key="TitleBarForeground" ResourceKey="SystemControlForegroundBaseHighBrush" />
+                    <StaticResource x:Key="TitleBarInactiveForeground" ResourceKey="TextFillColorDisabledBrush" />
 
                     <Thickness x:Key="CaptionButtonMargin">0</Thickness>
                     <StaticResource x:Key="CaptionButtonForeground" ResourceKey="SystemControlForegroundBaseHighBrush" />
@@ -28,7 +37,17 @@
                     <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="SubtleFillColorTertiary" />
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Light">
+                    <x:Boolean x:Key="IsHighContrastEnabled">False</x:Boolean>
+
                     <x:String x:Key="ChromeCloseGlyph">&#xE8BB;</x:String>
+                    <x:String x:Key="SettingsGlyph">&#xE713;</x:String>
+                    <x:String x:Key="BackGlyph">&#xE72B;</x:String>
+
+                    <Thickness x:Key="TitleBarPadding">14,0,0,0</Thickness>
+                    <StaticResource x:Key="TitleBarBackground" ResourceKey="ControlFillColorTransparentBrush" />
+                    <StaticResource x:Key="TitleBarInactiveBackground" ResourceKey="ControlFillColorTransparentBrush" />
+                    <StaticResource x:Key="TitleBarForeground" ResourceKey="SystemControlForegroundBaseHighBrush" />
+                    <StaticResource x:Key="TitleBarInactiveForeground" ResourceKey="TextFillColorDisabledBrush" />
 
                     <Thickness x:Key="CaptionButtonMargin">0</Thickness>
                     <StaticResource x:Key="CaptionButtonForeground" ResourceKey="SystemControlForegroundBaseHighBrush" />
@@ -39,7 +58,17 @@
                     <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="SubtleFillColorTertiary" />
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="HighContrast">
+                    <x:Boolean x:Key="IsHighContrastEnabled">True</x:Boolean>
+
                     <x:String x:Key="ChromeCloseGlyph">&#xEF2C;</x:String>
+                    <x:String x:Key="SettingsGlyph">&#xF8B0;</x:String>
+                    <x:String x:Key="BackGlyph">&#xF0D5;</x:String>
+
+                    <Thickness x:Key="TitleBarPadding">9,0,0,0</Thickness>
+                    <SolidColorBrush x:Key="TitleBarBackground" Color="{ThemeResource SystemColorActiveCaptionColor}" />
+                    <SolidColorBrush x:Key="TitleBarInactiveBackground" Color="{ThemeResource SystemColorInactiveCaptionColor}" />
+                    <SolidColorBrush x:Key="TitleBarForeground" Color="{ThemeResource SystemColorCaptionTextColor}" />
+                    <SolidColorBrush x:Key="TitleBarInactiveForeground" Color="{ThemeResource SystemColorInactiveCaptionTextColor}" />
 
                     <Thickness x:Key="CaptionButtonMargin">1,1,0,1</Thickness>
                     <StaticResource x:Key="CaptionButtonForeground" ResourceKey="ButtonForegroundThemeBrush" />
@@ -56,8 +85,8 @@
             <Color x:Key="CloseButtonTransparentBackgroundColor">#00C42B1C</Color>
             <Color x:Key="CloseButtonForegroundColor">White</Color>
 
-        <animatedvisuals:AnimatedSettingsVisualSource x:Key="SettingsVisualSource" />
-        <animatedvisuals:AnimatedBackVisualSource x:Key="BackVisualSource" />
+            <animatedvisuals:AnimatedSettingsVisualSource x:Key="SettingsVisualSource" />
+            <animatedvisuals:AnimatedBackVisualSource x:Key="BackVisualSource" />
 
             <Style x:Key="CaptionButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
                 <Setter Property="Foreground" Value="{ThemeResource CaptionButtonForeground}" />
@@ -74,19 +103,54 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Height="{x:Bind DimensionProvider.Height}">
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource TitleBarBackground}" Height="30" is11:Margin="0,1,0,0">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-                <VisualState x:Name="WindowActivated" />
+                <VisualState x:Name="Active" />
 
-                <VisualState x:Name="WindowDeactivated">
+                <VisualState x:Name="Inactive">
                     <VisualState.StateTriggers>
-                        <StateTrigger IsActive="{x:Bind InvertBool(IsSettingsButtonActive)}" />
+                        <ui:MultiStateTrigger ConditionOne="{x:Bind Window.IsActive}"
+                                              ConditionTwo="{x:Bind Appearance.IsAccented}"
+                                              InvertedConditions="One,Two" />
+
+                        <ui:MultiStateTrigger ConditionOne="{x:Bind Window.IsActive}"
+                                              ConditionTwo="{ThemeResource IsHighContrastEnabled}"
+                                              InvertedConditions="One" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="TitleText.Foreground" Value="{ThemeResource TitleBarCaptionButtonInactiveForegroundColor}" />
-                        <Setter Target="SettingsIcon.Foreground" Value="{ThemeResource TitleBarCaptionButtonInactiveForegroundColor}" />
-                        <Setter Target="FallbackSettingsIcon.Foreground" Value="{ThemeResource TitleBarCaptionButtonInactiveForegroundColor}" />
+                        <Setter Target="LayoutRoot.Background" Value="{ThemeResource TitleBarInactiveBackground}" />
+                        <Setter Target="TitleText.Foreground" Value="{ThemeResource TitleBarInactiveForeground}" />
+                        <Setter Target="SettingsButton.Foreground" Value="{ThemeResource CaptionButtonInactiveForeground}" />
+                        <Setter Target="CloseButton.Foreground" Value="{ThemeResource CaptionButtonInactiveForeground}" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="ActiveAccented">
+                    <VisualState.StateTriggers>
+                        <ui:MultiStateTrigger ConditionOne="{x:Bind Window.IsActive}"
+                                              ConditionTwo="{x:Bind Appearance.IsAccented}"
+                                              ConditionThree="{ThemeResource IsHighContrastEnabled}"
+                                              InvertedConditions="Three" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LayoutRoot.Background" Value="{x:Bind Appearance.AccentColor}" />
+                        <Setter Target="LayoutRoot.RequestedTheme" Value="{x:Bind Appearance.AccentTheme}" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="InactiveAccented">
+                    <VisualState.StateTriggers>
+                        <ui:MultiStateTrigger ConditionOne="{x:Bind Window.IsActive}"
+                                              ConditionTwo="{x:Bind Appearance.IsAccented}"
+                                              ConditionThree="{ThemeResource IsHighContrastEnabled}"
+                                              InvertedConditions="One,Three" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LayoutRoot.Background" Value="{ThemeResource TitleBarInactiveBackground}" />
+                        <Setter Target="TitleText.Foreground" Value="{ThemeResource AccentFillColorDefaultBrush}" />
+                        <Setter Target="SettingsButton.Foreground" Value="{ThemeResource AccentFillColorDefaultBrush}" />
+                        <Setter Target="CloseButton.Foreground" Value="{ThemeResource AccentFillColorDefaultBrush}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -99,10 +163,30 @@
                         <StateTrigger IsActive="{x:Bind IsSettingsOpen}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="SettingsButton.(ToolTipService.ToolTip)" Value="{strings:ResourcesExtension Key=SettingsButtonBackTooltip}" />
+                        <Setter Target="SettingsButtonToolTip.Content" Value="{strings:ResourcesExtension Key=SettingsButtonBackToolTip}" />
+
+                        <Setter Target="FallbackSettingsIcon.Glyph" Value="{ThemeResource BackGlyph}" />
+                        <Setter Target="FallbackSettingsIconViewbox.Width" Value="12" />
+                        <Setter Target="FallbackSettingsIconViewbox.Height" Value="12" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
+            <VisualStateGroup>
+                <VisualState x:Name="AnimatedSettings" />
+
+                <VisualState x:Name="AnimatedBack">
+                    <VisualState.StateTriggers>
+                        <ui:MultiStateTrigger ConditionOne="{x:Bind IsSettingsOpen}"
+                                              ConditionTwo="{ThemeResource IsHighContrastEnabled}"
+                                              InvertedConditions="Two" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
                         <Setter Target="SettingsIcon.Source" Value="{StaticResource BackVisualSource}" />
-                        <Setter Target="FallbackSettingsIcon.Glyph" Value="&#xE72B;" />
-                        <Setter Target="FallbackSettingsIcon.FontSize" Value="12" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
             <VisualStateGroup>
                 <VisualState x:Name="StaticIcons" />
 
@@ -126,8 +210,17 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <Border x:Name="DragRegion" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="14,0,0,0" Grid.Column="1">
-            <TextBlock x:Name="TitleText" Text="{x:Bind Title}" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" />
+        <Border x:Name="DragRegion"
+                Background="Transparent"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                Padding="{ThemeResource TitleBarPadding}">
+            <TextBlock x:Name="TitleText"
+                       Text="{x:Bind Title}"
+                       TextTrimming="CharacterEllipsis"
+                       Foreground="{ThemeResource TitleBarForeground}"
+                       VerticalAlignment="Center"
+                       HighContrastAdjustment="None"
+                       Style="{StaticResource CaptionTextBlockStyle}" />
         </Border>
 
         <Button x:Name="SettingsButton"
@@ -141,7 +234,7 @@
 
             <Grid>
                 <AnimatedIcon x:Name="SettingsIcon" x:Load="False"
-                          Source="{StaticResource SettingsVisualSource}"
+                              Source="{StaticResource SettingsVisualSource}"
                               Width="16" Height="16"
                               Visibility="Collapsed"
                               HighContrastAdjustment="None"

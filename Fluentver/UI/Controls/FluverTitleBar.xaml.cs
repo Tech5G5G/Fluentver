@@ -1,6 +1,8 @@
 using System.Windows.Input;
 using Windows.System;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Hosting;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.AnimatedVisuals;
 
@@ -9,6 +11,8 @@ namespace Fluver.UI.Controls
     public sealed partial class FluverTitleBar : UserControl
     {
         public event RoutedEventHandler SettingsButtonClick;
+
+        private WindowAppearance Appearance => FluverWindow.Appearance;
 
         public FluverTitleBar()
         {
@@ -62,9 +66,9 @@ namespace Fluver.UI.Controls
             }
 
             if (e.OldValue is FluverWindow oldWindow && oldWindow.Header.DragElement == titleBar.DragRegion)
-        {
+            {
                 oldWindow.Header.DragElement = null;
-        }
+            }
 
             if (e.NewValue is FluverWindow window)
             {
@@ -163,7 +167,7 @@ namespace Fluver.UI.Controls
             if (VisualTreeHelper.GetChildrenCount(SettingsIcon) == 0 ||
                 VisualTreeHelper.GetChild(SettingsIcon, childIndex: 0) is not Panel rootPanel ||
                 ElementCompositionPreview.GetElementChildVisual(rootPanel) is null)
-        {
+            {
                 AnimateIcons = false;
             }
         }
