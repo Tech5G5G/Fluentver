@@ -8,6 +8,8 @@ public static class ResourcesExtensions
 {
     private static readonly ResourceManager s_manager = new();
 
+    private static readonly ResourceMap s_map = s_manager.MainResourceMap.TryGetSubtree("Resources");
+
     extension(IResources resources)
     {
         public string GetString(string key, CultureInfo culture)
@@ -17,12 +19,15 @@ public static class ResourcesExtensions
 
         public string GetString(string key, string language)
         {
-            var map = s_manager.MainResourceMap.GetSubtree("Resources");
+            if (s_map is null)
+            {
+                return resources.GetString(key);
+            }
 
             var context = s_manager.CreateResourceContext();
             context.QualifierValues["Language"] = language;
 
-            return map.GetValue(key, context).ValueAsString;
+            return s_map.GetValue(key, context).ValueAsString;
         }
     }
 }
