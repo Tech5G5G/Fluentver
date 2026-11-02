@@ -39,6 +39,8 @@ namespace Fluver
 
 #if !DEBUG
             UnhandledException += OnUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += OnAppDomainUnhandledException;
+            TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
 #endif
 
             ServiceCollection services = new();
@@ -52,22 +54,6 @@ namespace Fluver
             // Cache services for later use
             _resources = _provider.GetRequiredService<IResources>();
             _manager = _provider.GetRequiredService<IWindowManager>();
-        }
-
-
-        private void OnUnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
-        {
-            e.Handled = true;
-
-            AppNotificationManager.Default.Show(
-                new AppNotificationBuilder().AddText(_resources.ExceptionThrown)
-                                            .AddText(_resources.ExceptionType(e.Exception.GetType().ToString()))
-                                            .AddText(_resources.ExceptionMessageResult(e.Message, e.Exception.HResult))
-                                            .AddButton(new(_resources.ExceptionFile)
-                                            {
-                                                InvokeUri = new("https://github.com/Tech5G5G/Fluentver/issues/new?template=BUG-REPORT.yml")
-                                            })
-                                            .BuildNotification());
         }
 
         private void InitializeServices(ServiceCollection services)
@@ -142,6 +128,43 @@ namespace Fluver
         void IApplicationLifetime.Exit()
         {
             Exit();
+        }
+
+        #endregion
+
+        #region Error Handling
+
+        private void OnUnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            ShowNotificationForException(e.Exception);
+        }
+
+        private void OnAppDomainUnhandledException(object sender, System.UnhandledExceptionEventArgs e)
+        {
+            if (e.ExceptionObject is Exception exception)
+            {
+                ShowNotificationForException(exception);
+            }
+        }
+
+        private void OnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            e.SetObserved();
+            ShowNotificationForException(e.Exception.InnerException);
+        }
+
+        private void ShowNotificationForException(Exception exception)
+        {
+            AppNotificationManager.Default.Show(
+                new AppNotificationBuilder().AddText(_resources.ExceptionThrown)
+                                            .AddText(_resources.ExceptionType(exception.GetType().ToString()))
+                                            .AddText(_resources.ExceptionMessageResult(exception.Message, exception.HResult))
+                                            .AddButton(new(_resources.ExceptionFile)
+                                            {
+                                                InvokeUri = new("https://github.com/Tech5G5G/Fluentver/issues/new?template=BUG-REPORT.yml")
+                                            })
+                                            .BuildNotification());
         }
 
         #endregion
