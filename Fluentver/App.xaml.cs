@@ -29,8 +29,6 @@ namespace Fluver
         private readonly IResources _resources;
         private readonly IWindowManager _manager;
 
-        private bool _restart;
-
         public App()
         {
             InitializeComponent();
@@ -51,22 +49,11 @@ namespace Fluver
             _provider.GetRequiredService<ICultureService>(); // Updates current culture info
             _provider.GetRequiredService<IBackdropManager>(); // Updates window backdrops
 
+            // Cache services for later use
             _resources = _provider.GetRequiredService<IResources>();
             _manager = _provider.GetRequiredService<IWindowManager>();
         }
 
-        private void OnShutdownStarting(DispatcherQueue sender, DispatcherQueueShutdownStartingEventArgs e)
-        {
-            ((IDisposable)this).Dispose();
-        }
-
-        private void OnShutdownCompleted(DispatcherQueue sender, object e)
-        {
-            if (_restart)
-            {
-                AppInstance.Restart(arguments: string.Empty);
-            }
-        }
 
         private void OnUnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
         {
@@ -118,6 +105,23 @@ namespace Fluver
             _manager.CreateWindow(_provider.GetRequiredService<MainWindowViewModel>()).Show();
         }
 
+        #region Application Lifetime
+
+        private bool _restart;
+
+        private void OnShutdownStarting(DispatcherQueue sender, DispatcherQueueShutdownStartingEventArgs e)
+        {
+            ((IDisposable)this).Dispose();
+        }
+
+        private void OnShutdownCompleted(DispatcherQueue sender, object e)
+        {
+            if (_restart)
+            {
+                AppInstance.Restart(arguments: string.Empty);
+            }
+        }
+
         public void Restart()
         {
             _restart = true;
@@ -139,6 +143,8 @@ namespace Fluver
         {
             Exit();
         }
+
+        #endregion
 
         void IDisposable.Dispose()
         {
