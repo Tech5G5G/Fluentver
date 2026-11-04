@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using CommunityToolkit.Mvvm.Input;
@@ -18,7 +17,7 @@ public sealed partial class MainPageViewModel : PageViewModel, IDisposable
     public partial FluverPage SelectedPage { get; set; }
 
     [ObservableProperty]
-    public partial ICollection ToolBarItems { get; set; }
+    public partial IList<object> ToolbarItems { get; set; }
 
     private readonly IWindowManager _manager;
     private readonly IPackageInformation _package;
@@ -51,10 +50,7 @@ public sealed partial class MainPageViewModel : PageViewModel, IDisposable
         SelectedPage = _navigation.CurrentPage;
         _updatingUi = false;
 
-        if (e.Content is FluverView { ToolBarItems: { } items })
-        {
-            ToolBarItems = items;
-        }
+        ToolbarItems = e.Content is FluverView { ToolbarItems: { } items } ? items : null;
     }
 
     partial void OnSelectedPageChanged(FluverPage value)

@@ -76,7 +76,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <ItemsControl HorizontalAlignment="Left" ItemsSource="{x:Bind ViewModel.ToolBarItems, Mode=OneWay}">
+            <ItemsControl ItemsSource="{x:Bind ViewModel.ToolbarItems, Mode=OneWay}" HorizontalAlignment="Left" IsTabStop="False">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <controls2:WrapPanel Orientation="Horizontal" HorizontalSpacing="8" VerticalSpacing="8">
