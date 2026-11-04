@@ -130,18 +130,6 @@ namespace Fluver.UI.Controls
         private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
         {
             SettingsButtonClick?.Invoke(sender: this, e);
-
-            if (SettingsCommand is not { } command)
-            {
-                return;
-            }
-
-            var parameter = SettingsCommandParameter;
-
-            if (command.CanExecute(parameter))
-            {
-                SettingsCommand.Execute(parameter);
-            }
         }
 
         private void OnSettingsButtonLoaded(object sender, RoutedEventArgs e)

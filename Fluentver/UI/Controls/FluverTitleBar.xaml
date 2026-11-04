@@ -224,6 +224,8 @@
         </Border>
 
         <Button x:Name="SettingsButton"
+                Command="{x:Bind SettingsCommand}"
+                CommandParameter="{x:Bind SettingsCommandParameter}"
                 Style="{StaticResource CaptionButtonStyle}"
                 Grid.Column="1"
                 Click="OnSettingsButtonClick"
