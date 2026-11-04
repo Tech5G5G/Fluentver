@@ -26,23 +26,26 @@ public sealed partial class PersistentExpander : Expander
         }
     }
 
-    private bool _hookedEvents;
+    private bool _validId;
 
     public PersistentExpander()
     {
-        DefaultStyleKey = typeof(PersistentExpander);
+        DefaultStyleKey = typeof(Expander);
+
+        Expanding += OnExpanding;
+        Collapsed += OnCollapsed;
     }
 
-    public string Id
+    public string PersistenceId
     {
-        get => (string)GetValue(IdProperty);
-        set => SetValue(IdProperty, value);
+        get => (string)GetValue(PersistenceIdProperty);
+        set => SetValue(PersistenceIdProperty, value);
     }
 
-    public static DependencyProperty IdProperty { get; } =
-        DependencyProperty.Register(nameof(Id), typeof(string), typeof(PersistentExpander), new(defaultValue: string.Empty, OnIdChanged));
+    public static DependencyProperty PersistenceIdProperty { get; } =
+        DependencyProperty.Register(nameof(PersistenceId), typeof(string), typeof(PersistentExpander), new(defaultValue: null, OnPersistenceIdChanged));
 
-    private static void OnIdChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+    private static void OnPersistenceIdChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
     {
         if (sender is not PersistentExpander expander)
         {
@@ -51,38 +54,40 @@ public sealed partial class PersistentExpander : Expander
 
         if (e.NewValue is not string id || string.IsNullOrWhiteSpace(id))
         {
-            expander.Expanding -= OnExpanding;
-            expander.Collapsed -= OnCollapsed;
-
-            expander._hookedEvents = false;
+            expander._validId = false;
             return;
         }
 
-        if (Storage.TryGetValue(id, out var state))
-        {
-            expander.IsExpanded = (bool)state;
-        }
-        else
-        {
-            Storage[expander.Id] = expander.IsExpanded;
-        }
+        expander._validId = true;
 
-        if (!expander._hookedEvents)
+        if (Storage is { } storage)
         {
-            expander.Expanding += OnExpanding;
-            expander.Collapsed += OnCollapsed;
-
-            expander._hookedEvents = true;
+            if (storage.TryGetValue(id, out var state))
+            {
+                expander.IsExpanded = (bool)state;
+            }
+            else
+            {
+                storage[id] = expander.IsExpanded;
+            }
         }
     }
-    
+
     private static void OnExpanding(Expander sender, ExpanderExpandingEventArgs e)
     {
-        Storage[(sender as PersistentExpander).Id] = true;
+        if (Storage is { } storage &&
+            sender is PersistentExpander { _validId: true, PersistenceId: { } id })
+        {
+            storage[id] = true;
+        }
     }
 
     private static void OnCollapsed(Expander sender, ExpanderCollapsedEventArgs e)
     {
-        Storage[(sender as PersistentExpander).Id] = false;
+        if (Storage is { } storage &&
+            sender is PersistentExpander { _validId: true, PersistenceId: { } id })
+        {
+            storage[id] = false;
+        }
     }
 }
