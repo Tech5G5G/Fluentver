@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Fluver.Views;
-using Fluver.Helpers;
+using Fluver.System;
 using Fluver.Options;
 
 namespace Fluver.Navigation;
@@ -42,7 +42,7 @@ public sealed class MainPageNavigationService : NavigationService<FluverPage>, I
     public override void Navigate(FluverPage page, object parameter)
     {
         base.Navigate(
-            page == FluverPage.InsiderPage && !VersionHelper.IsWindowsInsider ? FluverPage.AboutPage : page,
+            page == FluverPage.InsiderPage && !SystemInformation.IsWindowsInsider ? FluverPage.AboutPage : page,
             parameter);
     }
 
@@ -60,7 +60,7 @@ public sealed class MainPageNavigationService : NavigationService<FluverPage>, I
     {
         var currentPage = CurrentPage;
 
-        if (currentPage != (VersionHelper.IsWindowsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage))
+        if (currentPage != (SystemInformation.IsWindowsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage))
         {
             base.Navigate(currentPage + 1, parameter: null);
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using Fluver.System;
 using Fluver.Helpers;
 using Fluver.UI.Controls;
 
@@ -14,15 +15,15 @@ namespace Fluver.Views
 
         private void SetVersionInfo()
         {
-            BranchText.Text = VersionHelper.BuildBranch;
+            BranchText.Text = SystemInformation.BuildBranch;
 
-            var channel = VersionHelper.Channel;
+            var channel = SystemInformation.InsiderChannel;
             ChannelText.Text = Strings.Resources.GetString(channel.ToString());
             NotesLink.NavigateUri = new($"https://aka.ms/{channel}latest");
 
             Task.Run(async () =>
             {
-                var user = await VersionHelper.GetWIPAccountAsync();
+                var user = await SystemInformation.GetWIPAccountAsync();
                 string email = user.GetEmailAddress();
                 DispatcherQueue.TryEnqueue(() =>
                 {
@@ -35,7 +36,7 @@ namespace Fluver.Views
 
         private void FeedbackButton_Click(object sender, RoutedEventArgs e)
         {
-            _ = Windows.System.Launcher.LaunchUriAsync(new("feedback-hub:"));
+            _ = global::Windows.System.Launcher.LaunchUriAsync(new("feedback-hub:"));
         }
     }
 }

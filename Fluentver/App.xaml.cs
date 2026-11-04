@@ -4,7 +4,6 @@ using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
-using Fluver.Helpers;
 using Fluver.Options;
 using Fluver.Strings;
 using Fluver.Windows;
@@ -13,6 +12,7 @@ using Fluver.Navigation;
 using Fluver.ViewModels;
 using Fluver.Globalization;
 using Fluver.ApplicationModel;
+using Fluver.System;
 using Fluver.System.Interop;
 
 namespace Fluver
@@ -63,11 +63,11 @@ namespace Fluver
             services.AddFluverSetting(
                         FluverSetting.StartupPage,
                         defaultValue: FluverPage.Previous,
-                        p => p == FluverPage.InsiderPage && !VersionHelper.IsWindowsInsider ? FluverPage.AboutPage : p)
+                        p => p == FluverPage.InsiderPage && !SystemInformation.IsWindowsInsider ? FluverPage.AboutPage : p)
                     .AddFluverSetting(
                         FluverSetting.PersistedPage,
                         defaultValue: FluverPage.AboutPage,
-                        p => p < FluverPage.AboutPage || p > (VersionHelper.IsWindowsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage)
+                        p => p < FluverPage.AboutPage || p > (SystemInformation.IsWindowsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage)
                             ? FluverPage.AboutPage : p)
                     .AddFluverSetting(FluverSetting.Backdrop, defaultValue: BackdropType.Mica);
 

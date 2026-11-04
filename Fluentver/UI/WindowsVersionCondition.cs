@@ -1,5 +1,5 @@
-﻿using Fluver.Helpers;
-using Microsoft.UI.Xaml.Markup;
+﻿using Microsoft.UI.Xaml.Markup;
+using Fluver.System;
 
 namespace Fluver.UI;
 
@@ -9,10 +9,10 @@ public sealed partial class WindowsVersionCondition : IXamlCondition
     {
         return argument switch
         {
-            "11" => VersionHelper.IsWindows11,
-            "10" => !VersionHelper.IsWindows11,
-            "Insider" => VersionHelper.IsWindowsInsider,
-            "Release" => !VersionHelper.IsWindowsInsider,
+            "11" => SystemInformation.IsWindows11,
+            "10" => !SystemInformation.IsWindows11,
+            "Insider" => SystemInformation.IsWindowsInsider,
+            "Release" => !SystemInformation.IsWindowsInsider,
             _ => false
         };
     }
