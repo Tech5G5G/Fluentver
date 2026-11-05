@@ -1,5 +1,5 @@
-﻿using Fluver.ViewModels;
-using Fluver.UI.Controls;
+﻿using Fluver.UI.Controls;
+using Fluver.UI.ViewModels;
 
 namespace Fluver.Windows;
 

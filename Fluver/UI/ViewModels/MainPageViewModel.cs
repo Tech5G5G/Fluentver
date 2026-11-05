@@ -9,7 +9,7 @@ using Fluver.Navigation;
 using Fluver.ApplicationModel;
 using Fluver.UI.Controls;
 
-namespace Fluver.ViewModels;
+namespace Fluver.UI.ViewModels;
 
 public sealed partial class MainPageViewModel : PageViewModel, IDisposable
 {

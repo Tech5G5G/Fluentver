@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Fluver.Strings;
 
-namespace Fluver.ViewModels;
+namespace Fluver.UI.ViewModels;
 
 public sealed partial class RenamerWindowViewModel(IResources resources) : ObservableObject
 {

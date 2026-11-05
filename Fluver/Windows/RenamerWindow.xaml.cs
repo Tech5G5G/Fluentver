@@ -3,8 +3,8 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Controls;
 using Fluver.Helpers;
-using Fluver.ViewModels;
 using Fluver.UI.Controls;
+using Fluver.UI.ViewModels;
 
 namespace Fluver.Windows
 {

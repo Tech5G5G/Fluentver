@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Fluver.ViewModels;
 using Fluver.UI.Controls;
+using Fluver.UI.ViewModels;
 
-namespace Fluver.Views
+namespace Fluver.UI.Views
 {
     public sealed partial class AboutPage : FluverView
     {

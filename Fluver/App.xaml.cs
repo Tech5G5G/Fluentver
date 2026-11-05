@@ -9,9 +9,9 @@ using Fluver.Strings;
 using Fluver.Windows;
 using Fluver.Extensions;
 using Fluver.Navigation;
-using Fluver.ViewModels;
 using Fluver.Globalization;
 using Fluver.ApplicationModel;
+using Fluver.UI.ViewModels;
 using Fluver.System;
 using Fluver.System.Interop;
 

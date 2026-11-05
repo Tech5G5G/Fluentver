@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using Fluver.ViewModels;
+using Fluver.UI.ViewModels;
 
 namespace Fluver.UI.Controls;
 

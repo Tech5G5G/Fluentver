@@ -6,7 +6,7 @@ using Fluver.Options;
 using Fluver.Strings;
 using Fluver.Navigation;
 
-namespace Fluver.ViewModels;
+namespace Fluver.UI.ViewModels;
 
 public sealed partial class AboutPageViewModel(
     IResources resources,

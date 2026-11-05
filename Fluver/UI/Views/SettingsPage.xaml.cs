@@ -2,10 +2,10 @@
 using Microsoft.UI.Xaml.Controls;
 using Fluver.Options;
 using Fluver.Extensions;
-using Fluver.ViewModels;
 using Fluver.UI.Controls;
+using Fluver.UI.ViewModels;
 
-namespace Fluver.Views
+namespace Fluver.UI.Views
 {
     public sealed partial class SettingsPage : ViewModelPage
     {

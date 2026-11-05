@@ -3,7 +3,7 @@ using Fluver.Helpers;
 using Fluver.Options;
 using Fluver.UI.Controls;
 
-namespace Fluver.Views
+namespace Fluver.UI.Views
 {
     public sealed partial class StoragePage : InfoPage
     {

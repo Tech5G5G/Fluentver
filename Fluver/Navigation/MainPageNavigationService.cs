@@ -1,8 +1,8 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
-using Fluver.Views;
 using Fluver.System;
 using Fluver.Options;
+using Fluver.UI.Views;
 
 namespace Fluver.Navigation;
 

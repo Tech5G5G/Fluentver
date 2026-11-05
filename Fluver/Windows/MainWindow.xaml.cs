@@ -4,9 +4,9 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Animation;
 using Fluver.Extensions;
-using Fluver.ViewModels;
-using Fluver.UI.Controls;
 using Fluver.System.Interop;
+using Fluver.UI.Controls;
+using Fluver.UI.ViewModels;
 
 namespace Fluver.Windows
 {

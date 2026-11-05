@@ -7,7 +7,7 @@ using Fluver.Strings;
 using Fluver.Globalization;
 using Fluver.ApplicationModel;
 
-namespace Fluver.ViewModels;
+namespace Fluver.UI.ViewModels;
 
 public sealed partial class SettingsPageViewModel(
     IResources resources,

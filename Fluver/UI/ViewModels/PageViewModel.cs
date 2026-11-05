@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Navigation;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Fluver.ViewModels;
+namespace Fluver.UI.ViewModels;
 
 public partial class PageViewModel : ObservableObject
 {
