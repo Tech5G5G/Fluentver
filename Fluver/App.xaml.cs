@@ -59,6 +59,12 @@ namespace Fluver
         {
             services.AddSingleton<IApplicationLifetime>(this);
 
+            services.AddSingleton<ICultureService, CultureService>()
+                    .AddSingleton<IPackageInformation, PackageInformation>();
+
+            services.AddUIServices()
+                    .AddNavigationServices();
+
             services.AddFluverSetting(
                         FluverSetting.StartupPage,
                         defaultValue: FluverPage.Previous,
@@ -69,21 +75,6 @@ namespace Fluver
                         p => p < FluverPage.AboutPage || p > (WindowsInfo.IsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage)
                             ? FluverPage.AboutPage : p)
                     .AddFluverSetting(FluverSetting.Backdrop, defaultValue: BackdropType.Mica);
-
-            services.AddSingleton<IResources, ResourcesProvider>()
-                    .AddSingleton<IWindowManager, FluverWindowManager>()
-                    .AddSingleton<ICultureService, CultureService>()
-                    .AddSingleton<IBackdropManager, BackdropManager>()
-                    .AddSingleton<IPackageInformation, PackageInformation>();
-
-            services.AddSingleton<IMainPageNavigationService, MainPageNavigationService>()
-                    .AddSingleton<IMainWindowNavigationService, MainWindowNavigationService>();
-
-            services.AddTransient<MainPageViewModel>()
-                    .AddTransient<AboutPageViewModel>()
-                    .AddTransient<MainWindowViewModel>()
-                    .AddTransient<SettingsPageViewModel>()
-                    .AddTransient<RenamerWindowViewModel>();
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
