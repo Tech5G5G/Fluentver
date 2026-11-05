@@ -356,10 +356,10 @@
   <data name="NavigateUsers.Label" xml:space="preserve">
     <value>Go to Users</value>
   </data>
-  <data name="Activation.Text" xml:space="preserve">
+  <data name="Activation.Content" xml:space="preserve">
     <value>Activation state</value>
   </data>
-  <data name="WinUpdate.Text" xml:space="preserve">
+  <data name="WinUpdate.Content" xml:space="preserve">
     <value>Windows Update</value>
   </data>
   <data name="Stable" xml:space="preserve">
@@ -477,5 +477,9 @@ HResult: 0x{1:X8}</value>
   </data>
   <data name="ExceptionFile" xml:space="preserve">
     <value>File an issue on GitHub</value>
+  </data>
+  <data name="EvaluationCopy" xml:space="preserve">
+    <value>Evaluation copy. Expires {0}</value>
+    <comment>#Format[String date]</comment>
   </data>
 </root>

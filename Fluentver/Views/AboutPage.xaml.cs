@@ -1,49 +1,23 @@
-﻿using Windows.ApplicationModel.DataTransfer;
-using Microsoft.UI.Xaml;
-using Fluver.Helpers;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Fluver.ViewModels;
 using Fluver.UI.Controls;
 
 namespace Fluver.Views
 {
-    public sealed partial class AboutPage : InfoPage
+    public sealed partial class AboutPage : FluverView
     {
+        public AboutPageViewModel ViewModel { get; } = App.Services.GetRequiredService<AboutPageViewModel>();
+
+        protected override PageViewModel PageViewModel => ViewModel;
+
         public AboutPage()
         {
             InitializeComponent();
 
-            SetNames();
-            SetWindowsInformation();
-        }
-
-        private void SetNames()
-        {
-            UsernameLink.Content = VersionHelper.RegisteredOwner;
-            OrgText.Text = VersionHelper.RegisteredOrganization;
-            if (string.IsNullOrWhiteSpace(OrgText.Text))
+            if (!ViewModel.IsEvaluationCopy)
             {
-                OrgText.Visibility = Visibility.Collapsed;
+                LegalText.Blocks.Remove(EvaluationCopyParagraph);
             }
-        }
-
-        private void SetWindowsInformation()
-        {
-            EditionText.Text = $"{(VersionHelper.IsWindows11 ? "Windows 11" : "Windows 10")} {VersionHelper.Edition}";
-            VersionText.Text = VersionHelper.VersionDisplayName;
-            BuildText.Text = $"{VersionHelper.Build}.{VersionHelper.Revision}";
-
-            TrademarkText.Text = Strings.Resources.Trademark(EditionText.Text);
-        }
-
-        private void Navigate_UsersPage(object sender, RoutedEventArgs e)
-        {
-            App.MainWindow.SelectedIndex = 2;
-        }
-
-        private void CopyUsername(object sender, RoutedEventArgs e)
-        {
-            DataPackage package = new();
-            package.SetText((string)UsernameLink.Content);
-            Clipboard.SetContent(package);
         }
     }
 }

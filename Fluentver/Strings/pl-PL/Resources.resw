@@ -354,10 +354,10 @@
   <data name="NavigateUsers.Label" xml:space="preserve">
     <value>Przejdź do kont</value>
   </data>
-  <data name="Activation.Text" xml:space="preserve">
+  <data name="Activation.Content" xml:space="preserve">
     <value>Stan aktywacji</value>
   </data>
-  <data name="WinUpdate.Text" xml:space="preserve">
+  <data name="WinUpdate.Content" xml:space="preserve">
     <value>Aktualizacja systemu Windows</value>
   </data>
   <data name="Stable" xml:space="preserve">

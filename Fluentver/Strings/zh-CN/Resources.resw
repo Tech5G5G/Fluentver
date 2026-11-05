@@ -354,10 +354,10 @@
   <data name="NavigateUsers.Label" xml:space="preserve">
     <value>转到用户</value>
   </data>
-  <data name="Activation.Text" xml:space="preserve">
+  <data name="Activation.Content" xml:space="preserve">
     <value>激活状态</value>
   </data>
-  <data name="WinUpdate.Text" xml:space="preserve">
+  <data name="WinUpdate.Content" xml:space="preserve">
     <value>Windows 更新</value>
   </data>
   <data name="Stable" xml:space="preserve">

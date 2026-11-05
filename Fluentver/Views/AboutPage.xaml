@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<controls:InfoPage
+<controls:FluverView
     x:Class="Fluver.Views.AboutPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,65 +8,80 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:controls="using:Fluver.UI.Controls"
+    xmlns:converters="using:CommunityToolkit.WinUI.Converters"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
-    <!--<controls:InfoPage.ToolbarButtons>
-        <controls:GlyphButton x:Uid="Activation" Glyph="&#xEB95;" ProcessName="ms-settings:activation" />
-        <controls:GlyphButton x:Uid="WinUpdate" Glyph="&#xE895;" ProcessName="ms-settings:windowsupdate" />
-    </controls:InfoPage.ToolbarButtons>-->
+    <controls:FluverView.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </controls:FluverView.Resources>
 
-    <Expander x:Uid="WinSpecs" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12">
-        <Grid ColumnSpacing="12" RowSpacing="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+    <controls:FluverView.ToolbarItems>
+        <controls:IconButton x:Uid="Activation" Icon="{ui:FontIcon Glyph=&#xEB95;}" Command="{x:Bind ViewModel.LaunchActivationCommand}" />
+        <controls:IconButton x:Uid="WinUpdate" Icon="{ui:FontIcon Glyph=&#xE895;}" Command="{x:Bind ViewModel.LaunchWindowsUpdateCommand}" />
+    </controls:FluverView.ToolbarItems>
 
-            <TextBlock x:Uid="Edition" />
-            <TextBlock x:Name="EditionText" Text="Windows" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="1" />
+    <StackPanel Style="{StaticResource FluverViewRootPanelStyle}">
+        <controls:PersistentExpander x:Uid="WinSpecs" PersistenceId="WinSpecs">
+            <Grid ColumnSpacing="12" RowSpacing="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            <TextBlock x:Uid="VersionLabel" Grid.Row="1" />
-            <TextBlock x:Name="VersionText" Text="XXHX" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="1" Grid.Row="1" />
+                <TextBlock x:Uid="Edition" />
+                <TextBlock Text="{x:Bind ViewModel.Edition}" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="1" />
 
-            <TextBlock x:Uid="Build" Grid.Row="2" />
-            <TextBlock x:Name="BuildText" Text="XXXXX.XXXX" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="1" Grid.Row="2" />
-        </Grid>
-    </Expander>
-    <Expander x:Uid="Legal" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True" Padding="12">
-        <StackPanel Spacing="8">
-            <RichTextBlock TextWrapping="WrapWholeWords">
-                <Paragraph>
-                    <Run x:Name="TrademarkText" />
-                </Paragraph>
-                <Paragraph Margin="0,12,0,0">
-                    <Run x:Uid="Copyright" />
-                </Paragraph>
-                <Paragraph Margin="0,12,0,0">
-                    <Run x:Uid="Licensed" />
-                    <Hyperlink NavigateUri="https://www.microsoft.com/useterms#areaheading-uid673824" UnderlineStyle="None">
-                        <Run x:Uid="MSSoftwareTerms" />
-                    </Hyperlink>
-                    <Run x:Uid="To" />
-                </Paragraph>
-            </RichTextBlock>
-            <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
-                <HyperlinkButton x:Name="UsernameLink" Padding="0" Click="Navigate_UsersPage">
-                    <HyperlinkButton.ContextFlyout>
-                        <CommandBarFlyout Placement="RightEdgeAlignedTop">
-                            <CommandBarFlyout.SecondaryCommands>
-                                <AppBarButton Icon="{ui:FontIcon Glyph=&#xE8C8;}" x:Uid="Copy" Click="CopyUsername" />
-                                <AppBarButton x:Uid="NavigateUsers" Click="Navigate_UsersPage" />
-                            </CommandBarFlyout.SecondaryCommands>
-                        </CommandBarFlyout>
-                    </HyperlinkButton.ContextFlyout>
-                </HyperlinkButton>
-                <TextBlock x:Name="OrgText" IsTextSelectionEnabled="True" />
+                <TextBlock x:Uid="VersionLabel" Grid.Row="1" />
+                <TextBlock Text="{x:Bind ViewModel.Version}" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="1" Grid.Row="1" />
+
+                <TextBlock x:Uid="Build" Grid.Row="2" />
+                <TextBlock Text="{x:Bind ViewModel.Build}" Style="{ThemeResource SecondaryInfoBodyTextBlockStyle}" Grid.Column="1" Grid.Row="2" />
+            </Grid>
+        </controls:PersistentExpander>
+
+        <controls:PersistentExpander x:Uid="Legal" PersistenceId="Legal" HorizontalContentAlignment="Stretch">
+            <StackPanel Spacing="8">
+                <RichTextBlock x:Name="LegalText" TextWrapping="WrapWholeWords">
+                    <Paragraph>
+                        <Run Text="{x:Bind ViewModel.Resources.Trademark(ViewModel.Edition)}" />
+                    </Paragraph>
+                    <Paragraph Margin="0,12,0,0">
+                        <Run x:Uid="Copyright" />
+                    </Paragraph>
+                    <Paragraph x:Name="EvaluationCopyParagraph" Margin="0,12,0,0">
+                        <Run Text="{x:Bind ViewModel.Resources.EvaluationCopy(ViewModel.ExpirationDateString)}"  />
+                    </Paragraph>
+                    <Paragraph Margin="0,12,0,0">
+                        <Run x:Uid="Licensed" />
+                        <Hyperlink NavigateUri="https://www.microsoft.com/useterms#areaheading-uid673824" UnderlineStyle="None">
+                            <Run x:Uid="MSSoftwareTerms" />
+                        </Hyperlink>
+                        <Run x:Uid="To" />
+                    </Paragraph>
+                </RichTextBlock>
+
+                <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
+                    <HyperlinkButton Content="{x:Bind ViewModel.Owner}" Command="{x:Bind ViewModel.NavigateUsersPageCommand}" Padding="0">
+                        <HyperlinkButton.ContextFlyout>
+                            <CommandBarFlyout Placement="RightEdgeAlignedTop">
+                                <CommandBarFlyout.SecondaryCommands>
+                                    <AppBarButton x:Uid="Copy" Icon="{ui:FontIcon Glyph=&#xE8C8;}" Command="{x:Bind ViewModel.CopyOwnerCommand}" />
+                                    <AppBarButton x:Uid="NavigateUsers" Command="{x:Bind ViewModel.NavigateUsersPageCommand}" />
+                                </CommandBarFlyout.SecondaryCommands>
+                            </CommandBarFlyout>
+                        </HyperlinkButton.ContextFlyout>
+                    </HyperlinkButton>
+
+                    <TextBlock Text="{x:Bind ViewModel.Organization}"
+                               IsTextSelectionEnabled="True"
+                               Visibility="{x:Bind ViewModel.ShowOrganization, Converter={StaticResource BoolToVisibilityConverter}}" />
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </Expander>
-</controls:InfoPage>
+        </controls:PersistentExpander>
+    </StackPanel>
+</controls:FluverView>
