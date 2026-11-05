@@ -62,11 +62,11 @@ namespace Fluver
             services.AddFluverSetting(
                         FluverSetting.StartupPage,
                         defaultValue: FluverPage.Previous,
-                        p => p == FluverPage.InsiderPage && !SystemInformation.IsWindowsInsider ? FluverPage.AboutPage : p)
+                        p => p == FluverPage.InsiderPage && !WindowsInfo.IsInsider ? FluverPage.AboutPage : p)
                     .AddFluverSetting(
                         FluverSetting.PersistedPage,
                         defaultValue: FluverPage.AboutPage,
-                        p => p < FluverPage.AboutPage || p > (SystemInformation.IsWindowsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage)
+                        p => p < FluverPage.AboutPage || p > (WindowsInfo.IsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage)
                             ? FluverPage.AboutPage : p)
                     .AddFluverSetting(FluverSetting.Backdrop, defaultValue: BackdropType.Mica);
 

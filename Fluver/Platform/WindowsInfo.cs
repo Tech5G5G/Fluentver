@@ -1,10 +1,11 @@
 ﻿using System.DirectoryServices.AccountManagement;
 using Microsoft.Win32;
 using Fluver.Extensions;
+using Fluver.Platform.Interop;
 
 namespace Fluver.Platform
 {
-    public static class SystemInformation
+    public static class WindowsInfo
     {
         private const string CurrentVersion = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion",
                              Applicability = @"SOFTWARE\Microsoft\WindowsSelfHost\Applicability";
@@ -23,10 +24,10 @@ namespace Fluver.Platform
 
         public static string BuildBranch { get; }
 
-        public static bool IsWindowsInsider { get; }
+        public static bool IsInsider { get; }
         public static InsiderChannel InsiderChannel { get; }
 
-        static SystemInformation()
+        static WindowsInfo()
         {
             using var currentVersion = Registry.LocalMachine.TryOpenSubKey(CurrentVersion);
             if (currentVersion is not null)
@@ -50,7 +51,7 @@ namespace Fluver.Platform
             using var applicability = Registry.LocalMachine.TryOpenSubKey(Applicability);
             if (applicability is not null)
             {
-                IsWindowsInsider = applicability.TryGetValue("IsBuildFlightingEnabled", out int isBuildFlightingEnabled) &&
+                IsInsider = applicability.TryGetValue("IsBuildFlightingEnabled", out int isBuildFlightingEnabled) &&
                                    isBuildFlightingEnabled != 0;
 
                 applicability.TryGetValue("BranchName", out string branchName);

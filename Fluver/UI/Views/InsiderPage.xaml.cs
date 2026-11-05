@@ -16,15 +16,15 @@ namespace Fluver.UI.Views
 
         private void SetVersionInfo()
         {
-            BranchText.Text = SystemInformation.BuildBranch;
+            BranchText.Text = WindowsInfo.BuildBranch;
 
-            var channel = SystemInformation.InsiderChannel;
+            var channel = WindowsInfo.InsiderChannel;
             ChannelText.Text = Strings.Resources.GetString(channel.ToString());
             NotesLink.NavigateUri = new($"https://aka.ms/{channel}latest");
 
             Task.Run(async () =>
             {
-                var user = await SystemInformation.GetWIPAccountAsync();
+                var user = await WindowsInfo.GetWIPAccountAsync();
                 string email = user.GetEmailAddress();
                 DispatcherQueue.TryEnqueue(() =>
                 {

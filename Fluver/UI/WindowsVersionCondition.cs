@@ -9,10 +9,10 @@ public sealed partial class WindowsVersionCondition : IXamlCondition
     {
         return argument switch
         {
-            "11" => SystemInformation.IsWindows11,
-            "10" => !SystemInformation.IsWindows11,
-            "Insider" => SystemInformation.IsWindowsInsider,
-            "Release" => !SystemInformation.IsWindowsInsider,
+            "11" => WindowsInfo.IsWindows11,
+            "10" => !WindowsInfo.IsWindows11,
+            "Insider" => WindowsInfo.IsInsider,
+            "Release" => !WindowsInfo.IsInsider,
             _ => false
         };
     }
