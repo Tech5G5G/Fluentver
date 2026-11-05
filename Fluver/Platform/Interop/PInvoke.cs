@@ -1,4 +1,4 @@
-﻿namespace Fluver.System.Interop;
+﻿namespace Fluver.Platform.Interop;
 
 internal static partial class PInvoke
 {

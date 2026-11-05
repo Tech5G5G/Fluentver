@@ -2,7 +2,7 @@
 using Microsoft.Win32;
 using Microsoft.UI.Xaml;
 using Fluver.Extensions;
-using static Fluver.System.Interop.PInvoke;
+using static Fluver.Platform.Interop.PInvoke;
 
 namespace Fluver.UI.Controls;
 

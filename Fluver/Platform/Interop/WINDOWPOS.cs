@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Fluver.System.Interop;
+namespace Fluver.Platform.Interop;
 
 [StructLayout(LayoutKind.Sequential)]
 internal struct WINDOWPOS

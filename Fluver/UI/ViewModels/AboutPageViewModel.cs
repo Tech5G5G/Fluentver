@@ -1,8 +1,8 @@
 ﻿using Windows.System;
 using Windows.ApplicationModel.DataTransfer;
 using CommunityToolkit.Mvvm.Input;
-using Fluver.System;
 using Fluver.Strings;
+using Fluver.Platform;
 using Fluver.Contracts;
 using Fluver.Services.Navigation;
 

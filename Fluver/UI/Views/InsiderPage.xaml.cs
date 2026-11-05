@@ -1,6 +1,7 @@
-﻿using Microsoft.UI.Xaml;
-using Fluver.System;
+﻿using Windows.System;
+using Microsoft.UI.Xaml;
 using Fluver.Helpers;
+using Fluver.Platform;
 using Fluver.UI.Controls;
 
 namespace Fluver.UI.Views
@@ -36,7 +37,7 @@ namespace Fluver.UI.Views
 
         private void FeedbackButton_Click(object sender, RoutedEventArgs e)
         {
-            _ = global::Windows.System.Launcher.LaunchUriAsync(new("feedback-hub:"));
+            _ = Launcher.LaunchUriAsync(new("feedback-hub:"));
         }
     }
 }

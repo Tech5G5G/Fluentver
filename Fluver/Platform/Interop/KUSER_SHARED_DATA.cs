@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 
-namespace Fluver.System.Interop;
+namespace Fluver.Platform.Interop;
 
 [StructLayout(LayoutKind.Explicit)]
 internal readonly struct KUSER_SHARED_DATA

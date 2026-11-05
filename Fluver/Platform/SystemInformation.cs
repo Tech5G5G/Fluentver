@@ -1,9 +1,8 @@
 ﻿using System.DirectoryServices.AccountManagement;
 using Microsoft.Win32;
 using Fluver.Extensions;
-using Fluver.System.Interop;
 
-namespace Fluver.System
+namespace Fluver.Platform
 {
     public static class SystemInformation
     {

@@ -9,9 +9,9 @@ using WinRT;
 using WinUIEx;
 using WinUIEx.Messaging;
 using Fluver.Contracts;
-using Fluver.System.Interop;
-using Fluver.System.Interop.Com;
-using static Fluver.System.Interop.PInvoke;
+using Fluver.Platform.Interop;
+using Fluver.Platform.Interop.Com;
+using static Fluver.Platform.Interop.PInvoke;
 using SystemBackdrop = Microsoft.UI.Xaml.Media.SystemBackdrop;
 
 namespace Fluver.UI.Controls;
@@ -60,7 +60,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
         set => Owner = value as FluverWindow;
     }
 
-    global::Windows.UI.Composition.CompositionBrush ICompositionSupportsSystemBackdrop.SystemBackdrop
+    Windows.UI.Composition.CompositionBrush ICompositionSupportsSystemBackdrop.SystemBackdrop
     {
         get => _window.As<ICompositionSupportsSystemBackdrop>().SystemBackdrop;
         set => _window.As<ICompositionSupportsSystemBackdrop>().SystemBackdrop = value;

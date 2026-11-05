@@ -9,8 +9,8 @@ using Fluver.Strings;
 using Fluver.Contracts;
 using Fluver.Extensions;
 using Fluver.UI.ViewModels;
-using Fluver.System;
-using Fluver.System.Interop;
+using Fluver.Platform;
+using Fluver.Platform.Interop;
 using Fluver.Services;
 using Fluver.Services.Navigation;
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Markup;
-using Fluver.System;
+using Fluver.Platform;
 
 namespace Fluver.UI;
 

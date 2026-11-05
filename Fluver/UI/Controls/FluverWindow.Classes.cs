@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
-using static Fluver.System.Interop.PInvoke;
+using static Fluver.Platform.Interop.PInvoke;
 
 namespace Fluver.UI.Controls;
 

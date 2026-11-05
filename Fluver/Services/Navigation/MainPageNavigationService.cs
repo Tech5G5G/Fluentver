@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
-using Fluver.System;
+using Fluver.Platform;
 using Fluver.Contracts;
 using Fluver.UI.Views;
 
