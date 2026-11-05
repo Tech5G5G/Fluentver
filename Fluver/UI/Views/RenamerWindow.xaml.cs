@@ -6,7 +6,7 @@ using Fluver.Helpers;
 using Fluver.UI.Controls;
 using Fluver.UI.ViewModels;
 
-namespace Fluver.Windows
+namespace Fluver.UI.Views
 {
     public sealed partial class RenamerWindow : FluverWindow
     {

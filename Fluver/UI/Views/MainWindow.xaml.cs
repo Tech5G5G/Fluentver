@@ -8,7 +8,7 @@ using Fluver.System.Interop;
 using Fluver.UI.Controls;
 using Fluver.UI.ViewModels;
 
-namespace Fluver.Windows
+namespace Fluver.UI.Views
 {
     public sealed partial class MainWindow : FluverWindow
     {
