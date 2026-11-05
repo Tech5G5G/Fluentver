@@ -1,4 +1,4 @@
-﻿namespace Fluver.ApplicationModel;
+﻿namespace Fluver.Contracts;
 
 public interface IApplicationLifetime
 {

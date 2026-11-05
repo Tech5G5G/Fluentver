@@ -3,9 +3,9 @@ using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Controls;
-using Fluver.Options;
 using Fluver.UI.Controls;
 using Fluver.UI.ViewModels;
+using Fluver.Services.Navigation;
 
 namespace Fluver.UI.Views
 {

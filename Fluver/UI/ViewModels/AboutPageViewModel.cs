@@ -2,9 +2,9 @@
 using Windows.ApplicationModel.DataTransfer;
 using CommunityToolkit.Mvvm.Input;
 using Fluver.System;
-using Fluver.Options;
 using Fluver.Strings;
-using Fluver.Navigation;
+using Fluver.Contracts;
+using Fluver.Services.Navigation;
 
 namespace Fluver.UI.ViewModels;
 

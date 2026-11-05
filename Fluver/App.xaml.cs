@@ -6,14 +6,13 @@ using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Fluver.Options;
 using Fluver.Strings;
-using Fluver.Windows;
+using Fluver.Contracts;
 using Fluver.Extensions;
-using Fluver.Navigation;
-using Fluver.Globalization;
-using Fluver.ApplicationModel;
 using Fluver.UI.ViewModels;
 using Fluver.System;
 using Fluver.System.Interop;
+using Fluver.Services;
+using Fluver.Services.Navigation;
 
 namespace Fluver
 {

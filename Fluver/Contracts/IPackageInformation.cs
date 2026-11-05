@@ -1,6 +1,6 @@
 ﻿using Windows.ApplicationModel;
 
-namespace Fluver.ApplicationModel;
+namespace Fluver.Contracts;
 
 public interface IPackageInformation
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
-namespace Fluver.Navigation;
+namespace Fluver.Contracts;
 
 public interface INavigationService<T> where T : struct, Enum
 {

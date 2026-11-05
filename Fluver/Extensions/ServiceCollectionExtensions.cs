@@ -1,5 +1,6 @@
-﻿using Fluver.Options;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Fluver.Options;
+using Fluver.Contracts;
 
 namespace Fluver.Extensions;
 

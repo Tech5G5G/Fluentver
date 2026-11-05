@@ -1,10 +1,10 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Fluver.System;
-using Fluver.Options;
+using Fluver.Contracts;
 using Fluver.UI.Views;
 
-namespace Fluver.Navigation;
+namespace Fluver.Services.Navigation;
 
 public sealed class MainPageNavigationService : NavigationService<FluverPage>, IMainPageNavigationService
 {
@@ -67,4 +67,13 @@ public sealed class MainPageNavigationService : NavigationService<FluverPage>, I
     }
 }
 
-public interface IMainPageNavigationService : INavigationService<FluverPage>;
+public enum FluverPage
+{
+    Previous = -1,
+    AboutPage,
+    PCPage,
+    UsersPage,
+    StoragePage,
+    InsiderPage,
+    None
+}

@@ -1,8 +1,9 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
+using Fluver.Contracts;
 using Fluver.UI.Views;
 
-namespace Fluver.Navigation;
+namespace Fluver.Services.Navigation;
 
 public sealed class MainWindowNavigationService : NavigationService<MainWindowPage>, IMainWindowNavigationService
 {
@@ -48,5 +49,3 @@ public enum MainWindowPage
     MainPage,
     SettingsPage
 }
-
-public interface IMainWindowNavigationService : INavigationService<MainWindowPage>;

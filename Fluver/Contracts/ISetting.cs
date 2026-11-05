@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Fluver.Options;
+namespace Fluver.Contracts;
 
 public interface ISetting<T> : INotifyPropertyChanged
 {

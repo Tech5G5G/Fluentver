@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Media;
 
-namespace Fluver.Windows;
+namespace Fluver.Contracts;
 
 public interface IWindow
 {

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Fluver.Globalization;
+namespace Fluver.Contracts;
 
 public interface ICultureService
 {

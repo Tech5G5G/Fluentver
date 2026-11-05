@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using Windows.Storage;
 using Windows.Foundation.Collections;
+using Fluver.Contracts;
 
 namespace Fluver.Options;
 

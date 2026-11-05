@@ -1,7 +1,8 @@
 ﻿using System.Globalization;
 using Windows.Globalization;
+using Fluver.Contracts;
 
-namespace Fluver.Globalization;
+namespace Fluver.Services;
 
 public sealed class CultureService : ICultureService
 {

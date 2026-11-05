@@ -1,7 +1,9 @@
-﻿using Fluver.UI.Controls;
+﻿using Fluver.Contracts;
+using Fluver.UI.Views;
+using Fluver.UI.Controls;
 using Fluver.UI.ViewModels;
 
-namespace Fluver.Windows;
+namespace Fluver.Services;
 
 public sealed partial class FluverWindowManager : IWindowManager
 {

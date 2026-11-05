@@ -2,8 +2,9 @@
 using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Xaml.Media;
 using Fluver.Options;
+using Fluver.Contracts;
 
-namespace Fluver.Windows;
+namespace Fluver.Services;
 
 public sealed class BackdropManager : IBackdropManager
 {

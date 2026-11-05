@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Controls;
 using WinRT;
 using WinUIEx;
 using WinUIEx.Messaging;
+using Fluver.Contracts;
 using Fluver.System.Interop;
 using Fluver.System.Interop.Com;
 using static Fluver.System.Interop.PInvoke;
@@ -15,7 +16,7 @@ using SystemBackdrop = Microsoft.UI.Xaml.Media.SystemBackdrop;
 
 namespace Fluver.UI.Controls;
 
-public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBackdrop, Windows.IWindow
+public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBackdrop, IWindow
 {
     public static IReadOnlyList<FluverWindow> Windows => s_windows;
     private static readonly List<FluverWindow> s_windows = [];
@@ -53,7 +54,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
     private readonly DesktopChildBridge _bridge;
     private bool _sizeBridge = true;
 
-    Windows.IWindow Windows.IWindow.Owner
+    IWindow IWindow.Owner
     {
         get => Owner;
         set => Owner = value as FluverWindow;

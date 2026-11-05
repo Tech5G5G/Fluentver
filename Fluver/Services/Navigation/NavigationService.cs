@@ -1,8 +1,9 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Media.Animation;
+using Fluver.Contracts;
 
-namespace Fluver.Navigation;
+namespace Fluver.Services.Navigation;
 
 public abstract class NavigationService<T> : INavigationService<T> where T : struct, Enum
 {

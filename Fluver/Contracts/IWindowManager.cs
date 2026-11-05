@@ -1,4 +1,4 @@
-﻿namespace Fluver.Windows;
+﻿namespace Fluver.Contracts;
 
 public interface IWindowManager
 {
