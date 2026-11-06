@@ -34,13 +34,10 @@
                                               InvariantCultureTemplate="{StaticResource InvariantCultureInfoDataTemplate}"
                                               CurrentUICultureTemplate="{StaticResource CurrentUICultureInfoDataTemplate}" />
 
-            <data:CultureInfoFormatter x:Key="NativeCultureInfoFormatter" />
-            <data:CultureInfoFormatter x:Key="LocalizedCultureInfoFormatter" UseNativeName="False"/>
-
             <DataTemplate x:Key="CultureInfoDataTemplate" x:DataType="globalization:CultureInfo">
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{x:Bind Converter={StaticResource NativeCultureInfoFormatter}}" />
-                    <TextBlock Text="{x:Bind Converter={StaticResource LocalizedCultureInfoFormatter}}"
+                    <TextBlock Text="{x:Bind data:CultureInfoTemplateSelector.FormatCultureInfo((globalization:CultureInfo), x:True)}" />
+                    <TextBlock Text="{x:Bind data:CultureInfoTemplateSelector.FormatCultureInfo((globalization:CultureInfo), x:False)}"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                Style="{StaticResource CaptionTextBlockStyle}" />
                 </StackPanel>
@@ -49,7 +46,7 @@
                 <TextBlock x:Uid="Default" />
             </DataTemplate>
             <DataTemplate x:Key="CurrentUICultureInfoDataTemplate" x:DataType="globalization:CultureInfo">
-                <TextBlock Text="{x:Bind Converter={StaticResource NativeCultureInfoFormatter}}" />
+                <TextBlock Text="{x:Bind data:CultureInfoTemplateSelector.FormatCultureInfo((globalization:CultureInfo), x:True)}" />
             </DataTemplate>
         </ResourceDictionary>
     </controls:ViewModelPage.Resources>
