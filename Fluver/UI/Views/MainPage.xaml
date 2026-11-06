@@ -18,12 +18,10 @@
 
     <StackPanel>
         <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <FontIcon x:Name="WindowsIcon"
-                      is11:Glyph="&#xE911;" is10:Glyph="&#xE910;"
+            <FontIcon is11:Glyph="&#xE911;" is10:Glyph="&#xE910;"
                       FontFamily="{StaticResource WindowsLogos}" FontSize="40" />
 
-            <TextBlock x:Name="WindowsVersionText"
-                       is11:Text="Windows 11" is10:Text="Windows 10"
+            <TextBlock is11:Text="Windows 11" is10:Text="Windows 10"
                        is10:FontWeight="Normal" FontSize="40"
                        Style="{ThemeResource TitleTextBlockStyle}" />
         </StackPanel>
