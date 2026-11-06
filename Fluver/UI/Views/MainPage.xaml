@@ -17,6 +17,31 @@
     NavigationCacheMode="Required">
 
     <StackPanel>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="BarLong" />
+
+                <VisualState x:Name="BarShort">
+                    <VisualState.Setters>
+                        <Setter Target="BarViewer.HorizontalScrollMode" Value="Disabled" />
+                        <Setter Target="BarViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+                        <Setter Target="BarViewer.Margin" Value="-4,0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
+            <VisualStateGroup>
+                <VisualState x:Name="BarNormal" />
+
+                <VisualState x:Name="BarMouseOver">
+                    <VisualState.Setters>
+                        <Setter Target="BarViewer.HorizontalScrollBarVisibility" Value="Visible" />
+                        <Setter Target="BarViewer.Padding" Value="0,0,0,6" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Top">
             <FontIcon is11:Glyph="&#xE911;" is10:Glyph="&#xE910;"
                       FontFamily="{StaticResource WindowsLogos}" FontSize="40" />
@@ -29,7 +54,7 @@
         <ScrollViewer x:Name="BarViewer"
                       HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden"
                       VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
-                      HorizontalAlignment="Center" HorizontalContentAlignment="Center" Width="475"
+                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                       Style="{StaticResource PaddedScrollViewerStyle}"
                       Loaded="OnBarViewerLoaded">
             <NavigationView x:Name="Bar" SelectedItem="{x:Bind ConvertPageToItem(ViewModel.SelectedPage), BindBack=SetSelectedPage, Mode=TwoWay}"

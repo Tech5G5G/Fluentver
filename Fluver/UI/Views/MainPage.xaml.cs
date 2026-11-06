@@ -23,42 +23,43 @@ namespace Fluver.UI.Views
 
         private void OnBarViewerLoaded(object sender, RoutedEventArgs e)
         {
-            const int MaxBarViewerWidth = 475;
+            const int MaxScrollable = 8;
 
             BarViewer.Loaded -= OnBarViewerLoaded;
 
-            if (BarViewer.ExtentWidth <= MaxBarViewerWidth)
+            if (BarViewer.ScrollableWidth > MaxScrollable)
             {
-                BarViewer.HorizontalScrollMode = ScrollMode.Disabled;
-                BarViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+                BarViewer.PointerEntered += OnBarViewerPointerEntered;
+                BarViewer.PointerCaptureLost += OnBarViewerPointerCaptureLost;
+                BarViewer.PointerExited += OnBarViewerPointerExited;
             }
             else
             {
-                BarViewer.Width = double.NaN;
-                BarViewer.HorizontalAlignment = HorizontalAlignment.Stretch;
-
-                BarViewer.PointerEntered += OnBarViewerPointerEntered;
-                BarViewer.PointerExited += OnBarViewerPointerExited;
+                VisualStateManager.GoToState(control: this, nameof(BarShort), useTransitions: false);
             }
         }
 
         private void OnBarViewerPointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            ShowBarViewerScrollBar(show: true, e.Pointer.PointerDeviceType);
+            if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
+            {
+                VisualStateManager.GoToState(control: this, nameof(BarMouseOver), useTransitions: false);
+            }
+        }
+
+        private void OnBarViewerPointerCaptureLost(object sender, PointerRoutedEventArgs e)
+        {
+            if (e.GetCurrentPoint(BarViewer) is { Position: { } position } &&
+                (position.X < 0 || position.X > BarViewer.ActualWidth ||
+                position.Y < 0 || position.Y > BarViewer.ActualHeight))
+            {
+                VisualStateManager.GoToState(control: this, nameof(BarNormal), useTransitions: false);
+            }
         }
 
         private void OnBarViewerPointerExited(object sender, PointerRoutedEventArgs e)
         {
-            ShowBarViewerScrollBar(show: false, e.Pointer.PointerDeviceType);
-        }
-
-        private void ShowBarViewerScrollBar(bool show, PointerDeviceType pointerType)
-        {
-            if (pointerType == PointerDeviceType.Mouse || !show)
-            {
-                BarViewer.Padding = show ? new(left: 0, top: 0, right: 0, bottom: 6) : default;
-                BarViewer.HorizontalScrollBarVisibility = show ? ScrollBarVisibility.Visible : ScrollBarVisibility.Hidden;
-            }
+            VisualStateManager.GoToState(control: this, nameof(BarNormal), useTransitions: false);
         }
 
         private void OnBarSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)
