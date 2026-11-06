@@ -66,14 +66,3 @@ public sealed class MainPageNavigationService : NavigationService<FluverPage>, I
         }
     }
 }
-
-public enum FluverPage
-{
-    Previous = -1,
-    AboutPage,
-    PCPage,
-    UsersPage,
-    StoragePage,
-    InsiderPage,
-    None
-}

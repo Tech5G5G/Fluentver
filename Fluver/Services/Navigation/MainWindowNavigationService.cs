@@ -42,10 +42,3 @@ public sealed class MainWindowNavigationService : NavigationService<MainWindowPa
         };
     }
 }
-
-public enum MainWindowPage
-{
-    None,
-    MainPage,
-    SettingsPage
-}
