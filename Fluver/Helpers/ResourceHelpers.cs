@@ -274,12 +274,13 @@ public static class GPUHelper
 /// <summary>
 /// Wrapper for the MEMORYSTATUSEX structure, which contains memory statistics.
 /// </summary>
-public sealed class RAMHelper
+public sealed partial class RAMHelper
 {
     #region PInvoke
 
-    [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-    private static extern bool GlobalMemoryStatusEx(ref MEMORYSTATUSEX lpBuffer);
+    [LibraryImport("kernel32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static partial bool GlobalMemoryStatusEx(ref MEMORYSTATUSEX lpBuffer);
 
     private struct MEMORYSTATUSEX
     {

@@ -1,12 +1,51 @@
-﻿namespace Fluver.Platform.Interop;
+﻿using System.Runtime.InteropServices;
+using Windows.Win32.Foundation;
+using Windows.Win32.UI.WindowsAndMessaging;
 
-internal static partial class PInvoke
+namespace Windows.Win32;
+
+partial class PInvoke
 {
-    public static ushort LOWORD(uint value) => unchecked((ushort)value);
+    [LibraryImport("user32.dll")]
+    internal static partial nint GetWindowLongPtrW(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex);
 
-    public static ushort HIWORD(uint value) => unchecked((ushort)(value >> 16));
+    [LibraryImport("user32.dll")]
+    internal static partial nint SetWindowLongPtrW(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex, nint dwNewLong);
 
-    public const int S_OK = 0x00000000;
+    [LibraryImport("user32.dll")]
+    [SuppressGCTransition]
+    internal static unsafe partial BOOL GetClientRect(HWND hWnd, RECT* lpRect);
 
-    public const nint HWND_BOTTOM = 1;
+    [LibraryImport("uxtheme.dll", EntryPoint = "#135")]
+    internal static partial PREFERRED_APP_MODE SetPreferredAppMode(PREFERRED_APP_MODE mode);
+
+    [LibraryImport("uxtheme.dll", EntryPoint = "#136")]
+    internal static partial void FlushMenuThemes();
+
+    [LibraryImport("winbrand.dll", StringMarshalling = StringMarshalling.Utf16)]
+    public static partial BOOL BrandingLoadString(
+        [MarshalAs(UnmanagedType.LPWStr)] string lpNameSpace,
+        uint uID,
+        Span<char> lpBuffer,
+        int cchBufferMax);
+
+    public static nint GetWindowLongPtr(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex)
+    {
+        return Environment.Is64BitProcess ? GetWindowLongPtrW(hWnd, nIndex) : GetWindowLong(hWnd, nIndex);
+    }
+
+    public static nint SetWindowLongPtr(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex, nint dwNewLong)
+    {
+        return Environment.Is64BitProcess ? SetWindowLongPtrW(hWnd, nIndex, dwNewLong) : SetWindowLong(hWnd, nIndex, (int)dwNewLong);
+    }
+
+    internal static unsafe BOOL GetClientRect(HWND hWnd, out RECT lpRect)
+    {
+        fixed (RECT* lpRectLocal = &lpRect)
+        {
+            return GetClientRect(hWnd, lpRectLocal);
+        }
+    }
+
+    public const int WINDOWS_EDITION_PATTERN_LENGTH = 128;
 }

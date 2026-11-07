@@ -42,7 +42,7 @@ public sealed class MainPageNavigationService : NavigationService<FluverPage>, I
     public override void Navigate(FluverPage page, object parameter)
     {
         base.Navigate(
-            page == FluverPage.InsiderPage && !WindowsInfo.IsInsider ? FluverPage.AboutPage : page,
+            page == FluverPage.InsiderPage && !WindowsEnvironment.IsInsider ? FluverPage.AboutPage : page,
             parameter);
     }
 
@@ -60,7 +60,7 @@ public sealed class MainPageNavigationService : NavigationService<FluverPage>, I
     {
         var currentPage = CurrentPage;
 
-        if (currentPage != (WindowsInfo.IsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage))
+        if (currentPage != (WindowsEnvironment.IsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage))
         {
             base.Navigate(currentPage + 1, parameter: null);
         }

@@ -1,17 +1,18 @@
 ﻿using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 using Windows.Graphics;
+using Windows.Win32.Foundation;
+using Windows.Win32.UI.Shell;
+using Windows.Win32.UI.WindowsAndMessaging;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Controls;
 using WinRT;
+using WinRT.Interop;
 using WinUIEx;
 using WinUIEx.Messaging;
 using Fluver.Contracts;
-using Fluver.Platform.Interop;
-using Fluver.Platform.Interop.Com;
-using static Fluver.Platform.Interop.PInvoke;
+using static Windows.Win32.PInvoke;
 using SystemBackdrop = Microsoft.UI.Xaml.Media.SystemBackdrop;
 
 namespace Fluver.UI.Controls;
@@ -25,11 +26,11 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
     static FluverWindow()
     {
-        _ = SetPreferredAppMode(PreferredAppMode.AllowDark);
+        SetPreferredAppMode(PREFERRED_APP_MODE.PAM_ALLOWDARK);
         FlushMenuThemes();
 
-        var list = (ITaskbarList)new TaskbarList();
-        if (list.HrInit() == S_OK)
+        var list = TaskbarList.CreateInstance<ITaskbarList>();
+        if (list.HrInit().Succeeded)
         {
             s_list = list;
         }
@@ -38,7 +39,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
     #region Properties
 
     public nint Handle => _hWnd;
-    private nint _hWnd;
+    private HWND _hWnd;
 
     public Matrix TransformToDevice => new(_dpiScaleX, 0.0, 0.0, _dpiScaleY, 0.0, 0.0);
     public Matrix TransformFromDevice => new(1.0 / _dpiScaleX, 0.0, 0.0, 1.0 / _dpiScaleY, 0.0, 0.0);
@@ -97,18 +98,17 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
         _window.Content = this;
 
-        var hWnd = _hWnd = _window.GetWindowHandle();
+        var hWnd = _hWnd = (HWND)WindowNative.GetWindowHandle(_window);
         _header = new(window: this);
         _menu = new(hMenu: GetSystemMenu(hWnd, bRevert: false));
         _bridge = new(window: this);
 
-        _dpiScaleX = _dpiScaleY = HwndExtensions.GetDpiForWindow(hWnd) / USER_DEFAULT_SCREEN_DPI;
+        _dpiScaleX = _dpiScaleY = GetDpiForWindow(hWnd) / (double)USER_DEFAULT_SCREEN_DPI;
 
         _manager = WindowManager.Get(_window);
         _manager.WindowMessageReceived += OnWindowMessageReceived;
 
-        // Update _frameSize
-        SetWindowPos(hWnd, X: 0, Y: 0, cx: 0, cy: 0, uFlags: SWP_NOSIZE | SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
+        UpdateFrameSize(hWnd);
 
         GetClientRect(hWnd, out var rect);
         SyncClientRect(rect);
@@ -125,7 +125,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
         if (IsOpen)
         {
-            _window.SetForegroundWindow();
+            SetForegroundWindow(_hWnd);
             return;
         }
 
@@ -149,20 +149,21 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
     public void Close()
     {
-        PostMessage(_hWnd, WM_CLOSE, wParam: nuint.Zero, lParam: nint.Zero);
+        PostMessage(_hWnd, WM_CLOSE, wParam: default, lParam: default);
     }
 
     public void Resize(double width, double height)
     {
-        var hWnd = _hWnd;
         var size = _frameSize;
 
         SetWindowPos(
-            hWnd,
+            _hWnd,
             X: 0, Y: 0,
             cx: RoundDoubleToInt(width * _dpiScaleX) + size.Width,
             cy: RoundDoubleToInt(height * _dpiScaleY) + size.Height,
-            uFlags: SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE);
+            uFlags: SET_WINDOW_POS_FLAGS.SWP_NOMOVE |
+                    SET_WINDOW_POS_FLAGS.SWP_NOZORDER |
+                    SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE);
     }
 
     #endregion
@@ -201,7 +202,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
                     Closed?.Invoke(sender: this, EventArgs.Empty);
 
-                    _hWnd = nint.Zero;
+                    _hWnd = HWND.Null;
                 }
                 break;
 
@@ -217,7 +218,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
                         break;
                     }
 
-                    GetClientRect(hWnd, out var rect);
+                    GetClientRect((HWND)hWnd, out var rect);
 
                     if (IsOpen)
                     {
@@ -240,8 +241,8 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
             case WM_CLOSE:
                 {
                     // Hide here to stop content from disappearing
-                    // during close animation - we're already closing anyway
-                    ShowWindow(hWnd, SW_HIDE);
+                    // during close animation - we're already hiding anyway
+                    ShowWindow((HWND)hWnd, SHOW_WINDOW_CMD.SW_HIDE);
 
                     if (IsModal && Owner is { _hWnd: { } hWndParent })
                 {
@@ -263,7 +264,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
             case WM_SETTINGCHANGE when _updatesAppearance:
                 {
-                    if (wParam == SPI_SETCLIENTAREAANIMATION)
+                    if (wParam == (uint)SYSTEM_PARAMETERS_INFO_ACTION.SPI_SETCLIENTAREAANIMATION)
                     {
                         UpdateAnimations();
                     }
@@ -282,15 +283,21 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
                     // Update minimum size
                     double minWidth = MinClientWidth, minHeight = MinClientHeight;
-                    mm->ptMinTrackSize.x = (int)Math.Max((minWidth * scaleX) + size.Width, mm->ptMinTrackSize.x);
-                    mm->ptMinTrackSize.y = (int)Math.Max((minHeight * scaleY) + size.Height, mm->ptMinTrackSize.y);
+                    mm->ptMinTrackSize.X = (int)Math.Max((minWidth * scaleX) + size.Width, mm->ptMinTrackSize.X);
+                    mm->ptMinTrackSize.Y = (int)Math.Max((minHeight * scaleY) + size.Height, mm->ptMinTrackSize.Y);
 
                     // Update maximum size
                     double maxWidth = MaxClientWidth, maxHeight = MaxClientHeight;
-                    mm->ptMaxTrackSize.x = (int)Math.Min((Math.Max(minWidth, maxWidth) * scaleX) + size.Width, mm->ptMaxTrackSize.x);
-                    mm->ptMaxTrackSize.y = (int)Math.Min((Math.Max(minHeight, maxHeight) * scaleY) + size.Height, mm->ptMaxTrackSize.y);
+                    mm->ptMaxTrackSize.X = (int)Math.Min((Math.Max(minWidth, maxWidth) * scaleX) + size.Width, mm->ptMaxTrackSize.X);
+                    mm->ptMaxTrackSize.Y = (int)Math.Min((Math.Max(minHeight, maxHeight) * scaleY) + size.Height, mm->ptMaxTrackSize.Y);
                 }
                 handled = true;
+                break;
+
+            case WM_WINDOWPOSCHANGING when _showing:
+                {
+                    _persistedPos = *(WINDOWPOS*)lParam;
+                }
                 break;
 
             case WM_NCCALCSIZE:
@@ -298,7 +305,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
                     var rect = (RECT*)lParam;
                     var windowRect = *rect;
 
-                    DefSubclassProc(hWnd, uMsg, wParam, lParam);
+                    DefSubclassProc((HWND)hWnd, uMsg, wParam, lParam);
 
                     _frameSize = new(windowRect.Width - rect->Width, windowRect.Height - rect->Height);
                 }
@@ -322,8 +329,8 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
                 {
                     // Update scale factors
                     var dpis = (uint)wParam;
-                    double scaleX = _dpiScaleX = LOWORD(dpis) / USER_DEFAULT_SCREEN_DPI,
-                           scaleY = _dpiScaleY = HIWORD(dpis) / USER_DEFAULT_SCREEN_DPI;
+                    double scaleX = _dpiScaleX = LOWORD(dpis) / (double)USER_DEFAULT_SCREEN_DPI,
+                           scaleY = _dpiScaleY = HIWORD(dpis) / (double)USER_DEFAULT_SCREEN_DPI;
 
                     // Update window size + position
 
@@ -334,7 +341,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
                         _showing = false;
 
                         var pos = _persistedPos;
-                        SetWindowPos(hWnd, X: 0, Y: 0, cx: 0, cy: 0, uFlags: SWP_NOSIZE | SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
+                        UpdateFrameSize((HWND)hWnd);
                         SetWindowPos(pos.hwnd, pos.hwndInsertAfter, pos.x, pos.y, pos.cx, pos.cy, pos.flags);
 
                         break;
@@ -347,12 +354,14 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
                     var sizeBridge = _sizeBridge;
                     _sizeBridge = false;
                     SetWindowPos(
-                        hWnd,
+                        (HWND)hWnd,
                         X: rect->left,
                         Y: rect->top,
                         cx: rect->Width,
                         cy: rect->Height,
-                        uFlags: SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED);
+                        uFlags: SET_WINDOW_POS_FLAGS.SWP_NOZORDER |
+                                SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE |
+                                SET_WINDOW_POS_FLAGS.SWP_FRAMECHANGED);
                     _sizeBridge = sizeBridge;
 
                     if (_header is { DragElement: { } element, InvalidateElement: { } invalidateElement })
@@ -467,7 +476,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
         if (e.NewValue is FluverWindow { _hWnd: { } hWndParent })
         {
-            SetWindowLong(hWnd, GWL_HWNDPARENT, hWndParent);
+            SetWindowLongPtr(hWnd, WINDOW_LONG_PTR_INDEX.GWL_HWNDPARENT, hWndParent);
             if (enableParents)
             {
                 EnableWindow(hWndParent, bEnable: false);
@@ -475,7 +484,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
         }
         else
         {
-            SetWindowLong(hWnd, GWL_HWNDPARENT, nint.Zero);
+            SetWindowLongPtr(hWnd, WINDOW_LONG_PTR_INDEX.GWL_HWNDPARENT, dwNewLong: nint.Zero);
         }
     }
 
@@ -509,7 +518,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
     {
         if (sender is FluverWindow { _hWnd: { } hWnd } && e.NewValue is bool isResizable)
         {
-            HwndExtensions.ToggleWindowStyle(hWnd, isResizable, WindowStyle.SizeBox);
+            ToggleWindowStyle(hWnd, isResizable, WINDOW_STYLE.WS_SIZEBOX);
         }
     }
 
@@ -526,7 +535,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
     {
         if (sender is FluverWindow { _hWnd: { } hWnd } && e.NewValue is bool isMaximizable)
         {
-            HwndExtensions.ToggleWindowStyle(hWnd, isMaximizable, WindowStyle.MaximizeBox);
+            ToggleWindowStyle(hWnd, isMaximizable, WINDOW_STYLE.WS_MAXIMIZEBOX);
         }
     }
 
@@ -543,7 +552,7 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
     {
         if (sender is FluverWindow { _hWnd: { } hWnd } && e.NewValue is bool isMinimizable)
         {
-            HwndExtensions.ToggleWindowStyle(hWnd, isMinimizable, WindowStyle.MinimizeBox);
+            ToggleWindowStyle(hWnd, isMinimizable, WINDOW_STYLE.WS_MINIMIZEBOX);
         }
     }
 
@@ -693,7 +702,36 @@ public partial class FluverWindow : ContentControl, ICompositionSupportsSystemBa
 
     #endregion
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void UpdateFrameSize(HWND hWnd)
+    {
+        SetWindowPos(
+            hWnd,
+            X: 0, Y: 0,
+            cx: 0, cy: 0,
+            uFlags: SET_WINDOW_POS_FLAGS.SWP_NOSIZE |
+                    SET_WINDOW_POS_FLAGS.SWP_NOMOVE |
+                    SET_WINDOW_POS_FLAGS.SWP_NOZORDER |
+                    SET_WINDOW_POS_FLAGS.SWP_FRAMECHANGED |
+                    SET_WINDOW_POS_FLAGS.SWP_NOOWNERZORDER);
+    }
+
+    private static void ToggleWindowStyle(HWND hWnd, bool enable, WINDOW_STYLE flag)
+    {
+        var style = GetWindowLongPtr(hWnd, WINDOW_LONG_PTR_INDEX.GWL_STYLE);
+
+        if (enable)
+        {
+            style |= unchecked((int)flag);
+        }
+        else
+        {
+            style &= ~unchecked((int)flag);
+        }
+
+        SetWindowLongPtr(hWnd, WINDOW_LONG_PTR_INDEX.GWL_STYLE, style);
+        UpdateFrameSize(hWnd);
+    }
+
     private static int RoundDoubleToInt(double value)
     {
         return (0 < value) ? (int)(value + 0.5) : (int)(value - 0.5);

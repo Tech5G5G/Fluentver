@@ -1,11 +1,12 @@
 ﻿using System.DirectoryServices.AccountManagement;
+using Windows.Win32;
+using Windows.Wdk.System.SystemServices;
 using Microsoft.Win32;
 using Fluver.Extensions;
-using Fluver.Platform.Interop;
 
 namespace Fluver.Platform
 {
-    public static class WindowsInfo
+    public static class WindowsEnvironment
     {
         private const string CurrentVersion = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion",
                              Applicability = @"SOFTWARE\Microsoft\WindowsSelfHost\Applicability";
@@ -27,7 +28,7 @@ namespace Fluver.Platform
         public static bool IsInsider { get; }
         public static InsiderChannel InsiderChannel { get; }
 
-        static WindowsInfo()
+        static WindowsEnvironment()
         {
             using var currentVersion = Registry.LocalMachine.TryOpenSubKey(CurrentVersion);
             if (currentVersion is not null)

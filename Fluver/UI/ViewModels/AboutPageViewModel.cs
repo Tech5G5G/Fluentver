@@ -15,17 +15,17 @@ public sealed partial class AboutPageViewModel(
 {
     public IResources Resources => resources;
 
-    public string Edition => WindowsInfo.Edition;
-    public string Version => WindowsInfo.DisplayVersion ?? string.Empty;
-    public string Build => $"{WindowsInfo.Version.Build}.{WindowsInfo.Version.Revision}";
+    public string Edition => WindowsEnvironment.Edition;
+    public string Version => WindowsEnvironment.DisplayVersion ?? string.Empty;
+    public string Build => $"{WindowsEnvironment.Version.Build}.{WindowsEnvironment.Version.Revision}";
 
-    public bool IsEvaluationCopy => WindowsInfo.EvaluationInfo.IsEvaluationCopy;
-    public string ExpirationDateString => WindowsInfo.EvaluationInfo.ExpirationDate.ToLocalTime().ToString();
+    public bool IsEvaluationCopy => WindowsEnvironment.EvaluationInfo.IsEvaluationCopy;
+    public string ExpirationDateString => WindowsEnvironment.EvaluationInfo.ExpirationDate.ToLocalTime().ToString();
 
-    public string Owner => WindowsInfo.Owner ?? string.Empty;
+    public string Owner => WindowsEnvironment.Owner ?? string.Empty;
 
-    public string Organization => WindowsInfo.Organization ?? string.Empty;
-    public bool ShowOrganization => !string.IsNullOrWhiteSpace(WindowsInfo.Organization);
+    public string Organization => WindowsEnvironment.Organization ?? string.Empty;
+    public bool ShowOrganization => !string.IsNullOrWhiteSpace(WindowsEnvironment.Organization);
 
     [RelayCommand]
     public static async Task LaunchActivationAsync()

@@ -1,6 +1,8 @@
-﻿using Microsoft.UI.Windowing;
+﻿using Windows.Win32.Foundation;
+using Windows.Win32.UI.WindowsAndMessaging;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
-using static Fluver.Platform.Interop.PInvoke;
+using static Windows.Win32.PInvoke;
 
 namespace Fluver.UI.Controls;
 
@@ -59,7 +61,7 @@ partial class FluverWindow
         private sealed partial class HeaderInvalidateElement : FrameworkElement;
     }
 
-    private sealed class FluverWindowMenu(nint hMenu) : WindowMenu(hMenu)
+    private sealed class FluverWindowMenu(HMENU hMenu) : WindowMenu(hMenu)
     {
         public void OnSystemCommand(WindowMenuItemInvokedEventArgs e)
         {
@@ -69,7 +71,8 @@ partial class FluverWindow
 
     protected sealed class DesktopChildBridge(FluverWindow window)
     {
-        public nint Handle { get; } = FindWindowEx(window._hWnd, lpszClass: "Microsoft.UI.Content.DesktopChildSiteBridge");
+        public nint Handle => _hWnd;
+        private readonly HWND _hWnd = FindWindowEx(window._hWnd, lpszClass: "Microsoft.UI.Content.DesktopChildSiteBridge");
 
         public bool SizeToParent
         {
@@ -89,11 +92,11 @@ partial class FluverWindow
         public DesktopChildBridge Resize(int width, int height)
         {
             SetWindowPos(
-                Handle,
-                hWndInsertAfter: HWND_BOTTOM,
+                _hWnd,
+                hWndInsertAfter: HWND.HWND_BOTTOM,
                 X: 0, Y: 0,
                 width, height,
-                SWP_SHOWWINDOW);
+                SET_WINDOW_POS_FLAGS.SWP_SHOWWINDOW);
 
             return this;
         }
@@ -109,21 +112,27 @@ public abstract class WindowHeader : DependencyObject
     public abstract UIElement DragElement { get; set; }
 }
 
-public abstract class WindowMenu(nint hMenu)
+public abstract class WindowMenu
 {
-    public nint Handle { get; } = hMenu;
+    public nint Handle => _hMenu;
+    private readonly HMENU _hMenu;
 
     public event EventHandler<WindowMenuItemInvokedEventArgs> ItemInvoked;
 
+    internal WindowMenu(HMENU hMenu)
+    {
+        _hMenu = hMenu;
+    }
+
     public WindowMenu AddMenuItem(ushort id, string text)
     {
-        InsertMenu(Handle, SC_CLOSE, MF_BYCOMMAND | MF_STRING, id, text);
+        InsertMenu(_hMenu, SC_CLOSE, MENU_ITEM_FLAGS.MF_BYCOMMAND | MENU_ITEM_FLAGS.MF_STRING, id, text);
         return this;
     }
 
     public WindowMenu AddMenuSeparator()
     {
-        InsertMenu(Handle, SC_CLOSE, MF_BYCOMMAND | MF_SEPARATOR, uIDNewItem: 0);
+        InsertMenu(_hMenu, SC_CLOSE, MENU_ITEM_FLAGS.MF_BYCOMMAND | MENU_ITEM_FLAGS.MF_SEPARATOR, uIDNewItem: 0);
         return this;
     }
 

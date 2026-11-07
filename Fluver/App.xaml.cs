@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Windows.Win32;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Windows.AppLifecycle;
 using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
@@ -10,7 +11,6 @@ using Fluver.Contracts;
 using Fluver.Extensions;
 using Fluver.UI.ViewModels;
 using Fluver.Platform;
-using Fluver.Platform.Interop;
 using Fluver.Services;
 using Fluver.Services.Navigation;
 
@@ -68,11 +68,11 @@ namespace Fluver
             services.AddFluverSetting(
                         FluverSetting.StartupPage,
                         defaultValue: FluverPage.Previous,
-                        p => p == FluverPage.InsiderPage && !WindowsInfo.IsInsider ? FluverPage.AboutPage : p)
+                        p => p == FluverPage.InsiderPage && !WindowsEnvironment.IsInsider ? FluverPage.AboutPage : p)
                     .AddFluverSetting(
                         FluverSetting.PersistedPage,
                         defaultValue: FluverPage.AboutPage,
-                        p => p < FluverPage.AboutPage || p > (WindowsInfo.IsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage)
+                        p => p < FluverPage.AboutPage || p > (WindowsEnvironment.IsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage)
                             ? FluverPage.AboutPage : p)
                     .AddFluverSetting(FluverSetting.Backdrop, defaultValue: BackdropType.Mica);
         }

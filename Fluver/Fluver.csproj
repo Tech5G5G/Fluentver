@@ -8,6 +8,7 @@
     <Platforms>x86;x64;ARM64</Platforms>
     <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
     <RootNamespace>Fluver</RootNamespace>
+    <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
   </PropertyGroup>
 
   <!-- File-based properties -->
@@ -19,7 +20,8 @@
   <!-- Language configuration -->
   <PropertyGroup>
     <ImplicitUsings>true</ImplicitUsings>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
   </PropertyGroup>
 
   <!-- WinUI properties -->
@@ -28,29 +30,43 @@
     <WinUISDKReferences>false</WinUISDKReferences>
   </PropertyGroup>
 
+  <!-- CsWin32 properties -->
+  <PropertyGroup>
+    <CsWin32RunAsBuildTask>true</CsWin32RunAsBuildTask>
+  </PropertyGroup>
+
   <!-- Publish properties -->
   <PropertyGroup>
-    <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
-    <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
-    <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
-    <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
-    <SelfContained Condition="'$(Configuration)' == 'Debug'">false</SelfContained>
+    <PublishAot>true</PublishAot>
     <SelfContained Condition="'$(Configuration)' != 'Debug'">true</SelfContained>
+    <SelfContained Condition="'$(Configuration)' == 'Debug'">false</SelfContained>
+    <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">true</PublishTrimmed>
+    <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">false</PublishTrimmed>
   </PropertyGroup>
 
   <!-- Packaging properties -->
   <PropertyGroup>
     <EnableMsixTooling>true</EnableMsixTooling>
-    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
+    <GenerateAppInstallerFile>false</GenerateAppInstallerFile>
+    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxAutoIncrementPackageRevision>false</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>false</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>true</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
-    <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
+    <GenerateTemporaryStoreCertificate>true</GenerateTemporaryStoreCertificate>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
+
+  <!-- Direct P/Invoke libraries -->
+  <ItemGroup>
+    <DirectPInvoke Include="ole32" />
+    <DirectPInvoke Include="user32" />
+    <DirectPInvoke Include="comctl32" />
+    <DirectPInvoke Include="kernel32" />
+
+    <NativeLibrary Include="comctl32.lib" />
+  </ItemGroup>
 
   <!-- Packages -->
   <ItemGroup>
@@ -67,6 +83,11 @@
     <PackageReference Include="System.DirectoryServices.AccountManagement" Version="10.0.10" />
 
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
+
+    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.369">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
 
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.2.251219" />

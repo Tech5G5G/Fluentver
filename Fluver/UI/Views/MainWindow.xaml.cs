@@ -1,10 +1,11 @@
 ﻿using Windows.System;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Animation;
 using Fluver.Extensions;
-using Fluver.Platform.Interop;
 using Fluver.UI.Controls;
 using Fluver.UI.ViewModels;
 
@@ -56,7 +57,7 @@ namespace Fluver.UI.Views
             }
 
             // Cancel any moving modal loops
-            PInvoke.SendMessage(Handle, PInvoke.WM_CANCELMODE, wParam: nuint.Zero, lParam: nint.Zero);
+            PInvoke.SendMessage((HWND)Handle, PInvoke.WM_CANCELMODE, wParam: default, lParam: default);
 
             ClientHeightInitialKeyFrame.Value = oldHeight;
             ClientHeightFinalKeyFrame.Value = newHeight;

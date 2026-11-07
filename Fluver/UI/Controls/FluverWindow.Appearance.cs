@@ -1,8 +1,9 @@
 ﻿using Windows.UI;
+using Windows.Win32.UI.WindowsAndMessaging;
 using Microsoft.Win32;
 using Microsoft.UI.Xaml;
 using Fluver.Extensions;
-using static Fluver.Platform.Interop.PInvoke;
+using static Windows.Win32.PInvoke;
 
 namespace Fluver.UI.Controls;
 
@@ -14,7 +15,7 @@ partial class FluverWindow
     {
         int clientAnimation;
         var animations =
-            SystemParametersInfo(uiAction: SPI_GETCLIENTAREAANIMATION, uiParam: 0, (nint)(&clientAnimation), fWinIni: 0) &&
+            SystemParametersInfo(SYSTEM_PARAMETERS_INFO_ACTION.SPI_GETCLIENTAREAANIMATION, uiParam: 0, &clientAnimation, fWinIni: 0) &&
             clientAnimation != 0;
 
         Appearance.SetValue(WindowAppearance.AreAnimationsEnabledProperty, animations);
