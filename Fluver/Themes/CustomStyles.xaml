@@ -9,6 +9,7 @@
     <Style x:Key="FluverViewRootPanelStyle" TargetType="StackPanel">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Orientation" Value="Vertical" />
         <Setter Property="Spacing" Value="8" />
         <Setter Property="Padding" Value="8,0" />
         <Setter Property="ChildrenTransitions">

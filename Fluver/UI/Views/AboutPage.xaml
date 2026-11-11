@@ -40,7 +40,7 @@
         </controls:PersistentExpander>
 
         <controls:PersistentExpander x:Uid="Legal" PersistenceId="Legal" HorizontalContentAlignment="Stretch">
-            <StackPanel Spacing="8">
+            <StackPanel Orientation="Vertical" Spacing="8">
                 <RichTextBlock x:Name="LegalText" TextWrapping="WrapWholeWords">
                     <Paragraph>
                         <Run Text="{x:Bind ViewModel.Resources.Trademark(ViewModel.Edition)}" />

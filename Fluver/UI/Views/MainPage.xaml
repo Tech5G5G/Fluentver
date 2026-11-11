@@ -16,7 +16,7 @@
     mc:Ignorable="d"
     NavigationCacheMode="Required">
 
-    <StackPanel>
+    <StackPanel Orientation="Vertical">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="BarLong" />

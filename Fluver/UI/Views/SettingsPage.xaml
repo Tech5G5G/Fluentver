@@ -51,7 +51,7 @@
         </ResourceDictionary>
     </controls:ViewModelPage.Resources>
 
-    <StackPanel Spacing="4" Padding="{ThemeResource RootPanelPadding}" Style="{StaticResource FluverViewRootPanelStyle}">
+    <StackPanel Orientation="Vertical" Spacing="4" Padding="{ThemeResource RootPanelPadding}" Style="{StaticResource FluverViewRootPanelStyle}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="RestartUnnecessary" />
