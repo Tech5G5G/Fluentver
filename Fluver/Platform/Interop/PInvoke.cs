@@ -7,10 +7,10 @@ namespace Windows.Win32;
 partial class PInvoke
 {
     [LibraryImport("user32.dll")]
-    internal static partial nint GetWindowLongPtrW(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex);
+    private static partial nint GetWindowLongPtrW(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex);
 
     [LibraryImport("user32.dll")]
-    internal static partial nint SetWindowLongPtrW(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex, nint dwNewLong);
+    private static partial nint SetWindowLongPtrW(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex, nint dwNewLong);
 
     [LibraryImport("user32.dll")]
     [SuppressGCTransition]
@@ -23,18 +23,18 @@ partial class PInvoke
     internal static partial void FlushMenuThemes();
 
     [LibraryImport("winbrand.dll", StringMarshalling = StringMarshalling.Utf16)]
-    public static partial BOOL BrandingLoadString(
+    internal static partial BOOL BrandingLoadString(
         [MarshalAs(UnmanagedType.LPWStr)] string lpNameSpace,
         uint uID,
         Span<char> lpBuffer,
         int cchBufferMax);
 
-    public static nint GetWindowLongPtr(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex)
+    internal static nint GetWindowLongPtr(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex)
     {
         return Environment.Is64BitProcess ? GetWindowLongPtrW(hWnd, nIndex) : GetWindowLong(hWnd, nIndex);
     }
 
-    public static nint SetWindowLongPtr(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex, nint dwNewLong)
+    internal static nint SetWindowLongPtr(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex, nint dwNewLong)
     {
         return Environment.Is64BitProcess ? SetWindowLongPtrW(hWnd, nIndex, dwNewLong) : SetWindowLong(hWnd, nIndex, (int)dwNewLong);
     }
