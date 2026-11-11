@@ -20,12 +20,12 @@ public sealed partial class AboutPageViewModel(
     public string Build => $"{WindowsEnvironment.Version.Build}.{WindowsEnvironment.Version.Revision}";
 
     public bool IsEvaluationCopy => WindowsEnvironment.EvaluationInfo.IsEvaluationCopy;
-    public string ExpirationDateString => WindowsEnvironment.EvaluationInfo.ExpirationDate.ToLocalTime().ToString();
+    public string ExpirationDate => WindowsEnvironment.EvaluationInfo.ExpirationDate.ToLocalTime().ToString();
 
     public string Owner => WindowsEnvironment.Owner ?? string.Empty;
 
     public string Organization => WindowsEnvironment.Organization ?? string.Empty;
-    public bool ShowOrganization => !string.IsNullOrWhiteSpace(WindowsEnvironment.Organization);
+    public bool IsOrganizationValid => !string.IsNullOrWhiteSpace(WindowsEnvironment.Organization);
 
     [RelayCommand]
     public static async Task LaunchActivationAsync()

@@ -8,13 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:controls="using:Fluver.UI.Controls"
-    xmlns:converters="using:CommunityToolkit.WinUI.Converters"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
-    <controls:FluverView.Resources>
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-    </controls:FluverView.Resources>
-
     <controls:FluverView.ToolbarItems>
         <controls:IconButton x:Uid="Activation" Icon="{ui:FontIcon Glyph=&#xEB95;}" Command="{x:Bind ViewModel.LaunchActivationCommand}" />
         <controls:IconButton x:Uid="WinUpdate" Icon="{ui:FontIcon Glyph=&#xE895;}" Command="{x:Bind ViewModel.LaunchWindowsUpdateCommand}" />
@@ -54,7 +49,7 @@
                         <Run x:Uid="Copyright" />
                     </Paragraph>
                     <Paragraph x:Name="EvaluationCopyParagraph" Margin="0,12,0,0">
-                        <Run Text="{x:Bind ViewModel.Resources.EvaluationCopy(ViewModel.ExpirationDateString)}"  />
+                        <Run Text="{x:Bind ViewModel.Resources.EvaluationCopy(ViewModel.ExpirationDate)}"  />
                     </Paragraph>
                     <Paragraph Margin="0,12,0,0">
                         <Run x:Uid="Licensed" />
@@ -77,9 +72,10 @@
                         </HyperlinkButton.ContextFlyout>
                     </HyperlinkButton>
 
-                    <TextBlock Text="{x:Bind ViewModel.Organization}"
-                               IsTextSelectionEnabled="True"
-                               Visibility="{x:Bind ViewModel.ShowOrganization, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <TextBlock x:Name="OrganizationText"
+                               x:Load="{x:Bind ViewModel.IsOrganizationValid}"
+                               Text="{x:Bind ViewModel.Organization}"
+                               IsTextSelectionEnabled="True" />
                 </StackPanel>
             </StackPanel>
         </controls:PersistentExpander>
