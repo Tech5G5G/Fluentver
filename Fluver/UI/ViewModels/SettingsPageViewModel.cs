@@ -10,10 +10,9 @@ using Fluver.Services.Navigation;
 namespace Fluver.UI.ViewModels;
 
 public sealed partial class SettingsPageViewModel(
+    IApplication app,
     IResources resources,
     ICultureService culture,
-    IPackageInformation package,
-    IApplicationLifetime lifetime,
     [FromKeyedServices(FluverSetting.Backdrop)] ISetting<BackdropType> backdrop,
     [FromKeyedServices(FluverSetting.StartupPage)] ISetting<FluverPage> startupPage)
     : PageViewModel
@@ -33,7 +32,7 @@ public sealed partial class SettingsPageViewModel(
     public ISetting<BackdropType> BackdropSetting => backdrop;
     public ISetting<FluverPage> StartupPageSetting => startupPage;
 
-    public string DisplayName => package.DisplayName;
+    public string DisplayName => app.DisplayName;
 
     public string Version
     {
@@ -44,7 +43,7 @@ public sealed partial class SettingsPageViewModel(
                 return field;
             }
 
-            var version = package.Version;
+            var version = app.Version;
 
             var str = $"{version.Major}.{version.Minor}";
             if (version.Build > 0)
@@ -66,6 +65,6 @@ public sealed partial class SettingsPageViewModel(
     [RelayCommand]
     public void Restart()
     {
-        lifetime.Restart();
+        app.Restart();
     }
 }

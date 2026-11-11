@@ -18,8 +18,8 @@ public sealed partial class MainPageViewModel : PageViewModel, IDisposable
     [ObservableProperty]
     public partial IList<object> ToolbarItems { get; set; }
 
+    private readonly IApplication _app;
     private readonly IWindowManager _manager;
-    private readonly IPackageInformation _package;
     private readonly IMainPageNavigationService _navigation;
 
     private readonly ISetting<FluverPage> _startupPage;
@@ -28,14 +28,14 @@ public sealed partial class MainPageViewModel : PageViewModel, IDisposable
     private bool _updatingUi;
 
     public MainPageViewModel(
+        IApplication app,
         IWindowManager manager,
-        IPackageInformation package,
         IMainPageNavigationService navigation,
         [FromKeyedServices(FluverSetting.StartupPage)] ISetting<FluverPage> startupPage,
         [FromKeyedServices(FluverSetting.PersistedPage)] ISetting<FluverPage> persistedPage)
     {
+        _app = app;
         _manager = manager;
-        _package = package;
         _navigation = navigation;
         _startupPage = startupPage;
         _persistedPage = persistedPage;
@@ -73,7 +73,7 @@ public sealed partial class MainPageViewModel : PageViewModel, IDisposable
         // TODO: Set to '{SettingsPageName} - Settings - Fluver' when in settings
         // Move responsibility to MainWindowViewModel
         // Make (attached) property for FluverView/page that stores name
-        _manager.MainWindow.Title = $"{title} - {_package.DisplayName}";
+        _manager.MainWindow.Title = $"{title} - {_app.DisplayName}";
     }
 
     [RelayCommand]

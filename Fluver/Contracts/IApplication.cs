@@ -2,9 +2,11 @@
 
 namespace Fluver.Contracts;
 
-public interface IPackageInformation
+public interface IApplication
 {
     string DisplayName { get; }
-
     PackageVersion Version { get; }
+
+    void Restart();
+    void Exit();
 }

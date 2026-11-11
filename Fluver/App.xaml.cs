@@ -1,6 +1,6 @@
 ﻿using Windows.Win32;
+using Windows.ApplicationModel;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Windows.AppLifecycle;
 using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
 using Microsoft.UI.Dispatching;
@@ -16,7 +16,7 @@ using Fluver.Services.Navigation;
 
 namespace Fluver
 {
-    public sealed partial class App : Application, IApplicationLifetime, IDisposable
+    public sealed partial class App : Application, IApplication, IDisposable
     {
         public static new App Current => (App)Application.Current;
 
@@ -24,6 +24,9 @@ namespace Fluver
 
         public IServiceProvider ServiceProvider => _provider;
         private readonly ServiceProvider _provider;
+
+        public string DisplayName { get; } = Package.Current.DisplayName;
+        public PackageVersion Version { get; } = Package.Current.Id.Version;
 
         private readonly IResources _resources;
         private readonly IWindowManager _manager;
@@ -57,10 +60,9 @@ namespace Fluver
 
         private void InitializeServices(ServiceCollection services)
         {
-            services.AddSingleton<IApplicationLifetime>(this);
+            services.AddSingleton<IApplication>(this);
 
-            services.AddSingleton<ICultureService, CultureService>()
-                    .AddSingleton<IPackageInformation, PackageInformation>();
+            services.AddSingleton<ICultureService, CultureService>();
 
             services.AddUIServices()
                     .AddNavigationServices();
@@ -95,7 +97,7 @@ namespace Fluver
         {
             if (_restart)
             {
-                AppInstance.Restart(arguments: string.Empty);
+                Microsoft.Windows.AppLifecycle.AppInstance.Restart(arguments: string.Empty);
             }
         }
 
@@ -116,7 +118,7 @@ namespace Fluver
             PInvoke.PostQuitMessage(nExitCode: 0);
         }
 
-        void IApplicationLifetime.Exit()
+        void IApplication.Exit()
         {
             Exit();
         }
