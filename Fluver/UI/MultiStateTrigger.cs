@@ -4,41 +4,41 @@ namespace Fluver.UI;
 
 public sealed class MultiStateTrigger : StateTriggerBase
 {
-    public bool? ConditionOne
+    public bool? Condition1
     {
-        get => (bool?)GetValue(ConditionOneProperty);
-        set => SetValue(ConditionOneProperty, value);
+        get => (bool?)GetValue(Condition1Property);
+        set => SetValue(Condition1Property, value);
     }
 
-    public static DependencyProperty ConditionOneProperty { get; } =
-        DependencyProperty.Register(nameof(ConditionOne), typeof(bool?), typeof(MultiStateTrigger), new(defaultValue: null, OnPropertyChanged));
+    public static DependencyProperty Condition1Property { get; } =
+        DependencyProperty.Register(nameof(Condition1), typeof(bool?), typeof(MultiStateTrigger), new(defaultValue: null, OnPropertyChanged));
 
-    public bool? ConditionTwo
+    public bool? Condition2
     {
-        get => (bool?)GetValue(ConditionTwoProperty);
-        set => SetValue(ConditionTwoProperty, value);
+        get => (bool?)GetValue(Condition2Property);
+        set => SetValue(Condition2Property, value);
     }
 
-    public static DependencyProperty ConditionTwoProperty { get; } =
-        DependencyProperty.Register(nameof(ConditionTwo), typeof(bool?), typeof(MultiStateTrigger), new(defaultValue: null, OnPropertyChanged));
+    public static DependencyProperty Condition2Property { get; } =
+        DependencyProperty.Register(nameof(Condition2), typeof(bool?), typeof(MultiStateTrigger), new(defaultValue: null, OnPropertyChanged));
 
-    public bool? ConditionThree
+    public bool? Condition3
     {
-        get => (bool?)GetValue(ConditionThreeProperty);
-        set => SetValue(ConditionThreeProperty, value);
+        get => (bool?)GetValue(Condition3Property);
+        set => SetValue(Condition3Property, value);
     }
 
-    public static DependencyProperty ConditionThreeProperty { get; } =
-        DependencyProperty.Register(nameof(ConditionThree), typeof(bool?), typeof(MultiStateTrigger), new(defaultValue: null, OnPropertyChanged));
+    public static DependencyProperty Condition3Property { get; } =
+        DependencyProperty.Register(nameof(Condition3), typeof(bool?), typeof(MultiStateTrigger), new(defaultValue: null, OnPropertyChanged));
 
-    public Condition InvertedConditions
+    public TriggerCondition Invert
     {
-        get => (Condition)GetValue(InvertedConditionsProperty);
-        set => SetValue(InvertedConditionsProperty, value);
+        get => (TriggerCondition)GetValue(InvertProperty);
+        set => SetValue(InvertProperty, value);
     }
 
-    public static DependencyProperty InvertedConditionsProperty { get; } =
-        DependencyProperty.Register(nameof(InvertedConditions), typeof(Condition), typeof(MultiStateTrigger), new(defaultValue: Condition.None, OnPropertyChanged));
+    public static DependencyProperty InvertProperty { get; } =
+        DependencyProperty.Register(nameof(Invert), typeof(TriggerCondition), typeof(MultiStateTrigger), new(defaultValue: TriggerCondition.None, OnPropertyChanged));
 
     private static void OnPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
     {
@@ -48,27 +48,18 @@ public sealed class MultiStateTrigger : StateTriggerBase
     private void Evaluate()
     {
         SetActive(
-            CheckCondition(ConditionOne, Condition.One) &&
-            CheckCondition(ConditionTwo, Condition.Two) &&
-            CheckCondition(ConditionThree, Condition.Three));
+            CheckCondition(Condition1, TriggerCondition.Condition1) &&
+            CheckCondition(Condition2, TriggerCondition.Condition2) &&
+            CheckCondition(Condition3, TriggerCondition.Condition3));
 
-        bool CheckCondition(bool? condition, Condition flag)
+        bool CheckCondition(bool? condition, TriggerCondition flag)
         {
             if (condition is { } boolean)
             {
-                return InvertedConditions.HasFlag(flag) ? !boolean : boolean;
+                return Invert.HasFlag(flag) ? !boolean : boolean;
             }
 
             return true;
         }
     }
-}
-
-[Flags]
-public enum Condition
-{
-    None = 0,
-    One = 1,
-    Two = 2,
-    Three = 4
 }
