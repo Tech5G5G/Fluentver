@@ -3,9 +3,8 @@ using System.Collections.Specialized;
 using Windows.Storage;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Media.Animation;
-using Fluver.Options;
+using Fluver.Services.Settings;
 
 namespace Fluver.UI.Controls
 {

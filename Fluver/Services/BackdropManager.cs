@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Xaml.Media;
-using Fluver.Options;
 using Fluver.Contracts;
+using Fluver.Services.Settings;
 
 namespace Fluver.Services;
 

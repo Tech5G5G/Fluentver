@@ -2,9 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Fluver.Options;
 using Fluver.Strings;
 using Fluver.Contracts;
+using Fluver.Services.Settings;
 using Fluver.Services.Navigation;
 
 namespace Fluver.UI.ViewModels;

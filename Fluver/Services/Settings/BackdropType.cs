@@ -1,4 +1,4 @@
-﻿namespace Fluver.Options;
+﻿namespace Fluver.Services.Settings;
 
 public enum BackdropType
 {

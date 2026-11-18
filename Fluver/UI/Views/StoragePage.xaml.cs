@@ -1,6 +1,5 @@
 using Microsoft.UI.Xaml.Controls;
 using Fluver.Helpers;
-using Fluver.Options;
 using Fluver.UI.Controls;
 
 namespace Fluver.UI.Views

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Fluver.Options;
 using Fluver.Strings;
-using Fluver.Services;
 using Fluver.Contracts;
 using Fluver.UI.ViewModels;
+using Fluver.Services;
+using Fluver.Services.Settings;
 using Fluver.Services.Navigation;
 
 namespace Fluver.Extensions;
@@ -36,10 +36,21 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddFluverSetting<T>(
         this IServiceCollection services,
         FluverSetting setting,
-        T defaultValue,
+        T defaultValue = default,
         Func<T, T> coercer = null)
     {
         services.AddKeyedSingleton<ISetting<T>>(setting, new Setting<T>(setting.ToString(), defaultValue, coercer));
+        return services;
+    }
+
+    public static IServiceCollection AddFluverEnumSetting<T>(
+        this IServiceCollection services,
+        FluverSetting setting,
+        T defaultValue = default,
+        Func<T, T> coercer = null)
+        where T : struct, Enum
+    {
+        services.AddKeyedSingleton<ISetting<T>>(setting, new EnumSetting<T>(setting.ToString(), defaultValue, coercer));
         return services;
     }
 }

@@ -3,9 +3,9 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Fluver.Options;
 using Fluver.Contracts;
 using Fluver.UI.Controls;
+using Fluver.Services.Settings;
 using Fluver.Services.Navigation;
 
 namespace Fluver.UI.ViewModels;

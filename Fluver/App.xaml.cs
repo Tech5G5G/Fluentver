@@ -5,13 +5,13 @@ using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
-using Fluver.Options;
 using Fluver.Strings;
 using Fluver.Contracts;
 using Fluver.Extensions;
 using Fluver.UI.ViewModels;
 using Fluver.Platform;
 using Fluver.Services;
+using Fluver.Services.Settings;
 using Fluver.Services.Navigation;
 
 namespace Fluver
@@ -67,16 +67,16 @@ namespace Fluver
             services.AddUIServices()
                     .AddNavigationServices();
 
-            services.AddFluverSetting(
+            services.AddFluverEnumSetting(
                         FluverSetting.StartupPage,
                         defaultValue: FluverPage.Previous,
                         p => p == FluverPage.InsiderPage && !WindowsEnvironment.IsInsider ? FluverPage.AboutPage : p)
-                    .AddFluverSetting(
+                    .AddFluverEnumSetting(
                         FluverSetting.PersistedPage,
                         defaultValue: FluverPage.AboutPage,
                         p => p < FluverPage.AboutPage || p > (WindowsEnvironment.IsInsider ? FluverPage.InsiderPage : FluverPage.StoragePage)
                             ? FluverPage.AboutPage : p)
-                    .AddFluverSetting(FluverSetting.Backdrop, defaultValue: BackdropType.Mica);
+                    .AddFluverEnumSetting(FluverSetting.Backdrop, defaultValue: BackdropType.Mica);
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)

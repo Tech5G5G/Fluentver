@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml.Controls;
-using Fluver.Options;
 using Fluver.Extensions;
 using Fluver.UI.Controls;
 using Fluver.UI.ViewModels;
+using Fluver.Services.Settings;
 using Fluver.Services.Navigation;
 
 namespace Fluver.UI.Views
