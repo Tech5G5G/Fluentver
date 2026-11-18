@@ -1,5 +1,4 @@
-﻿using System.DirectoryServices.AccountManagement;
-using Windows.Win32;
+﻿using Windows.Win32;
 using Windows.Wdk.System.SystemServices;
 using Microsoft.Win32;
 using Fluver.Extensions;
@@ -55,7 +54,7 @@ namespace Fluver.Platform
                 using var key = applicability;
 
                 IsInsider = applicability.TryGetValue("IsBuildFlightingEnabled", out int isBuildFlightingEnabled) &&
-                                   isBuildFlightingEnabled != 0;
+                            isBuildFlightingEnabled != 0;
 
                 applicability.TryGetValue("BranchName", out string branchName);
                 InsiderChannel = Enum.TryParse(branchName, out InsiderChannel channel) ? channel : InsiderChannel.Stable;
@@ -83,12 +82,6 @@ namespace Fluver.Platform
             var evaluationCopy = expirationDate != 0;
 
             return (evaluationCopy, evaluationCopy ? DateTime.FromFileTimeUtc(expirationDate) : default);
-        }
-
-        public static Task<UserPrincipal> GetWIPAccountAsync()
-        {
-            return Helpers.UserHelper.GetUserFromSIDAsync(
-                new((string)Registry.GetValue(Helpers.SystemHelper.HKLM + Applicability, "FlightingOwnerSID", string.Empty)));
         }
     }
 
