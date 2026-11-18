@@ -39,16 +39,34 @@ public static class RegistryExtensions
 
     extension(RegistryKey key)
     {
-        public RegistryKey TryOpenSubKey(string name)
+        public bool TryOpenSubKey(string name, [NotNullWhen(true)] out RegistryKey subKey)
         {
             try
             {
-                return key.OpenSubKey(name);
+                return (subKey = key.OpenSubKey(name)) is not null;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Failed to open Registry subkey \"{name}\": {ex}");
-                return null;
+
+                subKey = null;
+                return false;
+            }
+        }
+
+        public bool TryGetSubKeyNames([NotNullWhen(true)] out string[] names)
+        {
+            try
+            {
+                names = key.GetSubKeyNames();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to enumerate subkey names of Registry key \"{key.Name}\": {ex}");
+
+                names = null;
+                return false;
             }
         }
 

@@ -8,9 +8,6 @@ namespace Fluver.Platform
 {
     public static class WindowsEnvironment
     {
-        private const string CurrentVersion = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion",
-                             Applicability = @"SOFTWARE\Microsoft\WindowsSelfHost\Applicability";
-
         public static string Edition { get; } = GetWindowsEdition();
 
         public static string DisplayVersion { get; }
@@ -30,9 +27,13 @@ namespace Fluver.Platform
 
         static WindowsEnvironment()
         {
-            using var currentVersion = Registry.LocalMachine.TryOpenSubKey(CurrentVersion);
-            if (currentVersion is not null)
+            const string CurrentVersion = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion",
+                         Applicability = @"SOFTWARE\Microsoft\WindowsSelfHost\Applicability";
+
+            if (Registry.LocalMachine.TryOpenSubKey(CurrentVersion, out var currentVersion))
             {
+                using var key = currentVersion;
+
                 currentVersion.TryGetValue("DisplayVersion", out string displayVersion);
                 DisplayVersion = displayVersion;
 
@@ -49,9 +50,10 @@ namespace Fluver.Platform
                 BuildBranch = buildBranch;
             }
 
-            using var applicability = Registry.LocalMachine.TryOpenSubKey(Applicability);
-            if (applicability is not null)
+            if (Registry.LocalMachine.TryOpenSubKey(Applicability, out var applicability))
             {
+                using var key = applicability;
+
                 IsInsider = applicability.TryGetValue("IsBuildFlightingEnabled", out int isBuildFlightingEnabled) &&
                                    isBuildFlightingEnabled != 0;
 
