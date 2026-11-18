@@ -270,7 +270,7 @@
   <data name="ManageStorage.Text" xml:space="preserve">
     <value>Διαχειριστείτε τον αποθηκευτικό σας χώρο</value>
   </data>
-  <data name="ManageOtherUsers.Text" xml:space="preserve">
+  <data name="ManageOtherUsers.Content" xml:space="preserve">
     <value>Διαχειριστείτε άλλους χρήστες</value>
   </data>
   <data name="X86" xml:space="preserve">

@@ -270,7 +270,7 @@
   <data name="ManageStorage.Text" xml:space="preserve">
     <value>Speicher verwalten</value>
   </data>
-  <data name="ManageOtherUsers.Text" xml:space="preserve">
+  <data name="ManageOtherUsers.Content" xml:space="preserve">
     <value>Andere Benutzer verwalten</value>
   </data>
   <data name="X86" xml:space="preserve">
