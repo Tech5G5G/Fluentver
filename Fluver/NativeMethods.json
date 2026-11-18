@@ -3,6 +3,6 @@
   "useSafeHandles": false,
   "comInterop": {
     "useComSourceGenerators": true,
-    "preserveSigMethods": [ "ITaskbarList" ]
+    "preserveSigMethods": [ "*" ]
   }
 }
