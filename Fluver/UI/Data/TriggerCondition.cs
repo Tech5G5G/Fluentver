@@ -1,4 +1,4 @@
-﻿namespace Fluver.UI;
+﻿namespace Fluver.UI.Data;
 
 [Flags]
 public enum TriggerCondition

@@ -8,6 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:Fluver.UI"
+    xmlns:data="using:Fluver.UI.Data"
     xmlns:strings="using:Fluver.Strings"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     xmlns:is11="http://schemas.microsoft.com/winfx/2006/xaml/presentation?ui:WindowsVersionCondition(11)"
@@ -110,13 +111,13 @@
 
                 <VisualState x:Name="Inactive">
                     <VisualState.StateTriggers>
-                        <ui:MultiStateTrigger Condition1="{x:Bind Window.IsActive}"
-                                              Condition2="{x:Bind Appearance.IsAccented}"
-                                              Invert="Condition1,Condition2" />
+                        <data:MultiStateTrigger Condition1="{x:Bind Window.IsActive}"
+                                                Condition2="{x:Bind Appearance.IsAccented}"
+                                                Invert="Condition1,Condition2" />
 
-                        <ui:MultiStateTrigger Condition1="{x:Bind Window.IsActive}"
-                                              Condition2="{ThemeResource IsHighContrastEnabled}"
-                                              Invert="Condition1" />
+                        <data:MultiStateTrigger Condition1="{x:Bind Window.IsActive}"
+                                                Condition2="{ThemeResource IsHighContrastEnabled}"
+                                                Invert="Condition1" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="LayoutRoot.Background" Value="{ThemeResource TitleBarInactiveBackground}" />
@@ -128,10 +129,10 @@
 
                 <VisualState x:Name="ActiveAccented">
                     <VisualState.StateTriggers>
-                        <ui:MultiStateTrigger Condition1="{x:Bind Window.IsActive}"
-                                              Condition2="{x:Bind Appearance.IsAccented}"
-                                              Condition3="{ThemeResource IsHighContrastEnabled}"
-                                              Invert="Condition3" />
+                        <data:MultiStateTrigger Condition1="{x:Bind Window.IsActive}"
+                                                Condition2="{x:Bind Appearance.IsAccented}"
+                                                Condition3="{ThemeResource IsHighContrastEnabled}"
+                                                Invert="Condition3" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="LayoutRoot.Background" Value="{x:Bind Appearance.AccentColor}" />
@@ -141,10 +142,10 @@
 
                 <VisualState x:Name="InactiveAccented">
                     <VisualState.StateTriggers>
-                        <ui:MultiStateTrigger Condition1="{x:Bind Window.IsActive}"
-                                              Condition2="{x:Bind Appearance.IsAccented}"
-                                              Condition3="{ThemeResource IsHighContrastEnabled}"
-                                              Invert="Condition1,Condition3" />
+                        <data:MultiStateTrigger Condition1="{x:Bind Window.IsActive}"
+                                                Condition2="{x:Bind Appearance.IsAccented}"
+                                                Condition3="{ThemeResource IsHighContrastEnabled}"
+                                                Invert="Condition1,Condition3" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="LayoutRoot.Background" Value="{ThemeResource TitleBarInactiveBackground}" />
@@ -177,9 +178,9 @@
 
                 <VisualState x:Name="AnimatedBack">
                     <VisualState.StateTriggers>
-                        <ui:MultiStateTrigger Condition1="{x:Bind IsSettingsOpen}"
-                                              Condition2="{ThemeResource IsHighContrastEnabled}"
-                                              Invert="Condition2" />
+                        <data:MultiStateTrigger Condition1="{x:Bind IsSettingsOpen}"
+                                                Condition2="{ThemeResource IsHighContrastEnabled}"
+                                                Invert="Condition2" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="SettingsIcon.Source" Value="{StaticResource BackVisualSource}" />
@@ -192,9 +193,9 @@
 
                 <VisualState x:Name="AnimatedIcons">
                     <VisualState.StateTriggers>
-                        <ui:MultiStateTrigger Condition1="{x:Bind AnimateIcons}"
-                                              Condition2="{ThemeResource IsHighContrastEnabled}"
-                                              Invert="Condition2" />
+                        <data:MultiStateTrigger Condition1="{x:Bind AnimateIcons}"
+                                                Condition2="{ThemeResource IsHighContrastEnabled}"
+                                                Invert="Condition2" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="SettingsIcon.Visibility" Value="Visible" />

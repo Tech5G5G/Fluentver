@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 
-namespace Fluver.UI;
+namespace Fluver.UI.Data;
 
 public sealed class MultiStateTrigger : StateTriggerBase
 {
